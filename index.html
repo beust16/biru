@@ -1,0 +1,23 @@
+<script>
+const start = new Date("2026-06-05T14:53:00+03:00");
+
+function updateCounter() {
+    const now = new Date();
+    let diff = Math.floor((now - start) / 1000);
+
+    const days = Math.floor(diff / 86400);
+    diff %= 86400;
+
+    const hours = Math.floor(diff / 3600);
+    diff %= 3600;
+
+    const minutes = Math.floor(diff / 60);
+    const seconds = diff % 60;
+
+    document.getElementById("counter").textContent =
+        `${days} Gün ${hours} Saat ${minutes} Dakika ${seconds} Saniye`;
+}
+
+updateCounter();
+setInterval(updateCounter, 1000);
+</script>
