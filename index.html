@@ -11,99 +11,65 @@
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     margin: 0;
+    min-height: 100vh;
     font-family: Arial, sans-serif;
     color: white;
     text-align: center;
     overflow-x: hidden;
+
     background:
-        radial-gradient(circle at top, #203b62 0%, #0b1424 45%, #050a12 100%);
+        radial-gradient(circle at 50% -10%, #355b86 0%, #172a43 32%, #08111e 72%, #03070d 100%);
 }
 
-/* YOĞUN KAR */
-.snow {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    z-index: 20;
+/* =========================
+   YILBAŞI IŞIKLARI
+========================= */
 
-    background-image:
-        radial-gradient(circle, white 2px, transparent 2px),
-        radial-gradient(circle, white 3px, transparent 3px),
-        radial-gradient(circle, white 1.5px, transparent 1.5px);
-
-    background-size:
-        70px 70px,
-        120px 120px,
-        45px 45px;
-
-    background-position:
-        0 0,
-        30px 20px,
-        15px 0;
-
-    animation: snow 7s linear infinite;
-    opacity: .7;
-}
-
-@keyframes snow {
-    to {
-        background-position:
-            40px 700px,
-            -50px 900px,
-            80px 600px;
-    }
-}
-
-/* KARIN YERDE BİRİKMESİ */
-.snow-ground {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 38px;
-    background: white;
-    border-radius: 50% 50% 0 0;
-    box-shadow: 0 -5px 25px rgba(255,255,255,.4);
-    z-index: 19;
-    pointer-events: none;
-}
-
-/* YILBAŞI IŞIKLARI */
 .lights {
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    height: 45px;
-    z-index: 30;
+    height: 48px;
+    z-index: 50;
 
     display: flex;
     justify-content: space-around;
     align-items: center;
+
+    pointer-events: none;
 }
 
 .light {
     width: 12px;
     height: 12px;
     border-radius: 50%;
-    background: white;
-    box-shadow: 0 0 15px white;
-    animation: blink 1.2s infinite alternate;
+
+    background: #fff;
+    box-shadow:
+        0 0 7px #fff,
+        0 0 18px rgba(255,255,255,.9);
+
+    animation: lightBlink 1.3s infinite alternate;
 }
 
 .light:nth-child(2n) {
-    animation-delay: .3s;
+    animation-delay: .25s;
 }
 
 .light:nth-child(3n) {
-    animation-delay: .6s;
+    animation-delay: .55s;
 }
 
-@keyframes blink {
+@keyframes lightBlink {
     from {
-        opacity: .3;
+        opacity: .35;
         transform: scale(.8);
     }
 
@@ -113,149 +79,447 @@ body {
     }
 }
 
-/* NOEL BABA */
-.santa {
-    position: fixed;
-    left: -100px;
-    top: 40px;
-    font-size: 60px;
-    z-index: 40;
-    pointer-events: none;
+/* =========================
+   KAR
+========================= */
 
-    animation: santaFly 18s linear infinite;
+.snow {
+    position: fixed;
+    inset: 0;
+    z-index: 20;
+
+    pointer-events: none;
+    overflow: hidden;
 }
 
-@keyframes santaFly {
+.snowflake {
+    position: absolute;
+    top: -30px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    box-shadow:
+        0 0 4px rgba(255,255,255,.8),
+        0 0 10px rgba(255,255,255,.35);
+
+    animation-name: snowfall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+
+@keyframes snowfall {
 
     0% {
-        left: -100px;
-        top: 40px;
+        transform:
+            translate3d(0, -40px, 0)
+            rotate(0deg);
     }
 
-    15% {
-        left: 20%;
-        top: 100px;
+    25% {
+        transform:
+            translate3d(35px, 25vh, 0)
+            rotate(90deg);
     }
 
-    30% {
-        left: 40%;
-        top: 45px;
-    }
-
-    45% {
-        left: 60%;
-        top: 120px;
-    }
-
-    60% {
-        left: 80%;
-        top: 50px;
+    50% {
+        transform:
+            translate3d(-30px, 50vh, 0)
+            rotate(180deg);
     }
 
     75% {
-        left: 105%;
-        top: 100px;
+        transform:
+            translate3d(45px, 75vh, 0)
+            rotate(270deg);
+    }
+
+    100% {
+        transform:
+            translate3d(-20px, 110vh, 0)
+            rotate(360deg);
+    }
+}
+
+/* Yerdeki kar */
+
+.snow-ground {
+    position: fixed;
+    left: -5%;
+    bottom: -15px;
+
+    width: 110%;
+    height: 75px;
+
+    z-index: 19;
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            ellipse 180px 42px at 8% 100%,
+            #ffffff 0%,
+            transparent 72%
+        ),
+        radial-gradient(
+            ellipse 230px 48px at 30% 100%,
+            #ffffff 0%,
+            transparent 72%
+        ),
+        radial-gradient(
+            ellipse 190px 43px at 55% 100%,
+            #ffffff 0%,
+            transparent 72%
+        ),
+        radial-gradient(
+            ellipse 240px 50px at 80% 100%,
+            #ffffff 0%,
+            transparent 72%
+        ),
+        radial-gradient(
+            ellipse 160px 40px at 98% 100%,
+            #ffffff 0%,
+            transparent 72%
+        );
+
+    filter:
+        drop-shadow(0 -8px 15px rgba(255,255,255,.35));
+}
+
+/* =========================
+   ARKA PLAN NOEL AĞACI
+========================= */
+
+.christmas-tree {
+    position: fixed;
+
+    right: 25px;
+    bottom: 15px;
+
+    width: 150px;
+    height: 210px;
+
+    z-index: 5;
+
+    pointer-events: none;
+}
+
+.tree-top,
+.tree-middle,
+.tree-bottom {
+    position: absolute;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    width: 0;
+    height: 0;
+
+    border-left: solid transparent;
+    border-right: solid transparent;
+    border-bottom: solid #0b5c43;
+
+    filter:
+        drop-shadow(0 0 8px rgba(0,255,160,.08));
+}
+
+.tree-top {
+    top: 0;
+
+    border-left-width: 42px;
+    border-right-width: 42px;
+    border-bottom-width: 65px;
+}
+
+.tree-middle {
+    top: 38px;
+
+    border-left-width: 58px;
+    border-right-width: 58px;
+    border-bottom-width: 82px;
+}
+
+.tree-bottom {
+    top: 82px;
+
+    border-left-width: 75px;
+    border-right-width: 75px;
+    border-bottom-width: 100px;
+}
+
+.tree-trunk {
+    position: absolute;
+
+    bottom: 0;
+    left: 50%;
+
+    width: 30px;
+    height: 48px;
+
+    transform: translateX(-50%);
+
+    background: #70452b;
+    border-radius: 4px;
+}
+
+.star {
+    position: absolute;
+
+    top: -18px;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    font-size: 32px;
+
+    filter:
+        drop-shadow(0 0 10px gold);
+}
+
+.ornament {
+    position: absolute;
+
+    width: 10px;
+    height: 10px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    box-shadow:
+        0 0 6px white,
+        0 0 12px rgba(255,255,255,.7);
+}
+
+.o1 { top: 58px; left: 43px; }
+.o2 { top: 78px; right: 40px; }
+.o3 { top: 105px; left: 29px; }
+.o4 { top: 120px; right: 25px; }
+.o5 { top: 145px; left: 48px; }
+.o6 { top: 157px; right: 49px; }
+.o7 { top: 91px; left: 72px; }
+
+@media(max-width:600px) {
+    .christmas-tree {
+        right: -20px;
+        transform: scale(.72);
+        transform-origin: bottom right;
+    }
+}
+
+/* =========================
+   NOEL BABA + 3 GEYİK
+========================= */
+
+.santa-team {
+    position: fixed;
+
+    left: -300px;
+    top: 65px;
+
+    z-index: 45;
+
+    display: flex;
+    align-items: center;
+
+    gap: 2px;
+
+    pointer-events: none;
+
+    animation: santaJourney 120s linear infinite;
+}
+
+.santa {
+    font-size: 65px;
+}
+
+.reindeer {
+    font-size: 48px;
+
+    margin-left: -7px;
+
+    transform: scaleX(-1);
+
+    filter:
+        drop-shadow(0 0 5px rgba(255,255,255,.25));
+}
+
+@keyframes santaJourney {
+
+    0% {
+        left: -300px;
+        top: 65px;
+    }
+
+    12% {
+        top: 110px;
+    }
+
+    25% {
+        top: 45px;
+    }
+
+    38% {
+        top: 105px;
+    }
+
+    50% {
+        top: 55px;
+    }
+
+    63% {
+        top: 120px;
+    }
+
+    76% {
+        top: 65px;
+    }
+
+    88% {
+        top: 105px;
     }
 
     100% {
         left: 110%;
-        top: 100px;
+        top: 70px;
     }
 }
 
+/* =========================
+   BAŞLIK
+========================= */
+
 header {
-    padding: 90px 20px 40px;
+    position: relative;
+
+    z-index: 6;
+
+    padding:
+        95px
+        20px
+        45px;
 }
 
-h1 {
-    font-size: 45px;
-    margin: 10px 0;
-
-    text-shadow:
-        0 0 15px rgba(255,255,255,.2);
-}
-
-.subtitle {
-    color: #dce8f7;
-    font-size: 19px;
-}
-
-/* GEYİK */
 .deer {
-    font-size: 85px;
+    font-size: 82px;
+
     display: inline-block;
 
-    animation: deerFloat 3s ease-in-out infinite;
+    filter:
+        drop-shadow(0 0 15px rgba(255,255,255,.2));
+
+    animation:
+        deerFloat 3s ease-in-out infinite;
 }
 
 @keyframes deerFloat {
 
-    0%,100% {
-        transform: translateY(0);
-    }
-
     50% {
-        transform: translateY(-12px);
+        transform: translateY(-10px);
     }
 }
+
+h1 {
+    margin: 10px 0;
+
+    font-size: 46px;
+
+    text-shadow:
+        0 0 15px rgba(255,255,255,.25),
+        0 0 35px rgba(150,200,255,.15);
+}
+
+.subtitle {
+    color: #dce9f8;
+
+    font-size: 19px;
+}
+
+/* =========================
+   İÇERİK
+========================= */
 
 .container {
+    position: relative;
+
+    z-index: 6;
+
     max-width: 900px;
+
     margin: auto;
-    padding: 25px 20px 70px;
+
+    padding:
+        20px
+        20px
+        90px;
 }
 
-/* SAYAÇ */
+h2 {
+    margin-top: 35px;
+
+    font-size: 28px;
+}
+
+.description {
+    color: #c9d8e8;
+
+    line-height: 1.6;
+}
+
 .counter {
     padding: 25px;
 
     border-radius: 20px;
 
-    background: rgba(255,255,255,.08);
+    background:
+        rgba(255,255,255,.08);
 
-    border: 1px solid rgba(255,255,255,.15);
+    border:
+        1px solid rgba(255,255,255,.15);
 
     box-shadow:
-        0 15px 40px rgba(0,0,0,.25);
+        0 15px 40px rgba(0,0,0,.3);
 
-    font-size: 22px;
+    font-size: 21px;
+
     font-weight: bold;
+
+    backdrop-filter: blur(5px);
 }
 
-/* YILBAŞI SAYAÇ */
 .newyear {
     margin-top: 20px;
-    padding: 25px;
-
-    border-radius: 20px;
-
-    background: rgba(255,255,255,.06);
-
-    border: 1px solid rgba(255,255,255,.12);
 }
 
 .newyear h2 {
     margin-top: 0;
 }
 
-/* SONSUZLUK */
+/* =========================
+   ∞ + ⌛
+========================= */
+
 .infinity {
-    margin-top: 45px;
+    margin-top: 50px;
 
     font-size: 105px;
+
     line-height: 1;
 
-    animation: pulse 2s infinite ease-in-out;
+    text-shadow:
+        0 0 25px rgba(255,255,255,.2);
+
+    animation:
+        infinityPulse 2s infinite ease-in-out;
 }
 
-@keyframes pulse {
+@keyframes infinityPulse {
 
     50% {
         transform: scale(1.08);
     }
 }
 
-/* KUM SAATİ */
 .hourglass {
     display: inline-block;
 
@@ -264,27 +528,20 @@ h1 {
     margin-left: 12px;
 
     animation:
-        flip 3s infinite ease-in-out;
+        hourglassFlip 3s infinite ease-in-out;
 }
 
-@keyframes flip {
+@keyframes hourglassFlip {
 
     50% {
         transform: rotate(180deg);
     }
 }
 
-h2 {
-    margin-top: 35px;
-    font-size: 28px;
-}
+/* =========================
+   FOTOĞRAFLAR
+========================= */
 
-.description {
-    color: #c7d6e8;
-    line-height: 1.6;
-}
-
-/* FOTOĞRAFLAR */
 .gallery {
     display: grid;
 
@@ -314,10 +571,14 @@ h2 {
 
     color: #91a5bd;
 
-    overflow: hidden;
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.2);
 }
 
-/* KALP */
+/* =========================
+   KALP
+========================= */
+
 .heart {
     font-size: 65px;
 
@@ -329,22 +590,25 @@ h2 {
 
 @keyframes heartBeat {
 
-    0%,100% {
-        transform: scale(1);
-    }
-
     50% {
         transform: scale(1.2);
     }
 }
 
 footer {
+    position: relative;
+
+    z-index: 6;
+
     padding: 30px;
 
     color: #9fb1c7;
 }
 
-/* MOBİL */
+/* =========================
+   MOBİL
+========================= */
+
 @media(max-width:600px) {
 
     h1 {
@@ -367,8 +631,16 @@ footer {
         font-size: 80px;
     }
 
+    .santa-team {
+        font-size: 38px;
+    }
+
     .santa {
-        font-size: 45px;
+        font-size: 48px;
+    }
+
+    .reindeer {
+        font-size: 35px;
     }
 }
 </style>
@@ -376,37 +648,72 @@ footer {
 
 <body>
 
-<!-- KAR -->
-<div class="snow"></div>
+<!-- YILBAŞI IŞIKLARI -->
 
-<!-- YERDEKİ KAR -->
+<div class="lights">
+    <span class="light"></span>
+    <span class="light"></span>
+    <span class="light"></span>
+    <span class="light"></span>
+    <span class="light"></span>
+    <span class="light"></span>
+    <span class="light"></span>
+    <span class="light"></span>
+    <span class="light"></span>
+    <span class="light"></span>
+    <span class="light"></span>
+    <span class="light"></span>
+</div>
+
+
+<!-- KAR -->
+
+<div class="snow" id="snow"></div>
+
 <div class="snow-ground"></div>
 
-<!-- IŞIKLAR -->
-<div class="lights">
 
-    <span class="light"></span>
-    <span class="light"></span>
-    <span class="light"></span>
-    <span class="light"></span>
-    <span class="light"></span>
-    <span class="light"></span>
-    <span class="light"></span>
-    <span class="light"></span>
-    <span class="light"></span>
-    <span class="light"></span>
+<!-- NOEL AĞACI -->
+
+<div class="christmas-tree">
+
+    <div class="star">⭐</div>
+
+    <div class="tree-top"></div>
+    <div class="tree-middle"></div>
+    <div class="tree-bottom"></div>
+
+    <div class="tree-trunk"></div>
+
+    <span class="ornament o1"></span>
+    <span class="ornament o2"></span>
+    <span class="ornament o3"></span>
+    <span class="ornament o4"></span>
+    <span class="ornament o5"></span>
+    <span class="ornament o6"></span>
+    <span class="ornament o7"></span>
 
 </div>
 
-<!-- NOEL BABA -->
-<div class="santa">🎅</div>
 
+<!-- NOEL BABA + 3 GEYİK -->
+
+<div class="santa-team">
+
+    <span class="santa">🎅</span>
+
+    <span class="reindeer">🦌</span>
+    <span class="reindeer">🦌</span>
+    <span class="reindeer">🦌</span>
+
+</div>
+
+
+<!-- BAŞLIK -->
 
 <header>
 
-    <div class="deer">
-        🦌
-    </div>
+    <div class="deer">🦌</div>
 
     <h1>
         Sadece İkimiz ♡
@@ -419,10 +726,9 @@ footer {
 </header>
 
 
+<!-- ANA İÇERİK -->
+
 <div class="container">
-
-
-    <!-- BİRLİKTELİK SAYACI -->
 
     <h2>
         ❤️ Birlikte Geçen Zaman
@@ -430,13 +736,10 @@ footer {
 
     <div
         class="counter"
-        id="counter"
-    >
+        id="counter">
         Yükleniyor...
     </div>
 
-
-    <!-- YILBAŞI SAYACI -->
 
     <div class="newyear">
 
@@ -446,24 +749,18 @@ footer {
 
         <div
             class="counter"
-            id="newyear"
-        >
+            id="newyear">
             Hesaplanıyor...
         </div>
 
     </div>
 
 
-    <!-- SONSUZLUK -->
-
     <div class="infinity">
-
         ∞
-
         <span class="hourglass">
             ⌛
         </span>
-
     </div>
 
 
@@ -471,16 +768,10 @@ footer {
         Sonsuza Dek
     </h2>
 
-
     <p class="description">
-
-        Zaman geçiyor ama
-        bizim hikâyemiz devam ediyor. ♡
-
+        Zaman geçiyor ama bizim hikâyemiz devam ediyor. ♡
     </p>
 
-
-    <!-- FOTOĞRAFLAR -->
 
     <h2>
         🎄 Bizden Kareler 📸
@@ -522,27 +813,79 @@ footer {
         🎁 Yeni Yıla Birlikte
     </h2>
 
-
     <p class="description">
-
-        Daha nice anılara,
-        nice yıllara. ♡
-
+        Daha nice anılara, nice yıllara. ♡
     </p>
 
 </div>
 
 
 <footer>
-
     ♡ Sadece ikimiz ♡
-
 </footer>
 
 
 <script>
 
-/* BİRLİKTELİK BAŞLANGICI */
+/* =========================
+   KAR TANESİ OLUŞTURMA
+========================= */
+
+const snow =
+    document.getElementById("snow");
+
+for (let i = 0; i < 180; i++) {
+
+    const flake =
+        document.createElement("div");
+
+    flake.className =
+        "snowflake";
+
+
+    /* Farklı kar büyüklükleri */
+
+    const size =
+        Math.random() * 5 + 1.5;
+
+    flake.style.width =
+        size + "px";
+
+    flake.style.height =
+        size + "px";
+
+
+    /* Rastgele yatay konum */
+
+    flake.style.left =
+        Math.random() * 100 + "%";
+
+
+    /* Saydamlık */
+
+    flake.style.opacity =
+        Math.random() * .65 + .35;
+
+
+    /* Farklı düşme hızları */
+
+    flake.style.animationDuration =
+        Math.random() * 10 + 8 + "s";
+
+
+    /* Sayfa açıldığında kar zaten yağarken başlasın */
+
+    flake.style.animationDelay =
+        -Math.random() * 18 + "s";
+
+
+    snow.appendChild(flake);
+}
+
+
+/* =========================
+   İLİŞKİ SAYACI
+========================= */
 
 const start =
     new Date(
@@ -551,10 +894,6 @@ const start =
 
 
 function updateCounters() {
-
-    /*
-       BİRLİKTELİK SAYACI
-    */
 
     let diff =
         Math.max(
@@ -567,21 +906,25 @@ function updateCounters() {
 
 
     const days =
-        Math.floor(diff / 86400);
-
+        Math.floor(
+            diff / 86400
+        );
 
     diff %= 86400;
 
 
     const hours =
-        Math.floor(diff / 3600);
-
+        Math.floor(
+            diff / 3600
+        );
 
     diff %= 3600;
 
 
     const minutes =
-        Math.floor(diff / 60);
+        Math.floor(
+            diff / 60
+        );
 
 
     const seconds =
@@ -591,22 +934,18 @@ function updateCounters() {
     document
         .getElementById("counter")
         .textContent =
-
-        `${days} Gün ` +
-        `${hours} Saat ` +
-        `${minutes} Dakika ` +
-        `${seconds} Saniye`;
+        `${days} Gün ${hours} Saat ${minutes} Dakika ${seconds} Saniye`;
 
 
-    /*
-       YILBAŞI SAYACI
-    */
+    /* =========================
+       YENİ YIL SAYACI
+    ========================= */
 
     const now =
         new Date();
 
 
-    let target =
+    const newYear =
         new Date(
             now.getFullYear() + 1,
             0,
@@ -620,31 +959,32 @@ function updateCounters() {
     const remaining =
         Math.max(
             0,
-            target.getTime() - now.getTime()
+            newYear.getTime() -
+            now.getTime()
         );
 
 
-    const newYearDays =
+    const d =
         Math.floor(
             remaining / 86400000
         );
 
 
-    const newYearHours =
+    const h =
         Math.floor(
             (remaining % 86400000)
             / 3600000
         );
 
 
-    const newYearMinutes =
+    const m =
         Math.floor(
             (remaining % 3600000)
             / 60000
         );
 
 
-    const newYearSeconds =
+    const s =
         Math.floor(
             (remaining % 60000)
             / 1000
@@ -654,21 +994,11 @@ function updateCounters() {
     document
         .getElementById("newyear")
         .textContent =
-
-        `${newYearDays} Gün ` +
-        `${newYearHours} Saat ` +
-        `${newYearMinutes} Dakika ` +
-        `${newYearSeconds} Saniye`;
-
+        `${d} Gün ${h} Saat ${m} Dakika ${s} Saniye`;
 }
 
 
-/* İLK ÇALIŞTIRMA */
-
 updateCounters();
-
-
-/* HER SANİYE GÜNCELLE */
 
 setInterval(
     updateCounters,
