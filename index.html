@@ -105,4 +105,65 @@
     backdrop-filter: blur(8px);
     font-size: 19px;
     box-shadow: 0 15px 40px rgba(0,0,0,.3);
+}<div id="lockScreen">
+
+    <div class="lockContent">
+
+        <div class="lock">
+
+            <div class="chain left">⛓️</div>
+            <div class="chain right">⛓️</div>
+
+        </div>
+
+        <div class="lockTitle">
+            🔒 Bu sayfa kilitli
+        </div>
+
+        <div class="lockText">
+            Sadece ikimiz için hazırlanmış bir sürpriz...
+        </div>
+
+        <div class="lockDate">
+            📅 01.01.2027 tarihinde açılacak
+        </div>
+
+        <div class="lockCountdown" id="lockCountdown">
+            Hesaplanıyor...
+        </div>
+
+    </div>
+
+</div>
+const unlockDate = new Date("2027-01-01T00:00:00+03:00");
+
+function updateLock() {
+
+    const remaining = unlockDate.getTime() - Date.now();
+
+    if (remaining <= 0) {
+        document.getElementById("lockScreen").style.display = "none";
+        document.body.style.overflowX = "hidden";
+        return;
+    }
+
+    const days = Math.floor(remaining / 86400000);
+
+    const hours = Math.floor(
+        (remaining % 86400000) / 3600000
+    );
+
+    const minutes = Math.floor(
+        (remaining % 3600000) / 60000
+    );
+
+    const seconds = Math.floor(
+        (remaining % 60000) / 1000
+    );
+
+    document.getElementById("lockCountdown").textContent =
+        `${days} Gün ${hours} Saat ${minutes} Dakika ${seconds} Saniye`;
 }
+
+updateLock();
+setInterval(updateLock, 1000);
