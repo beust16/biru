@@ -6,905 +6,1220 @@
 
 <title>Sadece İkimiz ♡</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <style>
-* { box-sizing: border-box; }
+*{box-sizing:border-box}
 
-html {
-    scroll-behavior: smooth;
+html,body{
+margin:0;
+padding:0;
+background:#07101c;
+color:white;
+font-family:Georgia,serif;
+overflow-x:hidden;
 }
 
-body {
-    margin: 0;
-    min-height: 100vh;
-    font-family: Arial, sans-serif;
-    color: white;
-    text-align: center;
-    overflow-x: hidden;
-    background:
-        radial-gradient(circle at 50% -10%, #355b86 0%, #172a43 32%, #08111e 72%, #03070d 100%);
+body{
+min-height:100vh;
+background:
+radial-gradient(circle at top,#243653 0,#101b2c 35%,#050b13 100%);
 }
 
-/* =========================
-   KİLİT EKRANI
-========================= */
+/* LOCK */
 
-#lockScreen {
-    position: fixed;
-    inset: 0;
-    z-index: 99999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    color: white;
-    background:
-        radial-gradient(circle at 50% 30%, #29496d 0%, #0c1829 45%, #02060c 100%);
-    overflow: hidden;
+#lockScreen{
+position:fixed;
+inset:0;
+z-index:9999;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+background:
+linear-gradient(rgba(3,8,15,.88),rgba(3,8,15,.95)),
+radial-gradient(circle at center,#29415c,#050a11);
+overflow:hidden;
 }
 
-.lockContent {
-    position: relative;
-    z-index: 2;
-    padding: 30px;
+.lockBox{
+position:relative;
+width:min(90%,650px);
+padding:45px 25px;
+border:1px solid rgba(255,255,255,.18);
+border-radius:25px;
+background:rgba(5,12,22,.72);
+box-shadow:0 0 60px rgba(180,210,255,.12);
+backdrop-filter:blur(10px);
 }
 
-.lock {
-    position: relative;
-    width: 150px;
-    height: 125px;
-    margin: 0 auto 35px;
-    background: linear-gradient(145deg, #e5e5e5, #666);
-    border-radius: 20px;
-    box-shadow:
-        0 0 30px rgba(255,255,255,.3),
-        inset 0 5px 10px rgba(255,255,255,.5),
-        0 20px 60px rgba(0,0,0,.7);
+.lock{
+font-size:65px;
+margin-bottom:15px;
 }
 
-.lock::before {
-    content: "";
-    position: absolute;
-    width: 82px;
-    height: 75px;
-    left: 34px;
-    top: -60px;
-    border: 18px solid #aaa;
-    border-bottom: none;
-    border-radius: 50px 50px 0 0;
+.lockBox h1{
+font-size:38px;
+margin:10px 0;
 }
 
-.lock::after {
-    content: "🔑";
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 42px;
-    filter: grayscale(1);
+.lockBox p{
+color:#ccd6e5;
+font-size:18px;
+line-height:1.7;
 }
 
-.chain {
-    position: absolute;
-    font-size: 55px;
-    filter: drop-shadow(0 0 8px rgba(255,255,255,.4));
+.countdown{
+font-size:27px;
+font-weight:bold;
+margin:25px 0;
+letter-spacing:2px;
 }
 
-.chain.left {
-    left: -85px;
-    top: 40px;
-    transform: rotate(-20deg);
+.preview{
+margin-top:30px;
+display:flex;
+justify-content:center;
+gap:8px;
 }
 
-.chain.right {
-    right: -85px;
-    top: 40px;
-    transform: rotate(20deg);
+.preview input{
+padding:12px 15px;
+border-radius:10px;
+border:1px solid #596b83;
+background:#101c2c;
+color:white;
+outline:none;
 }
 
-.lockTitle {
-    font-size: 34px;
-    font-weight: bold;
-    margin-bottom: 12px;
+.preview button{
+padding:12px 16px;
+border:0;
+border-radius:10px;
+cursor:pointer;
+background:#d8b66b;
+color:#101010;
+font-weight:bold;
 }
 
-.lockText {
-    color: #cbd8e8;
-    font-size: 18px;
-    margin-bottom: 25px;
+/* MAIN */
+
+#mainSite{
+display:none;
 }
 
-.lockDate {
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 22px;
+.hero{
+min-height:90vh;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:30px;
+position:relative;
 }
 
-.lockCountdown {
-    display: inline-block;
-    padding: 18px 25px;
-    border-radius: 18px;
-    background: rgba(255,255,255,.08);
-    border: 1px solid rgba(255,255,255,.18);
-    backdrop-filter: blur(8px);
-    font-size: 19px;
-    box-shadow: 0 15px 40px rgba(0,0,0,.3);
+.hero h1{
+font-size:clamp(48px,8vw,90px);
+margin:0;
+font-weight:500;
+text-shadow:0 0 25px rgba(255,255,255,.25);
 }
 
-/* =========================
-   KAR
-========================= */
-
-.snow {
-    position: fixed;
-    inset: 0;
-    z-index: 20;
-    pointer-events: none;
-    overflow: hidden;
+.hero p{
+font-size:21px;
+color:#dbe4ef;
+margin-top:18px;
 }
 
-.snowflake {
-    position: absolute;
-    top: -30px;
-    border-radius: 50%;
-    background: white;
-    box-shadow:
-        0 0 4px rgba(255,255,255,.8),
-        0 0 10px rgba(255,255,255,.35);
-    animation-name: snowfall;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
+.magic{
+font-size:50px;
+margin:20px;
+animation:float 3s ease-in-out infinite;
 }
 
-@keyframes snowfall {
-    0% {
-        transform: translate3d(0,-40px,0);
-    }
-    25% {
-        transform: translate3d(35px,25vh,0);
-    }
-    50% {
-        transform: translate3d(-30px,50vh,0);
-    }
-    75% {
-        transform: translate3d(45px,75vh,0);
-    }
-    100% {
-        transform: translate3d(-20px,110vh,0);
-    }
+@keyframes float{
+50%{transform:translateY(-12px)}
 }
 
-/* =========================
-   KAR ZEMİNİ
-========================= */
+/* SNOW */
 
-.snow-ground {
-    position: fixed;
-    left: -5%;
-    bottom: -15px;
-    width: 110%;
-    height: 75px;
-    z-index: 19;
-    pointer-events: none;
-    background:
-        radial-gradient(ellipse 180px 42px at 8% 100%,#fff 0%,transparent 72%),
-        radial-gradient(ellipse 230px 48px at 30% 100%,#fff 0%,transparent 72%),
-        radial-gradient(ellipse 190px 43px at 55% 100%,#fff 0%,transparent 72%),
-        radial-gradient(ellipse 240px 50px at 80% 100%,#fff 0%,transparent 72%),
-        radial-gradient(ellipse 160px 40px at 98% 100%,#fff 0%,transparent 72%);
-    filter: drop-shadow(0 -8px 15px rgba(255,255,255,.35));
+.snow{
+position:fixed;
+top:-20px;
+color:white;
+pointer-events:none;
+z-index:20;
+animation:fall linear infinite;
+text-shadow:0 0 5px white;
 }
 
-/* =========================
-   IŞIKLAR
-========================= */
-
-.lights {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 48px;
-    z-index: 50;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    pointer-events: none;
+@keyframes fall{
+to{
+transform:translateY(110vh) rotate(360deg);
+}
 }
 
-.light {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: white;
-    box-shadow:
-        0 0 7px white,
-        0 0 18px rgba(255,255,255,.9);
-    animation: lightBlink 1.3s infinite alternate;
+/* SECTIONS */
+
+.section{
+max-width:1050px;
+margin:auto;
+padding:70px 20px;
 }
 
-.light:nth-child(2n) {
-    animation-delay: .25s;
+.section h2{
+font-size:40px;
+text-align:center;
+font-weight:400;
+margin-bottom:35px;
 }
 
-.light:nth-child(3n) {
-    animation-delay: .55s;
+.card{
+background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.1);
+border-radius:22px;
+padding:30px;
+box-shadow:0 15px 50px rgba(0,0,0,.2);
 }
 
-@keyframes lightBlink {
-    from {
-        opacity: .35;
-        transform: scale(.8);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1.2);
-    }
+/* TIMER */
+
+.timer{
+display:flex;
+justify-content:center;
+gap:20px;
+flex-wrap:wrap;
 }
 
-/* =========================
-   NOEL AĞACI
-========================= */
-
-.christmas-tree {
-    position: fixed;
-    right: 25px;
-    bottom: 15px;
-    width: 150px;
-    height: 210px;
-    z-index: 5;
-    pointer-events: none;
+.timeBox{
+min-width:110px;
+padding:20px;
+text-align:center;
+border-radius:18px;
+background:rgba(255,255,255,.07);
 }
 
-.tree-top,
-.tree-middle,
-.tree-bottom {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: solid transparent;
-    border-right: solid transparent;
-    border-bottom: solid #0b5c43;
+.timeBox strong{
+font-size:35px;
+display:block;
 }
 
-.tree-top {
-    top: 0;
-    border-left-width: 42px;
-    border-right-width: 42px;
-    border-bottom-width: 65px;
+.timeBox span{
+color:#bdc8d8;
 }
 
-.tree-middle {
-    top: 38px;
-    border-left-width: 58px;
-    border-right-width: 58px;
-    border-bottom-width: 82px;
+/* NOTEBOOK */
+
+.book{
+max-width:850px;
+margin:auto;
+perspective:1800px;
 }
 
-.tree-bottom {
-    top: 82px;
-    border-left-width: 75px;
-    border-right-width: 75px;
-    border-bottom-width: 100px;
+.page{
+background:#eee4c9;
+color:#30291f;
+min-height:560px;
+padding:55px;
+border-radius:8px 20px 20px 8px;
+box-shadow:
+0 20px 50px rgba(0,0,0,.5),
+inset 0 0 40px rgba(80,50,20,.08);
+position:relative;
+transform-origin:left center;
+transition:transform .8s ease;
 }
 
-.tree-trunk {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    width: 30px;
-    height: 48px;
-    transform: translateX(-50%);
-    background: #70452b;
-    border-radius: 4px;
+.page.turn{
+transform:rotateY(-180deg);
 }
 
-.star {
-    position: absolute;
-    top: -18px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 32px;
-    filter: drop-shadow(0 0 10px gold);
+.page:before{
+content:"";
+position:absolute;
+left:42px;
+top:0;
+bottom:0;
+width:1px;
+background:rgba(160,80,80,.25);
 }
 
-.ornament {
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: white;
-    box-shadow:
-        0 0 6px white,
-        0 0 12px rgba(255,255,255,.7);
+.pageText{
+font-family:Caveat,cursive;
+font-size:27px;
+line-height:1.45;
+white-space:pre-line;
 }
 
-.o1 { top:58px; left:43px; }
-.o2 { top:78px; right:40px; }
-.o3 { top:105px; left:29px; }
-.o4 { top:120px; right:25px; }
-.o5 { top:145px; left:48px; }
-.o6 { top:157px; right:49px; }
-.o7 { top:91px; left:72px; }
-
-/* =========================
-   SANTA + 3 GEYİK
-========================= */
-
-.santa-team {
-    position: fixed;
-    left: -300px;
-    top: 65px;
-    z-index: 45;
-    display: flex;
-    align-items: center;
-    gap: 2px;
-    pointer-events: none;
-    animation: santaJourney 120s linear infinite;
+.pageNumber{
+position:absolute;
+bottom:20px;
+right:30px;
+font-family:Caveat,cursive;
+font-size:22px;
 }
 
-.santa {
-    font-size: 65px;
+.photoGrid{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:18px;
+margin-top:30px;
 }
 
-.reindeer {
-    font-size: 48px;
-    margin-left: -7px;
-    transform: scaleX(-1);
+.photo{
+background:white;
+padding:9px 9px 25px;
+box-shadow:0 7px 15px rgba(0,0,0,.25);
+transform:rotate(-1deg);
 }
 
-@keyframes santaJourney {
-    0% {
-        left: -300px;
-        top: 65px;
-    }
-    25% {
-        top: 45px;
-    }
-    50% {
-        top: 55px;
-    }
-    75% {
-        top: 65px;
-    }
-    100% {
-        left: 110%;
-        top: 70px;
-    }
+.photo:nth-child(2){transform:rotate(2deg)}
+.photo:nth-child(3){transform:rotate(-2deg)}
+.photo:nth-child(4){transform:rotate(1deg)}
+
+.photo img{
+width:100%;
+height:180px;
+object-fit:cover;
+display:block;
+background:#ddd;
 }
 
-/* =========================
-   ANA SİTE
-========================= */
-
-header {
-    position: relative;
-    z-index: 6;
-    padding: 95px 20px 45px;
+.photo span{
+display:block;
+text-align:center;
+font-family:Caveat,cursive;
+color:#222;
+font-size:20px;
+margin-top:5px;
 }
 
-.deer {
-    font-size: 82px;
-    display: inline-block;
-    filter: drop-shadow(0 0 15px rgba(255,255,255,.2));
-    animation: deerFloat 3s ease-in-out infinite;
+.bookControls{
+display:flex;
+justify-content:center;
+gap:15px;
+margin-top:25px;
 }
 
-@keyframes deerFloat {
-    50% {
-        transform: translateY(-10px);
-    }
+.bookControls button{
+border:0;
+padding:14px 25px;
+border-radius:12px;
+background:#d8b66b;
+cursor:pointer;
+font-weight:bold;
 }
 
-h1 {
-    margin: 10px 0;
-    font-size: 46px;
-    text-shadow:
-        0 0 15px rgba(255,255,255,.25),
-        0 0 35px rgba(150,200,255,.15);
+/* GALLERY */
+
+.gallery{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
 }
 
-.subtitle {
-    color: #dce9f8;
-    font-size: 19px;
+.gallery .placeholder{
+height:260px;
+border-radius:18px;
+display:flex;
+align-items:center;
+justify-content:center;
+background:rgba(255,255,255,.07);
+border:1px solid rgba(255,255,255,.1);
+color:#9ca9ba;
 }
 
-.container {
-    position: relative;
-    z-index: 6;
-    max-width: 900px;
-    margin: auto;
-    padding: 20px 20px 90px;
+/* FOOTER */
+
+footer{
+text-align:center;
+padding:70px 20px;
+color:#aeb9c9;
+font-size:20px;
 }
 
-h2 {
-    margin-top: 35px;
-    font-size: 28px;
+/* MUSIC */
+
+.musicButton{
+position:fixed;
+right:20px;
+bottom:20px;
+z-index:100;
+border:1px solid rgba(255,255,255,.2);
+background:rgba(12,22,36,.9);
+color:white;
+padding:13px 18px;
+border-radius:30px;
+cursor:pointer;
 }
 
-.description {
-    color: #c9d8e8;
-    line-height: 1.6;
+/* RESPONSIVE */
+
+@media(max-width:600px){
+
+.lockBox h1{
+font-size:30px;
 }
 
-.counter {
-    padding: 25px;
-    border-radius: 20px;
-    background: rgba(255,255,255,.08);
-    border: 1px solid rgba(255,255,255,.15);
-    box-shadow: 0 15px 40px rgba(0,0,0,.3);
-    font-size: 21px;
-    font-weight: bold;
-    backdrop-filter: blur(5px);
+.lockBox p{
+font-size:16px;
 }
 
-.newyear {
-    margin-top: 20px;
+.preview{
+flex-direction:column;
 }
 
-.newyear h2 {
-    margin-top: 0;
+.preview input,
+.preview button{
+width:100%;
 }
 
-.infinity {
-    margin-top: 50px;
-    font-size: 105px;
-    line-height: 1;
-    text-shadow: 0 0 25px rgba(255,255,255,.2);
-    animation: infinityPulse 2s infinite ease-in-out;
+.page{
+padding:35px 28px;
+min-height:600px;
 }
 
-@keyframes infinityPulse {
-    50% {
-        transform: scale(1.08);
-    }
+.page:before{
+left:20px;
 }
 
-.hourglass {
-    display: inline-block;
-    font-size: 55px;
-    margin-left: 12px;
-    animation: hourglassFlip 3s infinite ease-in-out;
+.pageText{
+font-size:23px;
 }
 
-@keyframes hourglassFlip {
-    50% {
-        transform: rotate(180deg);
-    }
+.photoGrid{
+grid-template-columns:1fr;
 }
 
-.gallery {
-    display: grid;
-    grid-template-columns: repeat(2,1fr);
-    gap: 15px;
-    margin-top: 25px;
+.photo img{
+height:220px;
 }
 
-.photo {
-    height: 240px;
-    border-radius: 18px;
-    background: rgba(255,255,255,.07);
-    border: 1px solid rgba(255,255,255,.15);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #91a5bd;
-    box-shadow: 0 10px 30px rgba(0,0,0,.2);
-}
-
-.heart {
-    font-size: 65px;
-    margin: 35px 0;
-    animation: heartBeat 1.5s infinite;
-}
-
-@keyframes heartBeat {
-    50% {
-        transform: scale(1.2);
-    }
-}
-
-footer {
-    position: relative;
-    z-index: 6;
-    padding: 30px;
-    color: #9fb1c7;
-}
-
-/* =========================
-   MOBİL
-========================= */
-
-@media(max-width:600px) {
-
-    h1 {
-        font-size: 34px;
-    }
-
-    .counter {
-        font-size: 17px;
-    }
-
-    .gallery {
-        grid-template-columns: 1fr;
-    }
-
-    .photo {
-        height: 220px;
-    }
-
-    .infinity {
-        font-size: 80px;
-    }
-
-    .santa {
-        font-size: 48px;
-    }
-
-    .reindeer {
-        font-size: 35px;
-    }
-
-    .christmas-tree {
-        right: -20px;
-        transform: scale(.72);
-        transform-origin: bottom right;
-    }
-
-    .lockTitle {
-        font-size: 28px;
-    }
-
-    .lockText {
-        font-size: 16px;
-    }
-
-    .lockDate {
-        font-size: 19px;
-    }
-
-    .lockCountdown {
-        font-size: 16px;
-    }
 }
 </style>
 </head>
 
 <body>
 
-<!-- =========================
-     YILBAŞI KİLİT EKRANI
-========================= -->
+<!-- LOCK SCREEN -->
 
 <div id="lockScreen">
 
-    <div class="lockContent">
+<div class="lockBox">
 
-        <div class="lock">
+<div class="lock">🔗❄️</div>
 
-            <div class="chain left">⛓️</div>
-            <div class="chain right">⛓️</div>
+<h1>Bu sayfa kilitli</h1>
 
-        </div>
+<p>
+Sadece ikimiz için hazırlanmış bir sürpriz...<br>
+01.01.2027 tarihinde açılacak.
+</p>
 
-        <div class="lockTitle">
-            🔒 Bu sayfa kilitli
-        </div>
+<div class="countdown" id="lockCountdown">
+Hesaplanıyor...
+</div>
 
-        <div class="lockText">
-            Sadece ikimiz için hazırlanmış bir sürpriz...
-        </div>
+<div class="preview">
 
-        <div class="lockDate">
-            📅 01.01.2027 tarihinde açılacak
-        </div>
+<input id="password"
+type="password"
+placeholder="Özel giriş">
 
-        <div class="lockCountdown" id="lockCountdown">
-            Hesaplanıyor...
-        </div>
-
-    </div>
+<button onclick="previewEnter()">
+Giriş
+</button>
 
 </div>
 
-<!-- =========================
-     ANA SİTE
-========================= -->
-
-<div class="lights">
-    <span class="light"></span>
-    <span class="light"></span>
-    <span class="light"></span>
-    <span class="light"></span>
-    <span class="light"></span>
-    <span class="light"></span>
-    <span class="light"></span>
-    <span class="light"></span>
-    <span class="light"></span>
-    <span class="light"></span>
-    <span class="light"></span>
-    <span class="light"></span>
 </div>
-
-<div class="snow" id="snow"></div>
-
-<div class="snow-ground"></div>
-
-<div class="christmas-tree">
-
-    <div class="star">⭐</div>
-
-    <div class="tree-top"></div>
-    <div class="tree-middle"></div>
-    <div class="tree-bottom"></div>
-
-    <div class="tree-trunk"></div>
-
-    <span class="ornament o1"></span>
-    <span class="ornament o2"></span>
-    <span class="ornament o3"></span>
-    <span class="ornament o4"></span>
-    <span class="ornament o5"></span>
-    <span class="ornament o6"></span>
-    <span class="ornament o7"></span>
 
 </div>
 
-<div class="santa-team">
 
-    <span class="santa">🎅</span>
+<!-- MAIN SITE -->
 
-    <span class="reindeer">🦌</span>
-    <span class="reindeer">🦌</span>
-    <span class="reindeer">🦌</span>
+<div id="mainSite">
+
+<section class="hero">
+
+<div class="magic">🪄 ❄️ 🎄</div>
+
+<h1>Sadece İkimiz ♡</h1>
+
+<p>Bu yılın en güzel hediyesi: Biz. ✨</p>
+
+<div style="font-size:28px;margin-top:30px">
+∞ &nbsp; ⌛ &nbsp; 🦌
+</div>
+
+</section>
+
+
+<!-- NEW YEAR -->
+
+<section class="section">
+
+<h2>Yeni Yıla Kalan</h2>
+
+<div class="timer">
+
+<div class="timeBox">
+<strong id="days">0</strong>
+<span>Gün</span>
+</div>
+
+<div class="timeBox">
+<strong id="hours">0</strong>
+<span>Saat</span>
+</div>
+
+<div class="timeBox">
+<strong id="minutes">0</strong>
+<span>Dakika</span>
+</div>
+
+<div class="timeBox">
+<strong id="seconds">0</strong>
+<span>Saniye</span>
+</div>
 
 </div>
 
-<header>
+</section>
 
-    <div class="deer">🦌</div>
 
-    <h1>Sadece İkimiz ♡</h1>
+<!-- RELATIONSHIP -->
 
-    <div class="subtitle">
-        Bu yılın en güzel hediyesi: Biz. ✨
-    </div>
+<section class="section">
 
-</header>
+<div class="card">
 
-<div class="container">
+<h2>Bizim Zamanımız ♡</h2>
 
-    <h2>❤️ Birlikte Geçen Zaman</h2>
+<p style="text-align:center;font-size:22px">
 
-    <div class="counter" id="counter">
-        Yükleniyor...
-    </div>
+Seninle geçen zaman:
 
-    <div class="newyear">
+<strong id="relationshipDays">0</strong> gün
 
-        <h2>🎄 Yeni Yıla Kalan</h2>
+<br><br>
 
-        <div class="counter" id="newyear">
-            Hesaplanıyor...
-        </div>
+05 Haziran 2026 — Sonsuza Dek
 
-    </div>
+<br><br>
 
-    <div class="infinity">
-        ∞
-        <span class="hourglass">⌛</span>
-    </div>
+∞
 
-    <h2>Sonsuza Dek</h2>
-
-    <p class="description">
-        Zaman geçiyor ama bizim hikâyemiz devam ediyor. ♡
-    </p>
-
-    <h2>🎄 Bizden Kareler 📸</h2>
-
-    <div class="gallery">
-
-        <div class="photo">Fotoğraf 1</div>
-        <div class="photo">Fotoğraf 2</div>
-        <div class="photo">Fotoğraf 3</div>
-        <div class="photo">Fotoğraf 4</div>
-
-    </div>
-
-    <div class="heart">♡</div>
-
-    <div class="deer">🦌</div>
-
-    <h2>🎁 Yeni Yıla Birlikte</h2>
-
-    <p class="description">
-        Daha nice anılara, nice yıllara. ♡
-    </p>
+</p>
 
 </div>
+
+</section>
+
+
+<!-- NOTEBOOK -->
+
+<section class="section">
+
+<h2>Anı Defterimiz</h2>
+
+<div class="book">
+
+<div class="page" id="page">
+
+<div class="pageText" id="pageText"></div>
+
+<div class="photoGrid" id="photoGrid"></div>
+
+<div class="pageNumber" id="pageNumber"></div>
+
+</div>
+
+</div>
+
+<div class="bookControls">
+
+<button onclick="previousPage()">← Önceki</button>
+
+<button onclick="nextPage()">Sonraki →</button>
+
+</div>
+
+</section>
+
+
+<!-- GALLERY -->
+
+<section class="section">
+
+<h2>Bizden Kareler ♡</h2>
+
+<div class="gallery">
+
+<div class="placeholder">Fotoğraf 1</div>
+<div class="placeholder">Fotoğraf 2</div>
+<div class="placeholder">Fotoğraf 3</div>
+<div class="placeholder">Fotoğraf 4</div>
+
+</div>
+
+</section>
+
+
+<section class="section">
+
+<div class="card" style="text-align:center">
+
+<h2>Sonsuza Dek</h2>
+
+<p style="font-size:22px;line-height:1.7">
+
+Zaman geçiyor ama bizim hikâyemiz devam ediyor. ♡
+
+<br><br>
+
+🎁 Yeni Yıla Birlikte
+
+<br>
+
+Daha nice anılara, nice yıllara. ♡
+
+</p>
+
+</div>
+
+</section>
+
 
 <footer>
-    ♡ Sadece ikimiz ♡
+♡ Sadece ikimiz ♡
 </footer>
+
+</div>
+
+
+<button class="musicButton" onclick="toggleMusic()" id="musicButton">
+🎵 Müziği Aç
+</button>
+
 
 <script>
 
-/* =========================
-   KİLİT AÇILMA TARİHİ
-========================= */
+/* PASSWORD */
 
-const unlockDate =
-    new Date("2027-01-01T00:00:00+03:00");
+const PASSWORD="sadeceikimiz";
 
-function updateLock() {
+function previewEnter(){
 
-    const remaining =
-        unlockDate.getTime() - Date.now();
+const input=document.getElementById("password").value;
 
-    if (remaining <= 0) {
+if(input===PASSWORD){
 
-        document.getElementById("lockScreen").style.display = "none";
+unlock();
 
-        return;
-    }
+}else{
 
-    const days =
-        Math.floor(remaining / 86400000);
+alert("Şifre yanlış.");
 
-    const hours =
-        Math.floor(
-            (remaining % 86400000) / 3600000
-        );
-
-    const minutes =
-        Math.floor(
-            (remaining % 3600000) / 60000
-        );
-
-    const seconds =
-        Math.floor(
-            (remaining % 60000) / 1000
-        );
-
-    document.getElementById("lockCountdown").textContent =
-        `${days} Gün ${hours} Saat ${minutes} Dakika ${seconds} Saniye`;
 }
 
-updateLock();
-
-setInterval(updateLock, 1000);
-
-
-/* =========================
-   KAR
-========================= */
-
-const snow =
-    document.getElementById("snow");
-
-for(let i = 0; i < 180; i++) {
-
-    const flake =
-        document.createElement("div");
-
-    flake.className =
-        "snowflake";
-
-    const size =
-        Math.random() * 5 + 1.5;
-
-    flake.style.width =
-        size + "px";
-
-    flake.style.height =
-        size + "px";
-
-    flake.style.left =
-        Math.random() * 100 + "%";
-
-    flake.style.opacity =
-        Math.random() * .65 + .35;
-
-    flake.style.animationDuration =
-        Math.random() * 10 + 8 + "s";
-
-    flake.style.animationDelay =
-        -Math.random() * 18 + "s";
-
-    snow.appendChild(flake);
 }
 
 
-/* =========================
-   İLİŞKİ SÜRESİ
-========================= */
+/* NEW YEAR */
 
-const start =
-    new Date("2026-06-05T14:53:00+03:00");
+const newYear=new Date("2027-01-01T00:00:00+03:00");
 
+function updateCountdown(){
 
-function updateCounters() {
+const now=new Date();
+const diff=newYear-now;
 
-    let diff =
-        Math.max(
-            0,
-            Math.floor(
-                (Date.now() - start.getTime()) / 1000
-            )
-        );
+if(diff<=0){
 
-    const days =
-        Math.floor(diff / 86400);
+unlock();
 
-    diff %= 86400;
+return;
 
-    const hours =
-        Math.floor(diff / 3600);
-
-    diff %= 3600;
-
-    const minutes =
-        Math.floor(diff / 60);
-
-    const seconds =
-        diff % 60;
-
-    document.getElementById("counter").textContent =
-        `${days} Gün ${hours} Saat ${minutes} Dakika ${seconds} Saniye`;
-
-
-    /* =========================
-       YENİ YIL GERİ SAYIMI
-    ========================= */
-
-    const now =
-        new Date();
-
-    const newYear =
-        new Date(
-            now.getFullYear() + 1,
-            0,
-            1,
-            0,
-            0,
-            0
-        );
-
-    const remaining =
-        Math.max(
-            0,
-            newYear.getTime() - now.getTime()
-        );
-
-    const d =
-        Math.floor(
-            remaining / 86400000
-        );
-
-    const h =
-        Math.floor(
-            (remaining % 86400000) / 3600000
-        );
-
-    const m =
-        Math.floor(
-            (remaining % 3600000) / 60000
-        );
-
-    const s =
-        Math.floor(
-            (remaining % 60000) / 1000
-        );
-
-    document.getElementById("newyear").textContent =
-        `${d} Gün ${h} Saat ${m} Dakika ${s} Saniye`;
 }
 
-updateCounters();
+const days=Math.floor(diff/86400000);
 
-setInterval(updateCounters, 1000);
+const hours=Math.floor(diff/3600000)%24;
+
+const minutes=Math.floor(diff/60000)%60;
+
+const seconds=Math.floor(diff/1000)%60;
+
+document.getElementById("days").textContent=days;
+document.getElementById("hours").textContent=hours;
+document.getElementById("minutes").textContent=minutes;
+document.getElementById("seconds").textContent=seconds;
+
+document.getElementById("lockCountdown").textContent=
+`${days} gün ${hours} saat ${minutes} dakika ${seconds} saniye`;
+
+}
+
+setInterval(updateCountdown,1000);
+updateCountdown();
+
+
+/* UNLOCK */
+
+function unlock(){
+
+document.getElementById("lockScreen").style.display="none";
+
+document.getElementById("mainSite").style.display="block";
+
+startMusic();
+
+}
+
+
+/* RELATIONSHIP */
+
+const relationshipStart=
+new Date("2026-06-05T14:53:00+03:00");
+
+function updateRelationship(){
+
+const now=new Date();
+
+const diff=now-relationshipStart;
+
+const days=Math.floor(diff/86400000);
+
+document.getElementById("relationshipDays").textContent=days;
+
+}
+
+setInterval(updateRelationship,1000);
+updateRelationship();
+
+
+/* SNOW */
+
+function createSnow(){
+
+const snow=document.createElement("div");
+
+snow.className="snow";
+
+snow.textContent=["❄","❅","❆"][Math.floor(Math.random()*3)];
+
+snow.style.left=Math.random()*100+"vw";
+
+snow.style.fontSize=(8+Math.random()*18)+"px";
+
+snow.style.opacity=.3+Math.random()*.7;
+
+snow.style.animationDuration=(5+Math.random()*8)+"s";
+
+document.body.appendChild(snow);
+
+setTimeout(()=>snow.remove(),14000);
+
+}
+
+setInterval(createSnow,180);
+
+
+/* NOTEBOOK */
+
+const pages=[
+
+{
+text:`Seninle tanıştığım güne gelmeden önce benim de bir hayatım vardı.
+
+Çalışıyordum.
+Çabalıyordum.
+
+Zor zamanlardan geçtim.
+
+Alkolün hayatımı ne kadar etkilediğini bile fark etmedim.
+
+Sadece devam ettim.
+
+Çalıştım.
+Çabaladım.
+
+Ama bir gün kendime baktım ve sordum:
+
+“Ben kimim?”`,
+photos:["001.jpg","002.jpg","003.jpg","004.jpg"]
+},
+
+{
+text:`Ne sevdiğimi bile bilmiyordum.
+
+O yüzden kendimi yeniden tanımaya çalıştım.
+
+Gitar kursuna başladım.
+
+Bir şeyi düzgün yapmak istedim.
+
+Öğrendim.
+Gitar çaldım.
+Ve mutlu oldum.
+
+Belki çocukçaydı.
+
+Ama benim için önemliydi.
+
+Çünkü uzun zamandır ilk defa kendime ait bir şey bulmuştum.`,
+photos:["005.jpg","006.jpg","007.jpg","008.jpg"]
+},
+
+{
+text:`Sonra babamla ilk işime başladım.
+
+Bu sefer kendimden çok onun hayallerini gerçekleştirmek için uğraşıyordum.
+
+Yeni bir yer buldum.
+
+Lotus'la anlaştık.
+
+Ama işler yine yolunda gitmedi.
+
+Başka bir yer bulduk.
+
+Sonra dükkân basıldı.
+
+Zor zamanlardı.
+
+Ama yine çalıştım.
+
+Ve sonunda babamın istediği dükkânı açtım.`,
+photos:["009.jpg","010.jpg","011.jpg","012.jpg"]
+},
+
+{
+text:`Bütün bunların arasında dostum dediğim insanların beni sattığı zamanlar oldu.
+
+İlk başta çok etkilenmedim.
+
+Sonra yavaş yavaş her şeyi geride bıraktım.
+
+Sıfırdan yeni bir hayat kurmaya çalıştım.
+
+Ama bu sefer gerçekten zarar görmüştüm.`,
+photos:["013.jpg","014.jpg","015.jpg","016.jpg"]
+},
+
+{
+text:`Sonra hayatımda her şeyi değiştiren bir şey oldu.
+
+Bir kaza geçirdim.
+
+Ve hafızamı kaybettim.
+
+Geçmişimin bazı parçaları artık benim için yoktu.
+
+Sanki hayatımın bazı sayfaları silinmişti.
+
+Ben de kalanlarla yeniden devam etmek zorunda kaldım.`,
+photos:["017.jpg","018.jpg","019.jpg","020.jpg"]
+},
+
+{
+text:`Sonra Ömerlerle tanıştım.
+
+Beni olduğum gibi kabul ettiler.
+
+Ben de onlara karşı samimi oldum.
+
+Uzun zaman sonra düzgün bir çevrem vardı.
+
+Hayat yeniden biraz daha normal görünmeye başlamıştı.`,
+photos:["021.jpg","022.jpg","023.jpg","024.jpg"]
+},
+
+{
+text:`Nurettin abiyle tanıştım.
+
+Aramız iyiydi.
+
+Ne zaman işlerine ihtiyaçları olsa koştum.
+
+Kamil'in annesi öldüğünde yanında olmaya çalıştım.
+
+Yine elimden geleni yaptım.
+
+Ama bazı insanlar hayatımızda kalmak için değil,
+bize bir şey öğretmek için varmış.`,
+photos:["025.jpg","026.jpg","027.jpg","028.jpg"]
+},
+
+{
+text:`Sonunda dükkânı açtım.
+
+Bir işim vardı.
+
+Çalışıyordum.
+
+Hayatımı yeniden kuruyordum.
+
+Dışarıdan bakınca her şey yoluna girmiş gibiydi.
+
+Ama içimde hâlâ bir şey eksikti.
+
+Ve ben o eksikliğin ne olduğunu bilmiyordum.`,
+photos:["029.jpg","030.jpg","031.jpg","032.jpg"]
+},
+
+{
+text:`Çalışarak doldurmaya çalıştım.
+
+Uğraşarak doldurmaya çalıştım.
+
+Yeni başlangıçlar yaparak doldurmaya çalıştım.
+
+Ama ne yaparsam yapayım o eksiklik gitmedi.
+
+Sonra seni tanıdım.
+
+Ve zaman geçtikçe bir şeyi fark etmeye başladım.`,
+photos:["033.jpg","034.jpg","035.jpg","036.jpg"]
+},
+
+{
+text:`Ben hayatım boyunca bir şey arıyormuşum.
+
+Ama ne aradığımı bilmiyormuşum.
+
+Sonra anladım.
+
+Benim hayatımdaki o eksiklik aslında senmişsin.
+
+Sen yoktun.
+
+Ve ben neyi aradığımı bilmeden o boşluğu başka şeylerle doldurmaya çalışıyordum.`,
+photos:["037.jpg","038.jpg","039.jpg","040.jpg"]
+},
+
+{
+text:`Sonra sana gelebilmek için bahaneler bulup apar topar yanına geldim.
+
+Ve hayatımda daha önce hissetmediğim duyguları hissettim.
+
+Çok garip karşıladım.
+
+Ne olduğunu anlamadım.
+
+Sonra bunun aşk olduğunu öğrendim.`,
+photos:["041.jpg","042.jpg","043.jpg","044.jpg"]
+},
+
+{
+text:`Bunu öğrendikten sonra yine apar topar,
+yine sana gelebilmek için çalışmaya başladım.
+
+Çalıştım.
+
+Ve geldim.
+
+Yaklaşık 20 gün senin yanında kaldım.
+
+Ailenle tanıştım.
+
+Seni tanıdım.
+
+Her bir parçanı öğrendim.
+
+Ve hepsini çok sevdim.`,
+photos:["045.jpg","046.jpg","047.jpg","048.jpg"]
+},
+
+{
+text:`Şu anda da çalışıp tekrar yanına gelebilmek için can atıyorum.
+
+Şu an sen beni iki yıl bekledin.
+
+Artık üç yıl oldu.
+
+Ve bu üç yılda değişmeyen bir şey var:
+
+Seni hâlâ çok beğeniyorum.
+
+Hâlâ seni seviyorum.
+
+Ve hâlâ çok güzelsinnnn.
+
+Aaaaa... neyse. ♡`,
+photos:["049.jpg","050.jpg","051.jpg","052.jpg"]
+},
+
+{
+text:`Hayatımıza binlerce kişi girdi,
+binlercesi çıktı.
+
+Ama yine de eninde sonunda tekrar birbirimize döndük.
+
+Ve bence bunun başka bir açıklaması yok.
+
+Bence bu kutsal bir şey.
+
+Belki de kaderimize böyle yazılmış.
+
+Onca insanın arasında,
+onca şeyin ardından yine birbirimizi bulduk.`,
+photos:["053.jpg","054.jpg","055.jpg","056.jpg"]
+},
+
+{
+text:`Benim yıllardır ne olduğunu bilmediğim o eksiklik...
+
+Meğer senmişsin.
+
+Şimdi bunu biliyorum.
+
+Ve artık yeni sayfaları tek başıma değil,
+seninle yazmak istiyorum.
+
+Sonsuza Dek ♡`,
+photos:["057.jpg","058.jpg","059.jpg","060.jpg"]
+}
+
+];
+
+let currentPage=0;
+
+function renderPage(){
+
+const page=pages[currentPage];
+
+document.getElementById("pageText").textContent=page.text;
+
+document.getElementById("pageNumber").textContent=
+`${currentPage+1} / ${pages.length}`;
+
+const grid=document.getElementById("photoGrid");
+
+grid.innerHTML="";
+
+page.photos.forEach((photo,i)=>{
+
+const div=document.createElement("div");
+
+div.className="photo";
+
+div.innerHTML=`
+<img src="photos/${photo}"
+onerror="this.style.display='none'">
+<span>♡</span>
+`;
+
+grid.appendChild(div);
+
+});
+
+speak(page.text);
+
+}
+
+function nextPage(){
+
+if(currentPage<pages.length-1){
+
+currentPage++;
+
+renderPage();
+
+}
+
+}
+
+function previousPage(){
+
+if(currentPage>0){
+
+currentPage--;
+
+renderPage();
+
+}
+
+}
+
+renderPage();
+
+
+/* VOICE */
+
+function speak(text){
+
+if(!("speechSynthesis" in window)) return;
+
+speechSynthesis.cancel();
+
+const utterance=
+new SpeechSynthesisUtterance(text);
+
+utterance.lang="tr-TR";
+utterance.rate=.88;
+utterance.pitch=1.0;
+utterance.volume=1;
+
+speechSynthesis.speak(utterance);
+
+}
+
+
+/* ORIGINAL MAGIC + CHRISTMAS MUSIC */
+/*
+   Gerçek Harry Potter müziği kullanılmıyor.
+   Özgün büyülü/kışlık melodi:
+   çanlar + yaylı hissi + sıcak Noel atmosferi.
+*/
+
+let audioContext=null;
+let masterGain=null;
+let musicTimer=null;
+let musicOn=false;
+
+const melody=[
+659.25,783.99,880.00,783.99,
+659.25,523.25,587.33,659.25,
+783.99,880.00,987.77,880.00,
+783.99,659.25,587.33,523.25
+];
+
+function note(freq,time,duration,volume=.045){
+
+const osc=audioContext.createOscillator();
+
+const gain=audioContext.createGain();
+
+osc.type="sine";
+
+osc.frequency.value=freq;
+
+gain.gain.setValueAtTime(0,time);
+
+gain.gain.linearRampToValueAtTime(
+volume,time+.08
+);
+
+gain.gain.exponentialRampToValueAtTime(
+.001,time+duration
+);
+
+osc.connect(gain);
+gain.connect(masterGain);
+
+osc.start(time);
+
+osc.stop(time+duration+.1);
+
+}
+
+
+function bell(freq,time){
+
+const osc=audioContext.createOscillator();
+
+const gain=audioContext.createGain();
+
+osc.type="sine";
+
+osc.frequency.value=freq*2;
+
+gain.gain.setValueAtTime(.001,time);
+
+gain.gain.linearRampToValueAtTime(.09,time+.01);
+
+gain.gain.exponentialRampToValueAtTime(.001,time+1.4);
+
+osc.connect(gain);
+
+gain.connect(masterGain);
+
+osc.start(time);
+
+osc.stop(time+1.5);
+
+}
+
+
+function playMelody(){
+
+if(!audioContext || !musicOn)return;
+
+const start=audioContext.currentTime+.05;
+
+melody.forEach((freq,i)=>{
+
+note(freq,start+i*.48,.7,.035);
+
+});
+
+bell(659.25,start);
+bell(783.99,start+3.8);
+bell(987.77,start+7.6);
+
+musicTimer=setTimeout(
+playMelody,
+melody.length*.48*1000
+);
+
+}
+
+
+function startMusic(){
+
+if(musicOn)return;
+
+musicOn=true;
+
+audioContext=
+new(window.AudioContext||window.webkitAudioContext)();
+
+masterGain=
+audioContext.createGain();
+
+masterGain.gain.value=.28;
+
+masterGain.connect(audioContext.destination);
+
+playMelody();
+
+document.getElementById("musicButton").textContent=
+"🎵 Müziği Kapat";
+
+}
+
+
+function toggleMusic(){
+
+if(!musicOn){
+
+startMusic();
+
+return;
+
+}
+
+musicOn=false;
+
+clearTimeout(musicTimer);
+
+if(masterGain){
+
+masterGain.gain.linearRampToValueAtTime(
+0,
+audioContext.currentTime+1
+);
+
+}
+
+document.getElementById("musicButton").textContent=
+"🎵 Müziği Aç";
+
+}
 
 </script>
 
