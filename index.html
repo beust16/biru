@@ -3,25 +3,34 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Sadece İkimiz ♡</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap');
 
-*{box-sizing:border-box}
+*{
+    box-sizing:border-box;
+}
 
-html{scroll-behavior:smooth}
+html{
+    scroll-behavior:smooth;
+}
 
 body{
     margin:0;
     background:
-      radial-gradient(circle at 50% 10%,#4b1827 0,#170b12 38%,#080509 100%);
+        radial-gradient(circle at 50% 10%,#4b1827 0,#170b12 38%,#080509 100%);
     color:#fff;
     font-family:'Cormorant Garamond',serif;
     overflow-x:hidden;
 }
 
-body.locked{overflow:hidden}
+body.locked{
+    overflow:hidden;
+}
+
+/* KAR */
 
 .snow{
     position:fixed;
@@ -46,7 +55,44 @@ body.locked{overflow:hidden}
     }
 }
 
-/* LOCK */
+/* ÜST IŞIKLAR */
+
+.lights{
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    height:38px;
+    z-index:30;
+    display:flex;
+    justify-content:space-around;
+    pointer-events:none;
+}
+
+.bulb{
+    width:11px;
+    height:17px;
+    border-radius:50%;
+    margin-top:3px;
+    background:#ffd966;
+    box-shadow:0 0 14px #ffd966;
+    animation:blink 1.4s infinite alternate;
+}
+
+.bulb:nth-child(2n){
+    animation-delay:.4s;
+}
+
+.bulb:nth-child(3n){
+    animation-delay:.8s;
+}
+
+@keyframes blink{
+    from{opacity:.35}
+    to{opacity:1}
+}
+
+/* KİLİT */
 
 #lockScreen{
     position:fixed;
@@ -56,9 +102,11 @@ body.locked{overflow:hidden}
     align-items:center;
     justify-content:center;
     padding:20px;
+
     background:
-      radial-gradient(circle at 50% 30%,rgba(137,25,49,.35),transparent 45%),
-      linear-gradient(#09050a,#170812);
+        radial-gradient(circle at 50% 30%,rgba(137,25,49,.35),transparent 45%),
+        linear-gradient(#09050a,#170812);
+
     transition:opacity 1s,visibility 1s;
 }
 
@@ -72,12 +120,16 @@ body.locked{overflow:hidden}
     width:min(560px,94vw);
     text-align:center;
     padding:42px 25px;
+
     border:1px solid rgba(255,255,255,.18);
     border-radius:30px;
+
     background:rgba(20,8,14,.82);
+
     box-shadow:
-      0 0 80px rgba(255,40,90,.18),
-      inset 0 0 40px rgba(255,255,255,.025);
+        0 0 80px rgba(255,40,90,.18),
+        inset 0 0 40px rgba(255,255,255,.025);
+
     backdrop-filter:blur(15px);
 }
 
@@ -88,7 +140,9 @@ body.locked{overflow:hidden}
 }
 
 @keyframes lockFloat{
-    50%{transform:translateY(-8px)}
+    50%{
+        transform:translateY(-8px);
+    }
 }
 
 .lockBox h1{
@@ -127,13 +181,22 @@ body.locked{overflow:hidden}
 .password input{
     width:220px;
     padding:14px 16px;
+
     border:1px solid rgba(255,255,255,.2);
     border-radius:14px;
+
     background:#10080d;
     color:#fff;
+
     outline:none;
+
     font-family:inherit;
     font-size:17px;
+}
+
+.password input:focus{
+    border-color:rgba(255,150,180,.6);
+    box-shadow:0 0 20px rgba(255,80,130,.12);
 }
 
 .password button,
@@ -141,12 +204,22 @@ body.locked{overflow:hidden}
     border:0;
     border-radius:14px;
     padding:14px 20px;
+
     background:linear-gradient(135deg,#c52e57,#7c1735);
+
     color:#fff;
     font-weight:bold;
+
     cursor:pointer;
     font-family:inherit;
     font-size:16px;
+
+    transition:transform .25s,box-shadow .25s;
+}
+
+.password button:hover{
+    transform:translateY(-2px);
+    box-shadow:0 8px 25px rgba(197,46,87,.25);
 }
 
 .error{
@@ -155,32 +228,82 @@ body.locked{overflow:hidden}
     margin-top:10px;
 }
 
-/* MAIN */
+/* YANLIŞ ŞİFRE */
+
+.shake{
+    animation:shake .45s ease;
+}
+
+@keyframes shake{
+    0%,100%{
+        transform:translateX(0);
+    }
+
+    20%{
+        transform:translateX(-8px);
+    }
+
+    40%{
+        transform:translateX(8px);
+    }
+
+    60%{
+        transform:translateX(-6px);
+    }
+
+    80%{
+        transform:translateX(6px);
+    }
+}
+
+/* ANA */
 
 main{
     position:relative;
     z-index:2;
 }
 
+/* HERO */
+
 .hero{
     min-height:100vh;
+
     display:flex;
     align-items:center;
     justify-content:center;
+
     text-align:center;
+
     padding:80px 20px;
+
     position:relative;
 }
 
 .heroContent{
     max-width:900px;
+
+    opacity:0;
+    transform:translateY(25px);
+
+    animation:heroIn 1.2s ease .25s forwards;
+}
+
+@keyframes heroIn{
+    to{
+        opacity:1;
+        transform:none;
+    }
 }
 
 .hero h1{
     font-family:'Great Vibes',cursive;
+
     font-size:clamp(65px,12vw,130px);
+
     font-weight:400;
+
     margin:0;
+
     text-shadow:0 0 35px rgba(255,120,160,.35);
 }
 
@@ -196,21 +319,57 @@ main{
     margin:25px 0;
 }
 
+.tree{
+    font-size:90px;
+    margin:20px 0;
+
+    filter:drop-shadow(0 10px 20px rgba(0,0,0,.35));
+
+    animation:treeFloat 3s ease-in-out infinite;
+}
+
+@keyframes treeFloat{
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-7px);
+    }
+}
+
+/* SAYAÇLAR */
+
 .stats{
     display:flex;
     gap:15px;
+
     justify-content:center;
     flex-wrap:wrap;
+
     margin-top:30px;
 }
 
 .stat{
     min-width:180px;
+
     padding:18px;
+
     border:1px solid rgba(255,255,255,.12);
     border-radius:20px;
+
     background:rgba(255,255,255,.035);
+
     backdrop-filter:blur(8px);
+
+    transition:
+        transform .3s ease,
+        background .3s ease;
+}
+
+.stat:hover{
+    transform:translateY(-6px);
+    background:rgba(255,255,255,.07);
 }
 
 .stat strong{
@@ -224,36 +383,71 @@ main{
     font-size:16px;
 }
 
+/* BÖLÜMLER */
+
 section{
     max-width:1000px;
     margin:0 auto;
     padding:90px 20px;
+
+    opacity:0;
+    transform:translateY(35px);
+
+    transition:
+        opacity .8s ease,
+        transform .8s ease;
+}
+
+section.visible{
+    opacity:1;
+    transform:translateY(0);
 }
 
 .sectionTitle{
     text-align:center;
+
     font-family:'Great Vibes',cursive;
+
     font-size:58px;
+
     font-weight:400;
+
     margin-bottom:35px;
+
+    text-shadow:0 0 22px rgba(255,120,160,.16);
 }
+
+/* HİKÂYE */
 
 .notebook{
     background:
-      linear-gradient(rgba(255,255,255,.95),rgba(248,237,231,.97));
+        linear-gradient(
+            rgba(255,255,255,.95),
+            rgba(248,237,231,.97)
+        );
+
     color:#3c2029;
+
     border-radius:22px;
+
     padding:45px clamp(20px,6vw,65px);
+
     box-shadow:0 25px 70px rgba(0,0,0,.35);
+
     position:relative;
 }
 
 .notebook:before{
     content:"";
+
     position:absolute;
+
     inset:14px;
+
     border:1px solid rgba(100,50,60,.15);
+
     border-radius:15px;
+
     pointer-events:none;
 }
 
@@ -263,12 +457,19 @@ section{
 
 .page.active{
     display:block;
-    animation:pageIn .5s ease;
+    animation:pageIn .65s cubic-bezier(.2,.8,.2,1);
 }
 
 @keyframes pageIn{
-    from{opacity:0;transform:translateY(10px)}
-    to{opacity:1;transform:none}
+    from{
+        opacity:0;
+        transform:translateY(15px);
+    }
+
+    to{
+        opacity:1;
+        transform:none;
+    }
 }
 
 .page h3{
@@ -279,100 +480,199 @@ section{
 .page p{
     font-size:21px;
     line-height:1.65;
+
     white-space:pre-line;
 }
 
 .pageControls{
     display:flex;
+
     justify-content:center;
+
     gap:15px;
+
     margin-top:30px;
 }
 
 .pageControls button{
     border:0;
+
     background:#5e2436;
+
     color:#fff;
+
     border-radius:12px;
+
     padding:12px 20px;
+
     cursor:pointer;
+
     font-family:inherit;
+
     font-size:17px;
+
+    transition:
+        transform .2s,
+        background .2s;
+}
+
+.pageControls button:hover{
+    transform:translateY(-2px);
+    background:#762c44;
 }
 
 .pageNumber{
     text-align:center;
+
     margin-top:14px;
+
     color:#76505d;
 }
 
-/* PHOTO */
+/* BÜYÜK FOTO */
 
 .photoArea{
     margin:55px auto 0;
+
     max-width:850px;
+
     min-height:460px;
+
     border-radius:25px;
+
     border:1px solid rgba(255,255,255,.16);
+
     background:
-      linear-gradient(135deg,rgba(255,255,255,.04),rgba(255,255,255,.015));
+        linear-gradient(
+            135deg,
+            rgba(255,255,255,.04),
+            rgba(255,255,255,.015)
+        );
+
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     overflow:hidden;
+
     box-shadow:0 25px 70px rgba(0,0,0,.3);
+
+    transition:
+        transform .4s ease,
+        box-shadow .4s ease;
+}
+
+.photoArea:hover{
+    transform:translateY(-5px);
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.4),
+        0 0 35px rgba(255,100,145,.12);
 }
 
 .photoArea img{
     width:100%;
     height:100%;
+
     max-height:650px;
+
     object-fit:cover;
+
+    transition:transform .5s ease;
+}
+
+.photoArea:hover img{
+    transform:scale(1.025);
 }
 
 .photoPlaceholder{
     text-align:center;
+
     color:#bbaab0;
+
     font-size:25px;
 }
 
-/* GALLERY */
+/* GALERİ */
 
 .gallery{
     display:grid;
+
     grid-template-columns:repeat(2,1fr);
+
     gap:18px;
 }
 
 .galleryItem{
     aspect-ratio:1/1;
+
     border-radius:20px;
+
     overflow:hidden;
+
     border:1px solid rgba(255,255,255,.1);
+
     background:
-      linear-gradient(135deg,#31121e,#160a10);
+        linear-gradient(
+            135deg,
+            #31121e,
+            #160a10
+        );
+
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     color:#bba8af;
+
     font-size:22px;
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease,
+        border-color .35s ease;
+}
+
+.galleryItem:hover{
+    transform:translateY(-7px) scale(1.015);
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,.35),
+        0 0 24px rgba(255,100,145,.12);
+
+    border-color:rgba(255,170,195,.3);
 }
 
 .galleryItem img{
     width:100%;
     height:100%;
+
     object-fit:cover;
+
+    transition:transform .5s ease;
 }
+
+.galleryItem:hover img{
+    transform:scale(1.04);
+}
+
+/* SON */
 
 .final{
     text-align:center;
+
     padding-bottom:120px;
 }
 
 .final h2{
     font-family:'Great Vibes',cursive;
+
     font-size:90px;
+
     font-weight:400;
+
     margin:0;
 }
 
@@ -381,79 +681,120 @@ section{
     color:#d7c6cd;
 }
 
-footer{
-    text-align:center;
-    padding:35px 20px;
-    color:#aa969f;
-    border-top:1px solid rgba(255,255,255,.08);
-}
+/* MÜZİK */
 
 .musicBtn{
     position:fixed;
+
     right:18px;
     bottom:18px;
+
     z-index:50;
+
     border-radius:50%;
+
     width:55px;
     height:55px;
+
     padding:0;
+
     font-size:21px;
+
     box-shadow:0 5px 25px rgba(0,0,0,.4);
 }
 
-/* LIGHTS */
-
-.lights{
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-    height:38px;
-    z-index:30;
-    display:flex;
-    justify-content:space-around;
-    pointer-events:none;
+.musicBtn:hover{
+    transform:scale(1.1);
 }
 
-.bulb{
-    width:11px;
-    height:17px;
-    border-radius:50%;
-    margin-top:3px;
-    background:#ffd966;
-    box-shadow:0 0 14px #ffd966;
-    animation:blink 1.4s infinite alternate;
+.musicBtn.playing{
+    animation:musicPulse 1.4s ease-in-out infinite;
 }
 
-.bulb:nth-child(2n){animation-delay:.4s}
-.bulb:nth-child(3n){animation-delay:.8s}
+@keyframes musicPulse{
+    0%,100%{
+        box-shadow:0 5px 25px rgba(0,0,0,.4);
+    }
 
-@keyframes blink{
-    from{opacity:.35}
-    to{opacity:1}
+    50%{
+        box-shadow:
+            0 5px 25px rgba(0,0,0,.4),
+            0 0 28px rgba(255,120,160,.5);
+    }
 }
 
-.tree{
-    font-size:90px;
-    margin:20px 0;
-    filter:drop-shadow(0 10px 20px rgba(0,0,0,.35));
+/* FOOTER */
+
+footer{
+    text-align:center;
+
+    padding:35px 20px;
+
+    color:#aa969f;
+
+    border-top:1px solid rgba(255,255,255,.08);
 }
+
+/* MOBİL */
 
 @media(max-width:650px){
-    .lockBox{padding:30px 17px}
-    .lock{font-size:70px}
-    .lockBox h1{font-size:39px}
-    .countdown{font-size:23px}
-    .hero{min-height:90vh}
-    .symbols{font-size:28px;letter-spacing:7px}
-    section{padding:65px 15px}
-    .sectionTitle{font-size:47px}
-    .notebook{padding:32px 20px}
-    .page h3{font-size:28px}
-    .page p{font-size:18px}
-    .gallery{grid-template-columns:1fr}
-    .photoArea{min-height:320px}
-    .final h2{font-size:65px}
+
+    .lockBox{
+        padding:30px 17px;
+    }
+
+    .lock{
+        font-size:70px;
+    }
+
+    .lockBox h1{
+        font-size:39px;
+    }
+
+    .countdown{
+        font-size:23px;
+    }
+
+    .hero{
+        min-height:90vh;
+    }
+
+    .symbols{
+        font-size:28px;
+        letter-spacing:7px;
+    }
+
+    section{
+        padding:65px 15px;
+    }
+
+    .sectionTitle{
+        font-size:47px;
+    }
+
+    .notebook{
+        padding:32px 20px;
+    }
+
+    .page h3{
+        font-size:28px;
+    }
+
+    .page p{
+        font-size:18px;
+    }
+
+    .gallery{
+        grid-template-columns:1fr;
+    }
+
+    .photoArea{
+        min-height:320px;
+    }
+
+    .final h2{
+        font-size:65px;
+    }
 }
 </style>
 </head>
@@ -463,18 +804,33 @@ footer{
 <div class="snow" id="snow"></div>
 
 <div class="lights">
-    <i class="bulb"></i><i class="bulb"></i><i class="bulb"></i>
-    <i class="bulb"></i><i class="bulb"></i><i class="bulb"></i>
-    <i class="bulb"></i><i class="bulb"></i><i class="bulb"></i>
-    <i class="bulb"></i><i class="bulb"></i><i class="bulb"></i>
+    <i class="bulb"></i>
+    <i class="bulb"></i>
+    <i class="bulb"></i>
+    <i class="bulb"></i>
+    <i class="bulb"></i>
+    <i class="bulb"></i>
+    <i class="bulb"></i>
+    <i class="bulb"></i>
+    <i class="bulb"></i>
+    <i class="bulb"></i>
+    <i class="bulb"></i>
+    <i class="bulb"></i>
 </div>
 
-<!-- KİLİT -->
-<div id="lockScreen">
-    <div class="lockBox">
-        <div class="lock">🔒❄️</div>
+<!-- KİLİT EKRANI -->
 
-        <h1>Aramızdaki küçük sır...</h1>
+<div id="lockScreen">
+
+    <div class="lockBox">
+
+        <div class="lock">
+            🔒❄️
+        </div>
+
+        <h1>
+            Aramızdaki küçük sır...
+        </h1>
 
         <p>
             Bu sayfa yalnızca ikimiz için hazırlandı.<br>
@@ -482,82 +838,174 @@ footer{
             bütün sayfalar açılacak. ♡
         </p>
 
-        <div class="openDate">01.01.2027 • 00:00</div>
+        <div class="openDate">
+            01.01.2027 • 00:00
+        </div>
 
-        <div class="countdown" id="lockCountdown">Yükleniyor...</div>
+        <div class="countdown" id="lockCountdown">
+            Yükleniyor...
+        </div>
 
         <div class="password">
-            <input id="passwordInput" type="password" placeholder="Sürpriz şifresi">
-            <button onclick="unlockWithPassword()">Sürprizi Gör</button>
+
+            <input
+                id="passwordInput"
+                type="password"
+                placeholder="Sürpriz şifresi"
+            >
+
+            <button onclick="unlockWithPassword()">
+                Sürprizi Gör
+            </button>
+
         </div>
 
         <div class="error" id="passwordError"></div>
+
     </div>
+
 </div>
 
 <main id="site">
 
+<!-- ANA SAYFA -->
+
 <section class="hero">
+
     <div class="heroContent">
-        <div class="tree">🎄</div>
 
-        <h1>Sadece İkimiz ♡</h1>
+        <div class="tree">
+            🎄
+        </div>
 
-        <p>Bu yılın en güzel hediyesi: Biz. ✨</p>
+        <h1>
+            Sadece İkimiz ♡
+        </h1>
+
+        <p>
+            Bu yılın en güzel hediyesi: Biz. ✨
+        </p>
 
         <div class="symbols">
             ∞ ⌛ 🦌
         </div>
 
         <div class="stats">
+
             <div class="stat">
-                <strong id="relationshipDays">0</strong>
-                <span>gündür birlikte</span>
+
+                <strong id="relationshipDays">
+                    0
+                </strong>
+
+                <span>
+                    gündür birlikte
+                </span>
+
             </div>
 
             <div class="stat">
-                <strong id="relationshipTime">0</strong>
-                <span>zamandır hayatımdasın</span>
+
+                <strong id="relationshipTime">
+                    0
+                </strong>
+
+                <span>
+                    zamandır hayatımdasın
+                </span>
+
             </div>
 
             <div class="stat">
-                <strong id="newYearCountdown">0</strong>
-                <span>yeni yıla kalan</span>
+
+                <strong id="newYearCountdown">
+                    0
+                </strong>
+
+                <span>
+                    yeni yıla kalan
+                </span>
+
             </div>
+
         </div>
+
     </div>
+
 </section>
 
+<!-- HİKÂYE -->
+
 <section>
-    <h2 class="sectionTitle">Bizim Hikâyemiz ♡</h2>
+
+    <h2 class="sectionTitle">
+        Bizim Hikâyemiz ♡
+    </h2>
 
     <div class="notebook" id="story"></div>
+
 </section>
 
+<!-- BÜYÜK FOTO -->
+
 <section>
-    <h2 class="sectionTitle">Birlikte ♡</h2>
+
+    <h2 class="sectionTitle">
+        Birlikte ♡
+    </h2>
 
     <div class="photoArea">
+
         <div class="photoPlaceholder">
-            📷<br><br>
+
+            📷
+            <br><br>
+
             Büyük fotoğrafımız burada olacak. ♡
+
         </div>
+
     </div>
+
 </section>
+
+<!-- GALERİ -->
 
 <section>
-    <h2 class="sectionTitle">Anılarımız</h2>
+
+    <h2 class="sectionTitle">
+        Anılarımız
+    </h2>
 
     <div class="gallery">
-        <div class="galleryItem">Fotoğraf 1</div>
-        <div class="galleryItem">Fotoğraf 2</div>
-        <div class="galleryItem">Fotoğraf 3</div>
-        <div class="galleryItem">Fotoğraf 4</div>
+
+        <div class="galleryItem">
+            Fotoğraf 1
+        </div>
+
+        <div class="galleryItem">
+            Fotoğraf 2
+        </div>
+
+        <div class="galleryItem">
+            Fotoğraf 3
+        </div>
+
+        <div class="galleryItem">
+            Fotoğraf 4
+        </div>
+
     </div>
+
 </section>
 
+<!-- SON -->
+
 <section class="final">
-    <h2>Sonsuza Dek ♡</h2>
+
+    <h2>
+        Sonsuza Dek ♡
+    </h2>
 
     <p>
         Zaman geçiyor ama bizim hikâyemiz devam ediyor. ♡
@@ -570,11 +1018,18 @@ footer{
     <p>
         Daha nice anılara, nice yıllara. ♡
     </p>
+
 </section>
 
 </main>
 
-<button class="musicBtn" id="musicBtn" onclick="toggleMusic()">🎵</button>
+<button
+    class="musicBtn"
+    id="musicBtn"
+    onclick="toggleMusic()"
+>
+    🎵
+</button>
 
 <footer>
     ♡ Sadece ikimiz ♡
@@ -582,106 +1037,224 @@ footer{
 
 <script>
 
-/* KAR YAĞIŞI */
+/* =========================================
+   KAR YAĞIŞI
+========================================= */
 
 const snow = document.getElementById("snow");
 
 for(let i=0;i<90;i++){
-    const flake=document.createElement("div");
-    flake.className="flake";
-    flake.textContent=Math.random()>.65 ? "❄" : "•";
-    flake.style.left=Math.random()*100+"%";
-    flake.style.fontSize=(7+Math.random()*15)+"px";
-    flake.style.animationDuration=(6+Math.random()*9)+"s";
-    flake.style.animationDelay=(-Math.random()*15)+"s";
-    flake.style.setProperty("--x",(Math.random()*160-80)+"px");
+
+    const flake = document.createElement("div");
+
+    flake.className = "flake";
+
+    flake.textContent =
+        Math.random() > .65 ? "❄" : "•";
+
+    flake.style.left =
+        Math.random()*100 + "%";
+
+    flake.style.fontSize =
+        (7 + Math.random()*15) + "px";
+
+    flake.style.animationDuration =
+        (6 + Math.random()*9) + "s";
+
+    flake.style.animationDelay =
+        (-Math.random()*15) + "s";
+
+    flake.style.setProperty(
+        "--x",
+        (Math.random()*160-80) + "px"
+    );
+
     snow.appendChild(flake);
 }
 
-/* TARİHLER */
+/* =========================================
+   TARİHLER
+========================================= */
 
-const relationshipStart = new Date("2026-06-05T14:53:00+03:00");
-const newYear = new Date("2027-01-01T00:00:00+03:00");
+const relationshipStart =
+    new Date("2026-06-05T14:53:00+03:00");
+
+const newYear =
+    new Date("2027-01-01T00:00:00+03:00");
 
 function updateTime(){
 
     const now = new Date();
 
-    const elapsed = Math.max(0,now-relationshipStart);
+    const elapsed =
+        Math.max(0,now-relationshipStart);
 
-    const days = Math.floor(elapsed/86400000);
+    const days =
+        Math.floor(elapsed/86400000);
 
-    const hours = Math.floor((elapsed%86400000)/3600000);
-    const minutes = Math.floor((elapsed%3600000)/60000);
-    const seconds = Math.floor((elapsed%60000)/1000);
+    const hours =
+        Math.floor(
+            (elapsed%86400000)/3600000
+        );
 
-    document.getElementById("relationshipDays").textContent=days;
+    const minutes =
+        Math.floor(
+            (elapsed%3600000)/60000
+        );
 
-    document.getElementById("relationshipTime").textContent =
-        days+" gün "+hours+" sa "+minutes+" dk";
+    const seconds =
+        Math.floor(
+            (elapsed%60000)/1000
+        );
 
-    const remaining = newYear-now;
+    document.getElementById(
+        "relationshipDays"
+    ).textContent = days;
+
+    document.getElementById(
+        "relationshipTime"
+    ).textContent =
+        days +
+        " gün " +
+        hours +
+        " sa " +
+        minutes +
+        " dk";
+
+    const remaining =
+        newYear-now;
 
     if(remaining<=0){
-        document.getElementById("newYearCountdown").textContent="♡";
+
+        document.getElementById(
+            "newYearCountdown"
+        ).textContent = "♡";
+
         openSite();
+
         return;
     }
 
-    const d=Math.floor(remaining/86400000);
-    const h=Math.floor((remaining%86400000)/3600000);
-    const m=Math.floor((remaining%3600000)/60000);
-    const s=Math.floor((remaining%60000)/1000);
+    const d =
+        Math.floor(
+            remaining/86400000
+        );
 
-    document.getElementById("newYearCountdown").textContent =
+    const h =
+        Math.floor(
+            (remaining%86400000)/3600000
+        );
+
+    const m =
+        Math.floor(
+            (remaining%3600000)/60000
+        );
+
+    const s =
+        Math.floor(
+            (remaining%60000)/1000
+        );
+
+    document.getElementById(
+        "newYearCountdown"
+    ).textContent =
         d+"g "+h+"s "+m+"d "+s+"sn";
 
-    document.getElementById("lockCountdown").textContent =
-        d+" gün "+h+" saat "+m+" dakika "+s+" saniye";
+    document.getElementById(
+        "lockCountdown"
+    ).textContent =
+        d+
+        " gün "+
+        h+
+        " saat "+
+        m+
+        " dakika "+
+        s+
+        " saniye";
 }
 
 setInterval(updateTime,1000);
+
 updateTime();
 
-/* ŞİFRE */
+/* =========================================
+   ŞİFRE
+========================================= */
 
 function unlockWithPassword(){
 
-    const value=document.getElementById("passwordInput").value;
+    const value =
+        document.getElementById(
+            "passwordInput"
+        ).value;
 
-    if(value==="sadeceikimiz"){
-        localStorage.setItem("specialPreview","yes");
+    if(value === "sadeceikimiz"){
+
+        localStorage.setItem(
+            "specialPreview",
+            "yes"
+        );
+
         openSite();
+
     }else{
-        document.getElementById("passwordError").textContent=
+
+        document.getElementById(
+            "passwordError"
+        ).textContent =
             "Şifre yanlış. ♡";
+
+        const box =
+            document.querySelector(
+                ".lockBox"
+            );
+
+        box.classList.remove("shake");
+
+        void box.offsetWidth;
+
+        box.classList.add("shake");
     }
 }
 
-document.getElementById("passwordInput").addEventListener("keydown",e=>{
-    if(e.key==="Enter") unlockWithPassword();
-});
+document
+    .getElementById("passwordInput")
+    .addEventListener(
+        "keydown",
+        e=>{
+            if(e.key==="Enter"){
+                unlockWithPassword();
+            }
+        }
+    );
 
 function openSite(){
-    document.getElementById("lockScreen").classList.add("hidden");
-    document.body.classList.remove("locked");
+
+    document
+        .getElementById("lockScreen")
+        .classList.add("hidden");
+
+    document.body
+        .classList.remove("locked");
 }
 
-/*
-Şifreyle girilmişse tekrar açılır.
-Yeni yıl geldiğinde zaten otomatik açılır.
-*/
-
-if(localStorage.getItem("specialPreview")==="yes"){
+if(
+    localStorage.getItem(
+        "specialPreview"
+    ) === "yes"
+){
     openSite();
 }
 
-/* HİKÂYE */
+/* =========================================
+   HİKÂYE
+========================================= */
 
-const pages=[
+const pages = [
 
 {
 title:"Sayfa 1 — Her Şeyden Önce",
+
 text:`Seninle tanışmadan önce benim de bir hayatım vardı.
 
 Çalışıyor, çabalıyor ve bir şeyleri düzeltmeye uğraşıyordum. Zor zamanlardan geçtiğim, hatta bazen kendi babamın bile beni unuttuğunu hissettiğim dönemler oldu.
@@ -699,6 +1272,7 @@ Ama bir gün durup kendime baktım ve kendime tek bir soru sordum:
 
 {
 title:"Sayfa 2 — Kendimi Ararken",
+
 text:`Ne sevdiğimi, ne istediğimi bile tam olarak bilmiyordum.
 
 Bu yüzden kendimi yeniden tanımaya çalıştım.
@@ -716,6 +1290,7 @@ Belki dışarıdan bakınca küçük bir şey gibi görünebilirdi ama benim iç
 
 {
 title:"Sayfa 3 — Bir Kaza",
+
 text:`Sonra hayatımı değiştiren bir şey oldu.
 
 Bir kaza geçirdim.
@@ -737,6 +1312,7 @@ Ben de durmadım.`
 
 {
 title:"Sayfa 4 — Babamın Hayali ve Yeniden Başlamak",
+
 text:`Sonra babamla birlikte ilk işime başladım.
 
 Bu kez sadece kendim için değil, onun hayallerini gerçekleştirmek için de uğraşıyordum.
@@ -764,6 +1340,7 @@ Ben de bazı şeyleri geride bırakıp yeniden başladım.`
 
 {
 title:"Sayfa 5 — Yeniden İnsanlar",
+
 text:`Sonra Ömerlerle tanıştım.
 
 Beni olduğum gibi kabul ettiler.
@@ -779,6 +1356,7 @@ Ama yine de içimde ne olduğunu anlayamadığım bir eksiklik vardı.`
 
 {
 title:"Sayfa 6 — Dükkân",
+
 text:`Sonunda dükkânı açtım.
 
 Bir işim vardı. Çalışıyordum. Kendi hayatımı yeniden kuruyordum.
@@ -802,6 +1380,7 @@ Ta ki sen gelene kadar...`
 
 {
 title:"Sayfa 7 — Sonra Sen Geldin",
+
 text:`Sonra seni tanıdım.
 
 Ve zaman geçtikçe bir şeyi fark etmeye başladım.
@@ -825,6 +1404,7 @@ Yaşadığım onca şeyin arasında seni neden bu kadar farklı hissettiğimi ar
 
 {
 title:"Sayfa 8 — Apar Topar Sana",
+
 text:`Sonra sana gelebilmek için bahaneler bulup apar topar yanına geldim.
 
 Ve hayatımda daha önce hissetmediğim duyguları hissettim.
@@ -844,6 +1424,7 @@ Ve geldim.
 
 {
 title:"Sayfa 9 — Seni Tanımak",
+
 text:`Yaklaşık 20 gün senin yanında kaldım.
 
 Ailenle tanıştım.
@@ -863,6 +1444,7 @@ Seni tanıdıkça, yıllardır hissettiğim o eksikliğin nedenini daha iyi anla
 
 {
 title:"Sayfa 10 — Üç Yıl",
+
 text:`Sen beni iki yıl bekledin.
 
 Artık üç yıl oldu.
@@ -880,6 +1462,7 @@ Aaaaa... neyse. ♡`
 
 {
 title:"Son Sayfa — Kader",
+
 text:`Hayatımıza binlerce insan girdi, binlercesi çıktı.
 
 Ama ne olursa olsun, en sonunda yine birbirimize döndük.
@@ -903,120 +1486,250 @@ Meğer senmişsin.
 
 ];
 
-let currentPage=0;
+let currentPage = 0;
 
 function renderStory(){
 
-    const story=document.getElementById("story");
+    const story =
+        document.getElementById("story");
 
-    story.innerHTML="";
+    story.innerHTML = "";
 
     pages.forEach((page,index)=>{
 
-        const div=document.createElement("div");
+        const div =
+            document.createElement("div");
 
-        div.className="page"+(index===0?" active":"");
+        div.className =
+            "page" +
+            (index===0 ? " active" : "");
 
-        div.innerHTML=`
+        div.innerHTML = `
             <h3>${page.title}</h3>
             <p>${page.text}</p>
         `;
 
         story.appendChild(div);
-
     });
 
-    story.innerHTML+=`
+    story.innerHTML += `
+
         <div class="pageControls">
-            <button onclick="previousPage()">← Önceki</button>
-            <button onclick="nextPage()">Sonraki →</button>
+
+            <button onclick="previousPage()">
+                ← Önceki
+            </button>
+
+            <button onclick="nextPage()">
+                Sonraki →
+            </button>
+
         </div>
-        <div class="pageNumber" id="pageNumber">1 / ${pages.length}</div>
+
+        <div class="pageNumber" id="pageNumber">
+            1 / ${pages.length}
+        </div>
     `;
 }
 
 function updatePage(){
 
-    document.querySelectorAll(".page").forEach((page,index)=>{
-        page.classList.toggle("active",index===currentPage);
-    });
+    document
+        .querySelectorAll(".page")
+        .forEach((page,index)=>{
 
-    document.getElementById("pageNumber").textContent =
-        (currentPage+1)+" / "+pages.length;
+            page.classList.toggle(
+                "active",
+                index===currentPage
+            );
+        });
 
-    document.querySelector(".notebook").scrollIntoView({
-        behavior:"smooth",
-        block:"center"
-    });
+    document.getElementById(
+        "pageNumber"
+    ).textContent =
+        (currentPage+1) +
+        " / " +
+        pages.length;
+
+    document
+        .querySelector(".notebook")
+        .scrollIntoView({
+            behavior:"smooth",
+            block:"center"
+        });
 }
 
 function nextPage(){
-    if(currentPage<pages.length-1){
+
+    if(currentPage < pages.length-1){
+
         currentPage++;
+
         updatePage();
     }
 }
 
 function previousPage(){
-    if(currentPage>0){
+
+    if(currentPage > 0){
+
         currentPage--;
+
         updatePage();
     }
 }
 
 renderStory();
 
-/* MÜZİK */
+/* =========================================
+   KAYDIRMA ANİMASYONU
+========================================= */
 
-let audioCtx=null;
-let musicPlaying=false;
-let musicTimer=null;
+const revealObserver =
+    new IntersectionObserver(
+        entries=>{
 
-const melody=[
-    523.25,659.25,783.99,1046.50,
-    987.77,783.99,659.25,783.99,
-    880.00,1174.66,1046.50,880.00,
-    783.99,659.25,587.33,783.99
+            entries.forEach(entry=>{
+
+                if(entry.isIntersecting){
+
+                    entry.target
+                        .classList
+                        .add("visible");
+
+                    revealObserver
+                        .unobserve(entry.target);
+                }
+            });
+
+        },
+        {
+            threshold:.12
+        }
+    );
+
+document
+    .querySelectorAll("section")
+    .forEach(section=>{
+        revealObserver.observe(section);
+    });
+
+/* =========================================
+   MÜZİK
+========================================= */
+
+let audioCtx = null;
+
+let musicPlaying = false;
+
+let musicTimer = null;
+
+const melody = [
+
+    523.25,
+    659.25,
+    783.99,
+    1046.50,
+
+    987.77,
+    783.99,
+    659.25,
+    783.99,
+
+    880.00,
+    1174.66,
+    1046.50,
+    880.00,
+
+    783.99,
+    659.25,
+    587.33,
+    783.99
 ];
 
-function playNote(freq,time,duration){
+function playNote(
+    freq,
+    time,
+    duration
+){
 
-    if(!audioCtx)return;
+    if(!audioCtx){
+        return;
+    }
 
-    const osc=audioCtx.createOscillator();
-    const gain=audioCtx.createGain();
+    const osc =
+        audioCtx.createOscillator();
 
-    osc.type="sine";
-    osc.frequency.value=freq;
+    const gain =
+        audioCtx.createGain();
 
-    gain.gain.setValueAtTime(0,time);
-    gain.gain.linearRampToValueAtTime(.045,time+.03);
-    gain.gain.exponentialRampToValueAtTime(.001,time+duration);
+    osc.type = "sine";
+
+    osc.frequency.value = freq;
+
+    gain.gain.setValueAtTime(
+        0,
+        time
+    );
+
+    gain.gain.linearRampToValueAtTime(
+        .045,
+        time+.03
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        .001,
+        time+duration
+    );
 
     osc.connect(gain);
-    gain.connect(audioCtx.destination);
+
+    gain.connect(
+        audioCtx.destination
+    );
 
     osc.start(time);
-    osc.stop(time+duration);
+
+    osc.stop(
+        time+duration
+    );
 }
 
 function startMusic(){
 
-    audioCtx=new(window.AudioContext||window.webkitAudioContext)();
-
-    let index=0;
+    audioCtx =
+        new(
+            window.AudioContext ||
+            window.webkitAudioContext
+        )();
 
     function loop(){
 
-        if(!musicPlaying)return;
-
-        const now=audioCtx.currentTime;
-
-        for(let i=0;i<melody.length;i++){
-            playNote(melody[i],now+i*.28,.5);
+        if(!musicPlaying){
+            return;
         }
 
-        musicTimer=setTimeout(loop,melody.length*280);
+        const now =
+            audioCtx.currentTime;
+
+        for(
+            let i=0;
+            i<melody.length;
+            i++
+        ){
+
+            playNote(
+                melody[i],
+                now+i*.28,
+                .5
+            );
+        }
+
+        musicTimer =
+            setTimeout(
+                loop,
+                melody.length*280
+            );
     }
 
     loop();
@@ -1024,27 +1737,48 @@ function startMusic(){
 
 function toggleMusic(){
 
+    const button =
+        document.getElementById(
+            "musicBtn"
+        );
+
     if(!musicPlaying){
 
-        musicPlaying=true;
+        musicPlaying = true;
 
         if(!audioCtx){
+
             startMusic();
+
         }else{
+
             audioCtx.resume();
         }
 
-        document.getElementById("musicBtn").textContent="🔊";
+        button.textContent = "🔊";
+
+        button.classList.add(
+            "playing"
+        );
 
     }else{
 
-        musicPlaying=false;
+        musicPlaying = false;
 
-        if(audioCtx) audioCtx.suspend();
+        if(audioCtx){
 
-        clearTimeout(musicTimer);
+            audioCtx.suspend();
+        }
 
-        document.getElementById("musicBtn").textContent="🎵";
+        clearTimeout(
+            musicTimer
+        );
+
+        button.textContent = "🎵";
+
+        button.classList.remove(
+            "playing"
+        );
     }
 }
 
