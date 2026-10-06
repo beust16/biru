@@ -11,23 +11,26 @@
 
 <style>
 :root{
-    --night:#090611;
-    --night2:#130b1d;
-    --wine:#4b1738;
-    --wine2:#6b234d;
-    --purple:#6f3d82;
-    --lilac:#b78cc9;
-    --pink:#e39ac5;
-    --silver:#d8d4df;
-    --gold:#d8b76a;
-    --cream:#f6ead2;
-    --paper:#f3e5c8;
-    --ink:#291d22;
-    --muted:#a99aa8;
+    --night:#090612;
+    --night2:#12091d;
+    --purple:#6d3f91;
+    --lilac:#b98be0;
+    --pink:#e58ac9;
+    --wine:#541b42;
+    --wine2:#7c285c;
+    --paper:#f4ead8;
+    --paper2:#eadcc4;
+    --ink:#2c1b28;
+    --gold:#d7b76d;
+    --silver:#d7d7e6;
+    --muted:#a99baa;
+    --white:#fff;
 }
 
 *{
     box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
 html{
@@ -35,1095 +38,1461 @@ html{
 }
 
 body{
-    margin:0;
+    min-height:100vh;
+    overflow-x:hidden;
     color:#fff;
     background:
-        radial-gradient(circle at 50% -10%, rgba(139,70,130,.32), transparent 35%),
-        radial-gradient(circle at 10% 40%, rgba(91,25,70,.18), transparent 30%),
-        radial-gradient(circle at 90% 70%, rgba(95,47,116,.16), transparent 30%),
-        linear-gradient(180deg,#08050d 0%,#100817 48%,#08050d 100%);
+        radial-gradient(circle at 50% -10%,rgba(183,116,225,.25),transparent 35%),
+        radial-gradient(circle at 10% 40%,rgba(123,35,101,.20),transparent 30%),
+        radial-gradient(circle at 90% 65%,rgba(100,50,160,.18),transparent 30%),
+        linear-gradient(180deg,#090612 0%,#11091b 42%,#08050d 100%);
     font-family:"Cormorant Garamond",serif;
-    overflow-x:hidden;
 }
 
-/* =========================
-   YILDIZLI GECE
-========================= */
+/* =========================================================
+   BACKGROUND
+========================================================= */
 
-#stars,
-#snow,
-#frontSnow{
+body:before{
+    content:"";
     position:fixed;
     inset:0;
     pointer-events:none;
+    z-index:-10;
+    opacity:.16;
+    background-image:
+        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+        linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+    background-size:55px 55px;
 }
+
+body:after{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:9998;
+    background:radial-gradient(circle,transparent 45%,rgba(0,0,0,.38) 100%);
+}
+
+/* stars */
 
 #stars{
-    z-index:1;
-}
-
-#snow{
-    z-index:3;
-    overflow:hidden;
-}
-
-#frontSnow{
-    z-index:70;
-    overflow:hidden;
+    position:fixed;
+    inset:0;
+    z-index:-5;
+    pointer-events:none;
 }
 
 .star{
     position:absolute;
-    width:2px;
-    height:2px;
     border-radius:50%;
     background:#fff;
-    box-shadow:0 0 8px rgba(255,255,255,.8);
-    animation:twinkle 3s infinite ease-in-out;
+    box-shadow:0 0 7px rgba(255,255,255,.9);
+    animation:twinkle var(--duration) ease-in-out infinite alternate;
 }
 
 @keyframes twinkle{
-    0%,100%{opacity:.25;transform:scale(.7)}
-    50%{opacity:1;transform:scale(1.5)}
+    from{opacity:.15;transform:scale(.7)}
+    to{opacity:1;transform:scale(1.35)}
 }
 
-/* =========================
-   KAR
-========================= */
+/* =========================================================
+   SNOW
+========================================================= */
 
-.snowflake{
+#snow{
+    position:fixed;
+    inset:0;
+    z-index:40;
+    pointer-events:none;
+    overflow:hidden;
+}
+
+.flake{
     position:absolute;
     top:-30px;
     color:#fff;
-    opacity:.8;
-    text-shadow:0 0 10px rgba(255,255,255,.75);
-    animation:fall linear infinite;
-    font-family:Arial,sans-serif;
-}
-
-.snowflake.back{
-    filter:blur(1px);
-    opacity:.42;
-}
-
-.snowflake.front{
-    text-shadow:0 0 14px #fff;
-    opacity:.9;
+    text-shadow:
+        0 0 5px rgba(255,255,255,.9),
+        0 0 14px rgba(196,181,255,.55);
+    opacity:var(--opacity);
+    animation:fall var(--speed) linear infinite;
+    user-select:none;
 }
 
 @keyframes fall{
     0%{
-        transform:translate3d(0,-40px,0) rotate(0deg);
-    }
-    25%{
-        transform:translate3d(35px,28vh,0) rotate(90deg);
+        transform:translate3d(0,-30px,0) rotate(0deg);
     }
     50%{
-        transform:translate3d(-25px,55vh,0) rotate(180deg);
-    }
-    75%{
-        transform:translate3d(30px,78vh,0) rotate(270deg);
+        transform:translate3d(var(--drift),55vh,0) rotate(180deg);
     }
     100%{
-        transform:translate3d(-15px,110vh,0) rotate(360deg);
+        transform:translate3d(calc(var(--drift) * -1),110vh,0) rotate(360deg);
     }
 }
 
-/* İnce doğal kar zemini */
+/* ground snow */
+
 .snow-ground{
     position:fixed;
-    z-index:4;
-    pointer-events:none;
     left:-5%;
     right:-5%;
-    bottom:-65px;
-    height:125px;
+    bottom:-30px;
+    height:90px;
+    z-index:35;
+    pointer-events:none;
+    border-radius:50% 50% 0 0;
     background:
-        radial-gradient(ellipse at 20% 30%,rgba(255,255,255,.92),transparent 20%),
-        radial-gradient(ellipse at 52% 20%,rgba(255,255,255,.8),transparent 25%),
-        radial-gradient(ellipse at 80% 35%,rgba(255,255,255,.9),transparent 23%),
-        linear-gradient(to bottom,rgba(245,242,249,.7),rgba(219,215,230,.08));
-    filter:blur(5px);
-    opacity:.55;
+        radial-gradient(ellipse at 50% 0%,rgba(255,255,255,.98),rgba(230,223,247,.82) 45%,rgba(190,176,215,.28) 80%,transparent 100%);
+    filter:blur(1px);
+    opacity:.82;
 }
 
-/* =========================
-   NOEL IŞIKLARI
-========================= */
+/* =========================================================
+   CHRISTMAS LIGHTS
+========================================================= */
 
 .christmas-lights{
     position:fixed;
     top:0;
     left:0;
     right:0;
-    height:56px;
-    z-index:90;
+    height:72px;
+    z-index:50;
     pointer-events:none;
 }
 
 .wire{
     position:absolute;
-    left:-2%;
-    right:-2%;
-    top:11px;
-    height:28px;
-    border-top:2px solid rgba(20,12,18,.9);
+    left:-3%;
+    top:10px;
+    width:106%;
+    height:55px;
+    border-top:2px solid rgba(35,22,34,.9);
     border-radius:50%;
-    transform:rotate(1deg);
-}
-
-.bulbs{
-    position:absolute;
-    left:2%;
-    right:2%;
-    top:17px;
-    display:flex;
-    justify-content:space-around;
+    transform:rotate(1.5deg);
 }
 
 .bulb{
-    width:10px;
-    height:14px;
+    position:absolute;
+    width:13px;
+    height:18px;
     border-radius:50% 50% 45% 45%;
-    background:#e5b6dc;
+    top:32px;
     box-shadow:
-        0 0 8px #e5b6dc,
-        0 0 20px rgba(229,182,220,.7);
-    animation:bulbGlow 1.8s infinite alternate;
+        0 0 8px currentColor,
+        0 0 20px currentColor,
+        0 0 35px currentColor;
+    animation:bulbGlow 1.5s ease-in-out infinite alternate;
 }
 
-.bulb:nth-child(3n){
-    background:#e7c778;
-    box-shadow:0 0 9px #e7c778,0 0 20px rgba(231,199,120,.7);
-}
-
-.bulb:nth-child(4n){
-    background:#b89ae5;
-    box-shadow:0 0 9px #b89ae5,0 0 20px rgba(184,154,229,.7);
-}
-
-@keyframes bulbGlow{
-    from{opacity:.55;transform:scale(.88)}
-    to{opacity:1;transform:scale(1.1)}
-}
-
-/* =========================
-   NOEL SÜSLERİ
-========================= */
-
-.corner-decor{
-    position:fixed;
-    z-index:6;
-    pointer-events:none;
-    opacity:.82;
-}
-
-.corner-decor.left{
-    left:-15px;
-    top:65px;
-    transform:rotate(-8deg);
-}
-
-.corner-decor.right{
-    right:-15px;
-    top:65px;
-    transform:scaleX(-1) rotate(-8deg);
-}
-
-.branch{
-    width:145px;
-    height:80px;
-    position:relative;
-}
-
-.branch:before,
-.branch:after{
+.bulb:before{
     content:"";
     position:absolute;
-    width:145px;
-    height:25px;
-    border-bottom:5px solid #173c31;
-    border-radius:50%;
-    transform:rotate(25deg);
+    width:7px;
+    height:5px;
+    top:-4px;
+    left:3px;
+    border-radius:2px;
+    background:#27202b;
 }
 
-.branch:after{
-    top:30px;
-    left:15px;
-    transform:rotate(5deg);
+.b1{left:5%;color:#e88bd4}
+.b2{left:13%;color:#d7c2ff;animation-delay:.2s}
+.b3{left:21%;color:#ffcc73;animation-delay:.5s}
+.b4{left:29%;color:#d89cf7;animation-delay:.7s}
+.b5{left:37%;color:#f08bc2;animation-delay:.1s}
+.b6{left:45%;color:#f3d37c;animation-delay:.6s}
+.b7{left:53%;color:#c79cff;animation-delay:.3s}
+.b8{left:61%;color:#e58bd0;animation-delay:.8s}
+.b9{left:69%;color:#ffe18e;animation-delay:.4s}
+.b10{left:77%;color:#ca9df7;animation-delay:.1s}
+.b11{left:85%;color:#ed8fc8;animation-delay:.6s}
+.b12{left:93%;color:#f3d27b;animation-delay:.3s}
+
+@keyframes bulbGlow{
+    from{filter:brightness(.75)}
+    to{filter:brightness(1.5)}
 }
 
-.berry{
-    position:absolute;
-    width:10px;
-    height:10px;
-    border-radius:50%;
-    background:#a51e4b;
-    box-shadow:0 0 10px rgba(200,45,90,.65);
-}
-
-.berry:nth-child(1){left:40px;top:20px}
-.berry:nth-child(2){left:72px;top:42px}
-.berry:nth-child(3){left:108px;top:17px}
-
-/* =========================
-   UÇAN SANTA
-========================= */
-
-#skyGift{
-    position:fixed;
-    z-index:110;
-    top:90px;
-    left:-430px;
-    display:flex;
-    align-items:center;
-    gap:10px;
-    font-size:42px;
-    pointer-events:none;
-    opacity:0;
-    filter:drop-shadow(0 7px 10px rgba(0,0,0,.5));
-}
-
-#skyGift.fly{
-    animation:santaFly 9s linear forwards;
-}
-
-.santaTrail{
-    position:absolute;
-    left:-25px;
-    top:40px;
-    width:250px;
-    height:30px;
-    background:linear-gradient(90deg,transparent,rgba(255,255,255,.2),transparent);
-    filter:blur(7px);
-}
-
-@keyframes santaFly{
-    0%{
-        left:-430px;
-        top:90px;
-        opacity:0;
-    }
-    8%{opacity:1}
-    45%{
-        top:150px;
-    }
-    75%{
-        top:105px;
-    }
-    100%{
-        left:calc(100vw + 430px);
-        top:75px;
-        opacity:0;
-    }
-}
-
-/* =========================
-   LOCK
-========================= */
+/* =========================================================
+   LOCK SCREEN
+========================================================= */
 
 #lockScreen{
     position:fixed;
     inset:0;
     z-index:1000;
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
     padding:25px;
     background:
-        radial-gradient(circle at center,rgba(88,35,91,.32),transparent 42%),
-        linear-gradient(180deg,#08050d,#120818,#08050d);
+        radial-gradient(circle at center,rgba(100,54,132,.22),transparent 40%),
+        linear-gradient(180deg,#08040d,#140a1c 55%,#08040d);
+    transition:opacity 1s ease,visibility 1s ease;
 }
 
-.lockBox{
-    width:min(500px,94vw);
-    padding:48px 35px 42px;
-    text-align:center;
-    border:1px solid rgba(222,180,214,.22);
-    border-radius:28px;
-    background:rgba(19,10,26,.84);
-    box-shadow:
-        0 30px 90px rgba(0,0,0,.6),
-        inset 0 0 45px rgba(158,84,151,.07);
-    backdrop-filter:blur(15px);
-}
-
-.lockOrnament{
-    font-size:38px;
-    margin-bottom:10px;
-}
-
-.lockBox h1{
-    margin:0;
-    font-family:"Great Vibes",cursive;
-    font-size:54px;
-    font-weight:400;
-    color:#f4d8ed;
-    text-shadow:0 0 20px rgba(222,142,202,.35);
-}
-
-.lockBox p{
-    color:#b9aab8;
-    font-size:18px;
-    margin:10px 0 25px;
-}
-
-#password{
-    width:100%;
-    padding:15px 18px;
-    border-radius:13px;
-    border:1px solid rgba(220,171,207,.25);
-    background:rgba(0,0,0,.3);
-    color:white;
-    text-align:center;
-    outline:none;
-    font-family:inherit;
-    font-size:17px;
-}
-
-#unlockBtn{
-    width:100%;
-    margin-top:13px;
-    padding:14px;
-    border:0;
-    border-radius:13px;
-    cursor:pointer;
-    font-family:inherit;
-    font-size:18px;
-    color:white;
-    background:linear-gradient(135deg,#6b234d,#8d4a8d);
-    box-shadow:0 8px 25px rgba(95,29,76,.3);
-}
-
-#error{
-    min-height:22px;
-    color:#df8fac;
-    margin-top:10px;
-}
-
-/* =========================
-   ANA
-========================= */
-
-#main{
-    display:none;
-    position:relative;
-    z-index:10;
-}
-
-.hero{
-    min-height:100vh;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:100px 20px 60px;
-    position:relative;
-}
-
-.hero:before{
-    content:"";
-    position:absolute;
-    width:500px;
-    height:500px;
-    border-radius:50%;
-    background:rgba(118,55,123,.13);
-    filter:blur(80px);
+#lockScreen.hidden{
+    opacity:0;
+    visibility:hidden;
     pointer-events:none;
 }
 
-.heroSmall{
-    color:#c6aebe;
-    letter-spacing:4px;
-    text-transform:uppercase;
-    font-size:14px;
-    margin-bottom:10px;
-}
-
-.hero h1{
-    margin:0;
-    font-family:"Great Vibes",cursive;
-    font-size:clamp(70px,10vw,135px);
-    line-height:.9;
-    font-weight:400;
-    color:#f1dce9;
-    text-shadow:
-        0 0 18px rgba(218,151,202,.25),
-        0 0 60px rgba(131,66,145,.2);
-}
-
-.hero h2{
-    margin:18px 0 0;
-    font-size:22px;
-    color:#b8a6b6;
-    font-weight:400;
-}
-
-.heroDecor{
-    margin:35px auto 0;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    gap:15px;
-    color:#d9bb72;
-    font-size:20px;
-}
-
-.heroDecor span:nth-child(2){
-    color:#e5a8ce;
-    font-size:28px;
-}
-
-/* =========================
-   SAYACLAR
-========================= */
-
-.counters{
-    display:flex;
-    justify-content:center;
-    gap:20px;
-    flex-wrap:wrap;
-    padding:20px;
-}
-
-.counter{
-    min-width:170px;
-    padding:20px;
-    border-radius:18px;
-    border:1px solid rgba(214,171,205,.13);
-    background:rgba(24,13,31,.58);
-    box-shadow:0 12px 35px rgba(0,0,0,.22);
-}
-
-.counter strong{
-    display:block;
-    font-size:29px;
-    color:#e8c9dd;
-}
-
-.counter span{
-    color:#a99aa8;
-    font-size:15px;
-}
-
-/* =========================
-   BAŞLIK
-========================= */
-
-.sectionTitle{
+.lock-card{
+    position:relative;
+    width:min(440px,100%);
+    padding:55px 35px 45px;
     text-align:center;
-    padding:80px 20px 35px;
+    border:1px solid rgba(215,183,109,.4);
+    border-radius:8px;
+    background:
+        linear-gradient(145deg,rgba(69,29,68,.78),rgba(19,9,29,.92));
+    box-shadow:
+        0 30px 100px rgba(0,0,0,.7),
+        inset 0 0 60px rgba(210,132,204,.06);
+    backdrop-filter:blur(18px);
 }
 
-.sectionTitle .tiny{
-    color:#bca3b7;
-    letter-spacing:3px;
-    font-size:13px;
-    text-transform:uppercase;
+.lock-card:before,
+.lock-card:after{
+    content:"✦";
+    position:absolute;
+    color:var(--gold);
+    font-size:24px;
+    opacity:.7;
 }
 
-.sectionTitle h2{
-    margin:7px 0;
+.lock-card:before{
+    top:18px;
+    left:22px;
+}
+
+.lock-card:after{
+    bottom:18px;
+    right:22px;
+}
+
+.lock-icon{
+    font-size:45px;
+    margin-bottom:12px;
+    filter:drop-shadow(0 0 12px rgba(231,179,242,.5));
+}
+
+.lock-card h1{
     font-family:"Great Vibes",cursive;
+    font-size:58px;
     font-weight:400;
-    font-size:62px;
-    color:#edcee1;
+    color:#f6d8f1;
+    text-shadow:0 0 25px rgba(221,139,211,.4);
 }
 
-.sectionTitle p{
-    color:#aa9baa;
-    margin:0;
+.lock-card p{
+    margin:8px 0 27px;
+    color:#c8b7c8;
     font-size:17px;
 }
 
-/* =========================
-   DEFTER
-========================= */
+#passwordInput{
+    width:100%;
+    height:52px;
+    padding:0 18px;
+    border:1px solid rgba(216,182,110,.5);
+    border-radius:5px;
+    outline:none;
+    color:white;
+    text-align:center;
+    letter-spacing:3px;
+    font-family:inherit;
+    font-size:17px;
+    background:rgba(0,0,0,.28);
+}
 
-.bookWrap{
-    padding:20px 18px 100px;
+#passwordInput:focus{
+    border-color:var(--pink);
+    box-shadow:0 0 20px rgba(229,138,201,.18);
+}
+
+.unlock-btn{
+    width:100%;
+    margin-top:14px;
+    height:50px;
+    border:0;
+    border-radius:5px;
+    cursor:pointer;
+    color:#241324;
+    font-family:"Cormorant Garamond",serif;
+    font-size:18px;
+    font-weight:700;
+    background:linear-gradient(135deg,#e8c878,#f1dca1);
+    box-shadow:0 8px 25px rgba(0,0,0,.3);
+    transition:.3s;
+}
+
+.unlock-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 10px 30px rgba(226,182,108,.25);
+}
+
+#errorMessage{
+    min-height:22px;
+    margin-top:10px;
+    color:#f39ac7;
+    font-size:15px;
+}
+
+/* =========================================================
+   MAIN
+========================================================= */
+
+#mainContent{
+    opacity:0;
+    visibility:hidden;
+    transition:opacity 1.2s ease;
+}
+
+#mainContent.show{
+    opacity:1;
+    visibility:visible;
+}
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero{
+    min-height:100vh;
+    position:relative;
     display:flex;
+    flex-direction:column;
+    align-items:center;
     justify-content:center;
+    text-align:center;
+    padding:120px 20px 100px;
+    overflow:hidden;
+}
+
+.moon{
+    position:absolute;
+    width:230px;
+    height:230px;
+    right:9%;
+    top:15%;
+    border-radius:50%;
+    background:
+        radial-gradient(circle at 35% 32%,rgba(255,255,255,.95),rgba(231,213,255,.85) 45%,rgba(168,129,198,.35) 70%,transparent 72%);
+    filter:blur(.3px);
+    opacity:.3;
+    box-shadow:0 0 90px rgba(207,174,255,.2);
+}
+
+.moon:after{
+    content:"";
+    position:absolute;
+    width:230px;
+    height:230px;
+    left:65px;
+    top:-15px;
+    border-radius:50%;
+    background:#0b0611;
+}
+
+.distant-tree{
+    position:absolute;
+    bottom:-30px;
+    left:5%;
+    width:230px;
+    height:320px;
+    opacity:.35;
+    filter:drop-shadow(0 0 30px rgba(155,101,191,.15));
+}
+
+.distant-tree .layer{
+    position:absolute;
+    left:50%;
+    transform:translateX(-50%);
+    border-left:solid transparent;
+    border-right:solid transparent;
+    border-bottom:solid #1b1025;
+}
+
+.distant-tree .l1{
+    bottom:20px;
+    border-left-width:115px;
+    border-right-width:115px;
+    border-bottom-width:220px;
+}
+
+.distant-tree .l2{
+    bottom:80px;
+    border-left-width:95px;
+    border-right-width:95px;
+    border-bottom-width:180px;
+}
+
+.distant-tree .l3{
+    bottom:140px;
+    border-left-width:70px;
+    border-right-width:70px;
+    border-bottom-width:140px;
+}
+
+.tree-light{
+    position:absolute;
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#f6d57e;
+    box-shadow:0 0 12px #f6d57e;
+}
+
+.t1{left:78px;bottom:145px}
+.t2{left:124px;bottom:112px}
+.t3{left:60px;bottom:82px}
+.t4{left:147px;bottom:60px}
+.t5{left:105px;bottom:38px}
+
+.hero-eyebrow{
+    position:relative;
+    z-index:2;
+    color:#d7b8db;
+    letter-spacing:5px;
+    text-transform:uppercase;
+    font-size:13px;
+    margin-bottom:18px;
+}
+
+.hero h1{
+    position:relative;
+    z-index:2;
+    font-family:"Great Vibes",cursive;
+    font-size:clamp(70px,11vw,150px);
+    font-weight:400;
+    line-height:.9;
+    color:#f2d9ed;
+    text-shadow:
+        0 0 18px rgba(232,140,211,.35),
+        0 0 55px rgba(145,86,181,.3);
+}
+
+.hero h1 span{
+    color:#e3b2df;
+}
+
+.hero-subtitle{
+    position:relative;
+    z-index:2;
+    max-width:650px;
+    margin-top:30px;
+    color:#bcaabd;
+    font-size:20px;
+    line-height:1.7;
+}
+
+.hero-divider{
+    position:relative;
+    z-index:2;
+    margin:30px 0;
+    color:var(--gold);
+    letter-spacing:10px;
+}
+
+.counter{
+    position:relative;
+    z-index:2;
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:12px;
+}
+
+.counter-box{
+    min-width:92px;
+    padding:13px 17px;
+    border:1px solid rgba(216,183,109,.3);
+    background:rgba(39,16,47,.48);
+    backdrop-filter:blur(8px);
+    border-radius:4px;
+}
+
+.counter-box strong{
+    display:block;
+    font-size:28px;
+    color:#eed7ec;
+    font-weight:600;
+}
+
+.counter-box span{
+    display:block;
+    margin-top:2px;
+    font-size:12px;
+    letter-spacing:2px;
+    text-transform:uppercase;
+    color:#a997aa;
+}
+
+.scroll-hint{
+    position:absolute;
+    bottom:28px;
+    z-index:2;
+    color:#9d8ca3;
+    font-size:13px;
+    letter-spacing:3px;
+    text-transform:uppercase;
+    animation:bounce 2s infinite;
+}
+
+@keyframes bounce{
+    0%,100%{transform:translateY(0)}
+    50%{transform:translateY(8px)}
+}
+
+/* =========================================================
+   SECTION
+========================================================= */
+
+.section{
+    position:relative;
+    padding:100px 20px;
+}
+
+.section-title{
+    text-align:center;
+    margin-bottom:55px;
+}
+
+.section-title .small{
+    color:#a98eb0;
+    text-transform:uppercase;
+    letter-spacing:4px;
+    font-size:12px;
+}
+
+.section-title h2{
+    margin-top:8px;
+    font-family:"Great Vibes",cursive;
+    font-size:65px;
+    font-weight:400;
+    color:#eacfe7;
+    text-shadow:0 0 25px rgba(215,127,201,.2);
+}
+
+.section-title .line{
+    width:100px;
+    height:1px;
+    margin:15px auto 0;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+}
+
+/* =========================================================
+   BOOK
+========================================================= */
+
+.book-wrap{
+    width:min(1500px,100%);
+    margin:auto;
+    perspective:1800px;
 }
 
 .book{
     position:relative;
-    width:min(1220px,96vw);
-    min-height:1000px;
-    padding:24px;
+    width:100%;
+    min-height:820px;
+    padding:28px;
     border-radius:12px;
     background:
-        linear-gradient(135deg,#321923,#24131d 50%,#3d1e2d);
-    border:7px solid #1d1117;
+        linear-gradient(135deg,#37142f,#641b47 45%,#32122e);
+    border:7px solid #35152c;
     box-shadow:
-        0 35px 100px rgba(0,0,0,.58),
-        inset 0 0 0 2px rgba(212,170,126,.24),
-        inset 0 0 50px rgba(0,0,0,.4);
+        0 45px 90px rgba(0,0,0,.65),
+        0 0 0 2px rgba(213,174,92,.28),
+        inset 0 0 50px rgba(0,0,0,.45);
 }
 
 .book:before{
     content:"";
     position:absolute;
-    inset:11px;
-    border:1px solid rgba(222,185,145,.23);
+    inset:10px;
+    border:1px solid rgba(224,191,111,.45);
     border-radius:7px;
     pointer-events:none;
 }
 
-.spiral{
+.book:after{
+    content:"";
     position:absolute;
-    left:6px;
-    top:25px;
-    bottom:25px;
-    width:20px;
+    top:0;
+    left:52px;
+    bottom:0;
+    width:2px;
+    background:linear-gradient(180deg,transparent,#c8a767,transparent);
+    opacity:.45;
+}
+
+.book-rings{
+    position:absolute;
+    top:30px;
+    bottom:30px;
+    left:17px;
+    width:35px;
+    z-index:30;
     display:flex;
     flex-direction:column;
     justify-content:space-around;
-    z-index:30;
+    pointer-events:none;
 }
 
 .ring{
     width:28px;
-    height:14px;
-    border:3px solid #8b725d;
+    height:12px;
+    border:3px solid #c6c5ce;
     border-radius:50%;
-    background:#2a171e;
-    box-shadow:0 2px 5px rgba(0,0,0,.6);
+    background:linear-gradient(180deg,#eee,#797780,#dedde4);
+    box-shadow:
+        0 2px 4px rgba(0,0,0,.6),
+        inset 0 1px 2px white;
 }
 
-/* Sayfalar */
-
 .page{
-    display:none;
     position:relative;
-    min-height:940px;
+    display:none;
+    min-height:760px;
     overflow:hidden;
     border-radius:5px;
+    padding:50px;
     background:
-        radial-gradient(circle at 15% 15%,rgba(255,255,255,.5),transparent 18%),
-        radial-gradient(circle at 90% 85%,rgba(174,123,105,.15),transparent 25%),
-        linear-gradient(110deg,#ead9b9,#f5e7c9 48%,#e7d4b3);
+        radial-gradient(circle at 20% 15%,rgba(124,77,55,.08),transparent 20%),
+        radial-gradient(circle at 85% 75%,rgba(104,63,49,.07),transparent 25%),
+        repeating-linear-gradient(
+            0deg,
+            rgba(80,50,35,.025) 0,
+            rgba(80,50,35,.025) 1px,
+            transparent 1px,
+            transparent 4px
+        ),
+        linear-gradient(145deg,#f5ecd9,#eadfc9);
     box-shadow:
-        inset 0 0 60px rgba(96,57,39,.13),
-        inset 0 0 5px rgba(65,37,26,.3);
+        inset 0 0 45px rgba(74,46,31,.12),
+        0 15px 30px rgba(0,0,0,.3);
 }
 
 .page.active{
     display:block;
-    animation:pageIn .7s ease both;
+    animation:pageIn .65s cubic-bezier(.2,.8,.2,1);
 }
 
 @keyframes pageIn{
     from{
         opacity:0;
-        transform:translateX(22px) rotate(.5deg);
+        transform:rotateY(-7deg) translateX(25px);
     }
     to{
         opacity:1;
-        transform:translateX(0) rotate(0);
+        transform:rotateY(0) translateX(0);
     }
 }
 
 .page:before{
     content:"";
     position:absolute;
-    inset:18px;
-    border:1px solid rgba(104,67,44,.18);
+    inset:15px;
+    border:1px solid rgba(90,54,38,.18);
     pointer-events:none;
 }
 
-/* =========================
-   FOTOĞRAFLAR
-   3 SOL + 3 SAĞ
-========================= */
+.corner{
+    position:absolute;
+    width:25px;
+    height:25px;
+    border-color:#b58b45;
+    opacity:.6;
+}
+
+.corner.tl{
+    top:25px;
+    left:25px;
+    border-top:1px solid;
+    border-left:1px solid;
+}
+
+.corner.tr{
+    top:25px;
+    right:25px;
+    border-top:1px solid;
+    border-right:1px solid;
+}
+
+.corner.bl{
+    bottom:25px;
+    left:25px;
+    border-bottom:1px solid;
+    border-left:1px solid;
+}
+
+.corner.br{
+    bottom:25px;
+    right:25px;
+    border-bottom:1px solid;
+    border-right:1px solid;
+}
+
+/* =========================================================
+   PHOTOS
+========================================================= */
 
 .photo{
     position:absolute;
-    width:175px;
-    padding:9px 9px 31px;
-    background:#f8f3e9;
-    border:1px solid rgba(70,45,35,.22);
-    box-shadow:
-        0 10px 20px rgba(48,27,23,.27),
-        0 2px 4px rgba(0,0,0,.2);
     z-index:6;
+    width:175px;
+    padding:9px 9px 27px;
+    background:#f8f2e7;
+    border:1px solid rgba(70,48,39,.15);
+    box-shadow:
+        0 10px 25px rgba(39,23,20,.22),
+        0 2px 5px rgba(0,0,0,.12);
     cursor:pointer;
     transition:
         transform .35s ease,
         box-shadow .35s ease,
-        filter .35s ease;
+        z-index 0s;
 }
 
 .photo img{
-    width:100%;
-    height:145px;
     display:block;
+    width:100%;
+    height:170px;
     object-fit:cover;
-    background:#d4c2a5;
+    background:#ddd;
+    filter:saturate(.92) contrast(.98);
 }
 
-.photo .caption{
+.photo:after{
+    content:"";
     position:absolute;
-    left:0;
-    right:0;
     bottom:7px;
-    text-align:center;
-    color:#58464a;
-    font-family:"Kalam",cursive;
-    font-size:13px;
+    left:50%;
+    transform:translateX(-50%);
+    width:65px;
+    height:1px;
+    background:rgba(80,50,40,.22);
 }
 
 .photo:hover{
-    z-index:25;
-    transform:scale(1.08) rotate(0deg) !important;
-    box-shadow:0 18px 35px rgba(45,25,35,.4);
-    filter:brightness(1.03);
+    z-index:20;
+    box-shadow:0 18px 35px rgba(40,20,30,.38);
+    transform:translateY(-8px) rotate(0deg) scale(1.04);
 }
 
-/* SOL */
+.photo.p1{left:4%;top:9%;transform:rotate(-7deg)}
+.photo.p2{left:4%;top:39%;transform:rotate(5deg)}
+.photo.p3{left:4%;bottom:8%;transform:rotate(-4deg)}
 
-.photo.left1{
-    left:30px;
-    top:95px;
-    transform:rotate(-5deg);
+.photo.p4{right:4%;top:8%;transform:rotate(6deg)}
+.photo.p5{right:4%;top:40%;transform:rotate(-5deg)}
+.photo.p6{right:4%;bottom:8%;transform:rotate(4deg)}
+
+.photo .tape{
+    position:absolute;
+    width:62px;
+    height:19px;
+    top:-9px;
+    left:50%;
+    transform:translateX(-50%) rotate(-2deg);
+    background:rgba(231,211,162,.62);
+    opacity:.85;
 }
 
-.photo.left2{
-    left:25px;
-    top:390px;
-    transform:rotate(4deg);
+.photo.p2 .tape,
+.photo.p5 .tape{
+    transform:translateX(-50%) rotate(3deg);
 }
 
-.photo.left3{
-    left:42px;
-    bottom:78px;
-    transform:rotate(-3deg);
-}
-
-/* SAĞ */
-
-.photo.right1{
-    right:30px;
-    top:95px;
-    transform:rotate(4deg);
-}
-
-.photo.right2{
-    right:25px;
-    top:390px;
-    transform:rotate(-5deg);
-}
-
-.photo.right3{
-    right:42px;
-    bottom:78px;
-    transform:rotate(3deg);
-}
-
-/* Tıklanınca öne çıkma */
-
-#photoBackdrop{
-    position:fixed;
-    inset:0;
-    z-index:1900;
-    background:rgba(7,3,11,.82);
-    backdrop-filter:blur(7px);
-    opacity:0;
-    pointer-events:none;
-    transition:opacity .3s ease;
-}
-
-#photoBackdrop.show{
-    opacity:1;
-    pointer-events:auto;
-}
+/* clicked photo */
 
 .photo.focused{
-    position:fixed !important;
-    left:50% !important;
-    top:50% !important;
-    right:auto !important;
-    bottom:auto !important;
-    width:min(680px,82vw) !important;
-    padding:14px 14px 45px !important;
-    z-index:2000 !important;
-    transform:translate(-50%,-50%) rotate(0deg) !important;
+    position:fixed;
+    z-index:200;
+    top:50%;
+    left:50%;
+    right:auto;
+    bottom:auto;
+    width:min(470px,78vw);
+    padding:14px 14px 38px;
+    transform:translate(-50%,-50%) rotate(0deg) scale(1);
     box-shadow:
-        0 35px 100px rgba(0,0,0,.7),
-        0 0 0 1px rgba(255,255,255,.2);
+        0 40px 90px rgba(0,0,0,.7),
+        0 0 0 1px rgba(235,213,160,.7);
+    cursor:zoom-out;
 }
 
 .photo.focused img{
     height:auto;
-    max-height:72vh;
+    max-height:70vh;
     object-fit:contain;
 }
 
-.photo.focused .caption{
-    font-size:16px;
+.photo-backdrop{
+    position:fixed;
+    inset:0;
+    z-index:190;
+    background:rgba(8,4,14,.78);
+    backdrop-filter:blur(5px);
+    opacity:0;
+    pointer-events:none;
+    transition:.3s;
 }
 
-/* =========================
-   NOT
-========================= */
+.photo-backdrop.show{
+    opacity:1;
+    pointer-events:auto;
+}
+
+/* =========================================================
+   NOTE
+========================================================= */
 
 .note{
-    position:absolute;
+    position:relative;
     z-index:12;
-    left:50%;
-    top:50%;
-    transform:translate(-50%,-50%);
-    width:57%;
-    min-height:690px;
-    max-height:850px;
-    overflow:auto;
-    padding:55px 58px 50px;
-    background:
-        linear-gradient(rgba(255,250,235,.91),rgba(242,226,193,.94));
+    width:56%;
+    min-height:610px;
+    margin:30px auto;
+    padding:55px 60px 48px;
     color:var(--ink);
+    border:1px solid rgba(87,54,39,.18);
+    background:
+        radial-gradient(circle at 80% 20%,rgba(164,112,77,.08),transparent 25%),
+        linear-gradient(145deg,#f9f0df,#eee2cc);
     box-shadow:
-        0 18px 38px rgba(61,38,27,.22),
-        inset 0 0 45px rgba(137,96,62,.08);
-    border:1px solid rgba(105,69,43,.25);
+        0 17px 35px rgba(54,31,25,.2),
+        inset 0 0 35px rgba(102,64,44,.07);
 }
 
 .note:before{
     content:"";
     position:absolute;
     inset:12px;
-    border:1px solid rgba(107,72,50,.16);
+    border:1px solid rgba(111,73,50,.15);
     pointer-events:none;
 }
 
-.note h3{
-    position:relative;
-    margin:0 0 25px;
+.note-title{
     text-align:center;
-    font-family:"Great Vibes",cursive;
-    font-weight:400;
-    font-size:46px;
-    color:#572d43;
+    margin-bottom:28px;
 }
 
-.note .ornament{
-    text-align:center;
-    color:#9c6d52;
+.note-title .chapter{
+    color:#95744d;
+    font-size:12px;
+    letter-spacing:4px;
+    text-transform:uppercase;
+}
+
+.note-title h3{
+    margin-top:6px;
+    font-size:39px;
+    font-weight:600;
+    color:#4a2736;
+}
+
+.note-title .ornament{
+    color:#a57a42;
+    margin-top:7px;
+    letter-spacing:8px;
+}
+
+.note-text{
+    font-family:"Kalam",cursive;
     font-size:18px;
-    margin:-13px 0 22px;
-}
-
-.noteText{
-    position:relative;
+    line-height:1.72;
     white-space:pre-line;
-    font-family:"Kalam",cursive;
-    font-size:18px;
-    line-height:1.85;
-    color:#35272a;
+    color:#3b2730;
 }
 
-.noteText::first-letter{
-    font-size:28px;
+.note-sign{
+    margin-top:25px;
+    text-align:right;
+    font-family:"Great Vibes",cursive;
+    font-size:32px;
+    color:#7c3b63;
 }
 
-.pageNumber{
-    position:absolute;
-    right:24px;
-    bottom:18px;
-    color:#8e7161;
-    font-family:"Kalam",cursive;
-    font-size:14px;
-}
+/* =========================================================
+   BOOK CONTROLS
+========================================================= */
 
-/* =========================
-   DEFTER KONTROLLERİ
-========================= */
-
-.bookControls{
+.book-controls{
     display:flex;
-    justify-content:center;
     align-items:center;
-    gap:22px;
+    justify-content:center;
+    gap:25px;
     margin-top:28px;
 }
 
-.bookBtn{
-    border:1px solid rgba(219,176,207,.25);
-    color:#f0dce9;
-    background:rgba(37,18,34,.8);
-    border-radius:12px;
-    padding:12px 25px;
-    font-family:inherit;
+.book-btn{
+    min-width:125px;
+    padding:13px 20px;
+    border:1px solid rgba(215,183,109,.4);
+    border-radius:3px;
+    color:#eadce9;
+    background:linear-gradient(135deg,#3d1838,#241127);
+    font-family:"Cormorant Garamond",serif;
     font-size:17px;
     cursor:pointer;
-    transition:.25s;
+    transition:.3s;
 }
 
-.bookBtn:hover{
+.book-btn:hover:not(:disabled){
     transform:translateY(-2px);
-    background:#572743;
+    border-color:#e3bd75;
+    box-shadow:0 8px 20px rgba(0,0,0,.25);
 }
 
-#pageCounter{
-    min-width:85px;
+.book-btn:disabled{
+    opacity:.35;
+    cursor:not-allowed;
+}
+
+.page-counter{
+    min-width:90px;
     text-align:center;
-    color:#bda9b9;
+    color:#b9a7b9;
+    font-size:15px;
+    letter-spacing:2px;
 }
 
-/* =========================
-   NOEL MİNİ SÜSLER
-========================= */
+/* =========================================================
+   HOURGLASS
+========================================================= */
 
-.christmasMini{
-    display:flex;
-    justify-content:center;
-    gap:22px;
-    margin:35px 0 10px;
-    font-size:28px;
-    filter:drop-shadow(0 5px 10px rgba(0,0,0,.4));
-}
-
-.christmasMini span{
-    animation:floatDecor 3s ease-in-out infinite;
-}
-
-.christmasMini span:nth-child(2){animation-delay:.5s}
-.christmasMini span:nth-child(3){animation-delay:1s}
-.christmasMini span:nth-child(4){animation-delay:1.5s}
-
-@keyframes floatDecor{
-    0%,100%{transform:translateY(0)}
-    50%{transform:translateY(-7px)}
-}
-
-/* =========================
-   KUM SAATİ
-========================= */
-
-.hourglassSection{
-    padding:120px 20px;
+.time-section{
+    width:min(900px,100%);
+    margin:0 auto;
     text-align:center;
 }
 
 .hourglass{
-    width:90px;
-    height:150px;
-    margin:25px auto;
     position:relative;
+    width:160px;
+    height:250px;
+    margin:35px auto;
 }
 
-.hourglass:before,
-.hourglass:after{
+.glass{
+    position:absolute;
+    left:22px;
+    right:22px;
+    top:25px;
+    bottom:25px;
+    overflow:hidden;
+}
+
+.glass:before,
+.glass:after{
     content:"";
     position:absolute;
-    left:10px;
+    left:50%;
+    transform:translateX(-50%);
+    border-left:55px solid transparent;
+    border-right:55px solid transparent;
+}
+
+.glass:before{
+    top:0;
+    border-top:90px solid rgba(224,205,235,.12);
+}
+
+.glass:after{
+    bottom:0;
+    border-bottom:90px solid rgba(224,205,235,.12);
+}
+
+.sand-top{
+    position:absolute;
+    left:34px;
+    top:20px;
     width:70px;
     height:65px;
-    border:4px solid #d7bd80;
+    border-radius:0 0 50% 50%;
+    background:linear-gradient(180deg,#d7b76d,#9f7540);
+    animation:sandTop 5s linear infinite;
 }
 
-.hourglass:before{
-    top:0;
-    border-radius:8px 8px 38px 38px;
-    clip-path:polygon(0 0,100% 0,62% 100%,38% 100%);
+.sand-stream{
+    position:absolute;
+    left:79px;
+    top:70px;
+    width:3px;
+    height:110px;
+    background:#c49d55;
+    box-shadow:0 0 8px rgba(215,183,109,.6);
 }
 
-.hourglass:after{
-    bottom:0;
-    border-radius:38px 38px 8px 8px;
-    clip-path:polygon(38% 0,62% 0,100% 100%,0 100%);
+.sand-bottom{
+    position:absolute;
+    left:28px;
+    bottom:20px;
+    width:82px;
+    height:50px;
+    border-radius:50% 50% 10px 10px;
+    background:linear-gradient(180deg,#a87940,#d4b26b);
 }
 
-.hourglassText{
-    font-family:"Great Vibes",cursive;
-    font-size:52px;
-    color:#e4cbdc;
+@keyframes sandTop{
+    from{height:65px}
+    to{height:8px}
 }
 
-/* =========================
-   FİNAL
-========================= */
+.hourglass-frame{
+    position:absolute;
+    inset:0;
+    border-top:8px solid #bda675;
+    border-bottom:8px solid #bda675;
+    box-shadow:
+        inset 0 0 15px rgba(0,0,0,.4),
+        0 10px 30px rgba(0,0,0,.3);
+}
 
-.finalSection{
-    padding:100px 20px 150px;
+.hourglass-text{
+    max-width:650px;
+    margin:auto;
+    color:#b8a8ba;
+    font-size:19px;
+    line-height:1.7;
+}
+
+/* =========================================================
+   FINAL
+========================================================= */
+
+.final-section{
+    min-height:100vh;
+    padding:120px 20px 160px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.final-card{
+    position:relative;
+    width:min(1000px,100%);
+    padding:70px 70px 75px;
     text-align:center;
+    border:1px solid rgba(216,183,109,.32);
+    background:
+        radial-gradient(circle at 50% 0%,rgba(142,81,160,.18),transparent 40%),
+        linear-gradient(145deg,rgba(43,17,46,.92),rgba(15,8,23,.96));
+    box-shadow:
+        0 40px 100px rgba(0,0,0,.6),
+        inset 0 0 70px rgba(190,105,174,.04);
 }
 
-.finalTitle{
+.final-card:before,
+.final-card:after{
+    position:absolute;
+    color:var(--gold);
+    font-size:30px;
+    opacity:.7;
+}
+
+.final-card:before{
+    content:"✦";
+    top:25px;
+    left:30px;
+}
+
+.final-card:after{
+    content:"✦";
+    right:30px;
+    bottom:25px;
+}
+
+.final-label{
+    color:#ae93b1;
+    letter-spacing:5px;
+    font-size:12px;
+    text-transform:uppercase;
+}
+
+.final-card h2{
+    margin:12px 0 30px;
     font-family:"Great Vibes",cursive;
     font-size:78px;
     font-weight:400;
-    color:#f0d5e5;
-    margin:0 0 30px;
+    color:#eed5e9;
 }
 
-.finalCard{
-    width:min(850px,94vw);
+.final-text{
+    max-width:730px;
     margin:auto;
-    padding:18px 18px 25px;
-    background:#f7f0e3;
-    box-shadow:0 30px 70px rgba(0,0,0,.45);
-    transform:rotate(-.7deg);
-}
-
-.finalCard img{
-    width:100%;
-    max-height:650px;
-    object-fit:cover;
-    display:block;
-}
-
-.finalText{
-    color:#33252b;
+    white-space:pre-line;
+    color:#d0c0d0;
     font-family:"Kalam",cursive;
     font-size:20px;
     line-height:1.9;
-    white-space:pre-line;
-    padding:35px 30px 15px;
 }
 
-.finalHeart{
-    font-size:40px;
-    color:#bd527e;
-    margin-top:15px;
+.final-photo{
+    width:min(500px,90%);
+    margin:45px auto 0;
+    padding:10px 10px 30px;
+    background:#f6efe3;
+    box-shadow:0 20px 45px rgba(0,0,0,.4);
+    transform:rotate(-1.5deg);
 }
+
+.final-photo img{
+    display:block;
+    width:100%;
+    max-height:500px;
+    object-fit:cover;
+}
+
+.final-heart{
+    margin-top:35px;
+    font-size:48px;
+    color:#e88bcf;
+    text-shadow:0 0 25px rgba(232,139,207,.45);
+    animation:heartPulse 2s infinite;
+}
+
+@keyframes heartPulse{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.12)}
+}
+
+/* =========================================================
+   MUSIC BUTTON
+========================================================= */
+
+.music-button{
+    position:fixed;
+    right:24px;
+    bottom:24px;
+    z-index:120;
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    border:1px solid rgba(216,183,109,.45);
+    color:#ead5e8;
+    background:rgba(40,15,43,.82);
+    backdrop-filter:blur(10px);
+    box-shadow:0 8px 25px rgba(0,0,0,.35);
+    cursor:pointer;
+    font-size:20px;
+    transition:.3s;
+}
+
+.music-button:hover{
+    transform:scale(1.08);
+    border-color:#e7bf76;
+}
+
+.music-button.playing{
+    box-shadow:
+        0 0 0 5px rgba(214,147,210,.06),
+        0 0 30px rgba(215,130,202,.35);
+}
+
+/* =========================================================
+   SANTA
+========================================================= */
+
+.santa-flight{
+    position:fixed;
+    z-index:90;
+    top:13%;
+    left:-500px;
+    display:flex;
+    align-items:center;
+    gap:5px;
+    pointer-events:none;
+    opacity:0;
+    filter:drop-shadow(0 8px 18px rgba(0,0,0,.45));
+}
+
+.santa-flight.fly{
+    animation:santaFly 15s linear forwards;
+}
+
+.santa{
+    font-size:76px;
+}
+
+.reindeer{
+    font-size:58px;
+}
+
+.reindeer.r1{transform:translateY(18px)}
+.reindeer.r2{transform:translateY(-5px)}
+.reindeer.r3{transform:translateY(12px)}
+
+@keyframes santaFly{
+    0%{
+        left:-500px;
+        top:15%;
+        opacity:0;
+    }
+    7%{opacity:1}
+    45%{top:10%}
+    72%{top:18%}
+    93%{opacity:1}
+    100%{
+        left:calc(100% + 500px);
+        top:11%;
+        opacity:0;
+    }
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
 
 footer{
+    padding:35px 20px 80px;
     text-align:center;
-    color:#756575;
-    padding:0 20px 60px;
-    font-size:15px;
+    color:#817182;
+    font-size:14px;
+    letter-spacing:1px;
 }
 
-/* =========================
-   MÜZİK
-========================= */
-
-#musicBtn{
-    position:fixed;
-    right:20px;
-    bottom:20px;
-    z-index:1500;
-    width:54px;
-    height:54px;
-    border-radius:50%;
-    border:1px solid rgba(230,191,221,.3);
-    background:rgba(34,15,35,.88);
-    color:#efd9e9;
-    cursor:pointer;
-    font-size:21px;
-    box-shadow:0 10px 25px rgba(0,0,0,.35);
+footer span{
+    color:#c78dbb;
 }
 
-/* =========================
-   MOBİL
-========================= */
+/* =========================================================
+   RESPONSIVE
+========================================================= */
 
-@media(max-width:900px){
+@media(max-width:1200px){
+    .note{
+        width:60%;
+        padding:45px;
+    }
 
+    .photo{
+        width:145px;
+    }
+
+    .photo img{
+        height:145px;
+    }
+
+    .photo.p1,
+    .photo.p3{
+        left:2%;
+    }
+
+    .photo.p4,
+    .photo.p6{
+        right:2%;
+    }
+}
+
+@media(max-width:850px){
     .book{
-        width:96vw;
-        padding:13px;
+        padding:17px;
         min-height:auto;
     }
 
     .page{
-        min-height:auto;
-        padding:20px 12px 30px;
-        overflow:visible;
+        min-height:900px;
+        padding:25px;
     }
 
     .note{
-        position:relative;
-        left:auto;
-        top:auto;
-        transform:none;
-        width:100%;
-        min-height:auto;
-        max-height:none;
-        padding:40px 25px;
+        width:78%;
+        min-height:700px;
+        margin:50px auto;
+        padding:40px 32px;
     }
 
-    .note h3{
-        font-size:40px;
+    .photo{
+        width:120px;
+        padding:7px 7px 20px;
     }
 
-    .noteText{
+    .photo img{
+        height:115px;
+    }
+
+    .photo.p1{left:1%;top:5%}
+    .photo.p2{left:1%;top:42%}
+    .photo.p3{left:1%;bottom:4%}
+
+    .photo.p4{right:1%;top:5%}
+    .photo.p5{right:1%;top:42%}
+    .photo.p6{right:1%;bottom:4%}
+
+    .note-text{
+        font-size:16px;
+        line-height:1.65;
+    }
+
+    .note-title h3{
+        font-size:32px;
+    }
+
+    .final-card{
+        padding:55px 30px 60px;
+    }
+
+    .final-card h2{
+        font-size:62px;
+    }
+}
+
+@media(max-width:600px){
+    .christmas-lights{
+        height:55px;
+    }
+
+    .bulb{
+        width:9px;
+        height:13px;
+        top:27px;
+    }
+
+    .hero{
+        padding-top:100px;
+    }
+
+    .hero h1{
+        font-size:72px;
+    }
+
+    .hero-subtitle{
+        font-size:17px;
+    }
+
+    .moon{
+        width:140px;
+        height:140px;
+        right:-20px;
+    }
+
+    .moon:after{
+        width:140px;
+        height:140px;
+        left:35px;
+    }
+
+    .counter-box{
+        min-width:72px;
+        padding:10px 8px;
+    }
+
+    .counter-box strong{
+        font-size:23px;
+    }
+
+    .counter-box span{
+        font-size:9px;
+        letter-spacing:1px;
+    }
+
+    .section{
+        padding:70px 10px;
+    }
+
+    .section-title h2{
+        font-size:53px;
+    }
+
+    .book{
+        border-width:4px;
+        padding:10px;
+    }
+
+    .book:after{
+        display:none;
+    }
+
+    .page{
+        min-height:970px;
+        padding:12px;
+    }
+
+    .note{
+        width:82%;
+        min-height:800px;
+        margin:50px auto;
+        padding:35px 24px;
+    }
+
+    .note-title h3{
+        font-size:29px;
+    }
+
+    .note-text{
+        font-size:15px;
+        line-height:1.62;
+    }
+
+    .photo{
+        width:92px;
+        padding:5px 5px 17px;
+    }
+
+    .photo img{
+        height:90px;
+    }
+
+    .photo .tape{
+        width:38px;
+        height:12px;
+        top:-6px;
+    }
+
+    .photo.p1{left:0;top:3%}
+    .photo.p2{left:0;top:45%}
+    .photo.p3{left:0;bottom:3%}
+
+    .photo.p4{right:0;top:3%}
+    .photo.p5{right:0;top:45%}
+    .photo.p6{right:0;bottom:3%}
+
+    .book-controls{
+        gap:8px;
+    }
+
+    .book-btn{
+        min-width:100px;
+        padding:11px 10px;
+        font-size:15px;
+    }
+
+    .page-counter{
+        min-width:60px;
+        font-size:12px;
+    }
+
+    .final-card{
+        padding:50px 20px 55px;
+    }
+
+    .final-card h2{
+        font-size:52px;
+    }
+
+    .final-text{
         font-size:17px;
         line-height:1.75;
     }
 
-    .photo{
-        position:relative !important;
-        left:auto !important;
-        right:auto !important;
-        top:auto !important;
-        bottom:auto !important;
-        display:inline-block;
-        vertical-align:top;
-        width:calc(50% - 12px);
-        margin:12px 5px;
-        transform:rotate(var(--r,0deg));
+    .santa{
+        font-size:52px;
     }
 
-    .photo img{
-        height:170px;
+    .reindeer{
+        font-size:40px;
     }
 
-    .photo.focused{
-        position:fixed !important;
-        width:min(88vw,650px) !important;
-        margin:0 !important;
-    }
-
-    .pageNumber{
-        position:relative;
-        right:auto;
-        bottom:auto;
-        text-align:center;
-        margin-top:15px;
-    }
-
-    .corner-decor{
-        opacity:.45;
-    }
-
-    .hero h1{
-        font-size:75px;
-    }
-
-    .hero h2{
-        font-size:19px;
-    }
-}
-
-@media(max-width:500px){
-
-    .lockBox{
-        padding:40px 22px;
-    }
-
-    .lockBox h1{
-        font-size:45px;
-    }
-
-    .sectionTitle h2{
-        font-size:48px;
-    }
-
-    .finalTitle{
-        font-size:58px;
-    }
-
-    .photo{
-        width:calc(50% - 12px);
-    }
-
-    .photo img{
-        height:135px;
-    }
-
-    .christmas-lights{
-        height:45px;
+    .music-button{
+        right:15px;
+        bottom:15px;
     }
 }
 </style>
@@ -1131,188 +1500,241 @@ footer{
 
 <body>
 
-<!-- YILDIZLAR -->
+<!-- =====================================================
+     STARS
+===================================================== -->
 <div id="stars"></div>
 
-<!-- KAR -->
+<!-- =====================================================
+     SNOW
+===================================================== -->
 <div id="snow"></div>
-<div id="frontSnow"></div>
 <div class="snow-ground"></div>
 
-<!-- NOEL IŞIKLARI -->
+<!-- =====================================================
+     CHRISTMAS LIGHTS
+===================================================== -->
 <div class="christmas-lights">
     <div class="wire"></div>
-    <div class="bulbs" id="bulbs"></div>
+    <div class="bulb b1"></div>
+    <div class="bulb b2"></div>
+    <div class="bulb b3"></div>
+    <div class="bulb b4"></div>
+    <div class="bulb b5"></div>
+    <div class="bulb b6"></div>
+    <div class="bulb b7"></div>
+    <div class="bulb b8"></div>
+    <div class="bulb b9"></div>
+    <div class="bulb b10"></div>
+    <div class="bulb b11"></div>
+    <div class="bulb b12"></div>
 </div>
 
-<!-- NOEL DALLARI -->
-<div class="corner-decor left">
-    <div class="branch">
-        <span class="berry"></span>
-        <span class="berry"></span>
-        <span class="berry"></span>
-    </div>
-</div>
+<!-- =====================================================
+     LOCK
+===================================================== -->
+<div id="lockScreen">
 
-<div class="corner-decor right">
-    <div class="branch">
-        <span class="berry"></span>
-        <span class="berry"></span>
-        <span class="berry"></span>
-    </div>
-</div>
+    <div class="lock-card">
 
-<!-- SANTA -->
-<div id="skyGift">
-    <div class="santaTrail"></div>
-    🦌 🦌 🦌 &nbsp; 🎅🏻
-</div>
+        <div class="lock-icon">✦</div>
 
-<!-- FOTO ODAK ARKAPLANI -->
-<div id="photoBackdrop"></div>
+        <h1>Sadece İkimiz</h1>
 
-<!-- KİLİT -->
-<section id="lockScreen">
-    <div class="lockBox">
-        <div class="lockOrnament">🎄 ✦ ❄️</div>
-        <h1>Sadece İkimiz ♡</h1>
-        <p>Bu küçük defter yalnızca sana ait.</p>
+        <p>
+            Bu sayfa sadece ikimizin hikâyesi için.
+        </p>
 
         <input
-            id="password"
+            id="passwordInput"
             type="password"
             placeholder="Şifremiz..."
             autocomplete="off"
         >
 
-        <button id="unlockBtn">Defteri Aç ♡</button>
+        <button class="unlock-btn" onclick="unlock()">
+            Hikâyemizi Aç ♡
+        </button>
 
-        <div id="error"></div>
+        <div id="errorMessage"></div>
+
     </div>
-</section>
 
-<!-- ANA -->
-<main id="main">
+</div>
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+<div id="mainContent">
 
     <!-- HERO -->
     <section class="hero">
 
-        <div>
-            <div class="heroSmall">Bir Noel gecesi · Bir hikâye · Biz</div>
+        <div class="moon"></div>
 
-            <h1>Sadece İkimiz ♡</h1>
+        <div class="distant-tree">
+            <div class="layer l1"></div>
+            <div class="layer l2"></div>
+            <div class="layer l3"></div>
 
-            <h2>Hayatın bütün yollarının sonunda birbirimizi bulduk.</h2>
-
-            <div class="heroDecor">
-                <span>✦</span>
-                <span>❄</span>
-                <span>✦</span>
-            </div>
-
-            <div class="christmasMini">
-                <span>🎁</span>
-                <span>🔔</span>
-                <span>🎄</span>
-                <span>🕯️</span>
-            </div>
+            <div class="tree-light t1"></div>
+            <div class="tree-light t2"></div>
+            <div class="tree-light t3"></div>
+            <div class="tree-light t4"></div>
+            <div class="tree-light t5"></div>
         </div>
 
-    </section>
-
-    <!-- SAYAÇLAR -->
-    <section class="counters">
-
-        <div class="counter">
-            <strong id="days">0</strong>
-            <span>gün</span>
+        <div class="hero-eyebrow">
+            Noel gecesi · bizim hikâyemiz
         </div>
 
-        <div class="counter">
-            <strong id="hours">0</strong>
-            <span>saat</span>
+        <h1>
+            Sadece İkimiz <span>♡</span>
+        </h1>
+
+        <div class="hero-divider">
+            ✦ · ✧ · ✦
         </div>
 
-        <div class="counter">
-            <strong id="minutes">0</strong>
-            <span>dakika</span>
-        </div>
-
-        <div class="counter">
-            <strong id="seconds">0</strong>
-            <span>saniye</span>
-        </div>
-
-    </section>
-
-    <!-- DEFTER BAŞLIK -->
-    <section class="sectionTitle">
-
-        <div class="tiny">Bizim hikâyemiz</div>
-
-        <h2>Sayfalarımız...</h2>
-
-        <p>
-            Bazı hikâyeler anlatılmaz. Biriktirilir.
+        <p class="hero-subtitle">
+            Bazı hikâyeler anlatılmaz.<br>
+            Yaşanır, hatırlanır ve yıllar geçse bile kalbin bir köşesinde yaşamaya devam eder.
         </p>
 
-    </section>
+        <div class="counter">
 
-    <!-- DEFTER -->
-    <section class="bookWrap">
-
-        <div class="book">
-
-            <div class="spiral">
-                <div class="ring"></div>
-                <div class="ring"></div>
-                <div class="ring"></div>
-                <div class="ring"></div>
-                <div class="ring"></div>
-                <div class="ring"></div>
-                <div class="ring"></div>
-                <div class="ring"></div>
-                <div class="ring"></div>
-                <div class="ring"></div>
+            <div class="counter-box">
+                <strong id="years">0</strong>
+                <span>Yıl</span>
             </div>
 
-            <!-- 1 -->
-            <article class="page active">
+            <div class="counter-box">
+                <strong id="months">0</strong>
+                <span>Ay</span>
+            </div>
 
-                <div class="photo left1">
-                    <img src="images/foto1.jpg">
-                    <div class="caption">Anımız ♡</div>
+            <div class="counter-box">
+                <strong id="days">0</strong>
+                <span>Gün</span>
+            </div>
+
+            <div class="counter-box">
+                <strong id="hours">0</strong>
+                <span>Saat</span>
+            </div>
+
+            <div class="counter-box">
+                <strong id="minutes">0</strong>
+                <span>Dakika</span>
+            </div>
+
+            <div class="counter-box">
+                <strong id="seconds">0</strong>
+                <span>Saniye</span>
+            </div>
+
+        </div>
+
+        <div class="scroll-hint">
+            Hikâyemize doğru ↓
+        </div>
+
+    </section>
+
+
+    <!-- BOOK -->
+    <section class="section">
+
+        <div class="section-title">
+
+            <div class="small">
+                Bir hikâyenin sayfaları
+            </div>
+
+            <h2>
+                Bizim Hikâyemiz
+            </h2>
+
+            <div class="line"></div>
+
+        </div>
+
+
+        <div class="book-wrap">
+
+            <div class="book">
+
+                <div class="book-rings">
+                    <div class="ring"></div>
+                    <div class="ring"></div>
+                    <div class="ring"></div>
+                    <div class="ring"></div>
+                    <div class="ring"></div>
+                    <div class="ring"></div>
+                    <div class="ring"></div>
+                    <div class="ring"></div>
+                    <div class="ring"></div>
+                    <div class="ring"></div>
                 </div>
 
-                <div class="photo left2">
-                    <img src="images/foto2.jpg">
-                    <div class="caption">Anımız ♡</div>
+                <!-- PHOTO BACKDROP -->
+                <div
+                    class="photo-backdrop"
+                    id="photoBackdrop"
+                    onclick="closePhoto()">
                 </div>
 
-                <div class="photo left3">
-                    <img src="images/foto3.jpg">
-                    <div class="caption">Anımız ♡</div>
-                </div>
 
-                <div class="photo right1">
-                    <img src="images/foto4.jpg">
-                    <div class="caption">Anımız ♡</div>
-                </div>
+                <!-- =================================================
+                     PAGE 1
+                ================================================== -->
 
-                <div class="photo right2">
-                    <img src="images/foto5.jpg">
-                    <div class="caption">Anımız ♡</div>
-                </div>
+                <div class="page active">
 
-                <div class="photo right3">
-                    <img src="images/foto6.jpg">
-                    <div class="caption">Anımız ♡</div>
-                </div>
+                    <div class="corner tl"></div>
+                    <div class="corner tr"></div>
+                    <div class="corner bl"></div>
+                    <div class="corner br"></div>
 
-                <div class="note">
-                    <h3>Her Şeyden Önce</h3>
-                    <div class="ornament">✦ ❄ ✦</div>
-                    <div class="noteText">Seninle tanışmadan önce benim de bir hayatım vardı.
+                    <div class="photo p1" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto1.jpg" alt="">
+                    </div>
+
+                    <div class="photo p2" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto2.jpg" alt="">
+                    </div>
+
+                    <div class="photo p3" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto3.jpg" alt="">
+                    </div>
+
+                    <div class="photo p4" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto4.jpg" alt="">
+                    </div>
+
+                    <div class="photo p5" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto5.jpg" alt="">
+                    </div>
+
+                    <div class="photo p6" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto6.jpg" alt="">
+                    </div>
+
+                    <div class="note">
+
+                        <div class="note-title">
+                            <div class="chapter">Sayfa I</div>
+                            <h3>Her Şeyden Önce</h3>
+                            <div class="ornament">✦ · ✦</div>
+                        </div>
+
+                        <div class="note-text">Seninle tanışmadan önce benim de bir hayatım vardı.
 
 Çalışıyor, çabalıyor ve bir şeyleri düzeltmeye uğraşıyordum.
 
@@ -1327,26 +1749,66 @@ Sadece devam ettim.
 Ama bir gün durup kendime baktım ve kendime tek bir soru sordum:
 
 “Ben kimim?”</div>
+
+                        <div class="note-sign">
+                            ♡
+                        </div>
+
+                    </div>
+
                 </div>
 
-                <div class="pageNumber">01</div>
-            </article>
 
-            <!-- 2 -->
-            <article class="page">
+                <!-- =================================================
+                     PAGE 2
+                ================================================== -->
 
-                <div class="photo left1"><img src="images/foto7.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo left2"><img src="images/foto8.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo left3"><img src="images/foto9.jpg"><div class="caption">Anımız ♡</div></div>
+                <div class="page">
 
-                <div class="photo right1"><img src="images/foto10.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo right2"><img src="images/foto11.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo right3"><img src="images/foto12.jpg"><div class="caption">Anımız ♡</div></div>
+                    <div class="corner tl"></div>
+                    <div class="corner tr"></div>
+                    <div class="corner bl"></div>
+                    <div class="corner br"></div>
 
-                <div class="note">
-                    <h3>Kendimi Ararken</h3>
-                    <div class="ornament">✦ ❄ ✦</div>
-                    <div class="noteText">Ne sevdiğimi, ne istediğimi bile tam olarak bilmiyordum.
+                    <div class="photo p1" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto7.jpg" alt="">
+                    </div>
+
+                    <div class="photo p2" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto8.jpg" alt="">
+                    </div>
+
+                    <div class="photo p3" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto9.jpg" alt="">
+                    </div>
+
+                    <div class="photo p4" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto10.jpg" alt="">
+                    </div>
+
+                    <div class="photo p5" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto11.jpg" alt="">
+                    </div>
+
+                    <div class="photo p6" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto12.jpg" alt="">
+                    </div>
+
+                    <div class="note">
+
+                        <div class="note-title">
+                            <div class="chapter">Sayfa II</div>
+                            <h3>Kendimi Ararken</h3>
+                            <div class="ornament">✦ · ✦</div>
+                        </div>
+
+                        <div class="note-text">Ne sevdiğimi, ne istediğimi bile tam olarak bilmiyordum.
 
 Bu yüzden kendimi yeniden tanımaya çalıştım.
 
@@ -1361,26 +1823,64 @@ Ve mutlu oldum.
 Belki dışarıdan bakınca küçük bir şey gibi görünebilirdi ama benim için değildi.
 
 Çünkü uzun zaman sonra ilk defa gerçekten bana ait bir şey bulmuştum.</div>
+
+                        <div class="note-sign">♡</div>
+
+                    </div>
+
                 </div>
 
-                <div class="pageNumber">02</div>
-            </article>
 
-            <!-- 3 -->
-            <article class="page">
+                <!-- =================================================
+                     PAGE 3
+                ================================================== -->
 
-                <div class="photo left1"><img src="images/foto13.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo left2"><img src="images/foto14.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo left3"><img src="images/foto15.jpg"><div class="caption">Anımız ♡</div></div>
+                <div class="page">
 
-                <div class="photo right1"><img src="images/foto16.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo right2"><img src="images/foto17.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo right3"><img src="images/foto18.jpg"><div class="caption">Anımız ♡</div></div>
+                    <div class="corner tl"></div>
+                    <div class="corner tr"></div>
+                    <div class="corner bl"></div>
+                    <div class="corner br"></div>
 
-                <div class="note">
-                    <h3>Bir Kaza</h3>
-                    <div class="ornament">✦ ❄ ✦</div>
-                    <div class="noteText">Sonra hayatımı değiştiren bir şey oldu.
+                    <div class="photo p1" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto13.jpg" alt="">
+                    </div>
+
+                    <div class="photo p2" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto14.jpg" alt="">
+                    </div>
+
+                    <div class="photo p3" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto15.jpg" alt="">
+                    </div>
+
+                    <div class="photo p4" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto16.jpg" alt="">
+                    </div>
+
+                    <div class="photo p5" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto17.jpg" alt="">
+                    </div>
+
+                    <div class="photo p6" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto18.jpg" alt="">
+                    </div>
+
+                    <div class="note">
+
+                        <div class="note-title">
+                            <div class="chapter">Sayfa III</div>
+                            <h3>Bir Kaza</h3>
+                            <div class="ornament">✦ · ✦</div>
+                        </div>
+
+                        <div class="note-text">Sonra hayatımı değiştiren bir şey oldu.
 
 Bir kaza geçirdim.
 
@@ -1397,26 +1897,64 @@ Yine bir şeyleri kaybettim.
 Ama hayat durmadı.
 
 Ben de durmadım.</div>
+
+                        <div class="note-sign">♡</div>
+
+                    </div>
+
                 </div>
 
-                <div class="pageNumber">03</div>
-            </article>
 
-            <!-- 4 -->
-            <article class="page">
+                <!-- =================================================
+                     PAGE 4
+                ================================================== -->
 
-                <div class="photo left1"><img src="images/foto19.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo left2"><img src="images/foto20.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo left3"><img src="images/foto21.jpg"><div class="caption">Anımız ♡</div></div>
+                <div class="page">
 
-                <div class="photo right1"><img src="images/foto22.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo right2"><img src="images/foto23.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo right3"><img src="images/foto24.jpg"><div class="caption">Anımız ♡</div></div>
+                    <div class="corner tl"></div>
+                    <div class="corner tr"></div>
+                    <div class="corner bl"></div>
+                    <div class="corner br"></div>
 
-                <div class="note">
-                    <h3>Babamın Hayali</h3>
-                    <div class="ornament">✦ ❄ ✦</div>
-                    <div class="noteText">Sonra babamla birlikte ilk işime başladım.
+                    <div class="photo p1" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto19.jpg" alt="">
+                    </div>
+
+                    <div class="photo p2" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto20.jpg" alt="">
+                    </div>
+
+                    <div class="photo p3" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto21.jpg" alt="">
+                    </div>
+
+                    <div class="photo p4" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto22.jpg" alt="">
+                    </div>
+
+                    <div class="photo p5" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto23.jpg" alt="">
+                    </div>
+
+                    <div class="photo p6" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto24.jpg" alt="">
+                    </div>
+
+                    <div class="note">
+
+                        <div class="note-title">
+                            <div class="chapter">Sayfa IV</div>
+                            <h3>Babamın Hayali</h3>
+                            <div class="ornament">✦ · ✦</div>
+                        </div>
+
+                        <div class="note-text">Sonra babamla birlikte ilk işime başladım.
 
 Bu kez sadece kendim için değil, onun hayallerini gerçekleştirmek için de uğraşıyordum.
 
@@ -1435,26 +1973,64 @@ Bu süreçte bazı insanları tanıdım.
 Bazıları hayatımızda kalmak için değil, bize bir şey öğretmek için vardı.
 
 Ben de bazı şeyleri geride bırakıp yeniden başladım.</div>
+
+                        <div class="note-sign">♡</div>
+
+                    </div>
+
                 </div>
 
-                <div class="pageNumber">04</div>
-            </article>
 
-            <!-- 5 -->
-            <article class="page">
+                <!-- =================================================
+                     PAGE 5
+                ================================================== -->
 
-                <div class="photo left1"><img src="images/foto25.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo left2"><img src="images/foto26.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo left3"><img src="images/foto27.jpg"><div class="caption">Anımız ♡</div></div>
+                <div class="page">
 
-                <div class="photo right1"><img src="images/foto28.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo right2"><img src="images/foto29.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo right3"><img src="images/foto30.jpg"><div class="caption">Anımız ♡</div></div>
+                    <div class="corner tl"></div>
+                    <div class="corner tr"></div>
+                    <div class="corner bl"></div>
+                    <div class="corner br"></div>
 
-                <div class="note">
-                    <h3>Yeniden İnsanlar</h3>
-                    <div class="ornament">✦ ❄ ✦</div>
-                    <div class="noteText">Sonra Ömerlerle tanıştım.
+                    <div class="photo p1" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto25.jpg" alt="">
+                    </div>
+
+                    <div class="photo p2" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto26.jpg" alt="">
+                    </div>
+
+                    <div class="photo p3" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto27.jpg" alt="">
+                    </div>
+
+                    <div class="photo p4" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto28.jpg" alt="">
+                    </div>
+
+                    <div class="photo p5" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto29.jpg" alt="">
+                    </div>
+
+                    <div class="photo p6" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto30.jpg" alt="">
+                    </div>
+
+                    <div class="note">
+
+                        <div class="note-title">
+                            <div class="chapter">Sayfa V</div>
+                            <h3>Yeniden İnsanlar</h3>
+                            <div class="ornament">✦ · ✦</div>
+                        </div>
+
+                        <div class="note-text">Sonra Ömerlerle tanıştım.
 
 Beni olduğum gibi kabul ettiler.
 
@@ -1465,26 +2041,64 @@ Uzun zaman sonra kendimi ait hissettiğim düzgün bir çevrem olmuştu.
 Hayat yavaş yavaş yeniden düzene giriyordu.
 
 Ama yine de içimde ne olduğunu anlayamadığım bir eksiklik vardı.</div>
+
+                        <div class="note-sign">♡</div>
+
+                    </div>
+
                 </div>
 
-                <div class="pageNumber">05</div>
-            </article>
 
-            <!-- 6 -->
-            <article class="page">
+                <!-- =================================================
+                     PAGE 6
+                ================================================== -->
 
-                <div class="photo left1"><img src="images/foto31.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo left2"><img src="images/foto32.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo left3"><img src="images/foto33.jpg"><div class="caption">Anımız ♡</div></div>
+                <div class="page">
 
-                <div class="photo right1"><img src="images/foto34.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo right2"><img src="images/foto35.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo right3"><img src="images/foto36.jpg"><div class="caption">Anımız ♡</div></div>
+                    <div class="corner tl"></div>
+                    <div class="corner tr"></div>
+                    <div class="corner bl"></div>
+                    <div class="corner br"></div>
 
-                <div class="note">
-                    <h3>Dükkân</h3>
-                    <div class="ornament">✦ ❄ ✦</div>
-                    <div class="noteText">Sonunda dükkânı açtım.
+                    <div class="photo p1" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto31.jpg" alt="">
+                    </div>
+
+                    <div class="photo p2" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto32.jpg" alt="">
+                    </div>
+
+                    <div class="photo p3" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto33.jpg" alt="">
+                    </div>
+
+                    <div class="photo p4" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto34.jpg" alt="">
+                    </div>
+
+                    <div class="photo p5" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto35.jpg" alt="">
+                    </div>
+
+                    <div class="photo p6" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto36.jpg" alt="">
+                    </div>
+
+                    <div class="note">
+
+                        <div class="note-title">
+                            <div class="chapter">Sayfa VI</div>
+                            <h3>Dükkân</h3>
+                            <div class="ornament">✦ · ✦</div>
+                        </div>
+
+                        <div class="note-text">Sonunda dükkânı açtım.
 
 Bir işim vardı.
 
@@ -1507,26 +2121,64 @@ Yeni başlangıçlarla doldurmaya çalıştım.
 Ama ne yaparsam yapayım o eksiklik gitmedi.
 
 Ta ki sen gelene kadar...</div>
+
+                        <div class="note-sign">♡</div>
+
+                    </div>
+
                 </div>
 
-                <div class="pageNumber">06</div>
-            </article>
 
-            <!-- 7 -->
-            <article class="page">
+                <!-- =================================================
+                     PAGE 7
+                ================================================== -->
 
-                <div class="photo left1"><img src="images/foto37.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo left2"><img src="images/foto38.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo left3"><img src="images/foto39.jpg"><div class="caption">Anımız ♡</div></div>
+                <div class="page">
 
-                <div class="photo right1"><img src="images/foto40.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo right2"><img src="images/foto41.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo right3"><img src="images/foto42.jpg"><div class="caption">Anımız ♡</div></div>
+                    <div class="corner tl"></div>
+                    <div class="corner tr"></div>
+                    <div class="corner bl"></div>
+                    <div class="corner br"></div>
 
-                <div class="note">
-                    <h3>Sonra Sen Geldin</h3>
-                    <div class="ornament">✦ ❄ ✦</div>
-                    <div class="noteText">Sonra seni tanıdım.
+                    <div class="photo p1" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto37.jpg" alt="">
+                    </div>
+
+                    <div class="photo p2" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto38.jpg" alt="">
+                    </div>
+
+                    <div class="photo p3" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto39.jpg" alt="">
+                    </div>
+
+                    <div class="photo p4" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto40.jpg" alt="">
+                    </div>
+
+                    <div class="photo p5" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto41.jpg" alt="">
+                    </div>
+
+                    <div class="photo p6" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto42.jpg" alt="">
+                    </div>
+
+                    <div class="note">
+
+                        <div class="note-title">
+                            <div class="chapter">Sayfa VII</div>
+                            <h3>Sonra Sen Geldin</h3>
+                            <div class="ornament">✦ · ✦</div>
+                        </div>
+
+                        <div class="note-text">Sonra seni tanıdım.
 
 Ve zaman geçtikçe bir şeyi fark etmeye başladım.
 
@@ -1545,26 +2197,64 @@ Meğer yıllardır aradığım şey senmişsin.
 Seni tanıdığım iki yıl boyunca bunu daha da iyi anladım.
 
 Yaşadığım onca şeyin arasında seni neden bu kadar farklı hissettiğimi artık biliyorum.</div>
+
+                        <div class="note-sign">♡</div>
+
+                    </div>
+
                 </div>
 
-                <div class="pageNumber">07</div>
-            </article>
 
-            <!-- 8 -->
-            <article class="page">
+                <!-- =================================================
+                     PAGE 8
+                ================================================== -->
 
-                <div class="photo left1"><img src="images/foto43.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo left2"><img src="images/foto44.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo left3"><img src="images/foto45.jpg"><div class="caption">Anımız ♡</div></div>
+                <div class="page">
 
-                <div class="photo right1"><img src="images/foto46.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo right2"><img src="images/foto47.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo right3"><img src="images/foto48.jpg"><div class="caption">Anımız ♡</div></div>
+                    <div class="corner tl"></div>
+                    <div class="corner tr"></div>
+                    <div class="corner bl"></div>
+                    <div class="corner br"></div>
 
-                <div class="note">
-                    <h3>Apar Topar Sana</h3>
-                    <div class="ornament">✦ ❄ ✦</div>
-                    <div class="noteText">Sonra sana gelebilmek için bahaneler bulup apar topar yanına geldim.
+                    <div class="photo p1" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto43.jpg" alt="">
+                    </div>
+
+                    <div class="photo p2" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto44.jpg" alt="">
+                    </div>
+
+                    <div class="photo p3" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto45.jpg" alt="">
+                    </div>
+
+                    <div class="photo p4" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto46.jpg" alt="">
+                    </div>
+
+                    <div class="photo p5" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto47.jpg" alt="">
+                    </div>
+
+                    <div class="photo p6" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto48.jpg" alt="">
+                    </div>
+
+                    <div class="note">
+
+                        <div class="note-title">
+                            <div class="chapter">Sayfa VIII</div>
+                            <h3>Apar Topar Sana</h3>
+                            <div class="ornament">✦ · ✦</div>
+                        </div>
+
+                        <div class="note-text">Sonra sana gelebilmek için bahaneler bulup apar topar yanına geldim.
 
 Ve hayatımda daha önce hissetmediğim duyguları hissettim.
 
@@ -1579,26 +2269,64 @@ Bunu anladıktan sonra yine sana gelebilmek için çalışmaya başladım.
 Ve geldim.
 
 Çünkü ilk defa bir yere değil, bir insana gitmek için bu kadar çok istemiştim.</div>
+
+                        <div class="note-sign">♡</div>
+
+                    </div>
+
                 </div>
 
-                <div class="pageNumber">08</div>
-            </article>
 
-            <!-- 9 -->
-            <article class="page">
+                <!-- =================================================
+                     PAGE 9
+                ================================================== -->
 
-                <div class="photo left1"><img src="images/foto49.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo left2"><img src="images/foto50.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo left3"><img src="images/foto51.jpg"><div class="caption">Anımız ♡</div></div>
+                <div class="page">
 
-                <div class="photo right1"><img src="images/foto52.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo right2"><img src="images/foto53.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo right3"><img src="images/foto54.jpg"><div class="caption">Anımız ♡</div></div>
+                    <div class="corner tl"></div>
+                    <div class="corner tr"></div>
+                    <div class="corner bl"></div>
+                    <div class="corner br"></div>
 
-                <div class="note">
-                    <h3>Seni Tanımak</h3>
-                    <div class="ornament">✦ ❄ ✦</div>
-                    <div class="noteText">Yaklaşık 20 gün senin yanında kaldım.
+                    <div class="photo p1" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto49.jpg" alt="">
+                    </div>
+
+                    <div class="photo p2" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto50.jpg" alt="">
+                    </div>
+
+                    <div class="photo p3" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto51.jpg" alt="">
+                    </div>
+
+                    <div class="photo p4" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto52.jpg" alt="">
+                    </div>
+
+                    <div class="photo p5" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto53.jpg" alt="">
+                    </div>
+
+                    <div class="photo p6" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto54.jpg" alt="">
+                    </div>
+
+                    <div class="note">
+
+                        <div class="note-title">
+                            <div class="chapter">Sayfa IX</div>
+                            <h3>Seni Tanımak</h3>
+                            <div class="ornament">✦ · ✦</div>
+                        </div>
+
+                        <div class="note-text">Yaklaşık 20 gün senin yanında kaldım.
 
 Ailenle tanıştım.
 
@@ -1613,26 +2341,64 @@ Seni tanıdıkça, yıllardır hissettiğim o eksikliğin nedenini daha iyi anla
 Şimdi de çalışıp tekrar yanına gelebilmek için can atıyorum.
 
 Çünkü artık nereye ait olduğumu biliyorum.</div>
+
+                        <div class="note-sign">♡</div>
+
+                    </div>
+
                 </div>
 
-                <div class="pageNumber">09</div>
-            </article>
 
-            <!-- 10 -->
-            <article class="page">
+                <!-- =================================================
+                     PAGE 10
+                ================================================== -->
 
-                <div class="photo left1"><img src="images/foto55.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo left2"><img src="images/foto56.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo left3"><img src="images/foto57.jpg"><div class="caption">Anımız ♡</div></div>
+                <div class="page">
 
-                <div class="photo right1"><img src="images/foto58.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo right2"><img src="images/foto59.jpg"><div class="caption">Anımız ♡</div></div>
-                <div class="photo right3"><img src="images/foto60.jpg"><div class="caption">Anımız ♡</div></div>
+                    <div class="corner tl"></div>
+                    <div class="corner tr"></div>
+                    <div class="corner bl"></div>
+                    <div class="corner br"></div>
 
-                <div class="note">
-                    <h3>Üç Yıl</h3>
-                    <div class="ornament">✦ ❄ ✦</div>
-                    <div class="noteText">Sen beni iki yıl bekledin.
+                    <div class="photo p1" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto55.jpg" alt="">
+                    </div>
+
+                    <div class="photo p2" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto56.jpg" alt="">
+                    </div>
+
+                    <div class="photo p3" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto57.jpg" alt="">
+                    </div>
+
+                    <div class="photo p4" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto58.jpg" alt="">
+                    </div>
+
+                    <div class="photo p5" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto59.jpg" alt="">
+                    </div>
+
+                    <div class="photo p6" onclick="focusPhoto(this)">
+                        <div class="tape"></div>
+                        <img src="images/foto60.jpg" alt="">
+                    </div>
+
+                    <div class="note">
+
+                        <div class="note-title">
+                            <div class="chapter">Sayfa X</div>
+                            <h3>Üç Yıl</h3>
+                            <div class="ornament">✦ · ✦</div>
+                        </div>
+
+                        <div class="note-text">Sen beni iki yıl bekledin.
 
 Artık üç yıl oldu.
 
@@ -1645,52 +2411,111 @@ Hâlâ seni seviyorum.
 Ve hâlâ çok güzelsinnnn.
 
 Aaaaa... neyse. ♡</div>
+
+                        <div class="note-sign">Sadece ikimiz ♡</div>
+
+                    </div>
+
                 </div>
 
-                <div class="pageNumber">10</div>
-            </article>
+            </div>
+
+
+            <!-- CONTROLS -->
+
+            <div class="book-controls">
+
+                <button
+                    class="book-btn"
+                    id="prevBtn"
+                    onclick="changePage(-1)"
+                    disabled>
+                    ← Önceki
+                </button>
+
+                <div class="page-counter">
+                    <span id="currentPage">1</span>
+                    /
+                    <span id="totalPages">10</span>
+                </div>
+
+                <button
+                    class="book-btn"
+                    id="nextBtn"
+                    onclick="changePage(1)">
+                    Sonraki →
+                </button>
+
+            </div>
 
         </div>
 
     </section>
 
-    <div class="bookControls">
-        <button class="bookBtn" id="prevBtn">← Önceki</button>
-        <div id="pageCounter">1 / 10</div>
-        <button class="bookBtn" id="nextBtn">Sonraki →</button>
-    </div>
 
-    <!-- KUM SAATİ -->
-    <section class="hourglassSection">
+    <!-- =====================================================
+         HOURGLASS
+    ====================================================== -->
 
-        <div class="sectionTitle">
-            <div class="tiny">Zaman geçiyor</div>
-            <h2>Ama hikâyemiz devam ediyor...</h2>
+    <section class="section">
+
+        <div class="section-title">
+
+            <div class="small">
+                Zamanın içinden
+            </div>
+
+            <h2>
+                Birlikte Geçen Zaman
+            </h2>
+
+            <div class="line"></div>
+
         </div>
 
-        <div class="hourglass">
-            <div></div>
-        </div>
+        <div class="time-section">
 
-        <div class="hourglassText">
-            Daha yazılacak çok sayfa var.
+            <div class="hourglass">
+
+                <div class="glass">
+                    <div class="sand-top"></div>
+                    <div class="sand-stream"></div>
+                    <div class="sand-bottom"></div>
+                </div>
+
+                <div class="hourglass-frame"></div>
+
+            </div>
+
+            <p class="hourglass-text">
+                Zaman bazen çok hızlı geçti.
+                Bazen de geçmek bilmedi.
+                Ama geriye dönüp baktığımda,
+                geçen her saniyenin bizi biraz daha birbirimize getirdiğini görüyorum.
+            </p>
+
         </div>
 
     </section>
 
-    <!-- FİNAL -->
-    <section class="finalSection">
 
-        <div class="sectionTitle">
-            <div class="tiny">Son sayfa değil</div>
-            <h2>Kader</h2>
-        </div>
+    <!-- =====================================================
+         FINAL
+    ====================================================== -->
 
-        <div class="finalCard">
+    <section class="final-section">
 
-            <img src="images/final.jpg" alt="Biz">
+        <div class="final-card">
 
-            <div class="finalText">Hayatımıza binlerce insan girdi, binlercesi çıktı.
+            <div class="final-label">
+                Son sayfa değil
+            </div>
+
+            <h2>
+                Kader
+            </h2>
+
+            <div class="final-text">Hayatımıza binlerce insan girdi, binlercesi çıktı.
 
 Ama ne olursa olsun, en sonunda yine birbirimize döndük.
 
@@ -1710,150 +2535,208 @@ Meğer senmişsin.
 
 İyi ki seni bulmuşum. ♡</div>
 
-            <div class="finalHeart">♡</div>
+            <div class="final-photo">
+
+                <img
+                    src="images/final.jpg"
+                    alt="Sadece İkimiz">
+
+            </div>
+
+            <div class="final-heart">
+                ♡
+            </div>
 
         </div>
 
     </section>
 
+
     <footer>
-        Sadece ikimiz. ♡
+        Bu hikâyenin en güzel kısmı daha yazılmadı.
+        <span>Çünkü daha bitmedi.</span> ♡
     </footer>
 
-</main>
+</div>
 
-<button id="musicBtn" title="Müziği aç/kapat">♫</button>
+
+<!-- SANTA -->
+
+<div class="santa-flight" id="santaFlight">
+
+    <div class="santa">🎅</div>
+
+    <div class="reindeer r1">🦌</div>
+    <div class="reindeer r2">🦌</div>
+    <div class="reindeer r3">🦌</div>
+
+</div>
+
+
+<!-- MUSIC -->
+
+<button
+    class="music-button"
+    id="musicButton"
+    onclick="toggleMusic()"
+    title="Müziği aç/kapat">
+    ♫
+</button>
+
 
 <script>
 
-/* =========================
-   ŞİFRE
-========================= */
+/* =========================================================
+   PASSWORD
+========================================================= */
 
 const PASSWORD = "sadeceikimiz";
 
-const lockScreen = document.getElementById("lockScreen");
-const main = document.getElementById("main");
-const passwordInput = document.getElementById("password");
-const unlockBtn = document.getElementById("unlockBtn");
-const error = document.getElementById("error");
-
-function showMain(){
-    lockScreen.style.display = "none";
-    main.style.display = "block";
-
-    window.scrollTo({
-        top:0,
-        behavior:"instant"
-    });
-
-    startMusic();
-}
-
 function unlock(){
 
-    if(passwordInput.value.trim() === PASSWORD){
+    const input =
+        document.getElementById("passwordInput");
 
-        error.textContent = "";
-        showMain();
+    const error =
+        document.getElementById("errorMessage");
+
+    if(input.value.toLowerCase().trim() === PASSWORD){
+
+        document
+            .getElementById("lockScreen")
+            .classList.add("hidden");
+
+        document
+            .getElementById("mainContent")
+            .classList.add("show");
+
+        startMusic();
 
     }else{
 
-        error.textContent = "Şifre yanlış... ♡";
-        passwordInput.value = "";
+        error.textContent =
+            "Bu hikâyenin şifresini sadece ikimiz biliyoruz. ♡";
 
-        passwordInput.animate(
+        input.value = "";
+
+        input.animate(
             [
-                {transform:"translateX(-7px)"},
-                {transform:"translateX(7px)"},
-                {transform:"translateX(-4px)"},
+                {transform:"translateX(0)"},
+                {transform:"translateX(-8px)"},
+                {transform:"translateX(8px)"},
                 {transform:"translateX(0)"}
             ],
-            {duration:260}
+            {
+                duration:300
+            }
         );
     }
 }
 
-unlockBtn.addEventListener("click",unlock);
+document
+    .getElementById("passwordInput")
+    .addEventListener("keydown",function(e){
 
-passwordInput.addEventListener("keydown",e=>{
-    if(e.key === "Enter") unlock();
-});
+        if(e.key === "Enter"){
+            unlock();
+        }
 
-/* =========================
-   YILDIZLAR
-========================= */
+    });
 
-const stars = document.getElementById("stars");
 
-for(let i=0;i<95;i++){
+/* =========================================================
+   STARS
+========================================================= */
 
-    const s = document.createElement("span");
+const stars =
+    document.getElementById("stars");
 
-    s.className = "star";
+for(let i=0;i<110;i++){
 
-    s.style.left = Math.random()*100 + "%";
-    s.style.top = Math.random()*100 + "%";
-    s.style.animationDelay = Math.random()*4 + "s";
-    s.style.animationDuration = 2 + Math.random()*4 + "s";
+    const star =
+        document.createElement("div");
 
-    stars.appendChild(s);
+    star.className="star";
+
+    const size =
+        Math.random()*3+1;
+
+    star.style.width=size+"px";
+    star.style.height=size+"px";
+
+    star.style.left =
+        Math.random()*100+"%";
+
+    star.style.top =
+        Math.random()*100+"%";
+
+    star.style.setProperty(
+        "--duration",
+        (1.5+Math.random()*4)+"s"
+    );
+
+    star.style.animationDelay =
+        Math.random()*4+"s";
+
+    stars.appendChild(star);
 }
 
-/* =========================
-   KAR
-========================= */
 
-function createSnow(container,count,front=false){
+/* =========================================================
+   SNOW
+========================================================= */
 
-    const symbols = ["❄","✦","•","❅"];
+const snow =
+    document.getElementById("snow");
 
-    for(let i=0;i<count;i++){
+const snowCharacters =
+    ["❄","❅","❆","•"];
 
-        const flake = document.createElement("span");
+for(let i=0;i<150;i++){
 
-        flake.className = "snowflake " + (front ? "front" : "back");
+    const flake =
+        document.createElement("div");
 
-        flake.textContent =
-            symbols[Math.floor(Math.random()*symbols.length)];
+    flake.className="flake";
 
-        flake.style.left = Math.random()*100 + "%";
+    flake.textContent =
+        snowCharacters[
+            Math.floor(
+                Math.random()*snowCharacters.length
+            )
+        ];
 
-        flake.style.fontSize =
-            (front ? 9 + Math.random()*13 : 5 + Math.random()*9) + "px";
+    flake.style.left =
+        Math.random()*100+"%";
 
-        flake.style.animationDuration =
-            (front ? 7 + Math.random()*8 : 10 + Math.random()*13) + "s";
+    flake.style.fontSize =
+        (Math.random()*12+5)+"px";
 
-        flake.style.animationDelay =
-            (-Math.random()*20) + "s";
+    flake.style.setProperty(
+        "--speed",
+        (Math.random()*12+8)+"s"
+    );
 
-        container.appendChild(flake);
-    }
+    flake.style.setProperty(
+        "--drift",
+        (Math.random()*180-90)+"px"
+    );
+
+    flake.style.setProperty(
+        "--opacity",
+        (.2+Math.random()*.75)
+    );
+
+    flake.style.animationDelay =
+        (-Math.random()*20)+"s";
+
+    snow.appendChild(flake);
 }
 
-createSnow(document.getElementById("snow"),150,false);
-createSnow(document.getElementById("frontSnow"),65,true);
 
-/* =========================
-   NOEL IŞIKLARI
-========================= */
-
-const bulbs = document.getElementById("bulbs");
-
-for(let i=0;i<24;i++){
-
-    const b = document.createElement("span");
-
-    b.className = "bulb";
-    b.style.animationDelay = Math.random()*2 + "s";
-
-    bulbs.appendChild(b);
-}
-
-/* =========================
-   SAYAÇ
-========================= */
+/* =========================================================
+   RELATIONSHIP COUNTER
+========================================================= */
 
 const relationshipStart =
     new Date("2026-06-05T14:53:00+03:00");
@@ -1862,178 +2745,301 @@ function updateCounter(){
 
     const now = new Date();
 
-    let diff = now - relationshipStart;
+    let diff =
+        now.getTime() -
+        relationshipStart.getTime();
 
-    if(diff < 0) diff = 0;
-
-    const totalSeconds = Math.floor(diff/1000);
-
-    const days = Math.floor(totalSeconds/86400);
-
-    const hours =
-        Math.floor(totalSeconds%86400/3600);
-
-    const minutes =
-        Math.floor(totalSeconds%3600/60);
+    if(diff < 0) diff=0;
 
     const seconds =
-        totalSeconds%60;
+        Math.floor(diff/1000);
+
+    const minutes =
+        Math.floor(seconds/60);
+
+    const hours =
+        Math.floor(minutes/60);
+
+    const days =
+        Math.floor(hours/24);
+
+    const years =
+        Math.floor(days/365.2425);
+
+    let tempDate =
+        new Date(relationshipStart);
+
+    tempDate.setFullYear(
+        tempDate.getFullYear()+years
+    );
+
+    let remaining =
+        now.getTime() -
+        tempDate.getTime();
+
+    const months =
+        Math.floor(
+            remaining/
+            (1000*60*60*24*30.4375)
+        );
+
+    const remainingDays =
+        Math.floor(
+            (
+                remaining -
+                months*
+                (1000*60*60*24*30.4375)
+            )/
+            (1000*60*60*24)
+        );
+
+    const h =
+        Math.floor(
+            (
+                remaining -
+                months*
+                (1000*60*60*24*30.4375) -
+                remainingDays*
+                (1000*60*60*24)
+            )/
+            (1000*60*60)
+        );
+
+    const m =
+        Math.floor(
+            (
+                remaining -
+                months*
+                (1000*60*60*24*30.4375) -
+                remainingDays*
+                (1000*60*60*24) -
+                h*
+                (1000*60*60)
+            )/
+            (1000*60)
+        );
+
+    const s =
+        Math.floor(
+            (
+                remaining -
+                months*
+                (1000*60*60*24*30.4375) -
+                remainingDays*
+                (1000*60*60*24) -
+                h*
+                (1000*60*60) -
+                m*
+                (1000*60)
+            )/1000
+        );
+
+    document.getElementById("years").textContent =
+        years;
+
+    document.getElementById("months").textContent =
+        months;
 
     document.getElementById("days").textContent =
-        days.toLocaleString("tr-TR");
+        remainingDays;
 
     document.getElementById("hours").textContent =
-        hours;
+        h;
 
     document.getElementById("minutes").textContent =
-        minutes;
+        m;
 
     document.getElementById("seconds").textContent =
-        seconds;
+        s;
 }
 
-updateCounter();
 setInterval(updateCounter,1000);
+updateCounter();
 
-/* =========================
-   DEFTER
-========================= */
+
+/* =========================================================
+   BOOK
+========================================================= */
 
 const pages =
-    Array.from(document.querySelectorAll(".page"));
+    document.querySelectorAll(".page");
 
-let currentPage = 0;
+let currentPage=0;
 
-const pageCounter =
-    document.getElementById("pageCounter");
+document.getElementById("totalPages")
+    .textContent=pages.length;
 
-function showPage(index){
+function renderPage(){
 
-    if(index < 0) index = 0;
-    if(index >= pages.length) index = pages.length-1;
+    pages.forEach(
+        (page,index)=>{
+            page.classList.toggle(
+                "active",
+                index===currentPage
+            );
+        }
+    );
 
-    pages.forEach(p=>{
-        p.classList.remove("active");
+    document.getElementById("currentPage")
+        .textContent=currentPage+1;
+
+    document.getElementById("prevBtn")
+        .disabled=currentPage===0;
+
+    document.getElementById("nextBtn")
+        .disabled=currentPage===pages.length-1;
+
+    window.scrollTo({
+        top:
+            document.querySelector(".book-wrap")
+                .getBoundingClientRect().top+
+                window.scrollY-
+                100,
+        behavior:"smooth"
     });
 
-    currentPage = index;
-
-    pages[currentPage].classList.add("active");
-
-    pageCounter.textContent =
-        `${currentPage+1} / ${pages.length}`;
-
-    document.querySelector(".book").scrollIntoView({
-        behavior:"smooth",
-        block:"center"
-    });
+    closePhoto();
 }
 
-document.getElementById("nextBtn").addEventListener("click",()=>{
-    showPage(currentPage+1);
-});
+function changePage(direction){
 
-document.getElementById("prevBtn").addEventListener("click",()=>{
-    showPage(currentPage-1);
-});
+    const next =
+        currentPage+direction;
 
-/* Klavye */
+    if(
+        next<0 ||
+        next>=pages.length
+    ) return;
 
-document.addEventListener("keydown",e=>{
+    currentPage=next;
 
-    if(main.style.display === "none") return;
-
-    if(e.key === "ArrowRight"){
-        showPage(currentPage+1);
-    }
-
-    if(e.key === "ArrowLeft"){
-        showPage(currentPage-1);
-    }
-
-    if(e.key === "Escape"){
-        closeFocusedPhoto();
-    }
-});
-
-/* =========================
-   FOTOĞRAF ODAKLAMA
-========================= */
-
-const photoBackdrop =
-    document.getElementById("photoBackdrop");
-
-let focusedPhoto = null;
-
-function closeFocusedPhoto(){
-
-    if(!focusedPhoto) return;
-
-    focusedPhoto.classList.remove("focused");
-    focusedPhoto = null;
-
-    photoBackdrop.classList.remove("show");
-
-    document.body.style.overflow = "";
+    renderPage();
 }
 
-document.querySelectorAll(".photo").forEach(photo=>{
 
-    photo.addEventListener("click",e=>{
+/* =========================================================
+   PHOTO FOCUS
+========================================================= */
 
-        e.stopPropagation();
+function focusPhoto(photo){
 
-        if(focusedPhoto === photo){
+    const alreadyFocused =
+        photo.classList.contains("focused");
 
-            closeFocusedPhoto();
-            return;
+    if(alreadyFocused){
+
+        closePhoto();
+
+        return;
+    }
+
+    document
+        .querySelectorAll(".photo.focused")
+        .forEach(
+            p=>p.classList.remove("focused")
+        );
+
+    photo.classList.add("focused");
+
+    document
+        .getElementById("photoBackdrop")
+        .classList.add("show");
+}
+
+function closePhoto(){
+
+    document
+        .querySelectorAll(".photo.focused")
+        .forEach(
+            p=>p.classList.remove("focused")
+        );
+
+    document
+        .getElementById("photoBackdrop")
+        .classList.remove("show");
+}
+
+
+/* =========================================================
+   KEYBOARD
+========================================================= */
+
+document.addEventListener("keydown",function(e){
+
+    if(e.key==="Escape"){
+        closePhoto();
+    }
+
+    if(
+        document
+            .getElementById("mainContent")
+            .classList.contains("show")
+    ){
+
+        if(e.key==="ArrowRight"){
+            changePage(1);
         }
 
-        if(focusedPhoto){
-            focusedPhoto.classList.remove("focused");
+        if(e.key==="ArrowLeft"){
+            changePage(-1);
         }
+    }
 
-        focusedPhoto = photo;
-
-        photo.classList.add("focused");
-        photoBackdrop.classList.add("show");
-
-        document.body.style.overflow = "hidden";
-    });
-
-    const img = photo.querySelector("img");
-
-    img.addEventListener("error",()=>{
-
-        img.style.display = "none";
-
-        photo.style.background =
-            "linear-gradient(135deg,#eadbc3,#f6e8ca)";
-
-        const fallback =
-            document.createElement("div");
-
-        fallback.style.height = "145px";
-        fallback.style.display = "flex";
-        fallback.style.alignItems = "center";
-        fallback.style.justifyContent = "center";
-        fallback.style.color = "#765d59";
-        fallback.style.fontFamily = "Kalam";
-        fallback.textContent = "♡";
-
-        photo.insertBefore(fallback,img);
-    });
 });
 
-photoBackdrop.addEventListener("click",closeFocusedPhoto);
 
-/* =========================
-   SANTA
-========================= */
+/* =========================================================
+   MOBILE SWIPE
+========================================================= */
 
-const santa = document.getElementById("skyGift");
+let touchStartX=0;
 
-function flySanta(){
+document
+    .querySelector(".book")
+    .addEventListener(
+        "touchstart",
+        function(e){
+
+            touchStartX =
+                e.changedTouches[0].screenX;
+
+        },
+        {passive:true}
+    );
+
+document
+    .querySelector(".book")
+    .addEventListener(
+        "touchend",
+        function(e){
+
+            const touchEndX =
+                e.changedTouches[0].screenX;
+
+            const diff =
+                touchStartX-touchEndX;
+
+            if(Math.abs(diff)<50) return;
+
+            if(diff>0){
+                changePage(1);
+            }else{
+                changePage(-1);
+            }
+
+        },
+        {passive:true}
+    );
+
+
+/* =========================================================
+   SANTA + 3 REINDEER
+========================================================= */
+
+const santa =
+    document.getElementById("santaFlight");
+
+function santaRide(){
 
     santa.classList.remove("fly");
 
@@ -2042,61 +3048,61 @@ function flySanta(){
     santa.classList.add("fly");
 }
 
-setTimeout(flySanta,2500);
+/* first appearance */
 
-/* Her 60 saniyede */
-setInterval(flySanta,60000);
+setTimeout(
+    santaRide,
+    2500
+);
 
-/* =========================
-   MÜZİK
-   Orijinal sinematik melodi
-========================= */
+/* every 60 seconds */
 
-let audioContext = null;
-let master = null;
-let musicPlaying = false;
-let musicTimer = null;
+setInterval(
+    santaRide,
+    60000
+);
 
-const musicBtn = document.getElementById("musicBtn");
 
-function setupAudio(){
+/* =========================================================
+   ORIGINAL CINEMATIC MUSIC
+========================================================= */
+
+let audioContext=null;
+let masterGain=null;
+let musicTimer=null;
+let musicStarted=false;
+let musicMuted=false;
+
+function createAudio(){
 
     if(audioContext) return;
 
     audioContext =
-        new (window.AudioContext ||
-        window.webkitAudioContext)();
+        new (
+            window.AudioContext ||
+            window.webkitAudioContext
+        )();
 
-    master =
+    masterGain =
         audioContext.createGain();
 
-    master.gain.value = .075;
+    masterGain.gain.value=.045;
 
-    const delay =
-        audioContext.createDelay();
-
-    delay.delayTime.value = .34;
-
-    const feedback =
-        audioContext.createGain();
-
-    feedback.gain.value = .22;
-
-    const wet =
-        audioContext.createGain();
-
-    wet.gain.value = .18;
-
-    master.connect(audioContext.destination);
-
-    master.connect(delay);
-    delay.connect(feedback);
-    feedback.connect(delay);
-    delay.connect(wet);
-    wet.connect(audioContext.destination);
+    masterGain.connect(
+        audioContext.destination
+    );
 }
 
-function note(freq,start,duration,type="triangle",volume=.06){
+
+/* soft synth note */
+
+function playTone(
+    frequency,
+    start,
+    duration,
+    volume,
+    type="sine"
+){
 
     if(!audioContext) return;
 
@@ -2106,265 +3112,253 @@ function note(freq,start,duration,type="triangle",volume=.06){
     const gain =
         audioContext.createGain();
 
-    osc.type = type;
-    osc.frequency.setValueAtTime(freq,start);
+    osc.type=type;
 
-    gain.gain.setValueAtTime(0,start);
+    osc.frequency.setValueAtTime(
+        frequency,
+        start
+    );
+
+    gain.gain.setValueAtTime(
+        0,
+        start
+    );
+
     gain.gain.linearRampToValueAtTime(
         volume,
-        start+.06
+        start+.15
     );
 
     gain.gain.exponentialRampToValueAtTime(
-        .001,
+        .0001,
         start+duration
     );
 
     osc.connect(gain);
-    gain.connect(master);
+    gain.connect(masterGain);
 
     osc.start(start);
     osc.stop(start+duration+.1);
 }
 
-function chord(freqs,start,duration){
 
-    freqs.forEach((f,i)=>{
-        note(
-            f,
-            start + i*.018,
-            duration,
-            "sine",
-            .022
-        );
-    });
+/* cinematic chord */
+
+function playChord(
+    frequencies,
+    start,
+    duration
+){
+
+    frequencies.forEach(
+        (frequency,index)=>{
+
+            playTone(
+                frequency,
+                start+index*.025,
+                duration,
+                .009,
+                "sine"
+            );
+
+        }
+    );
 }
 
-function playMusicLoop(){
 
-    if(!musicPlaying) return;
+function musicLoop(){
 
-    const now = audioContext.currentTime + .08;
+    if(
+        !audioContext ||
+        musicMuted
+    ) return;
 
-    const C = {
-        C3:130.81,
-        D3:146.83,
-        E3:164.81,
-        F3:174.61,
-        G3:196,
-        A3:220,
-        Bb3:233.08,
-        C4:261.63,
-        D4:293.66,
-        E4:329.63,
-        F4:349.23,
-        G4:392,
-        A4:440,
-        Bb4:466.16,
-        C5:523.25,
-        D5:587.33,
-        E5:659.25,
-        F5:698.46,
-        G5:783.99
-    };
+    const now =
+        audioContext.currentTime;
+
+    const beat=1.15;
 
     /*
-      Yumuşak, karanlık ve Noel gecesi hissi veren
-      tamamen özgün küçük bir melodi.
+       Original progression:
+       Dm → Bb → F → C
+       with additional suspended tones.
     */
 
-    const chords = [
+    const chords=[
 
-        [C.D3,C.F3,C.A3,C.C4],
-        [C.Bb3,C.D4,C.F4,C.A4],
-        [C.F3,C.A3,C.C4,C.E4],
-        [C.C3,C.E3,C.G3,C.Bb3],
+        [146.83,174.61,220.00,261.63],
+        [116.54,146.83,174.61,233.08],
+        [174.61,220.00,261.63,329.63],
+        [130.81,164.81,196.00,246.94]
 
-        [C.D3,C.F3,C.A3,C.C4],
-        [C.G3,C.Bb3,C.D4,C.F4],
-        [C.A3,C.C4,C.E4,C.G4],
-        [C.D3,C.F3,C.A3,C.C4]
     ];
 
-    chords.forEach((chordNotes,i)=>{
-        chord(
-            chordNotes,
-            now+i*1.35,
-            1.7
-        );
-    });
+    chords.forEach(
+        (chord,index)=>{
 
-    const melody = [
+            const start =
+                now+index*beat*4;
 
-        [C.A4,0],
-        [C.C5,.34],
-        [C.D5,.68],
-        [C.C5,1.02],
+            playChord(
+                chord,
+                start,
+                beat*3.8
+            );
 
-        [C.A4,1.7],
-        [C.G4,2.04],
-        [C.F4,2.38],
+        }
+    );
 
-        [C.A4,3.4],
-        [C.C5,3.74],
-        [C.E5,4.08],
-        [C.D5,4.42],
 
-        [C.C5,5.1],
-        [C.A4,5.44],
-        [C.G4,5.78],
+    /* gentle bell melody */
 
-        [C.F4,6.8],
-        [C.A4,7.14],
-        [C.C5,7.48],
-        [C.A4,7.82],
+    const melody=[
 
-        [C.G4,8.5],
-        [C.F4,8.84],
-        [C.D4,9.18],
+        293.66,
+        349.23,
+        440.00,
+        392.00,
 
-        [C.E4,10.2],
-        [C.G4,10.54],
-        [C.A4,10.88],
-        [C.G4,11.22]
+        349.23,
+        293.66,
+        261.63,
+        293.66,
+
+        349.23,
+        392.00,
+        523.25,
+        440.00,
+
+        392.00,
+        349.23,
+        293.66,
+        261.63
+
     ];
 
-    melody.forEach(([freq,t])=>{
-        note(
-            freq,
-            now+t,
-            .42,
-            "triangle",
-            .045
-        );
-    });
+    melody.forEach(
+        (note,index)=>{
 
-    /* Küçük çanlar */
-    const bells = [
-        [C.C5,.15],
-        [C.G5,1.35],
-        [C.E5,2.72],
-        [C.A4,4.55],
-        [C.C5,6.25],
-        [C.G5,8.05],
-        [C.E5,9.65],
-        [C.A4,11.55]
+            playTone(
+                note,
+                now+index*.55,
+                .95,
+                .025,
+                "triangle"
+            );
+
+        }
+    );
+
+
+    /* tiny high Christmas sparkle */
+
+    const sparkle=[
+        880,
+        1046.5,
+        1318.5,
+        1174.66
     ];
 
-    bells.forEach(([freq,t])=>{
-        note(
-            freq,
-            now+t,
-            1.15,
-            "sine",
-            .055
-        );
-    });
+    sparkle.forEach(
+        (note,index)=>{
 
-    /* Yumuşak bas */
-    const bass = [
-        [C.D3,0],
-        [C.Bb3,2.7],
-        [C.F3,5.4],
-        [C.C3,8.1],
-        [C.D3,10.8]
-    ];
+            playTone(
+                note,
+                now+index*2.8+1.4,
+                2,
+                .008,
+                "sine"
+            );
 
-    bass.forEach(([freq,t])=>{
-        note(
-            freq,
-            now+t,
-            1.5,
-            "sine",
-            .035
-        );
-    });
+        }
+    );
 
     musicTimer =
         setTimeout(
-            playMusicLoop,
-            10.8*1000
+            musicLoop,
+            beat*4*1000-150
         );
 }
 
-async function startMusic(){
 
-    try{
+function startMusic(){
 
-        setupAudio();
+    if(musicStarted) return;
 
-        if(audioContext.state === "suspended"){
-            await audioContext.resume();
-        }
+    createAudio();
 
-        if(musicPlaying) return;
-
-        musicPlaying = true;
-
-        musicBtn.textContent = "♫";
-
-        playMusicLoop();
-
-    }catch(err){
-
-        console.log("Music error:",err);
-
+    if(audioContext.state==="suspended"){
+        audioContext.resume();
     }
+
+    musicStarted=true;
+
+    musicLoop();
+
+    document
+        .getElementById("musicButton")
+        .classList.add("playing");
 }
 
-function stopMusic(){
 
-    musicPlaying = false;
+function toggleMusic(){
 
-    clearTimeout(musicTimer);
+    if(!musicStarted){
 
-    musicBtn.textContent = "♪";
-}
-
-musicBtn.addEventListener("click",()=>{
-
-    if(musicPlaying){
-        stopMusic();
-    }else{
         startMusic();
-    }
 
-});
-
-/* =========================
-   MOBİL SWIPE
-========================= */
-
-let touchStartX = 0;
-
-document.addEventListener("touchstart",e=>{
-
-    touchStartX = e.changedTouches[0].screenX;
-
-},{passive:true});
-
-document.addEventListener("touchend",e=>{
-
-    const diff =
-        e.changedTouches[0].screenX - touchStartX;
-
-    if(Math.abs(diff) < 70) return;
-
-    if(focusedPhoto){
-        closeFocusedPhoto();
         return;
     }
 
-    if(diff < 0){
-        showPage(currentPage+1);
+    musicMuted=!musicMuted;
+
+    const button =
+        document.getElementById("musicButton");
+
+    if(musicMuted){
+
+        masterGain.gain.setTargetAtTime(
+            0,
+            audioContext.currentTime,
+            .25
+        );
+
+        button.classList.remove("playing");
+
     }else{
-        showPage(currentPage-1);
+
+        masterGain.gain.setTargetAtTime(
+            .045,
+            audioContext.currentTime,
+            .25
+        );
+
+        button.classList.add("playing");
+
+        musicLoop();
     }
+}
 
-},{passive:true});
 
-/* İlk sayfa */
-showPage(0);
+/* =========================================================
+   IMAGE FALLBACK
+========================================================= */
+
+document
+    .querySelectorAll("img")
+    .forEach(img=>{
+
+        img.addEventListener(
+            "error",
+            function(){
+
+                this.style.background=
+                    "linear-gradient(135deg,#43233e,#1c1021)";
+
+            }
+        );
+
+    });
 
 </script>
 
