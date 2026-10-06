@@ -3,6 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0611">
+
 <title>Sadece İkimiz ♡</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -10,27 +12,51 @@
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Kalam:wght@300;400;700&display=swap" rel="stylesheet">
 
 <style>
+
+/* =========================================================
+   VARIABLES
+========================================================= */
+
 :root{
-    --night:#090612;
-    --night2:#12091d;
-    --purple:#6d3f91;
-    --lilac:#b98be0;
-    --pink:#e58ac9;
-    --wine:#541b42;
-    --wine2:#7c285c;
-    --paper:#f4ead8;
-    --paper2:#eadcc4;
-    --ink:#2c1b28;
-    --gold:#d7b76d;
-    --silver:#d7d7e6;
-    --muted:#a99baa;
-    --white:#fff;
+    --night:#08050d;
+    --night2:#110719;
+    --night3:#1a0b24;
+
+    --purple:#74479a;
+    --purple2:#9c69bd;
+    --lilac:#c69be3;
+    --pink:#e795ca;
+    --fuchsia:#d75aa8;
+
+    --wine:#47152f;
+    --wine2:#68234d;
+    --wine3:#8c3269;
+
+    --gold:#d8b96e;
+    --gold2:#f0d99a;
+
+    --silver:#d9d8e4;
+
+    --paper:#f5eddd;
+    --paper2:#e8dcc6;
+    --paper3:#ded0b8;
+
+    --ink:#2d1c27;
+    --ink2:#54333f;
+
+    --muted:#a99aaa;
+
+    --shadow:rgba(0,0,0,.65);
 }
 
+/* =========================================================
+   RESET
+========================================================= */
+
 *{
-    box-sizing:border-box;
     margin:0;
     padding:0;
+    box-sizing:border-box;
 }
 
 html{
@@ -40,42 +66,74 @@ html{
 body{
     min-height:100vh;
     overflow-x:hidden;
-    color:#fff;
+    color:white;
     background:
-        radial-gradient(circle at 50% -10%,rgba(183,116,225,.25),transparent 35%),
-        radial-gradient(circle at 10% 40%,rgba(123,35,101,.20),transparent 30%),
-        radial-gradient(circle at 90% 65%,rgba(100,50,160,.18),transparent 30%),
-        linear-gradient(180deg,#090612 0%,#11091b 42%,#08050d 100%);
-    font-family:"Cormorant Garamond",serif;
-}
+        radial-gradient(
+            circle at 50% -10%,
+            rgba(169,91,205,.22),
+            transparent 36%
+        ),
+        radial-gradient(
+            circle at 5% 45%,
+            rgba(122,35,101,.18),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 95% 65%,
+            rgba(85,43,144,.16),
+            transparent 34%
+        ),
+        linear-gradient(
+            180deg,
+            #08050d 0%,
+            #100719 45%,
+            #07040c 100%
+        );
 
-/* =========================================================
-   BACKGROUND
-========================================================= */
+    font-family:
+        "Cormorant Garamond",
+        serif;
+}
 
 body:before{
     content:"";
     position:fixed;
     inset:0;
+    z-index:-20;
     pointer-events:none;
-    z-index:-10;
-    opacity:.16;
-    background-image:
-        linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
-        linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
-    background-size:55px 55px;
+
+    background:
+        linear-gradient(
+            rgba(255,255,255,.018) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.018) 1px,
+            transparent 1px
+        );
+
+    background-size:60px 60px;
 }
 
 body:after{
     content:"";
     position:fixed;
     inset:0;
-    pointer-events:none;
     z-index:9998;
-    background:radial-gradient(circle,transparent 45%,rgba(0,0,0,.38) 100%);
+    pointer-events:none;
+
+    background:
+        radial-gradient(
+            circle at center,
+            transparent 45%,
+            rgba(0,0,0,.42) 100%
+        );
 }
 
-/* stars */
+/* =========================================================
+   STARS
+========================================================= */
 
 #stars{
     position:fixed;
@@ -86,15 +144,33 @@ body:after{
 
 .star{
     position:absolute;
+    width:3px;
+    height:3px;
     border-radius:50%;
+
     background:#fff;
-    box-shadow:0 0 7px rgba(255,255,255,.9);
-    animation:twinkle var(--duration) ease-in-out infinite alternate;
+
+    box-shadow:
+        0 0 5px rgba(255,255,255,.95),
+        0 0 12px rgba(210,183,255,.5);
+
+    animation:
+        twinkle var(--duration)
+        ease-in-out
+        infinite
+        alternate;
 }
 
 @keyframes twinkle{
-    from{opacity:.15;transform:scale(.7)}
-    to{opacity:1;transform:scale(1.35)}
+    0%{
+        opacity:.12;
+        transform:scale(.65);
+    }
+
+    100%{
+        opacity:1;
+        transform:scale(1.35);
+    }
 }
 
 /* =========================================================
@@ -111,43 +187,77 @@ body:after{
 
 .flake{
     position:absolute;
-    top:-30px;
-    color:#fff;
+    top:-35px;
+
+    color:white;
+
     text-shadow:
-        0 0 5px rgba(255,255,255,.9),
-        0 0 14px rgba(196,181,255,.55);
+        0 0 5px white,
+        0 0 14px rgba(191,174,255,.55);
+
     opacity:var(--opacity);
-    animation:fall var(--speed) linear infinite;
-    user-select:none;
+
+    animation:
+        snowFall
+        var(--speed)
+        linear
+        infinite;
 }
 
-@keyframes fall{
+@keyframes snowFall{
+
     0%{
-        transform:translate3d(0,-30px,0) rotate(0deg);
+        transform:
+            translate3d(0,-35px,0)
+            rotate(0deg);
     }
+
     50%{
-        transform:translate3d(var(--drift),55vh,0) rotate(180deg);
+        transform:
+            translate3d(var(--drift),55vh,0)
+            rotate(180deg);
     }
+
     100%{
-        transform:translate3d(calc(var(--drift) * -1),110vh,0) rotate(360deg);
+        transform:
+            translate3d(
+                calc(var(--drift) * -1),
+                110vh,
+                0
+            )
+            rotate(360deg);
     }
 }
-
-/* ground snow */
 
 .snow-ground{
     position:fixed;
     left:-5%;
     right:-5%;
-    bottom:-30px;
-    height:90px;
+    bottom:-35px;
+
+    height:100px;
+
     z-index:35;
     pointer-events:none;
-    border-radius:50% 50% 0 0;
+
+    border-radius:
+        50%
+        50%
+        0
+        0;
+
     background:
-        radial-gradient(ellipse at 50% 0%,rgba(255,255,255,.98),rgba(230,223,247,.82) 45%,rgba(190,176,215,.28) 80%,transparent 100%);
+        radial-gradient(
+            ellipse at 50% 0%,
+            rgba(255,255,255,.98),
+            rgba(233,229,246,.82) 42%,
+            rgba(186,173,214,.2) 78%,
+            transparent 100%
+        );
+
     filter:blur(1px);
-    opacity:.82;
+
+    opacity:.78;
 }
 
 /* =========================================================
@@ -159,62 +269,154 @@ body:after{
     top:0;
     left:0;
     right:0;
-    height:72px;
+
+    height:70px;
+
     z-index:50;
     pointer-events:none;
 }
 
 .wire{
     position:absolute;
+
     left:-3%;
-    top:10px;
+    top:9px;
+
     width:106%;
     height:55px;
-    border-top:2px solid rgba(35,22,34,.9);
+
+    border-top:
+        2px solid
+        rgba(28,19,31,.95);
+
     border-radius:50%;
-    transform:rotate(1.5deg);
+
+    transform:rotate(1.4deg);
 }
 
 .bulb{
     position:absolute;
+
     width:13px;
     height:18px;
-    border-radius:50% 50% 45% 45%;
+
     top:32px;
+
+    border-radius:
+        50%
+        50%
+        45%
+        45%;
+
     box-shadow:
         0 0 8px currentColor,
         0 0 20px currentColor,
         0 0 35px currentColor;
-    animation:bulbGlow 1.5s ease-in-out infinite alternate;
+
+    animation:
+        bulbGlow
+        1.6s
+        ease-in-out
+        infinite
+        alternate;
 }
 
 .bulb:before{
     content:"";
+
     position:absolute;
+
     width:7px;
     height:5px;
-    top:-4px;
+
     left:3px;
+    top:-4px;
+
     border-radius:2px;
-    background:#27202b;
+
+    background:#27212c;
 }
 
-.b1{left:5%;color:#e88bd4}
-.b2{left:13%;color:#d7c2ff;animation-delay:.2s}
-.b3{left:21%;color:#ffcc73;animation-delay:.5s}
-.b4{left:29%;color:#d89cf7;animation-delay:.7s}
-.b5{left:37%;color:#f08bc2;animation-delay:.1s}
-.b6{left:45%;color:#f3d37c;animation-delay:.6s}
-.b7{left:53%;color:#c79cff;animation-delay:.3s}
-.b8{left:61%;color:#e58bd0;animation-delay:.8s}
-.b9{left:69%;color:#ffe18e;animation-delay:.4s}
-.b10{left:77%;color:#ca9df7;animation-delay:.1s}
-.b11{left:85%;color:#ed8fc8;animation-delay:.6s}
-.b12{left:93%;color:#f3d27b;animation-delay:.3s}
+.b1{
+    left:4%;
+    color:#e58acb;
+}
+
+.b2{
+    left:12%;
+    color:#d5c4ff;
+    animation-delay:.2s;
+}
+
+.b3{
+    left:20%;
+    color:#f3ce78;
+    animation-delay:.5s;
+}
+
+.b4{
+    left:28%;
+    color:#c58df3;
+    animation-delay:.7s;
+}
+
+.b5{
+    left:36%;
+    color:#ef86bd;
+    animation-delay:.1s;
+}
+
+.b6{
+    left:44%;
+    color:#f4d37d;
+    animation-delay:.6s;
+}
+
+.b7{
+    left:52%;
+    color:#c89af8;
+    animation-delay:.3s;
+}
+
+.b8{
+    left:60%;
+    color:#e98ccf;
+    animation-delay:.8s;
+}
+
+.b9{
+    left:68%;
+    color:#ffe18c;
+    animation-delay:.4s;
+}
+
+.b10{
+    left:76%;
+    color:#cba0fa;
+    animation-delay:.1s;
+}
+
+.b11{
+    left:84%;
+    color:#eb8ac9;
+    animation-delay:.6s;
+}
+
+.b12{
+    left:92%;
+    color:#f4d27c;
+    animation-delay:.3s;
+}
 
 @keyframes bulbGlow{
-    from{filter:brightness(.75)}
-    to{filter:brightness(1.5)}
+
+    from{
+        filter:brightness(.75);
+    }
+
+    to{
+        filter:brightness(1.55);
+    }
 }
 
 /* =========================================================
@@ -224,15 +426,31 @@ body:after{
 #lockScreen{
     position:fixed;
     inset:0;
+
     z-index:1000;
+
     display:flex;
     justify-content:center;
     align-items:center;
+
     padding:25px;
+
     background:
-        radial-gradient(circle at center,rgba(100,54,132,.22),transparent 40%),
-        linear-gradient(180deg,#08040d,#140a1c 55%,#08040d);
-    transition:opacity 1s ease,visibility 1s ease;
+        radial-gradient(
+            circle at center,
+            rgba(115,59,145,.22),
+            transparent 40%
+        ),
+        linear-gradient(
+            180deg,
+            #07040b,
+            #150a1d 55%,
+            #07040b
+        );
+
+    transition:
+        opacity 1s ease,
+        visibility 1s ease;
 }
 
 #lockScreen.hidden{
@@ -243,103 +461,179 @@ body:after{
 
 .lock-card{
     position:relative;
-    width:min(440px,100%);
-    padding:55px 35px 45px;
+
+    width:min(450px,100%);
+
+    padding:
+        55px
+        35px
+        45px;
+
     text-align:center;
-    border:1px solid rgba(215,183,109,.4);
-    border-radius:8px;
+
+    border:
+        1px solid
+        rgba(215,183,109,.45);
+
     background:
-        linear-gradient(145deg,rgba(69,29,68,.78),rgba(19,9,29,.92));
+        linear-gradient(
+            145deg,
+            rgba(67,28,66,.82),
+            rgba(17,8,26,.95)
+        );
+
     box-shadow:
-        0 30px 100px rgba(0,0,0,.7),
-        inset 0 0 60px rgba(210,132,204,.06);
+        0 35px 110px rgba(0,0,0,.72),
+        inset 0 0 60px rgba(217,137,205,.055);
+
     backdrop-filter:blur(18px);
 }
 
 .lock-card:before,
 .lock-card:after{
-    content:"✦";
     position:absolute;
+
     color:var(--gold);
+
     font-size:24px;
+
     opacity:.7;
 }
 
 .lock-card:before{
+    content:"✦";
+
     top:18px;
     left:22px;
 }
 
 .lock-card:after{
-    bottom:18px;
+    content:"✦";
+
     right:22px;
+    bottom:18px;
 }
 
 .lock-icon{
-    font-size:45px;
-    margin-bottom:12px;
-    filter:drop-shadow(0 0 12px rgba(231,179,242,.5));
+    font-size:44px;
+    margin-bottom:10px;
+
+    filter:
+        drop-shadow(
+            0 0 13px
+            rgba(235,179,245,.55)
+        );
 }
 
 .lock-card h1{
     font-family:"Great Vibes",cursive;
-    font-size:58px;
+
+    font-size:60px;
+
     font-weight:400;
-    color:#f6d8f1;
-    text-shadow:0 0 25px rgba(221,139,211,.4);
+
+    color:#f5d9ef;
+
+    text-shadow:
+        0 0 25px
+        rgba(224,133,211,.4);
 }
 
 .lock-card p{
-    margin:8px 0 27px;
-    color:#c8b7c8;
+    margin:
+        8px
+        0
+        27px;
+
+    color:#c7b6c7;
+
     font-size:17px;
 }
 
 #passwordInput{
     width:100%;
-    height:52px;
+    height:53px;
+
     padding:0 18px;
-    border:1px solid rgba(216,182,110,.5);
+
+    border:
+        1px solid
+        rgba(216,182,110,.5);
+
     border-radius:5px;
+
     outline:none;
+
     color:white;
+
     text-align:center;
+
     letter-spacing:3px;
+
     font-family:inherit;
     font-size:17px;
-    background:rgba(0,0,0,.28);
+
+    background:
+        rgba(0,0,0,.28);
 }
 
 #passwordInput:focus{
     border-color:var(--pink);
-    box-shadow:0 0 20px rgba(229,138,201,.18);
+
+    box-shadow:
+        0 0 20px
+        rgba(229,138,201,.2);
 }
 
 .unlock-btn{
     width:100%;
+
+    height:51px;
+
     margin-top:14px;
-    height:50px;
+
     border:0;
     border-radius:5px;
+
     cursor:pointer;
-    color:#241324;
-    font-family:"Cormorant Garamond",serif;
+
+    color:#261426;
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
     font-size:18px;
     font-weight:700;
-    background:linear-gradient(135deg,#e8c878,#f1dca1);
-    box-shadow:0 8px 25px rgba(0,0,0,.3);
+
+    background:
+        linear-gradient(
+            135deg,
+            #e8c878,
+            #f2dfa6
+        );
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.3);
+
     transition:.3s;
 }
 
 .unlock-btn:hover{
     transform:translateY(-2px);
-    box-shadow:0 10px 30px rgba(226,182,108,.25);
+
+    box-shadow:
+        0 10px 32px
+        rgba(226,182,108,.28);
 }
 
 #errorMessage{
     min-height:22px;
+
     margin-top:10px;
+
     color:#f39ac7;
+
     font-size:15px;
 }
 
@@ -350,7 +644,9 @@ body:after{
 #mainContent{
     opacity:0;
     visibility:hidden;
-    transition:opacity 1.2s ease;
+
+    transition:
+        opacity 1.2s ease;
 }
 
 #mainContent.show{
@@ -363,227 +659,435 @@ body:after{
 ========================================================= */
 
 .hero{
-    min-height:100vh;
     position:relative;
+
+    min-height:100vh;
+
     display:flex;
     flex-direction:column;
-    align-items:center;
+
     justify-content:center;
+    align-items:center;
+
     text-align:center;
-    padding:120px 20px 100px;
+
+    padding:
+        120px
+        20px
+        100px;
+
     overflow:hidden;
 }
 
 .moon{
     position:absolute;
-    width:230px;
-    height:230px;
-    right:9%;
-    top:15%;
+
+    width:245px;
+    height:245px;
+
+    right:8%;
+    top:14%;
+
     border-radius:50%;
+
     background:
-        radial-gradient(circle at 35% 32%,rgba(255,255,255,.95),rgba(231,213,255,.85) 45%,rgba(168,129,198,.35) 70%,transparent 72%);
-    filter:blur(.3px);
-    opacity:.3;
-    box-shadow:0 0 90px rgba(207,174,255,.2);
+        radial-gradient(
+            circle at 35% 32%,
+            rgba(255,255,255,.96),
+            rgba(231,213,255,.85) 45%,
+            rgba(168,129,198,.35) 70%,
+            transparent 72%
+        );
+
+    opacity:.28;
+
+    box-shadow:
+        0 0 100px
+        rgba(207,174,255,.2);
 }
 
 .moon:after{
     content:"";
+
     position:absolute;
-    width:230px;
-    height:230px;
-    left:65px;
+
+    width:245px;
+    height:245px;
+
+    left:70px;
     top:-15px;
+
     border-radius:50%;
+
     background:#0b0611;
 }
 
+/* distant Christmas tree */
+
 .distant-tree{
     position:absolute;
+
+    left:4%;
     bottom:-30px;
-    left:5%;
-    width:230px;
-    height:320px;
+
+    width:240px;
+    height:330px;
+
     opacity:.35;
-    filter:drop-shadow(0 0 30px rgba(155,101,191,.15));
+
+    filter:
+        drop-shadow(
+            0 0 30px
+            rgba(155,101,191,.15)
+        );
 }
 
-.distant-tree .layer{
+.tree-layer{
     position:absolute;
+
     left:50%;
-    transform:translateX(-50%);
-    border-left:solid transparent;
-    border-right:solid transparent;
-    border-bottom:solid #1b1025;
+
+    transform:
+        translateX(-50%);
+
+    border-left:
+        solid transparent;
+
+    border-right:
+        solid transparent;
+
+    border-bottom:
+        solid #1a1024;
 }
 
-.distant-tree .l1{
-    bottom:20px;
-    border-left-width:115px;
-    border-right-width:115px;
-    border-bottom-width:220px;
+.tree1{
+    bottom:15px;
+
+    border-left-width:120px;
+    border-right-width:120px;
+    border-bottom-width:230px;
 }
 
-.distant-tree .l2{
-    bottom:80px;
-    border-left-width:95px;
-    border-right-width:95px;
-    border-bottom-width:180px;
+.tree2{
+    bottom:75px;
+
+    border-left-width:98px;
+    border-right-width:98px;
+    border-bottom-width:185px;
 }
 
-.distant-tree .l3{
+.tree3{
     bottom:140px;
-    border-left-width:70px;
-    border-right-width:70px;
+
+    border-left-width:73px;
+    border-right-width:73px;
     border-bottom-width:140px;
 }
 
 .tree-light{
     position:absolute;
+
     width:7px;
     height:7px;
+
     border-radius:50%;
+
     background:#f6d57e;
-    box-shadow:0 0 12px #f6d57e;
+
+    box-shadow:
+        0 0 12px #f6d57e;
+
+    animation:
+        treeBlink
+        2s
+        ease-in-out
+        infinite
+        alternate;
 }
 
-.t1{left:78px;bottom:145px}
-.t2{left:124px;bottom:112px}
-.t3{left:60px;bottom:82px}
-.t4{left:147px;bottom:60px}
-.t5{left:105px;bottom:38px}
+.tree-light.t1{
+    left:80px;
+    bottom:147px;
+}
+
+.tree-light.t2{
+    left:126px;
+    bottom:115px;
+    animation-delay:.4s;
+}
+
+.tree-light.t3{
+    left:62px;
+    bottom:84px;
+    animation-delay:.8s;
+}
+
+.tree-light.t4{
+    left:150px;
+    bottom:62px;
+    animation-delay:.2s;
+}
+
+.tree-light.t5{
+    left:105px;
+    bottom:39px;
+    animation-delay:.6s;
+}
+
+@keyframes treeBlink{
+
+    from{
+        opacity:.35;
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1.35);
+    }
+}
 
 .hero-eyebrow{
     position:relative;
     z-index:2;
+
     color:#d7b8db;
+
     letter-spacing:5px;
+
     text-transform:uppercase;
+
     font-size:13px;
+
     margin-bottom:18px;
 }
 
 .hero h1{
     position:relative;
     z-index:2;
+
     font-family:"Great Vibes",cursive;
-    font-size:clamp(70px,11vw,150px);
+
+    font-size:
+        clamp(
+            75px,
+            11vw,
+            155px
+        );
+
     font-weight:400;
+
     line-height:.9;
+
     color:#f2d9ed;
+
     text-shadow:
-        0 0 18px rgba(232,140,211,.35),
-        0 0 55px rgba(145,86,181,.3);
+        0 0 18px
+        rgba(232,140,211,.35),
+        0 0 55px
+        rgba(145,86,181,.3);
 }
 
 .hero h1 span{
     color:#e3b2df;
 }
 
-.hero-subtitle{
-    position:relative;
-    z-index:2;
-    max-width:650px;
-    margin-top:30px;
-    color:#bcaabd;
-    font-size:20px;
-    line-height:1.7;
-}
-
 .hero-divider{
     position:relative;
     z-index:2;
-    margin:30px 0;
+
+    margin:
+        30px
+        0;
+
     color:var(--gold);
+
     letter-spacing:10px;
+}
+
+.hero-subtitle{
+    position:relative;
+    z-index:2;
+
+    max-width:700px;
+
+    margin-top:2px;
+
+    color:#bcaabd;
+
+    font-size:20px;
+
+    line-height:1.7;
 }
 
 .counter{
     position:relative;
     z-index:2;
+
     display:flex;
     flex-wrap:wrap;
+
     justify-content:center;
-    gap:12px;
+
+    gap:11px;
+
+    margin-top:30px;
 }
 
 .counter-box{
     min-width:92px;
-    padding:13px 17px;
-    border:1px solid rgba(216,183,109,.3);
-    background:rgba(39,16,47,.48);
+
+    padding:
+        13px
+        17px;
+
+    border:
+        1px solid
+        rgba(216,183,109,.3);
+
+    background:
+        rgba(39,16,47,.48);
+
     backdrop-filter:blur(8px);
+
     border-radius:4px;
 }
 
 .counter-box strong{
     display:block;
+
     font-size:28px;
+
     color:#eed7ec;
+
     font-weight:600;
 }
 
 .counter-box span{
     display:block;
+
     margin-top:2px;
+
     font-size:12px;
+
     letter-spacing:2px;
+
     text-transform:uppercase;
+
     color:#a997aa;
+}
+
+.newyear-counter{
+    position:relative;
+    z-index:2;
+
+    margin-top:20px;
+
+    color:#a99baa;
+
+    font-size:14px;
+
+    letter-spacing:2px;
+}
+
+.newyear-counter strong{
+    color:#e3c98d;
 }
 
 .scroll-hint{
     position:absolute;
+
     bottom:28px;
+
     z-index:2;
+
     color:#9d8ca3;
+
     font-size:13px;
+
     letter-spacing:3px;
+
     text-transform:uppercase;
-    animation:bounce 2s infinite;
+
+    animation:
+        bounce
+        2s
+        infinite;
 }
 
 @keyframes bounce{
-    0%,100%{transform:translateY(0)}
-    50%{transform:translateY(8px)}
+
+    0%,100%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(8px);
+    }
 }
 
 /* =========================================================
-   SECTION
+   SECTIONS
 ========================================================= */
 
 .section{
     position:relative;
-    padding:100px 20px;
+
+    padding:
+        110px
+        20px;
 }
 
 .section-title{
     text-align:center;
+
     margin-bottom:55px;
 }
 
 .section-title .small{
     color:#a98eb0;
+
     text-transform:uppercase;
+
     letter-spacing:4px;
+
     font-size:12px;
 }
 
 .section-title h2{
     margin-top:8px;
-    font-family:"Great Vibes",cursive;
-    font-size:65px;
+
+    font-family:
+        "Great Vibes",
+        cursive;
+
+    font-size:68px;
+
     font-weight:400;
+
     color:#eacfe7;
-    text-shadow:0 0 25px rgba(215,127,201,.2);
+
+    text-shadow:
+        0 0 25px
+        rgba(215,127,201,.2);
 }
 
 .section-title .line{
-    width:100px;
+    width:110px;
+
     height:1px;
-    margin:15px auto 0;
-    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+
+    margin:
+        15px
+        auto
+        0;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            var(--gold),
+            transparent
+        );
 }
 
 /* =========================================================
@@ -591,80 +1095,211 @@ body:after{
 ========================================================= */
 
 .book-wrap{
-    width:min(1500px,100%);
+    width:min(1550px,100%);
+
     margin:auto;
-    perspective:1800px;
+
+    perspective:2200px;
 }
 
 .book{
     position:relative;
+
     width:100%;
-    min-height:820px;
-    padding:28px;
-    border-radius:12px;
+
+    min-height:850px;
+
+    padding:
+        28px;
+
+    border:
+        8px solid
+        #2b1025;
+
+    border-radius:14px;
+
     background:
-        linear-gradient(135deg,#37142f,#641b47 45%,#32122e);
-    border:7px solid #35152c;
+        linear-gradient(
+            135deg,
+            #311127,
+            #5d1943 38%,
+            #722250 55%,
+            #321029
+        );
+
     box-shadow:
-        0 45px 90px rgba(0,0,0,.65),
-        0 0 0 2px rgba(213,174,92,.28),
-        inset 0 0 50px rgba(0,0,0,.45);
+        0 50px 100px rgba(0,0,0,.7),
+        0 0 0 2px rgba(215,183,109,.3),
+        inset 0 0 65px rgba(0,0,0,.5);
 }
+
+/* leather texture */
 
 .book:before{
     content:"";
+
     position:absolute;
     inset:10px;
-    border:1px solid rgba(224,191,111,.45);
-    border-radius:7px;
+
+    border:
+        1px solid
+        rgba(226,191,111,.5);
+
+    border-radius:8px;
+
     pointer-events:none;
+
+    background:
+        repeating-linear-gradient(
+            115deg,
+            transparent 0,
+            transparent 6px,
+            rgba(255,255,255,.012) 7px,
+            transparent 9px
+        );
 }
 
 .book:after{
     content:"";
+
     position:absolute;
+
     top:0;
-    left:52px;
     bottom:0;
+    left:57px;
+
     width:2px;
-    background:linear-gradient(180deg,transparent,#c8a767,transparent);
+
+    background:
+        linear-gradient(
+            180deg,
+            transparent,
+            #c8a767,
+            transparent
+        );
+
     opacity:.45;
 }
 
+/* gold spine ornament */
+
+.book-spine{
+    position:absolute;
+
+    left:22px;
+    top:50%;
+
+    width:25px;
+    height:260px;
+
+    transform:
+        translateY(-50%);
+
+    border:
+        1px solid
+        rgba(220,185,103,.35);
+
+    border-radius:15px;
+
+    pointer-events:none;
+}
+
+.book-spine:before,
+.book-spine:after{
+    content:"✦";
+
+    position:absolute;
+
+    left:50%;
+
+    transform:
+        translateX(-50%);
+
+    color:#d8b96e;
+
+    font-size:13px;
+}
+
+.book-spine:before{
+    top:12px;
+}
+
+.book-spine:after{
+    bottom:12px;
+}
+
+/* rings */
+
 .book-rings{
     position:absolute;
+
     top:30px;
     bottom:30px;
-    left:17px;
-    width:35px;
+    left:16px;
+
+    width:40px;
+
     z-index:30;
+
     display:flex;
     flex-direction:column;
+
     justify-content:space-around;
+
     pointer-events:none;
 }
 
 .ring{
-    width:28px;
-    height:12px;
-    border:3px solid #c6c5ce;
+    width:30px;
+    height:13px;
+
+    border:
+        3px solid
+        #cbcbd4;
+
     border-radius:50%;
-    background:linear-gradient(180deg,#eee,#797780,#dedde4);
+
+    background:
+        linear-gradient(
+            180deg,
+            #f4f3f5,
+            #77757f,
+            #e6e4e8
+        );
+
     box-shadow:
-        0 2px 4px rgba(0,0,0,.6),
+        0 3px 5px rgba(0,0,0,.65),
         inset 0 1px 2px white;
 }
 
+/* =========================================================
+   PAGE
+========================================================= */
+
 .page{
     position:relative;
+
     display:none;
-    min-height:760px;
+
+    min-height:785px;
+
     overflow:hidden;
-    border-radius:5px;
+
+    border-radius:6px;
+
     padding:50px;
+
     background:
-        radial-gradient(circle at 20% 15%,rgba(124,77,55,.08),transparent 20%),
-        radial-gradient(circle at 85% 75%,rgba(104,63,49,.07),transparent 25%),
+        radial-gradient(
+            circle at 20% 15%,
+            rgba(124,77,55,.09),
+            transparent 20%
+        ),
+        radial-gradient(
+            circle at 85% 75%,
+            rgba(104,63,49,.07),
+            transparent 25%
+        ),
         repeating-linear-gradient(
             0deg,
             rgba(80,50,35,.025) 0,
@@ -672,47 +1307,100 @@ body:after{
             transparent 1px,
             transparent 4px
         ),
-        linear-gradient(145deg,#f5ecd9,#eadfc9);
+        linear-gradient(
+            145deg,
+            #f7efdf,
+            #eadfc9
+        );
+
     box-shadow:
-        inset 0 0 45px rgba(74,46,31,.12),
-        0 15px 30px rgba(0,0,0,.3);
+        inset 0 0 55px
+        rgba(74,46,31,.13),
+
+        0 15px 30px
+        rgba(0,0,0,.3);
 }
 
 .page.active{
     display:block;
-    animation:pageIn .65s cubic-bezier(.2,.8,.2,1);
+
+    animation:
+        pageIn
+        .72s
+        cubic-bezier(.18,.85,.2,1);
 }
 
 @keyframes pageIn{
-    from{
+
+    0%{
         opacity:0;
-        transform:rotateY(-7deg) translateX(25px);
+        transform:
+            rotateY(-8deg)
+            translateX(35px)
+            scale(.985);
     }
-    to{
+
+    100%{
         opacity:1;
-        transform:rotateY(0) translateX(0);
+        transform:
+            rotateY(0)
+            translateX(0)
+            scale(1);
     }
 }
 
 .page:before{
     content:"";
+
     position:absolute;
+
     inset:15px;
-    border:1px solid rgba(90,54,38,.18);
+
+    border:
+        1px solid
+        rgba(90,54,38,.18);
+
     pointer-events:none;
 }
 
+.page:after{
+    content:"";
+
+    position:absolute;
+
+    right:0;
+    top:0;
+    bottom:0;
+
+    width:45px;
+
+    background:
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(64,42,32,.06)
+        );
+
+    pointer-events:none;
+}
+
+/* corners */
+
 .corner{
     position:absolute;
-    width:25px;
-    height:25px;
+
+    width:27px;
+    height:27px;
+
     border-color:#b58b45;
-    opacity:.6;
+
+    opacity:.65;
 }
 
 .corner.tl{
     top:25px;
     left:25px;
+
     border-top:1px solid;
     border-left:1px solid;
 }
@@ -720,6 +1408,7 @@ body:after{
 .corner.tr{
     top:25px;
     right:25px;
+
     border-top:1px solid;
     border-right:1px solid;
 }
@@ -727,6 +1416,7 @@ body:after{
 .corner.bl{
     bottom:25px;
     left:25px;
+
     border-bottom:1px solid;
     border-left:1px solid;
 }
@@ -734,119 +1424,237 @@ body:after{
 .corner.br{
     bottom:25px;
     right:25px;
+
     border-bottom:1px solid;
     border-right:1px solid;
 }
 
 /* =========================================================
-   PHOTOS
+   PHOTO SYSTEM
 ========================================================= */
 
 .photo{
     position:absolute;
+
     z-index:6;
-    width:175px;
-    padding:9px 9px 27px;
-    background:#f8f2e7;
-    border:1px solid rgba(70,48,39,.15);
+
+    width:176px;
+
+    padding:
+        9px
+        9px
+        28px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffaf0,
+            #eee5d5
+        );
+
+    border:
+        1px solid
+        rgba(70,48,39,.17);
+
     box-shadow:
-        0 10px 25px rgba(39,23,20,.22),
-        0 2px 5px rgba(0,0,0,.12);
+        0 11px 25px
+        rgba(39,23,20,.24),
+
+        0 2px 5px
+        rgba(0,0,0,.12);
+
     cursor:pointer;
+
     transition:
-        transform .35s ease,
-        box-shadow .35s ease,
-        z-index 0s;
+        transform .38s ease,
+        box-shadow .38s ease;
 }
 
 .photo img{
     display:block;
+
     width:100%;
     height:170px;
+
     object-fit:cover;
+
     background:#ddd;
-    filter:saturate(.92) contrast(.98);
+
+    filter:
+        saturate(.94)
+        contrast(.99);
 }
 
 .photo:after{
     content:"";
+
     position:absolute;
-    bottom:7px;
+
+    bottom:8px;
     left:50%;
-    transform:translateX(-50%);
-    width:65px;
+
+    width:68px;
     height:1px;
-    background:rgba(80,50,40,.22);
+
+    transform:
+        translateX(-50%);
+
+    background:
+        rgba(80,50,40,.22);
 }
 
 .photo:hover{
     z-index:20;
-    box-shadow:0 18px 35px rgba(40,20,30,.38);
-    transform:translateY(-8px) rotate(0deg) scale(1.04);
+
+    box-shadow:
+        0 20px 38px
+        rgba(40,20,30,.4);
+
+    transform:
+        translateY(-8px)
+        rotate(0deg)
+        scale(1.045);
 }
 
-.photo.p1{left:4%;top:9%;transform:rotate(-7deg)}
-.photo.p2{left:4%;top:39%;transform:rotate(5deg)}
-.photo.p3{left:4%;bottom:8%;transform:rotate(-4deg)}
+/* positions */
 
-.photo.p4{right:4%;top:8%;transform:rotate(6deg)}
-.photo.p5{right:4%;top:40%;transform:rotate(-5deg)}
-.photo.p6{right:4%;bottom:8%;transform:rotate(4deg)}
+.photo.p1{
+    left:4%;
+    top:8%;
+
+    transform:rotate(-7deg);
+}
+
+.photo.p2{
+    left:4%;
+    top:40%;
+
+    transform:rotate(5deg);
+}
+
+.photo.p3{
+    left:4%;
+    bottom:8%;
+
+    transform:rotate(-4deg);
+}
+
+.photo.p4{
+    right:4%;
+    top:8%;
+
+    transform:rotate(6deg);
+}
+
+.photo.p5{
+    right:4%;
+    top:40%;
+
+    transform:rotate(-5deg);
+}
+
+.photo.p6{
+    right:4%;
+    bottom:8%;
+
+    transform:rotate(4deg);
+}
+
+/* tape */
 
 .photo .tape{
     position:absolute;
-    width:62px;
+
+    width:64px;
     height:19px;
+
     top:-9px;
     left:50%;
-    transform:translateX(-50%) rotate(-2deg);
-    background:rgba(231,211,162,.62);
+
+    transform:
+        translateX(-50%)
+        rotate(-2deg);
+
+    background:
+        rgba(229,210,163,.64);
+
     opacity:.85;
 }
 
 .photo.p2 .tape,
 .photo.p5 .tape{
-    transform:translateX(-50%) rotate(3deg);
+    transform:
+        translateX(-50%)
+        rotate(3deg);
 }
 
-/* clicked photo */
-
-.photo.focused{
-    position:fixed;
-    z-index:200;
-    top:50%;
-    left:50%;
-    right:auto;
-    bottom:auto;
-    width:min(470px,78vw);
-    padding:14px 14px 38px;
-    transform:translate(-50%,-50%) rotate(0deg) scale(1);
-    box-shadow:
-        0 40px 90px rgba(0,0,0,.7),
-        0 0 0 1px rgba(235,213,160,.7);
-    cursor:zoom-out;
-}
-
-.photo.focused img{
-    height:auto;
-    max-height:70vh;
-    object-fit:contain;
-}
+/* focus */
 
 .photo-backdrop{
     position:fixed;
+
     inset:0;
+
     z-index:190;
-    background:rgba(8,4,14,.78);
-    backdrop-filter:blur(5px);
+
+    background:
+        rgba(7,3,12,.82);
+
+    backdrop-filter:
+        blur(6px);
+
     opacity:0;
+
     pointer-events:none;
+
     transition:.3s;
 }
 
 .photo-backdrop.show{
     opacity:1;
+
     pointer-events:auto;
+}
+
+.photo.focused{
+    position:fixed;
+
+    z-index:200;
+
+    top:50%;
+    left:50%;
+
+    right:auto;
+    bottom:auto;
+
+    width:min(500px,80vw);
+
+    padding:
+        14px
+        14px
+        40px;
+
+    transform:
+        translate(-50%,-50%)
+        rotate(0deg)
+        scale(1);
+
+    box-shadow:
+        0 45px 100px
+        rgba(0,0,0,.78),
+
+        0 0 0 1px
+        rgba(236,215,165,.75);
+
+    cursor:zoom-out;
+}
+
+.photo.focused img{
+    height:auto;
+
+    max-height:72vh;
+
+    object-fit:contain;
 }
 
 /* =========================================================
@@ -855,67 +1663,121 @@ body:after{
 
 .note{
     position:relative;
+
     z-index:12;
+
     width:56%;
-    min-height:610px;
-    margin:30px auto;
-    padding:55px 60px 48px;
+
+    min-height:615px;
+
+    margin:
+        28px
+        auto;
+
+    padding:
+        52px
+        58px
+        45px;
+
     color:var(--ink);
-    border:1px solid rgba(87,54,39,.18);
+
+    border:
+        1px solid
+        rgba(87,54,39,.18);
+
     background:
-        radial-gradient(circle at 80% 20%,rgba(164,112,77,.08),transparent 25%),
-        linear-gradient(145deg,#f9f0df,#eee2cc);
+        radial-gradient(
+            circle at 80% 20%,
+            rgba(164,112,77,.08),
+            transparent 25%
+        ),
+        linear-gradient(
+            145deg,
+            #faf1df,
+            #eee2cc
+        );
+
     box-shadow:
-        0 17px 35px rgba(54,31,25,.2),
-        inset 0 0 35px rgba(102,64,44,.07);
+        0 18px 38px
+        rgba(54,31,25,.22),
+
+        inset 0 0 38px
+        rgba(102,64,44,.07);
 }
 
 .note:before{
     content:"";
+
     position:absolute;
+
     inset:12px;
-    border:1px solid rgba(111,73,50,.15);
+
+    border:
+        1px solid
+        rgba(111,73,50,.15);
+
     pointer-events:none;
 }
 
 .note-title{
     text-align:center;
+
     margin-bottom:28px;
 }
 
 .note-title .chapter{
     color:#95744d;
+
     font-size:12px;
+
     letter-spacing:4px;
+
     text-transform:uppercase;
 }
 
 .note-title h3{
     margin-top:6px;
+
     font-size:39px;
+
     font-weight:600;
+
     color:#4a2736;
 }
 
 .note-title .ornament{
     color:#a57a42;
+
     margin-top:7px;
+
     letter-spacing:8px;
 }
 
 .note-text{
-    font-family:"Kalam",cursive;
+    font-family:
+        "Kalam",
+        cursive;
+
     font-size:18px;
+
     line-height:1.72;
+
     white-space:pre-line;
+
     color:#3b2730;
 }
 
 .note-sign{
     margin-top:25px;
+
     text-align:right;
-    font-family:"Great Vibes",cursive;
+
+    font-family:
+        "Great Vibes",
+        cursive;
+
     font-size:32px;
+
     color:#7c3b63;
 }
 
@@ -925,141 +1787,254 @@ body:after{
 
 .book-controls{
     display:flex;
+
     align-items:center;
     justify-content:center;
+
     gap:25px;
+
     margin-top:28px;
 }
 
 .book-btn{
-    min-width:125px;
-    padding:13px 20px;
-    border:1px solid rgba(215,183,109,.4);
+    min-width:130px;
+
+    padding:
+        13px
+        20px;
+
+    border:
+        1px solid
+        rgba(215,183,109,.42);
+
     border-radius:3px;
+
     color:#eadce9;
-    background:linear-gradient(135deg,#3d1838,#241127);
-    font-family:"Cormorant Garamond",serif;
+
+    background:
+        linear-gradient(
+            135deg,
+            #42183d,
+            #211026
+        );
+
+    font-family:
+        "Cormorant Garamond",
+        serif;
+
     font-size:17px;
+
     cursor:pointer;
+
     transition:.3s;
 }
 
 .book-btn:hover:not(:disabled){
     transform:translateY(-2px);
+
     border-color:#e3bd75;
-    box-shadow:0 8px 20px rgba(0,0,0,.25);
+
+    box-shadow:
+        0 8px 20px
+        rgba(0,0,0,.25);
 }
 
 .book-btn:disabled{
-    opacity:.35;
+    opacity:.32;
+
     cursor:not-allowed;
 }
 
 .page-counter{
-    min-width:90px;
+    min-width:95px;
+
     text-align:center;
+
     color:#b9a7b9;
+
     font-size:15px;
+
     letter-spacing:2px;
 }
 
 /* =========================================================
-   HOURGLASS
+   TIME SECTION
 ========================================================= */
 
 .time-section{
     width:min(900px,100%);
-    margin:0 auto;
+
+    margin:auto;
+
     text-align:center;
 }
 
 .hourglass{
     position:relative;
-    width:160px;
-    height:250px;
-    margin:35px auto;
+
+    width:165px;
+    height:255px;
+
+    margin:
+        35px
+        auto;
 }
 
 .glass{
     position:absolute;
+
     left:22px;
     right:22px;
+
     top:25px;
     bottom:25px;
+
     overflow:hidden;
 }
 
 .glass:before,
 .glass:after{
     content:"";
+
     position:absolute;
+
     left:50%;
-    transform:translateX(-50%);
-    border-left:55px solid transparent;
-    border-right:55px solid transparent;
+
+    transform:
+        translateX(-50%);
+
+    border-left:
+        56px solid transparent;
+
+    border-right:
+        56px solid transparent;
 }
 
 .glass:before{
     top:0;
-    border-top:90px solid rgba(224,205,235,.12);
+
+    border-top:
+        91px solid
+        rgba(224,205,235,.12);
 }
 
 .glass:after{
     bottom:0;
-    border-bottom:90px solid rgba(224,205,235,.12);
+
+    border-bottom:
+        91px solid
+        rgba(224,205,235,.12);
 }
 
 .sand-top{
     position:absolute;
+
     left:34px;
     top:20px;
-    width:70px;
+
+    width:72px;
     height:65px;
-    border-radius:0 0 50% 50%;
-    background:linear-gradient(180deg,#d7b76d,#9f7540);
-    animation:sandTop 5s linear infinite;
+
+    border-radius:
+        0
+        0
+        50%
+        50%;
+
+    background:
+        linear-gradient(
+            180deg,
+            #d7b76d,
+            #9f7540
+        );
+
+    animation:
+        sandTop
+        5s
+        linear
+        infinite;
 }
 
 .sand-stream{
     position:absolute;
+
     left:79px;
     top:70px;
+
     width:3px;
     height:110px;
+
     background:#c49d55;
-    box-shadow:0 0 8px rgba(215,183,109,.6);
+
+    box-shadow:
+        0 0 8px
+        rgba(215,183,109,.6);
 }
 
 .sand-bottom{
     position:absolute;
+
     left:28px;
     bottom:20px;
+
     width:82px;
     height:50px;
-    border-radius:50% 50% 10px 10px;
-    background:linear-gradient(180deg,#a87940,#d4b26b);
+
+    border-radius:
+        50%
+        50%
+        10px
+        10px;
+
+    background:
+        linear-gradient(
+            180deg,
+            #a87940,
+            #d4b26b
+        );
 }
 
 @keyframes sandTop{
-    from{height:65px}
-    to{height:8px}
+
+    from{
+        height:65px;
+    }
+
+    to{
+        height:8px;
+    }
 }
 
 .hourglass-frame{
     position:absolute;
+
     inset:0;
-    border-top:8px solid #bda675;
-    border-bottom:8px solid #bda675;
+
+    border-top:
+        8px solid
+        #bda675;
+
+    border-bottom:
+        8px solid
+        #bda675;
+
     box-shadow:
-        inset 0 0 15px rgba(0,0,0,.4),
-        0 10px 30px rgba(0,0,0,.3);
+        inset 0 0 15px
+        rgba(0,0,0,.4),
+
+        0 10px 30px
+        rgba(0,0,0,.3);
 }
 
 .hourglass-text{
     max-width:650px;
+
     margin:auto;
+
     color:#b8a8ba;
+
     font-size:19px;
+
     line-height:1.7;
 }
 
@@ -1069,131 +2044,241 @@ body:after{
 
 .final-section{
     min-height:100vh;
-    padding:120px 20px 160px;
+
+    padding:
+        120px
+        20px
+        160px;
+
     display:flex;
+
     justify-content:center;
     align-items:center;
 }
 
 .final-card{
     position:relative;
-    width:min(1000px,100%);
-    padding:70px 70px 75px;
-    text-align:center;
-    border:1px solid rgba(216,183,109,.32);
-    background:
-        radial-gradient(circle at 50% 0%,rgba(142,81,160,.18),transparent 40%),
-        linear-gradient(145deg,rgba(43,17,46,.92),rgba(15,8,23,.96));
-    box-shadow:
-        0 40px 100px rgba(0,0,0,.6),
-        inset 0 0 70px rgba(190,105,174,.04);
-}
 
-.final-card:before,
-.final-card:after{
-    position:absolute;
-    color:var(--gold);
-    font-size:30px;
-    opacity:.7;
+    width:min(1000px,100%);
+
+    padding:
+        75px
+        70px
+        80px;
+
+    text-align:center;
+
+    border:
+        1px solid
+        rgba(216,183,109,.34);
+
+    background:
+        radial-gradient(
+            circle at 50% 0%,
+            rgba(142,81,160,.18),
+            transparent 40%
+        ),
+        linear-gradient(
+            145deg,
+            rgba(43,17,46,.94),
+            rgba(15,8,23,.97)
+        );
+
+    box-shadow:
+        0 45px 110px
+        rgba(0,0,0,.62),
+
+        inset 0 0 70px
+        rgba(190,105,174,.04);
 }
 
 .final-card:before{
     content:"✦";
+
+    position:absolute;
+
     top:25px;
     left:30px;
+
+    color:var(--gold);
+
+    font-size:30px;
+
+    opacity:.7;
 }
 
 .final-card:after{
     content:"✦";
+
+    position:absolute;
+
     right:30px;
     bottom:25px;
+
+    color:var(--gold);
+
+    font-size:30px;
+
+    opacity:.7;
 }
 
 .final-label{
     color:#ae93b1;
+
     letter-spacing:5px;
+
     font-size:12px;
+
     text-transform:uppercase;
 }
 
 .final-card h2{
-    margin:12px 0 30px;
-    font-family:"Great Vibes",cursive;
-    font-size:78px;
+    margin:
+        12px
+        0
+        30px;
+
+    font-family:
+        "Great Vibes",
+        cursive;
+
+    font-size:80px;
+
     font-weight:400;
+
     color:#eed5e9;
 }
 
 .final-text{
     max-width:730px;
+
     margin:auto;
+
     white-space:pre-line;
+
     color:#d0c0d0;
-    font-family:"Kalam",cursive;
+
+    font-family:
+        "Kalam",
+        cursive;
+
     font-size:20px;
+
     line-height:1.9;
 }
 
 .final-photo{
     width:min(500px,90%);
-    margin:45px auto 0;
-    padding:10px 10px 30px;
+
+    margin:
+        45px
+        auto
+        0;
+
+    padding:
+        10px
+        10px
+        30px;
+
     background:#f6efe3;
-    box-shadow:0 20px 45px rgba(0,0,0,.4);
+
+    box-shadow:
+        0 20px 45px
+        rgba(0,0,0,.4);
+
     transform:rotate(-1.5deg);
 }
 
 .final-photo img{
     display:block;
+
     width:100%;
+
     max-height:500px;
+
     object-fit:cover;
 }
 
 .final-heart{
     margin-top:35px;
-    font-size:48px;
+
+    font-size:50px;
+
     color:#e88bcf;
-    text-shadow:0 0 25px rgba(232,139,207,.45);
-    animation:heartPulse 2s infinite;
+
+    text-shadow:
+        0 0 25px
+        rgba(232,139,207,.45);
+
+    animation:
+        heartPulse
+        2s
+        infinite;
 }
 
 @keyframes heartPulse{
-    0%,100%{transform:scale(1)}
-    50%{transform:scale(1.12)}
+
+    0%,100%{
+        transform:scale(1);
+    }
+
+    50%{
+        transform:scale(1.12);
+    }
 }
 
 /* =========================================================
-   MUSIC BUTTON
+   MUSIC
 ========================================================= */
 
 .music-button{
     position:fixed;
+
     right:24px;
     bottom:24px;
+
     z-index:120;
-    width:55px;
-    height:55px;
+
+    width:57px;
+    height:57px;
+
     border-radius:50%;
-    border:1px solid rgba(216,183,109,.45);
+
+    border:
+        1px solid
+        rgba(216,183,109,.45);
+
     color:#ead5e8;
-    background:rgba(40,15,43,.82);
+
+    background:
+        rgba(40,15,43,.84);
+
     backdrop-filter:blur(10px);
-    box-shadow:0 8px 25px rgba(0,0,0,.35);
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,.35);
+
     cursor:pointer;
+
     font-size:20px;
+
     transition:.3s;
 }
 
 .music-button:hover{
     transform:scale(1.08);
+
     border-color:#e7bf76;
 }
 
 .music-button.playing{
     box-shadow:
-        0 0 0 5px rgba(214,147,210,.06),
-        0 0 30px rgba(215,130,202,.35);
+        0 0 0 5px
+        rgba(214,147,210,.06),
+
+        0 0 30px
+        rgba(215,130,202,.35);
 }
 
 /* =========================================================
@@ -1202,45 +2287,83 @@ body:after{
 
 .santa-flight{
     position:fixed;
+
     z-index:90;
+
     top:13%;
-    left:-500px;
+    left:-520px;
+
     display:flex;
+
     align-items:center;
+
     gap:5px;
+
     pointer-events:none;
+
     opacity:0;
-    filter:drop-shadow(0 8px 18px rgba(0,0,0,.45));
+
+    filter:
+        drop-shadow(
+            0 8px 18px
+            rgba(0,0,0,.45)
+        );
 }
 
 .santa-flight.fly{
-    animation:santaFly 15s linear forwards;
+    animation:
+        santaFly
+        15s
+        linear
+        forwards;
 }
 
 .santa{
-    font-size:76px;
+    font-size:78px;
 }
 
 .reindeer{
     font-size:58px;
 }
 
-.reindeer.r1{transform:translateY(18px)}
-.reindeer.r2{transform:translateY(-5px)}
-.reindeer.r3{transform:translateY(12px)}
+.reindeer.r1{
+    transform:translateY(18px);
+}
+
+.reindeer.r2{
+    transform:translateY(-5px);
+}
+
+.reindeer.r3{
+    transform:translateY(12px);
+}
 
 @keyframes santaFly{
+
     0%{
-        left:-500px;
+        left:-520px;
         top:15%;
         opacity:0;
     }
-    7%{opacity:1}
-    45%{top:10%}
-    72%{top:18%}
-    93%{opacity:1}
+
+    7%{
+        opacity:1;
+    }
+
+    45%{
+        top:10%;
+    }
+
+    72%{
+        top:18%;
+    }
+
+    93%{
+        opacity:1;
+    }
+
     100%{
-        left:calc(100% + 500px);
+        left:calc(100% + 520px);
         top:11%;
         opacity:0;
     }
@@ -1251,10 +2374,17 @@ body:after{
 ========================================================= */
 
 footer{
-    padding:35px 20px 80px;
+    padding:
+        35px
+        20px
+        80px;
+
     text-align:center;
+
     color:#817182;
+
     font-size:14px;
+
     letter-spacing:1px;
 }
 
@@ -1267,9 +2397,12 @@ footer span{
 ========================================================= */
 
 @media(max-width:1200px){
+
     .note{
         width:60%;
-        padding:45px;
+
+        padding:
+            45px;
     }
 
     .photo{
@@ -1281,50 +2414,81 @@ footer span{
     }
 
     .photo.p1,
+    .photo.p2,
     .photo.p3{
-        left:2%;
+        left:1.5%;
     }
 
     .photo.p4,
+    .photo.p5,
     .photo.p6{
-        right:2%;
+        right:1.5%;
     }
 }
 
-@media(max-width:850px){
+@media(max-width:900px){
+
     .book{
         padding:17px;
         min-height:auto;
     }
 
     .page{
-        min-height:900px;
+        min-height:930px;
         padding:25px;
     }
 
     .note{
-        width:78%;
-        min-height:700px;
-        margin:50px auto;
-        padding:40px 32px;
+        width:77%;
+
+        min-height:740px;
+
+        margin:
+            45px
+            auto;
+
+        padding:
+            40px
+            32px;
     }
 
     .photo{
-        width:120px;
-        padding:7px 7px 20px;
+        width:125px;
     }
 
     .photo img{
-        height:115px;
+        height:120px;
     }
 
-    .photo.p1{left:1%;top:5%}
-    .photo.p2{left:1%;top:42%}
-    .photo.p3{left:1%;bottom:4%}
+    .photo.p1{
+        left:1%;
+        top:4%;
+    }
 
-    .photo.p4{right:1%;top:5%}
-    .photo.p5{right:1%;top:42%}
-    .photo.p6{right:1%;bottom:4%}
+    .photo.p2{
+        left:1%;
+        top:43%;
+    }
+
+    .photo.p3{
+        left:1%;
+        bottom:4%;
+    }
+
+    .photo.p4{
+        right:1%;
+        top:4%;
+    }
+
+    .photo.p5{
+        right:1%;
+        top:43%;
+    }
+
+    .photo.p6{
+        right:1%;
+        bottom:4%;
+    }
 
     .note-text{
         font-size:16px;
@@ -1336,15 +2500,19 @@ footer span{
     }
 
     .final-card{
-        padding:55px 30px 60px;
+        padding:
+            55px
+            30px
+            60px;
     }
 
     .final-card h2{
-        font-size:62px;
+        font-size:64px;
     }
 }
 
 @media(max-width:600px){
+
     .christmas-lights{
         height:55px;
     }
@@ -1356,7 +2524,7 @@ footer span{
     }
 
     .hero{
-        padding-top:100px;
+        padding-top:105px;
     }
 
     .hero h1{
@@ -1365,6 +2533,11 @@ footer span{
 
     .hero-subtitle{
         font-size:17px;
+    }
+
+    .hero-eyebrow{
+        font-size:10px;
+        letter-spacing:3px;
     }
 
     .moon{
@@ -1379,26 +2552,35 @@ footer span{
         left:35px;
     }
 
+    .counter{
+        gap:7px;
+    }
+
     .counter-box{
-        min-width:72px;
-        padding:10px 8px;
+        min-width:70px;
+
+        padding:
+            10px
+            7px;
     }
 
     .counter-box strong{
-        font-size:23px;
+        font-size:22px;
     }
 
     .counter-box span{
-        font-size:9px;
+        font-size:8px;
         letter-spacing:1px;
     }
 
     .section{
-        padding:70px 10px;
+        padding:
+            75px
+            10px;
     }
 
     .section-title h2{
-        font-size:53px;
+        font-size:54px;
     }
 
     .book{
@@ -1410,16 +2592,28 @@ footer span{
         display:none;
     }
 
+    .book-spine{
+        display:none;
+    }
+
     .page{
-        min-height:970px;
+        min-height:1000px;
+
         padding:12px;
     }
 
     .note{
-        width:82%;
-        min-height:800px;
-        margin:50px auto;
-        padding:35px 24px;
+        width:81%;
+
+        min-height:820px;
+
+        margin:
+            50px
+            auto;
+
+        padding:
+            35px
+            23px;
     }
 
     .note-title h3{
@@ -1432,8 +2626,12 @@ footer span{
     }
 
     .photo{
-        width:92px;
-        padding:5px 5px 17px;
+        width:91px;
+
+        padding:
+            5px
+            5px
+            17px;
     }
 
     .photo img{
@@ -1446,13 +2644,35 @@ footer span{
         top:-6px;
     }
 
-    .photo.p1{left:0;top:3%}
-    .photo.p2{left:0;top:45%}
-    .photo.p3{left:0;bottom:3%}
+    .photo.p1{
+        left:0;
+        top:3%;
+    }
 
-    .photo.p4{right:0;top:3%}
-    .photo.p5{right:0;top:45%}
-    .photo.p6{right:0;bottom:3%}
+    .photo.p2{
+        left:0;
+        top:45%;
+    }
+
+    .photo.p3{
+        left:0;
+        bottom:3%;
+    }
+
+    .photo.p4{
+        right:0;
+        top:3%;
+    }
+
+    .photo.p5{
+        right:0;
+        top:45%;
+    }
+
+    .photo.p6{
+        right:0;
+        bottom:3%;
+    }
 
     .book-controls{
         gap:8px;
@@ -1460,21 +2680,29 @@ footer span{
 
     .book-btn{
         min-width:100px;
-        padding:11px 10px;
+
+        padding:
+            11px
+            10px;
+
         font-size:15px;
     }
 
     .page-counter{
         min-width:60px;
+
         font-size:12px;
     }
 
     .final-card{
-        padding:50px 20px 55px;
+        padding:
+            50px
+            20px
+            55px;
     }
 
     .final-card h2{
-        font-size:52px;
+        font-size:53px;
     }
 
     .final-text{
@@ -1495,27 +2723,33 @@ footer span{
         bottom:15px;
     }
 }
+
 </style>
 </head>
 
 <body>
 
-<!-- =====================================================
+<!-- =========================================================
      STARS
-===================================================== -->
+========================================================= -->
+
 <div id="stars"></div>
 
-<!-- =====================================================
+<!-- =========================================================
      SNOW
-===================================================== -->
+========================================================= -->
+
 <div id="snow"></div>
 <div class="snow-ground"></div>
 
-<!-- =====================================================
+<!-- =========================================================
      CHRISTMAS LIGHTS
-===================================================== -->
+========================================================= -->
+
 <div class="christmas-lights">
+
     <div class="wire"></div>
+
     <div class="bulb b1"></div>
     <div class="bulb b2"></div>
     <div class="bulb b3"></div>
@@ -1528,18 +2762,25 @@ footer span{
     <div class="bulb b10"></div>
     <div class="bulb b11"></div>
     <div class="bulb b12"></div>
+
 </div>
 
-<!-- =====================================================
-     LOCK
-===================================================== -->
+
+<!-- =========================================================
+     LOCK SCREEN
+========================================================= -->
+
 <div id="lockScreen">
 
     <div class="lock-card">
 
-        <div class="lock-icon">✦</div>
+        <div class="lock-icon">
+            ✦
+        </div>
 
-        <h1>Sadece İkimiz</h1>
+        <h1>
+            Sadece İkimiz
+        </h1>
 
         <p>
             Bu sayfa sadece ikimizin hikâyesi için.
@@ -1552,7 +2793,10 @@ footer span{
             autocomplete="off"
         >
 
-        <button class="unlock-btn" onclick="unlock()">
+        <button
+            class="unlock-btn"
+            onclick="unlock()"
+        >
             Hikâyemizi Aç ♡
         </button>
 
@@ -1562,179 +2806,223 @@ footer span{
 
 </div>
 
-<!-- =====================================================
+
+<!-- =========================================================
      MAIN
-===================================================== -->
+========================================================= -->
+
 <div id="mainContent">
 
-    <!-- HERO -->
-    <section class="hero">
 
-        <div class="moon"></div>
+<!-- =========================================================
+     HERO
+========================================================= -->
 
-        <div class="distant-tree">
-            <div class="layer l1"></div>
-            <div class="layer l2"></div>
-            <div class="layer l3"></div>
+<section class="hero">
 
-            <div class="tree-light t1"></div>
-            <div class="tree-light t2"></div>
-            <div class="tree-light t3"></div>
-            <div class="tree-light t4"></div>
-            <div class="tree-light t5"></div>
+    <div class="moon"></div>
+
+
+    <div class="distant-tree">
+
+        <div class="tree-layer tree1"></div>
+        <div class="tree-layer tree2"></div>
+        <div class="tree-layer tree3"></div>
+
+        <div class="tree-light t1"></div>
+        <div class="tree-light t2"></div>
+        <div class="tree-light t3"></div>
+        <div class="tree-light t4"></div>
+        <div class="tree-light t5"></div>
+
+    </div>
+
+
+    <div class="hero-eyebrow">
+        Noel gecesi · bizim hikâyemiz
+    </div>
+
+
+    <h1>
+        Sadece İkimiz <span>♡</span>
+    </h1>
+
+
+    <div class="hero-divider">
+        ✦ · ✧ · ✦
+    </div>
+
+
+    <p class="hero-subtitle">
+        Bazı hikâyeler anlatılmaz.<br>
+        Yaşanır, hatırlanır ve yıllar geçse bile kalbin bir köşesinde yaşamaya devam eder.
+    </p>
+
+
+    <div class="counter">
+
+        <div class="counter-box">
+            <strong id="years">0</strong>
+            <span>Yıl</span>
         </div>
 
-        <div class="hero-eyebrow">
-            Noel gecesi · bizim hikâyemiz
+        <div class="counter-box">
+            <strong id="months">0</strong>
+            <span>Ay</span>
         </div>
 
-        <h1>
-            Sadece İkimiz <span>♡</span>
-        </h1>
-
-        <div class="hero-divider">
-            ✦ · ✧ · ✦
+        <div class="counter-box">
+            <strong id="days">0</strong>
+            <span>Gün</span>
         </div>
 
-        <p class="hero-subtitle">
-            Bazı hikâyeler anlatılmaz.<br>
-            Yaşanır, hatırlanır ve yıllar geçse bile kalbin bir köşesinde yaşamaya devam eder.
-        </p>
+        <div class="counter-box">
+            <strong id="hours">0</strong>
+            <span>Saat</span>
+        </div>
 
-        <div class="counter">
+        <div class="counter-box">
+            <strong id="minutes">0</strong>
+            <span>Dakika</span>
+        </div>
 
-            <div class="counter-box">
-                <strong id="years">0</strong>
-                <span>Yıl</span>
+        <div class="counter-box">
+            <strong id="seconds">0</strong>
+            <span>Saniye</span>
+        </div>
+
+    </div>
+
+
+    <div class="newyear-counter">
+        Yeni yıla kalan:
+        <strong id="newYearCountdown">
+            hesaplanıyor...
+        </strong>
+    </div>
+
+
+    <div class="scroll-hint">
+        Hikâyemize doğru ↓
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     STORY BOOK
+========================================================= -->
+
+<section class="section">
+
+    <div class="section-title">
+
+        <div class="small">
+            Bir hikâyenin sayfaları
+        </div>
+
+        <h2>
+            Bizim Hikâyemiz
+        </h2>
+
+        <div class="line"></div>
+
+    </div>
+
+
+    <div class="book-wrap">
+
+        <div class="book">
+
+            <div class="book-spine"></div>
+
+
+            <div class="book-rings">
+
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+                <div class="ring"></div>
+
             </div>
 
-            <div class="counter-box">
-                <strong id="months">0</strong>
-                <span>Ay</span>
+
+            <div
+                class="photo-backdrop"
+                id="photoBackdrop"
+                onclick="closePhoto()"
+            ></div>
+
+
+<!-- =========================================================
+     PAGE 1
+========================================================= -->
+
+<div class="page active">
+
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+
+
+    <div class="photo p1" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto1.jpg" alt="">
+    </div>
+
+    <div class="photo p2" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto2.jpg" alt="">
+    </div>
+
+    <div class="photo p3" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto3.jpg" alt="">
+    </div>
+
+    <div class="photo p4" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto4.jpg" alt="">
+    </div>
+
+    <div class="photo p5" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto5.jpg" alt="">
+    </div>
+
+    <div class="photo p6" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto6.jpg" alt="">
+    </div>
+
+
+    <div class="note">
+
+        <div class="note-title">
+
+            <div class="chapter">
+                Sayfa I
             </div>
 
-            <div class="counter-box">
-                <strong id="days">0</strong>
-                <span>Gün</span>
-            </div>
+            <h3>
+                Her Şeyden Önce
+            </h3>
 
-            <div class="counter-box">
-                <strong id="hours">0</strong>
-                <span>Saat</span>
-            </div>
-
-            <div class="counter-box">
-                <strong id="minutes">0</strong>
-                <span>Dakika</span>
-            </div>
-
-            <div class="counter-box">
-                <strong id="seconds">0</strong>
-                <span>Saniye</span>
+            <div class="ornament">
+                ✦ · ✦
             </div>
 
         </div>
 
-        <div class="scroll-hint">
-            Hikâyemize doğru ↓
-        </div>
 
-    </section>
-
-
-    <!-- BOOK -->
-    <section class="section">
-
-        <div class="section-title">
-
-            <div class="small">
-                Bir hikâyenin sayfaları
-            </div>
-
-            <h2>
-                Bizim Hikâyemiz
-            </h2>
-
-            <div class="line"></div>
-
-        </div>
-
-
-        <div class="book-wrap">
-
-            <div class="book">
-
-                <div class="book-rings">
-                    <div class="ring"></div>
-                    <div class="ring"></div>
-                    <div class="ring"></div>
-                    <div class="ring"></div>
-                    <div class="ring"></div>
-                    <div class="ring"></div>
-                    <div class="ring"></div>
-                    <div class="ring"></div>
-                    <div class="ring"></div>
-                    <div class="ring"></div>
-                </div>
-
-                <!-- PHOTO BACKDROP -->
-                <div
-                    class="photo-backdrop"
-                    id="photoBackdrop"
-                    onclick="closePhoto()">
-                </div>
-
-
-                <!-- =================================================
-                     PAGE 1
-                ================================================== -->
-
-                <div class="page active">
-
-                    <div class="corner tl"></div>
-                    <div class="corner tr"></div>
-                    <div class="corner bl"></div>
-                    <div class="corner br"></div>
-
-                    <div class="photo p1" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto1.jpg" alt="">
-                    </div>
-
-                    <div class="photo p2" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto2.jpg" alt="">
-                    </div>
-
-                    <div class="photo p3" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto3.jpg" alt="">
-                    </div>
-
-                    <div class="photo p4" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto4.jpg" alt="">
-                    </div>
-
-                    <div class="photo p5" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto5.jpg" alt="">
-                    </div>
-
-                    <div class="photo p6" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto6.jpg" alt="">
-                    </div>
-
-                    <div class="note">
-
-                        <div class="note-title">
-                            <div class="chapter">Sayfa I</div>
-                            <h3>Her Şeyden Önce</h3>
-                            <div class="ornament">✦ · ✦</div>
-                        </div>
-
-                        <div class="note-text">Seninle tanışmadan önce benim de bir hayatım vardı.
+        <div class="note-text">Seninle tanışmadan önce benim de bir hayatım vardı.
 
 Çalışıyor, çabalıyor ve bir şeyleri düzeltmeye uğraşıyordum.
 
@@ -1750,65 +3038,79 @@ Ama bir gün durup kendime baktım ve kendime tek bir soru sordum:
 
 “Ben kimim?”</div>
 
-                        <div class="note-sign">
-                            ♡
-                        </div>
 
-                    </div>
+        <div class="note-sign">
+            ♡
+        </div>
 
-                </div>
+    </div>
+
+</div>
 
 
-                <!-- =================================================
-                     PAGE 2
-                ================================================== -->
+<!-- =========================================================
+     PAGE 2
+========================================================= -->
 
-                <div class="page">
+<div class="page">
 
-                    <div class="corner tl"></div>
-                    <div class="corner tr"></div>
-                    <div class="corner bl"></div>
-                    <div class="corner br"></div>
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
 
-                    <div class="photo p1" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto7.jpg" alt="">
-                    </div>
 
-                    <div class="photo p2" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto8.jpg" alt="">
-                    </div>
+    <div class="photo p1" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto7.jpg" alt="">
+    </div>
 
-                    <div class="photo p3" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto9.jpg" alt="">
-                    </div>
+    <div class="photo p2" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto8.jpg" alt="">
+    </div>
 
-                    <div class="photo p4" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto10.jpg" alt="">
-                    </div>
+    <div class="photo p3" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto9.jpg" alt="">
+    </div>
 
-                    <div class="photo p5" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto11.jpg" alt="">
-                    </div>
+    <div class="photo p4" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto10.jpg" alt="">
+    </div>
 
-                    <div class="photo p6" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto12.jpg" alt="">
-                    </div>
+    <div class="photo p5" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto11.jpg" alt="">
+    </div>
 
-                    <div class="note">
+    <div class="photo p6" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto12.jpg" alt="">
+    </div>
 
-                        <div class="note-title">
-                            <div class="chapter">Sayfa II</div>
-                            <h3>Kendimi Ararken</h3>
-                            <div class="ornament">✦ · ✦</div>
-                        </div>
 
-                        <div class="note-text">Ne sevdiğimi, ne istediğimi bile tam olarak bilmiyordum.
+    <div class="note">
+
+        <div class="note-title">
+
+            <div class="chapter">
+                Sayfa II
+            </div>
+
+            <h3>
+                Kendimi Ararken
+            </h3>
+
+            <div class="ornament">
+                ✦ · ✦
+            </div>
+
+        </div>
+
+
+        <div class="note-text">Ne sevdiğimi, ne istediğimi bile tam olarak bilmiyordum.
 
 Bu yüzden kendimi yeniden tanımaya çalıştım.
 
@@ -1824,63 +3126,79 @@ Belki dışarıdan bakınca küçük bir şey gibi görünebilirdi ama benim iç
 
 Çünkü uzun zaman sonra ilk defa gerçekten bana ait bir şey bulmuştum.</div>
 
-                        <div class="note-sign">♡</div>
 
-                    </div>
+        <div class="note-sign">
+            ♡
+        </div>
 
-                </div>
+    </div>
+
+</div>
 
 
-                <!-- =================================================
-                     PAGE 3
-                ================================================== -->
+<!-- =========================================================
+     PAGE 3
+========================================================= -->
 
-                <div class="page">
+<div class="page">
 
-                    <div class="corner tl"></div>
-                    <div class="corner tr"></div>
-                    <div class="corner bl"></div>
-                    <div class="corner br"></div>
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
 
-                    <div class="photo p1" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto13.jpg" alt="">
-                    </div>
 
-                    <div class="photo p2" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto14.jpg" alt="">
-                    </div>
+    <div class="photo p1" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto13.jpg" alt="">
+    </div>
 
-                    <div class="photo p3" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto15.jpg" alt="">
-                    </div>
+    <div class="photo p2" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto14.jpg" alt="">
+    </div>
 
-                    <div class="photo p4" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto16.jpg" alt="">
-                    </div>
+    <div class="photo p3" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto15.jpg" alt="">
+    </div>
 
-                    <div class="photo p5" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto17.jpg" alt="">
-                    </div>
+    <div class="photo p4" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto16.jpg" alt="">
+    </div>
 
-                    <div class="photo p6" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto18.jpg" alt="">
-                    </div>
+    <div class="photo p5" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto17.jpg" alt="">
+    </div>
 
-                    <div class="note">
+    <div class="photo p6" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto18.jpg" alt="">
+    </div>
 
-                        <div class="note-title">
-                            <div class="chapter">Sayfa III</div>
-                            <h3>Bir Kaza</h3>
-                            <div class="ornament">✦ · ✦</div>
-                        </div>
 
-                        <div class="note-text">Sonra hayatımı değiştiren bir şey oldu.
+    <div class="note">
+
+        <div class="note-title">
+
+            <div class="chapter">
+                Sayfa III
+            </div>
+
+            <h3>
+                Bir Kaza
+            </h3>
+
+            <div class="ornament">
+                ✦ · ✦
+            </div>
+
+        </div>
+
+
+        <div class="note-text">Sonra hayatımı değiştiren bir şey oldu.
 
 Bir kaza geçirdim.
 
@@ -1898,63 +3216,79 @@ Ama hayat durmadı.
 
 Ben de durmadım.</div>
 
-                        <div class="note-sign">♡</div>
 
-                    </div>
+        <div class="note-sign">
+            ♡
+        </div>
 
-                </div>
+    </div>
+
+</div>
 
 
-                <!-- =================================================
-                     PAGE 4
-                ================================================== -->
+<!-- =========================================================
+     PAGE 4
+========================================================= -->
 
-                <div class="page">
+<div class="page">
 
-                    <div class="corner tl"></div>
-                    <div class="corner tr"></div>
-                    <div class="corner bl"></div>
-                    <div class="corner br"></div>
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
 
-                    <div class="photo p1" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto19.jpg" alt="">
-                    </div>
 
-                    <div class="photo p2" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto20.jpg" alt="">
-                    </div>
+    <div class="photo p1" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto19.jpg" alt="">
+    </div>
 
-                    <div class="photo p3" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto21.jpg" alt="">
-                    </div>
+    <div class="photo p2" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto20.jpg" alt="">
+    </div>
 
-                    <div class="photo p4" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto22.jpg" alt="">
-                    </div>
+    <div class="photo p3" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto21.jpg" alt="">
+    </div>
 
-                    <div class="photo p5" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto23.jpg" alt="">
-                    </div>
+    <div class="photo p4" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto22.jpg" alt="">
+    </div>
 
-                    <div class="photo p6" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto24.jpg" alt="">
-                    </div>
+    <div class="photo p5" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto23.jpg" alt="">
+    </div>
 
-                    <div class="note">
+    <div class="photo p6" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto24.jpg" alt="">
+    </div>
 
-                        <div class="note-title">
-                            <div class="chapter">Sayfa IV</div>
-                            <h3>Babamın Hayali</h3>
-                            <div class="ornament">✦ · ✦</div>
-                        </div>
 
-                        <div class="note-text">Sonra babamla birlikte ilk işime başladım.
+    <div class="note">
+
+        <div class="note-title">
+
+            <div class="chapter">
+                Sayfa IV
+            </div>
+
+            <h3>
+                Babamın Hayali
+            </h3>
+
+            <div class="ornament">
+                ✦ · ✦
+            </div>
+
+        </div>
+
+
+        <div class="note-text">Sonra babamla birlikte ilk işime başladım.
 
 Bu kez sadece kendim için değil, onun hayallerini gerçekleştirmek için de uğraşıyordum.
 
@@ -1974,63 +3308,79 @@ Bazıları hayatımızda kalmak için değil, bize bir şey öğretmek için var
 
 Ben de bazı şeyleri geride bırakıp yeniden başladım.</div>
 
-                        <div class="note-sign">♡</div>
 
-                    </div>
+        <div class="note-sign">
+            ♡
+        </div>
 
-                </div>
+    </div>
+
+</div>
 
 
-                <!-- =================================================
-                     PAGE 5
-                ================================================== -->
+<!-- =========================================================
+     PAGE 5
+========================================================= -->
 
-                <div class="page">
+<div class="page">
 
-                    <div class="corner tl"></div>
-                    <div class="corner tr"></div>
-                    <div class="corner bl"></div>
-                    <div class="corner br"></div>
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
 
-                    <div class="photo p1" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto25.jpg" alt="">
-                    </div>
 
-                    <div class="photo p2" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto26.jpg" alt="">
-                    </div>
+    <div class="photo p1" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto25.jpg" alt="">
+    </div>
 
-                    <div class="photo p3" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto27.jpg" alt="">
-                    </div>
+    <div class="photo p2" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto26.jpg" alt="">
+    </div>
 
-                    <div class="photo p4" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto28.jpg" alt="">
-                    </div>
+    <div class="photo p3" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto27.jpg" alt="">
+    </div>
 
-                    <div class="photo p5" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto29.jpg" alt="">
-                    </div>
+    <div class="photo p4" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto28.jpg" alt="">
+    </div>
 
-                    <div class="photo p6" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto30.jpg" alt="">
-                    </div>
+    <div class="photo p5" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto29.jpg" alt="">
+    </div>
 
-                    <div class="note">
+    <div class="photo p6" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto30.jpg" alt="">
+    </div>
 
-                        <div class="note-title">
-                            <div class="chapter">Sayfa V</div>
-                            <h3>Yeniden İnsanlar</h3>
-                            <div class="ornament">✦ · ✦</div>
-                        </div>
 
-                        <div class="note-text">Sonra Ömerlerle tanıştım.
+    <div class="note">
+
+        <div class="note-title">
+
+            <div class="chapter">
+                Sayfa V
+            </div>
+
+            <h3>
+                Yeniden İnsanlar
+            </h3>
+
+            <div class="ornament">
+                ✦ · ✦
+            </div>
+
+        </div>
+
+
+        <div class="note-text">Sonra Ömerlerle tanıştım.
 
 Beni olduğum gibi kabul ettiler.
 
@@ -2042,63 +3392,79 @@ Hayat yavaş yavaş yeniden düzene giriyordu.
 
 Ama yine de içimde ne olduğunu anlayamadığım bir eksiklik vardı.</div>
 
-                        <div class="note-sign">♡</div>
 
-                    </div>
+        <div class="note-sign">
+            ♡
+        </div>
 
-                </div>
+    </div>
+
+</div>
 
 
-                <!-- =================================================
-                     PAGE 6
-                ================================================== -->
+<!-- =========================================================
+     PAGE 6
+========================================================= -->
 
-                <div class="page">
+<div class="page">
 
-                    <div class="corner tl"></div>
-                    <div class="corner tr"></div>
-                    <div class="corner bl"></div>
-                    <div class="corner br"></div>
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
 
-                    <div class="photo p1" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto31.jpg" alt="">
-                    </div>
 
-                    <div class="photo p2" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto32.jpg" alt="">
-                    </div>
+    <div class="photo p1" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto31.jpg" alt="">
+    </div>
 
-                    <div class="photo p3" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto33.jpg" alt="">
-                    </div>
+    <div class="photo p2" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto32.jpg" alt="">
+    </div>
 
-                    <div class="photo p4" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto34.jpg" alt="">
-                    </div>
+    <div class="photo p3" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto33.jpg" alt="">
+    </div>
 
-                    <div class="photo p5" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto35.jpg" alt="">
-                    </div>
+    <div class="photo p4" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto34.jpg" alt="">
+    </div>
 
-                    <div class="photo p6" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto36.jpg" alt="">
-                    </div>
+    <div class="photo p5" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto35.jpg" alt="">
+    </div>
 
-                    <div class="note">
+    <div class="photo p6" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto36.jpg" alt="">
+    </div>
 
-                        <div class="note-title">
-                            <div class="chapter">Sayfa VI</div>
-                            <h3>Dükkân</h3>
-                            <div class="ornament">✦ · ✦</div>
-                        </div>
 
-                        <div class="note-text">Sonunda dükkânı açtım.
+    <div class="note">
+
+        <div class="note-title">
+
+            <div class="chapter">
+                Sayfa VI
+            </div>
+
+            <h3>
+                Dükkân
+            </h3>
+
+            <div class="ornament">
+                ✦ · ✦
+            </div>
+
+        </div>
+
+
+        <div class="note-text">Sonunda dükkânı açtım.
 
 Bir işim vardı.
 
@@ -2122,63 +3488,79 @@ Ama ne yaparsam yapayım o eksiklik gitmedi.
 
 Ta ki sen gelene kadar...</div>
 
-                        <div class="note-sign">♡</div>
 
-                    </div>
+        <div class="note-sign">
+            ♡
+        </div>
 
-                </div>
+    </div>
+
+</div>
 
 
-                <!-- =================================================
-                     PAGE 7
-                ================================================== -->
+<!-- =========================================================
+     PAGE 7
+========================================================= -->
 
-                <div class="page">
+<div class="page">
 
-                    <div class="corner tl"></div>
-                    <div class="corner tr"></div>
-                    <div class="corner bl"></div>
-                    <div class="corner br"></div>
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
 
-                    <div class="photo p1" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto37.jpg" alt="">
-                    </div>
 
-                    <div class="photo p2" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto38.jpg" alt="">
-                    </div>
+    <div class="photo p1" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto37.jpg" alt="">
+    </div>
 
-                    <div class="photo p3" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto39.jpg" alt="">
-                    </div>
+    <div class="photo p2" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto38.jpg" alt="">
+    </div>
 
-                    <div class="photo p4" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto40.jpg" alt="">
-                    </div>
+    <div class="photo p3" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto39.jpg" alt="">
+    </div>
 
-                    <div class="photo p5" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto41.jpg" alt="">
-                    </div>
+    <div class="photo p4" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto40.jpg" alt="">
+    </div>
 
-                    <div class="photo p6" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto42.jpg" alt="">
-                    </div>
+    <div class="photo p5" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto41.jpg" alt="">
+    </div>
 
-                    <div class="note">
+    <div class="photo p6" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto42.jpg" alt="">
+    </div>
 
-                        <div class="note-title">
-                            <div class="chapter">Sayfa VII</div>
-                            <h3>Sonra Sen Geldin</h3>
-                            <div class="ornament">✦ · ✦</div>
-                        </div>
 
-                        <div class="note-text">Sonra seni tanıdım.
+    <div class="note">
+
+        <div class="note-title">
+
+            <div class="chapter">
+                Sayfa VII
+            </div>
+
+            <h3>
+                Sonra Sen Geldin
+            </h3>
+
+            <div class="ornament">
+                ✦ · ✦
+            </div>
+
+        </div>
+
+
+        <div class="note-text">Sonra seni tanıdım.
 
 Ve zaman geçtikçe bir şeyi fark etmeye başladım.
 
@@ -2198,63 +3580,79 @@ Seni tanıdığım iki yıl boyunca bunu daha da iyi anladım.
 
 Yaşadığım onca şeyin arasında seni neden bu kadar farklı hissettiğimi artık biliyorum.</div>
 
-                        <div class="note-sign">♡</div>
 
-                    </div>
+        <div class="note-sign">
+            ♡
+        </div>
 
-                </div>
+    </div>
+
+</div>
 
 
-                <!-- =================================================
-                     PAGE 8
-                ================================================== -->
+<!-- =========================================================
+     PAGE 8
+========================================================= -->
 
-                <div class="page">
+<div class="page">
 
-                    <div class="corner tl"></div>
-                    <div class="corner tr"></div>
-                    <div class="corner bl"></div>
-                    <div class="corner br"></div>
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
 
-                    <div class="photo p1" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto43.jpg" alt="">
-                    </div>
 
-                    <div class="photo p2" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto44.jpg" alt="">
-                    </div>
+    <div class="photo p1" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto43.jpg" alt="">
+    </div>
 
-                    <div class="photo p3" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto45.jpg" alt="">
-                    </div>
+    <div class="photo p2" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto44.jpg" alt="">
+    </div>
 
-                    <div class="photo p4" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto46.jpg" alt="">
-                    </div>
+    <div class="photo p3" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto45.jpg" alt="">
+    </div>
 
-                    <div class="photo p5" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto47.jpg" alt="">
-                    </div>
+    <div class="photo p4" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto46.jpg" alt="">
+    </div>
 
-                    <div class="photo p6" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto48.jpg" alt="">
-                    </div>
+    <div class="photo p5" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto47.jpg" alt="">
+    </div>
 
-                    <div class="note">
+    <div class="photo p6" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto48.jpg" alt="">
+    </div>
 
-                        <div class="note-title">
-                            <div class="chapter">Sayfa VIII</div>
-                            <h3>Apar Topar Sana</h3>
-                            <div class="ornament">✦ · ✦</div>
-                        </div>
 
-                        <div class="note-text">Sonra sana gelebilmek için bahaneler bulup apar topar yanına geldim.
+    <div class="note">
+
+        <div class="note-title">
+
+            <div class="chapter">
+                Sayfa VIII
+            </div>
+
+            <h3>
+                Apar Topar Sana
+            </h3>
+
+            <div class="ornament">
+                ✦ · ✦
+            </div>
+
+        </div>
+
+
+        <div class="note-text">Sonra sana gelebilmek için bahaneler bulup apar topar yanına geldim.
 
 Ve hayatımda daha önce hissetmediğim duyguları hissettim.
 
@@ -2270,63 +3668,79 @@ Ve geldim.
 
 Çünkü ilk defa bir yere değil, bir insana gitmek için bu kadar çok istemiştim.</div>
 
-                        <div class="note-sign">♡</div>
 
-                    </div>
+        <div class="note-sign">
+            ♡
+        </div>
 
-                </div>
+    </div>
+
+</div>
 
 
-                <!-- =================================================
-                     PAGE 9
-                ================================================== -->
+<!-- =========================================================
+     PAGE 9
+========================================================= -->
 
-                <div class="page">
+<div class="page">
 
-                    <div class="corner tl"></div>
-                    <div class="corner tr"></div>
-                    <div class="corner bl"></div>
-                    <div class="corner br"></div>
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
 
-                    <div class="photo p1" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto49.jpg" alt="">
-                    </div>
 
-                    <div class="photo p2" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto50.jpg" alt="">
-                    </div>
+    <div class="photo p1" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto49.jpg" alt="">
+    </div>
 
-                    <div class="photo p3" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto51.jpg" alt="">
-                    </div>
+    <div class="photo p2" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto50.jpg" alt="">
+    </div>
 
-                    <div class="photo p4" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto52.jpg" alt="">
-                    </div>
+    <div class="photo p3" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto51.jpg" alt="">
+    </div>
 
-                    <div class="photo p5" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto53.jpg" alt="">
-                    </div>
+    <div class="photo p4" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto52.jpg" alt="">
+    </div>
 
-                    <div class="photo p6" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto54.jpg" alt="">
-                    </div>
+    <div class="photo p5" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto53.jpg" alt="">
+    </div>
 
-                    <div class="note">
+    <div class="photo p6" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto54.jpg" alt="">
+    </div>
 
-                        <div class="note-title">
-                            <div class="chapter">Sayfa IX</div>
-                            <h3>Seni Tanımak</h3>
-                            <div class="ornament">✦ · ✦</div>
-                        </div>
 
-                        <div class="note-text">Yaklaşık 20 gün senin yanında kaldım.
+    <div class="note">
+
+        <div class="note-title">
+
+            <div class="chapter">
+                Sayfa IX
+            </div>
+
+            <h3>
+                Seni Tanımak
+            </h3>
+
+            <div class="ornament">
+                ✦ · ✦
+            </div>
+
+        </div>
+
+
+        <div class="note-text">Yaklaşık 20 gün senin yanında kaldım.
 
 Ailenle tanıştım.
 
@@ -2342,63 +3756,79 @@ Seni tanıdıkça, yıllardır hissettiğim o eksikliğin nedenini daha iyi anla
 
 Çünkü artık nereye ait olduğumu biliyorum.</div>
 
-                        <div class="note-sign">♡</div>
 
-                    </div>
+        <div class="note-sign">
+            ♡
+        </div>
 
-                </div>
+    </div>
+
+</div>
 
 
-                <!-- =================================================
-                     PAGE 10
-                ================================================== -->
+<!-- =========================================================
+     PAGE 10
+========================================================= -->
 
-                <div class="page">
+<div class="page">
 
-                    <div class="corner tl"></div>
-                    <div class="corner tr"></div>
-                    <div class="corner bl"></div>
-                    <div class="corner br"></div>
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
 
-                    <div class="photo p1" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto55.jpg" alt="">
-                    </div>
 
-                    <div class="photo p2" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto56.jpg" alt="">
-                    </div>
+    <div class="photo p1" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto55.jpg" alt="">
+    </div>
 
-                    <div class="photo p3" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto57.jpg" alt="">
-                    </div>
+    <div class="photo p2" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto56.jpg" alt="">
+    </div>
 
-                    <div class="photo p4" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto58.jpg" alt="">
-                    </div>
+    <div class="photo p3" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto57.jpg" alt="">
+    </div>
 
-                    <div class="photo p5" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto59.jpg" alt="">
-                    </div>
+    <div class="photo p4" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto58.jpg" alt="">
+    </div>
 
-                    <div class="photo p6" onclick="focusPhoto(this)">
-                        <div class="tape"></div>
-                        <img src="images/foto60.jpg" alt="">
-                    </div>
+    <div class="photo p5" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto59.jpg" alt="">
+    </div>
 
-                    <div class="note">
+    <div class="photo p6" onclick="focusPhoto(this)">
+        <div class="tape"></div>
+        <img src="images/foto60.jpg" alt="">
+    </div>
 
-                        <div class="note-title">
-                            <div class="chapter">Sayfa X</div>
-                            <h3>Üç Yıl</h3>
-                            <div class="ornament">✦ · ✦</div>
-                        </div>
 
-                        <div class="note-text">Sen beni iki yıl bekledin.
+    <div class="note">
+
+        <div class="note-title">
+
+            <div class="chapter">
+                Sayfa X
+            </div>
+
+            <h3>
+                Üç Yıl
+            </h3>
+
+            <div class="ornament">
+                ✦ · ✦
+            </div>
+
+        </div>
+
+
+        <div class="note-text">Sen beni iki yıl bekledin.
 
 Artık üç yıl oldu.
 
@@ -2412,110 +3842,132 @@ Ve hâlâ çok güzelsinnnn.
 
 Aaaaa... neyse. ♡</div>
 
-                        <div class="note-sign">Sadece ikimiz ♡</div>
 
-                    </div>
+        <div class="note-sign">
+            Sadece ikimiz ♡
+        </div>
 
-                </div>
+    </div>
 
-            </div>
+</div>
 
-
-            <!-- CONTROLS -->
-
-            <div class="book-controls">
-
-                <button
-                    class="book-btn"
-                    id="prevBtn"
-                    onclick="changePage(-1)"
-                    disabled>
-                    ← Önceki
-                </button>
-
-                <div class="page-counter">
-                    <span id="currentPage">1</span>
-                    /
-                    <span id="totalPages">10</span>
-                </div>
-
-                <button
-                    class="book-btn"
-                    id="nextBtn"
-                    onclick="changePage(1)">
-                    Sonraki →
-                </button>
-
-            </div>
 
         </div>
 
-    </section>
+
+        <div class="book-controls">
+
+            <button
+                class="book-btn"
+                id="prevBtn"
+                onclick="changePage(-1)"
+                disabled
+            >
+                ← Önceki
+            </button>
 
 
-    <!-- =====================================================
-         HOURGLASS
-    ====================================================== -->
+            <div class="page-counter">
 
-    <section class="section">
+                <span id="currentPage">
+                    1
+                </span>
 
-        <div class="section-title">
+                /
 
-            <div class="small">
-                Zamanın içinden
+                <span id="totalPages">
+                    10
+                </span>
+
             </div>
 
-            <h2>
-                Birlikte Geçen Zaman
-            </h2>
 
-            <div class="line"></div>
+            <button
+                class="book-btn"
+                id="nextBtn"
+                onclick="changePage(1)"
+            >
+                Sonraki →
+            </button>
 
         </div>
 
-        <div class="time-section">
+    </div>
 
-            <div class="hourglass">
+</section>
 
-                <div class="glass">
-                    <div class="sand-top"></div>
-                    <div class="sand-stream"></div>
-                    <div class="sand-bottom"></div>
-                </div>
 
-                <div class="hourglass-frame"></div>
+<!-- =========================================================
+     HOURGLASS
+========================================================= -->
+
+<section class="section">
+
+    <div class="section-title">
+
+        <div class="small">
+            Zamanın içinden
+        </div>
+
+        <h2>
+            Birlikte Geçen Zaman
+        </h2>
+
+        <div class="line"></div>
+
+    </div>
+
+
+    <div class="time-section">
+
+        <div class="hourglass">
+
+            <div class="glass">
+
+                <div class="sand-top"></div>
+
+                <div class="sand-stream"></div>
+
+                <div class="sand-bottom"></div>
 
             </div>
 
-            <p class="hourglass-text">
-                Zaman bazen çok hızlı geçti.
-                Bazen de geçmek bilmedi.
-                Ama geriye dönüp baktığımda,
-                geçen her saniyenin bizi biraz daha birbirimize getirdiğini görüyorum.
-            </p>
+            <div class="hourglass-frame"></div>
 
         </div>
 
-    </section>
+
+        <p class="hourglass-text">
+            Zaman bazen çok hızlı geçti.
+            Bazen de geçmek bilmedi.
+            Ama geriye dönüp baktığımda,
+            geçen her saniyenin bizi biraz daha birbirimize getirdiğini görüyorum.
+        </p>
+
+    </div>
+
+</section>
 
 
-    <!-- =====================================================
-         FINAL
-    ====================================================== -->
+<!-- =========================================================
+     FINAL
+========================================================= -->
 
-    <section class="final-section">
+<section class="final-section">
 
-        <div class="final-card">
+    <div class="final-card">
 
-            <div class="final-label">
-                Son sayfa değil
-            </div>
+        <div class="final-label">
+            Son sayfa değil
+        </div>
 
-            <h2>
-                Kader
-            </h2>
 
-            <div class="final-text">Hayatımıza binlerce insan girdi, binlercesi çıktı.
+        <h2>
+            Kader
+        </h2>
+
+
+        <div class="final-text">Hayatımıza binlerce insan girdi, binlercesi çıktı.
 
 Ama ne olursa olsun, en sonunda yine birbirimize döndük.
 
@@ -2535,51 +3987,79 @@ Meğer senmişsin.
 
 İyi ki seni bulmuşum. ♡</div>
 
-            <div class="final-photo">
 
-                <img
-                    src="images/final.jpg"
-                    alt="Sadece İkimiz">
+        <div class="final-photo">
 
-            </div>
-
-            <div class="final-heart">
-                ♡
-            </div>
+            <img
+                src="images/final.jpg"
+                alt="Sadece İkimiz"
+            >
 
         </div>
 
-    </section>
+
+        <div class="final-heart">
+            ♡
+        </div>
+
+    </div>
+
+</section>
 
 
-    <footer>
-        Bu hikâyenin en güzel kısmı daha yazılmadı.
-        <span>Çünkü daha bitmedi.</span> ♡
-    </footer>
+<footer>
+
+    Bu hikâyenin en güzel kısmı daha yazılmadı.
+    <span>
+        Çünkü daha bitmedi.
+    </span>
+
+    ♡
+
+</footer>
+
 
 </div>
 
 
-<!-- SANTA -->
+<!-- =========================================================
+     SANTA
+========================================================= -->
 
-<div class="santa-flight" id="santaFlight">
+<div
+    class="santa-flight"
+    id="santaFlight"
+>
 
-    <div class="santa">🎅</div>
+    <div class="santa">
+        🎅
+    </div>
 
-    <div class="reindeer r1">🦌</div>
-    <div class="reindeer r2">🦌</div>
-    <div class="reindeer r3">🦌</div>
+    <div class="reindeer r1">
+        🦌
+    </div>
+
+    <div class="reindeer r2">
+        🦌
+    </div>
+
+    <div class="reindeer r3">
+        🦌
+    </div>
 
 </div>
 
 
-<!-- MUSIC -->
+<!-- =========================================================
+     MUSIC
+========================================================= -->
 
 <button
     class="music-button"
     id="musicButton"
     onclick="toggleMusic()"
-    title="Müziği aç/kapat">
+    title="Müziği aç/kapat"
+>
     ♫
 </button>
 
@@ -2592,56 +4072,87 @@ Meğer senmişsin.
 
 const PASSWORD = "sadeceikimiz";
 
+
 function unlock(){
 
     const input =
-        document.getElementById("passwordInput");
+        document.getElementById(
+            "passwordInput"
+        );
 
     const error =
-        document.getElementById("errorMessage");
+        document.getElementById(
+            "errorMessage"
+        );
 
-    if(input.value.toLowerCase().trim() === PASSWORD){
+
+    if(
+        input.value
+            .toLowerCase()
+            .trim()
+        === PASSWORD
+    ){
 
         document
             .getElementById("lockScreen")
             .classList.add("hidden");
 
+
         document
             .getElementById("mainContent")
             .classList.add("show");
 
+
         startMusic();
 
-    }else{
+    }
+
+    else{
 
         error.textContent =
             "Bu hikâyenin şifresini sadece ikimiz biliyoruz. ♡";
 
+
         input.value = "";
+
 
         input.animate(
             [
-                {transform:"translateX(0)"},
-                {transform:"translateX(-8px)"},
-                {transform:"translateX(8px)"},
-                {transform:"translateX(0)"}
+                {
+                    transform:"translateX(0)"
+                },
+                {
+                    transform:"translateX(-8px)"
+                },
+                {
+                    transform:"translateX(8px)"
+                },
+                {
+                    transform:"translateX(0)"
+                }
             ],
             {
                 duration:300
             }
         );
+
     }
+
 }
+
 
 document
     .getElementById("passwordInput")
-    .addEventListener("keydown",function(e){
+    .addEventListener(
+        "keydown",
+        function(e){
 
-        if(e.key === "Enter"){
-            unlock();
+            if(e.key === "Enter"){
+                unlock();
+            }
+
         }
-
-    });
+    );
 
 
 /* =========================================================
@@ -2649,20 +4160,33 @@ document
 ========================================================= */
 
 const stars =
-    document.getElementById("stars");
+    document.getElementById(
+        "stars"
+    );
 
-for(let i=0;i<110;i++){
+
+for(let i=0;i<120;i++){
 
     const star =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
-    star.className="star";
+
+    star.className =
+        "star";
+
 
     const size =
         Math.random()*3+1;
 
-    star.style.width=size+"px";
-    star.style.height=size+"px";
+
+    star.style.width =
+        size+"px";
+
+    star.style.height =
+        size+"px";
+
 
     star.style.left =
         Math.random()*100+"%";
@@ -2670,15 +4194,19 @@ for(let i=0;i<110;i++){
     star.style.top =
         Math.random()*100+"%";
 
+
     star.style.setProperty(
         "--duration",
         (1.5+Math.random()*4)+"s"
     );
 
+
     star.style.animationDelay =
         Math.random()*4+"s";
 
+
     stars.appendChild(star);
+
 }
 
 
@@ -2687,174 +4215,445 @@ for(let i=0;i<110;i++){
 ========================================================= */
 
 const snow =
-    document.getElementById("snow");
+    document.getElementById(
+        "snow"
+    );
+
 
 const snowCharacters =
-    ["❄","❅","❆","•"];
+    [
+        "❄",
+        "❅",
+        "❆",
+        "•"
+    ];
 
-for(let i=0;i<150;i++){
+
+for(let i=0;i<160;i++){
 
     const flake =
-        document.createElement("div");
+        document.createElement(
+            "div"
+        );
 
-    flake.className="flake";
+
+    flake.className =
+        "flake";
+
 
     flake.textContent =
         snowCharacters[
             Math.floor(
-                Math.random()*snowCharacters.length
+                Math.random()
+                *
+                snowCharacters.length
             )
         ];
+
 
     flake.style.left =
         Math.random()*100+"%";
 
+
     flake.style.fontSize =
-        (Math.random()*12+5)+"px";
+        (Math.random()*13+5)+"px";
+
 
     flake.style.setProperty(
         "--speed",
-        (Math.random()*12+8)+"s"
+        (Math.random()*13+8)+"s"
     );
+
 
     flake.style.setProperty(
         "--drift",
         (Math.random()*180-90)+"px"
     );
 
+
     flake.style.setProperty(
         "--opacity",
-        (.2+Math.random()*.75)
+        (.18+Math.random()*.78)
     );
+
 
     flake.style.animationDelay =
         (-Math.random()*20)+"s";
 
+
     snow.appendChild(flake);
+
 }
 
 
 /* =========================================================
-   RELATIONSHIP COUNTER
+   RELATIONSHIP TIMER
 ========================================================= */
 
 const relationshipStart =
-    new Date("2026-06-05T14:53:00+03:00");
+    new Date(
+        "2026-06-05T14:53:00+03:00"
+    );
+
 
 function updateCounter(){
 
-    const now = new Date();
+    const now =
+        new Date();
+
 
     let diff =
-        now.getTime() -
+        now.getTime()
+        -
         relationshipStart.getTime();
 
-    if(diff < 0) diff=0;
+
+    if(diff<0){
+        diff=0;
+    }
+
 
     const seconds =
-        Math.floor(diff/1000);
+        Math.floor(
+            diff/1000
+        );
+
 
     const minutes =
-        Math.floor(seconds/60);
+        Math.floor(
+            seconds/60
+        );
+
 
     const hours =
-        Math.floor(minutes/60);
+        Math.floor(
+            minutes/60
+        );
+
 
     const days =
-        Math.floor(hours/24);
+        Math.floor(
+            hours/24
+        );
+
 
     const years =
-        Math.floor(days/365.2425);
+        Math.floor(
+            days/365.2425
+        );
+
 
     let tempDate =
-        new Date(relationshipStart);
+        new Date(
+            relationshipStart
+        );
+
 
     tempDate.setFullYear(
-        tempDate.getFullYear()+years
+        tempDate.getFullYear()
+        +
+        years
     );
 
+
     let remaining =
-        now.getTime() -
+        now.getTime()
+        -
         tempDate.getTime();
+
 
     const months =
         Math.floor(
-            remaining/
-            (1000*60*60*24*30.4375)
+            remaining
+            /
+            (
+                1000*
+                60*
+                60*
+                24*
+                30.4375
+            )
         );
+
 
     const remainingDays =
         Math.floor(
             (
-                remaining -
+                remaining
+                -
                 months*
-                (1000*60*60*24*30.4375)
-            )/
-            (1000*60*60*24)
+                (
+                    1000*
+                    60*
+                    60*
+                    24*
+                    30.4375
+                )
+            )
+            /
+            (
+                1000*
+                60*
+                60*
+                24
+            )
         );
+
 
     const h =
         Math.floor(
             (
-                remaining -
+                remaining
+                -
                 months*
-                (1000*60*60*24*30.4375) -
+                (
+                    1000*
+                    60*
+                    60*
+                    24*
+                    30.4375
+                )
+                -
                 remainingDays*
-                (1000*60*60*24)
-            )/
-            (1000*60*60)
+                (
+                    1000*
+                    60*
+                    60*
+                    24
+                )
+            )
+            /
+            (
+                1000*
+                60*
+                60
+            )
         );
+
 
     const m =
         Math.floor(
             (
-                remaining -
+                remaining
+                -
                 months*
-                (1000*60*60*24*30.4375) -
+                (
+                    1000*
+                    60*
+                    60*
+                    24*
+                    30.4375
+                )
+                -
                 remainingDays*
-                (1000*60*60*24) -
+                (
+                    1000*
+                    60*
+                    60*
+                    24
+                )
+                -
                 h*
-                (1000*60*60)
-            )/
-            (1000*60)
+                (
+                    1000*
+                    60*
+                    60
+                )
+            )
+            /
+            (
+                1000*
+                60
+            )
         );
+
 
     const s =
         Math.floor(
             (
-                remaining -
+                remaining
+                -
                 months*
-                (1000*60*60*24*30.4375) -
+                (
+                    1000*
+                    60*
+                    60*
+                    24*
+                    30.4375
+                )
+                -
                 remainingDays*
-                (1000*60*60*24) -
+                (
+                    1000*
+                    60*
+                    60*
+                    24
+                )
+                -
                 h*
-                (1000*60*60) -
+                (
+                    1000*
+                    60*
+                    60
+                )
+                -
                 m*
-                (1000*60)
-            )/1000
+                (
+                    1000*
+                    60
+                )
+            )
+            /
+            1000
         );
 
-    document.getElementById("years").textContent =
-        years;
 
-    document.getElementById("months").textContent =
-        months;
+    document.getElementById(
+        "years"
+    ).textContent=years;
 
-    document.getElementById("days").textContent =
-        remainingDays;
 
-    document.getElementById("hours").textContent =
-        h;
+    document.getElementById(
+        "months"
+    ).textContent=months;
 
-    document.getElementById("minutes").textContent =
-        m;
 
-    document.getElementById("seconds").textContent =
-        s;
+    document.getElementById(
+        "days"
+    ).textContent=remainingDays;
+
+
+    document.getElementById(
+        "hours"
+    ).textContent=h;
+
+
+    document.getElementById(
+        "minutes"
+    ).textContent=m;
+
+
+    document.getElementById(
+        "seconds"
+    ).textContent=s;
+
 }
 
-setInterval(updateCounter,1000);
+
+setInterval(
+    updateCounter,
+    1000
+);
+
 updateCounter();
+
+
+/* =========================================================
+   NEW YEAR COUNTDOWN
+========================================================= */
+
+function updateNewYear(){
+
+    const now =
+        new Date();
+
+
+    const year =
+        now.getFullYear();
+
+
+    let target =
+        new Date(
+            `January 1, ${year+1} 00:00:00`
+        );
+
+
+    let diff =
+        target.getTime()
+        -
+        now.getTime();
+
+
+    if(diff<0){
+
+        target =
+            new Date(
+                `January 1, ${year+2} 00:00:00`
+            );
+
+        diff =
+            target.getTime()
+            -
+            now.getTime();
+
+    }
+
+
+    const days =
+        Math.floor(
+            diff/
+            (
+                1000*
+                60*
+                60*
+                24
+            )
+        );
+
+
+    const hours =
+        Math.floor(
+            (
+                diff/
+                (
+                    1000*
+                    60*
+                    60
+                )
+            )
+            %
+            24
+        );
+
+
+    const minutes =
+        Math.floor(
+            (
+                diff/
+                (
+                    1000*
+                    60
+                )
+            )
+            %
+            60
+        );
+
+
+    const seconds =
+        Math.floor(
+            (
+                diff/1000
+            )
+            %
+            60
+        );
+
+
+    document.getElementById(
+        "newYearCountdown"
+    ).textContent =
+        `${days} gün · ${hours} saat · ${minutes} dk · ${seconds} sn`;
+
+}
+
+
+setInterval(
+    updateNewYear,
+    1000
+);
+
+updateNewYear();
 
 
 /* =========================================================
@@ -2862,58 +4661,105 @@ updateCounter();
 ========================================================= */
 
 const pages =
-    document.querySelectorAll(".page");
+    document.querySelectorAll(
+        ".page"
+    );
+
 
 let currentPage=0;
 
-document.getElementById("totalPages")
-    .textContent=pages.length;
+
+document.getElementById(
+    "totalPages"
+).textContent =
+    pages.length;
+
 
 function renderPage(){
 
     pages.forEach(
         (page,index)=>{
+
             page.classList.toggle(
                 "active",
                 index===currentPage
             );
+
         }
     );
 
-    document.getElementById("currentPage")
-        .textContent=currentPage+1;
 
-    document.getElementById("prevBtn")
-        .disabled=currentPage===0;
+    document.getElementById(
+        "currentPage"
+    ).textContent =
+        currentPage+1;
 
-    document.getElementById("nextBtn")
-        .disabled=currentPage===pages.length-1;
 
-    window.scrollTo({
-        top:
-            document.querySelector(".book-wrap")
-                .getBoundingClientRect().top+
-                window.scrollY-
-                100,
-        behavior:"smooth"
-    });
+    document.getElementById(
+        "prevBtn"
+    ).disabled =
+        currentPage===0;
+
+
+    document.getElementById(
+        "nextBtn"
+    ).disabled =
+        currentPage===
+        pages.length-1;
+
 
     closePhoto();
+
+
+    const book =
+        document.querySelector(
+            ".book-wrap"
+        );
+
+
+    if(book){
+
+        const top =
+            book.getBoundingClientRect().top
+            +
+            window.scrollY
+            -
+            100;
+
+
+        window.scrollTo({
+            top,
+            behavior:"smooth"
+        });
+
+    }
+
 }
+
 
 function changePage(direction){
 
     const next =
-        currentPage+direction;
+        currentPage
+        +
+        direction;
+
 
     if(
-        next<0 ||
+        next<0
+        ||
         next>=pages.length
-    ) return;
+    ){
+        return;
+    }
 
-    currentPage=next;
+
+    currentPage =
+        next;
+
 
     renderPage();
+
 }
 
 
@@ -2923,40 +4769,69 @@ function changePage(direction){
 
 function focusPhoto(photo){
 
-    const alreadyFocused =
-        photo.classList.contains("focused");
-
-    if(alreadyFocused){
+    if(
+        photo.classList.contains(
+            "focused"
+        )
+    ){
 
         closePhoto();
 
         return;
+
     }
 
+
     document
-        .querySelectorAll(".photo.focused")
+        .querySelectorAll(
+            ".photo.focused"
+        )
         .forEach(
-            p=>p.classList.remove("focused")
+            p =>
+                p.classList.remove(
+                    "focused"
+                )
         );
 
-    photo.classList.add("focused");
+
+    photo.classList.add(
+        "focused"
+    );
+
 
     document
-        .getElementById("photoBackdrop")
-        .classList.add("show");
+        .getElementById(
+            "photoBackdrop"
+        )
+        .classList.add(
+            "show"
+        );
+
 }
+
 
 function closePhoto(){
 
     document
-        .querySelectorAll(".photo.focused")
+        .querySelectorAll(
+            ".photo.focused"
+        )
         .forEach(
-            p=>p.classList.remove("focused")
+            p =>
+                p.classList.remove(
+                    "focused"
+                )
         );
 
+
     document
-        .getElementById("photoBackdrop")
-        .classList.remove("show");
+        .getElementById(
+            "photoBackdrop"
+        )
+        .classList.remove(
+            "show"
+        );
+
 }
 
 
@@ -2964,28 +4839,37 @@ function closePhoto(){
    KEYBOARD
 ========================================================= */
 
-document.addEventListener("keydown",function(e){
+document.addEventListener(
+    "keydown",
+    function(e){
 
-    if(e.key==="Escape"){
-        closePhoto();
-    }
-
-    if(
-        document
-            .getElementById("mainContent")
-            .classList.contains("show")
-    ){
-
-        if(e.key==="ArrowRight"){
-            changePage(1);
+        if(e.key==="Escape"){
+            closePhoto();
         }
 
-        if(e.key==="ArrowLeft"){
-            changePage(-1);
-        }
-    }
 
-});
+        if(
+            document
+                .getElementById(
+                    "mainContent"
+                )
+                .classList.contains(
+                    "show"
+                )
+        ){
+
+            if(e.key==="ArrowRight"){
+                changePage(1);
+            }
+
+            if(e.key==="ArrowLeft"){
+                changePage(-1);
+            }
+
+        }
+
+    }
+);
 
 
 /* =========================================================
@@ -2994,6 +4878,7 @@ document.addEventListener("keydown",function(e){
 
 let touchStartX=0;
 
+
 document
     .querySelector(".book")
     .addEventListener(
@@ -3001,11 +4886,15 @@ document
         function(e){
 
             touchStartX =
-                e.changedTouches[0].screenX;
+                e.changedTouches[0]
+                    .screenX;
 
         },
-        {passive:true}
+        {
+            passive:true
+        }
     );
+
 
 document
     .querySelector(".book")
@@ -3014,21 +4903,37 @@ document
         function(e){
 
             const touchEndX =
-                e.changedTouches[0].screenX;
+                e.changedTouches[0]
+                    .screenX;
+
 
             const diff =
-                touchStartX-touchEndX;
+                touchStartX
+                -
+                touchEndX;
 
-            if(Math.abs(diff)<50) return;
+
+            if(
+                Math.abs(diff)<50
+            ){
+                return;
+            }
+
 
             if(diff>0){
+
                 changePage(1);
+
             }else{
+
                 changePage(-1);
+
             }
 
         },
-        {passive:true}
+        {
+            passive:true
+        }
     );
 
 
@@ -3037,16 +4942,27 @@ document
 ========================================================= */
 
 const santa =
-    document.getElementById("santaFlight");
+    document.getElementById(
+        "santaFlight"
+    );
+
 
 function santaRide(){
 
-    santa.classList.remove("fly");
+    santa.classList.remove(
+        "fly"
+    );
+
 
     void santa.offsetWidth;
 
-    santa.classList.add("fly");
+
+    santa.classList.add(
+        "fly"
+    );
+
 }
+
 
 /* first appearance */
 
@@ -3054,6 +4970,7 @@ setTimeout(
     santaRide,
     2500
 );
+
 
 /* every 60 seconds */
 
@@ -3068,33 +4985,48 @@ setInterval(
 ========================================================= */
 
 let audioContext=null;
+
 let masterGain=null;
+
 let musicTimer=null;
+
 let musicStarted=false;
+
 let musicMuted=false;
+
+
+/* create */
 
 function createAudio(){
 
-    if(audioContext) return;
+    if(audioContext){
+        return;
+    }
+
 
     audioContext =
         new (
-            window.AudioContext ||
+            window.AudioContext
+            ||
             window.webkitAudioContext
         )();
+
 
     masterGain =
         audioContext.createGain();
 
+
     masterGain.gain.value=.045;
+
 
     masterGain.connect(
         audioContext.destination
     );
+
 }
 
 
-/* soft synth note */
+/* soft tone */
 
 function playTone(
     frequency,
@@ -3104,45 +5036,66 @@ function playTone(
     type="sine"
 ){
 
-    if(!audioContext) return;
+    if(!audioContext){
+        return;
+    }
+
 
     const osc =
         audioContext.createOscillator();
 
+
     const gain =
         audioContext.createGain();
 
-    osc.type=type;
+
+    osc.type =
+        type;
+
 
     osc.frequency.setValueAtTime(
         frequency,
         start
     );
 
+
     gain.gain.setValueAtTime(
         0,
         start
     );
 
+
     gain.gain.linearRampToValueAtTime(
         volume,
-        start+.15
+        start+.18
     );
+
 
     gain.gain.exponentialRampToValueAtTime(
         .0001,
         start+duration
     );
 
+
     osc.connect(gain);
-    gain.connect(masterGain);
+
+    gain.connect(
+        masterGain
+    );
+
 
     osc.start(start);
-    osc.stop(start+duration+.1);
+
+    osc.stop(
+        start+
+        duration+
+        .1
+    );
+
 }
 
 
-/* cinematic chord */
+/* chord */
 
 function playChord(
     frequencies,
@@ -3155,7 +5108,8 @@ function playChord(
 
             playTone(
                 frequency,
-                start+index*.025,
+                start+
+                index*.025,
                 duration,
                 .009,
                 "sine"
@@ -3163,41 +5117,77 @@ function playChord(
 
         }
     );
+
 }
 
+
+/* music loop */
 
 function musicLoop(){
 
     if(
-        !audioContext ||
+        !audioContext
+        ||
         musicMuted
-    ) return;
+    ){
+        return;
+    }
+
 
     const now =
         audioContext.currentTime;
 
+
     const beat=1.15;
 
+
     /*
-       Original progression:
-       Dm → Bb → F → C
-       with additional suspended tones.
+        Original progression:
+        Dm → Bb → F → C
     */
 
     const chords=[
 
-        [146.83,174.61,220.00,261.63],
-        [116.54,146.83,174.61,233.08],
-        [174.61,220.00,261.63,329.63],
-        [130.81,164.81,196.00,246.94]
+        [
+            146.83,
+            174.61,
+            220.00,
+            261.63
+        ],
+
+        [
+            116.54,
+            146.83,
+            174.61,
+            233.08
+        ],
+
+        [
+            174.61,
+            220.00,
+            261.63,
+            329.63
+        ],
+
+        [
+            130.81,
+            164.81,
+            196.00,
+            246.94
+        ]
 
     ];
+
 
     chords.forEach(
         (chord,index)=>{
 
             const start =
-                now+index*beat*4;
+                now+
+                index*
+                beat*
+                4;
+
 
             playChord(
                 chord,
@@ -3209,7 +5199,7 @@ function musicLoop(){
     );
 
 
-    /* gentle bell melody */
+    /* melody */
 
     const melody=[
 
@@ -3235,12 +5225,14 @@ function musicLoop(){
 
     ];
 
+
     melody.forEach(
         (note,index)=>{
 
             playTone(
                 note,
-                now+index*.55,
+                now+
+                index*.55,
                 .95,
                 .025,
                 "triangle"
@@ -3250,21 +5242,26 @@ function musicLoop(){
     );
 
 
-    /* tiny high Christmas sparkle */
+    /* high sparkle */
 
     const sparkle=[
+
         880,
         1046.5,
         1318.5,
         1174.66
+
     ];
+
 
     sparkle.forEach(
         (note,index)=>{
 
             playTone(
                 note,
-                now+index*2.8+1.4,
+                now+
+                index*2.8+
+                1.4,
                 2,
                 .008,
                 "sine"
@@ -3273,33 +5270,60 @@ function musicLoop(){
         }
     );
 
+
     musicTimer =
         setTimeout(
             musicLoop,
-            beat*4*1000-150
+            beat*
+            4*
+            1000
+            -
+            150
         );
+
 }
 
+
+/* start */
 
 function startMusic(){
 
-    if(musicStarted) return;
+    if(musicStarted){
+        return;
+    }
+
 
     createAudio();
 
-    if(audioContext.state==="suspended"){
+
+    if(
+        audioContext.state===
+        "suspended"
+    ){
+
         audioContext.resume();
+
     }
+
 
     musicStarted=true;
 
+
     musicLoop();
 
+
     document
-        .getElementById("musicButton")
-        .classList.add("playing");
+        .getElementById(
+            "musicButton"
+        )
+        .classList.add(
+            "playing"
+        );
+
 }
 
+
+/* toggle */
 
 function toggleMusic(){
 
@@ -3308,12 +5332,19 @@ function toggleMusic(){
         startMusic();
 
         return;
+
     }
 
-    musicMuted=!musicMuted;
+
+    musicMuted =
+        !musicMuted;
+
 
     const button =
-        document.getElementById("musicButton");
+        document.getElementById(
+            "musicButton"
+        );
+
 
     if(musicMuted){
 
@@ -3323,9 +5354,14 @@ function toggleMusic(){
             .25
         );
 
-        button.classList.remove("playing");
 
-    }else{
+        button.classList.remove(
+            "playing"
+        );
+
+    }
+
+    else{
 
         masterGain.gain.setTargetAtTime(
             .045,
@@ -3333,10 +5369,16 @@ function toggleMusic(){
             .25
         );
 
-        button.classList.add("playing");
+
+        button.classList.add(
+            "playing"
+        );
+
 
         musicLoop();
+
     }
+
 }
 
 
@@ -3346,19 +5388,28 @@ function toggleMusic(){
 
 document
     .querySelectorAll("img")
-    .forEach(img=>{
+    .forEach(
+        img=>{
 
-        img.addEventListener(
-            "error",
-            function(){
+            img.addEventListener(
+                "error",
+                function(){
 
-                this.style.background=
-                    "linear-gradient(135deg,#43233e,#1c1021)";
+                    this.style.background =
+                        "linear-gradient(135deg,#43233e,#1c1021)";
 
-            }
-        );
+                }
+            );
 
-    });
+        }
+    );
+
+
+/* =========================================================
+   INITIAL
+========================================================= */
+
+renderPage();
 
 </script>
 
