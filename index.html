@@ -808,6 +808,316 @@ body{
         font-size:18px;
     }
 }
+
+/* ===== POLISHED VISUAL LAYER ===== */
+:root{
+    --rose:#ff6f9f;
+    --pink:#f3a4ce;
+    --violet:#a879ff;
+    --gold:#f7d58a;
+    --ink:#4b2b3a;
+}
+body{
+    background:
+        radial-gradient(circle at 12% 12%,rgba(255,102,160,.16),transparent 27%),
+        radial-gradient(circle at 88% 20%,rgba(158,111,255,.16),transparent 28%),
+        radial-gradient(circle at 50% 90%,rgba(255,190,110,.08),transparent 30%),
+        linear-gradient(135deg,#07030c 0%,#1b0718 48%,#08030d 100%);
+}
+body:before{
+    content:"";
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-4;
+    background:
+      linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(255,255,255,.014) 1px,transparent 1px);
+    background-size:42px 42px;
+    mask-image:linear-gradient(to bottom,black,transparent 92%);
+}
+#lock{
+    overflow:hidden;
+}
+#lock:before,#lock:after{
+    content:"";
+    position:absolute;
+    border-radius:50%;
+    filter:blur(8px);
+    pointer-events:none;
+}
+#lock:before{
+    width:320px;height:320px;
+    background:rgba(255,74,130,.13);
+    top:-90px;left:-90px;
+}
+#lock:after{
+    width:360px;height:360px;
+    background:rgba(151,88,255,.12);
+    right:-120px;bottom:-120px;
+}
+.lockBox{
+    position:relative;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,.17);
+    background:
+      linear-gradient(145deg,rgba(255,255,255,.10),rgba(255,255,255,.035));
+    box-shadow:
+      0 35px 100px rgba(0,0,0,.62),
+      0 0 80px rgba(255,82,150,.08),
+      inset 0 1px 0 rgba(255,255,255,.12);
+}
+.lockBox:before{
+    content:"✦  ✧  ✦";
+    position:absolute;
+    top:17px;left:0;right:0;
+    color:rgba(255,255,255,.34);
+    letter-spacing:18px;
+    font-size:13px;
+}
+.lockHeart{
+    text-shadow:0 0 28px rgba(255,94,145,.5);
+}
+.lockBox h1{
+    text-shadow:0 0 30px rgba(255,126,190,.25);
+}
+.password{
+    transition:.25s;
+}
+.password:focus{
+    border-color:rgba(255,125,175,.65);
+    box-shadow:0 0 0 4px rgba(255,100,160,.09),0 0 25px rgba(255,100,160,.10);
+}
+.enter{
+    box-shadow:0 10px 30px rgba(145,39,107,.25);
+}
+.enter:active{
+    transform:scale(.98);
+}
+.hero{
+    position:relative;
+}
+.hero:before{
+    content:"";
+    position:absolute;
+    width:min(720px,90vw);
+    height:420px;
+    border-radius:50%;
+    background:radial-gradient(ellipse,rgba(255,85,150,.11),transparent 68%);
+    filter:blur(8px);
+    z-index:-1;
+}
+.tree{
+    filter:drop-shadow(0 0 25px rgba(255,215,120,.16));
+}
+.hero h1{
+    text-shadow:0 10px 45px rgba(255,74,145,.14);
+}
+.symbols{
+    text-shadow:0 0 25px rgba(224,145,255,.18);
+}
+.counter{
+    position:relative;
+    overflow:hidden;
+    transition:transform .35s,box-shadow .35s,border-color .35s;
+}
+.counter:before{
+    content:"";
+    position:absolute;
+    inset:-80%;
+    background:conic-gradient(from 0deg,transparent 0 72%,rgba(255,255,255,.08) 78%,transparent 84%);
+    animation:counterSweep 7s linear infinite;
+}
+.counter>*{position:relative;z-index:1}
+.counter:hover{
+    transform:translateY(-6px);
+    border-color:rgba(255,151,200,.25);
+    box-shadow:0 18px 45px rgba(0,0,0,.22),0 0 30px rgba(217,100,175,.08);
+}
+@keyframes counterSweep{to{transform:rotate(360deg)}}
+.bookSection{
+    position:relative;
+}
+.bookTitle h2{
+    text-shadow:0 0 30px rgba(255,146,205,.16);
+}
+.book{
+    isolation:isolate;
+}
+.page{
+    transform-origin:center;
+}
+.page.active{
+    animation:pageReveal .65s cubic-bezier(.2,.75,.2,1);
+}
+@keyframes pageReveal{
+    from{opacity:0;transform:translateY(18px) rotateY(-7deg) scale(.985)}
+    to{opacity:1;transform:none}
+}
+.photo{
+    border:1px solid rgba(110,70,65,.12);
+    box-shadow:0 18px 30px rgba(50,20,30,.23),0 3px 0 rgba(255,255,255,.55) inset;
+}
+.photo:after{
+    content:"";
+    position:absolute;
+    inset:5px;
+    border:1px solid rgba(90,50,45,.08);
+    pointer-events:none;
+}
+.photo img{
+    filter:saturate(.98) contrast(.99);
+}
+.note{
+    text-shadow:0 1px 0 rgba(255,255,255,.45);
+}
+.controls{
+    border-top:1px solid rgba(100,55,50,.08);
+}
+.btn{
+    box-shadow:0 7px 18px rgba(65,25,45,.14);
+}
+.btn:focus-visible,.music:focus-visible,.enter:focus-visible{
+    outline:3px solid rgba(255,145,190,.5);
+    outline-offset:3px;
+}
+.hourglass{
+    filter:drop-shadow(0 0 22px rgba(230,130,220,.28));
+}
+.final{
+    position:relative;
+}
+.final:before{
+    content:"";
+    position:absolute;
+    left:50%;top:15%;
+    width:min(650px,90vw);
+    height:420px;
+    transform:translateX(-50%);
+    background:radial-gradient(ellipse,rgba(255,90,155,.11),transparent 67%);
+    pointer-events:none;
+}
+.final>*{position:relative}
+.final h2{
+    text-shadow:0 0 34px rgba(255,120,180,.18);
+}
+.finalPhoto{
+    width:min(920px,92vw);
+    margin:0 auto 120px;
+    position:relative;
+    padding:14px 14px 52px;
+    background:#fffaf1;
+    border-radius:2px;
+    transform:rotate(-1.1deg);
+    box-shadow:0 30px 75px rgba(0,0,0,.46),0 2px 0 rgba(255,255,255,.7) inset;
+}
+.finalPhoto:before,.finalPhoto:after{
+    content:"";
+    position:absolute;
+    width:95px;height:28px;
+    background:rgba(246,219,183,.55);
+    top:-12px;
+    box-shadow:0 2px 5px rgba(0,0,0,.08);
+}
+.finalPhoto:before{left:13%;transform:rotate(-4deg)}
+.finalPhoto:after{right:13%;transform:rotate(5deg)}
+.finalPhoto img{
+    display:block;
+    width:100%;
+    height:min(62vw,590px);
+    min-height:300px;
+    object-fit:cover;
+    background:linear-gradient(135deg,#eee0d1,#fffaf1);
+}
+.finalPhotoCaption{
+    position:absolute;
+    bottom:11px;left:0;right:0;
+    text-align:center;
+    color:#785365;
+    font:18px "Kalam",cursive;
+}
+.music{
+    transition:transform .25s,box-shadow .25s;
+}
+.music:hover{
+    transform:translateY(-3px) scale(1.05);
+    box-shadow:0 14px 38px rgba(0,0,0,.46),0 0 25px rgba(210,83,170,.2);
+}
+.music.playing{
+    animation:musicPulse 1.5s ease-in-out infinite;
+}
+@keyframes musicPulse{
+    50%{box-shadow:0 0 0 10px rgba(255,100,160,.06),0 14px 38px rgba(0,0,0,.46)}
+}
+.skyGift{
+    position:fixed;
+    top:-80px;
+    left:-180px;
+    z-index:30;
+    pointer-events:none;
+    display:flex;
+    align-items:center;
+    gap:8px;
+    font-size:34px;
+    filter:drop-shadow(0 7px 10px rgba(0,0,0,.3));
+    opacity:0;
+}
+.skyGift.go{
+    animation:skyRide 13s linear forwards;
+}
+@keyframes skyRide{
+    0%{left:-220px;top:5%;opacity:0;transform:scale(.72)}
+    8%{opacity:1}
+    46%{transform:translateY(28px) scale(1)}
+    92%{opacity:1}
+    100%{left:110vw;top:13%;opacity:0;transform:translateY(-12px) scale(.86)}
+}
+.skyGift .santa{font-size:42px}
+.skyGift .reindeer{font-size:30px}
+.snowGround{
+    position:fixed;
+    left:0;right:0;bottom:-3px;
+    height:34px;
+    z-index:19;
+    pointer-events:none;
+    background:
+      radial-gradient(70px 22px at 4% 100%,#fff 0 70%,transparent 72%),
+      radial-gradient(90px 26px at 15% 100%,#fff 0 70%,transparent 72%),
+      radial-gradient(75px 22px at 27% 100%,#fff 0 70%,transparent 72%),
+      radial-gradient(100px 28px at 41% 100%,#fff 0 70%,transparent 72%),
+      radial-gradient(80px 24px at 56% 100%,#fff 0 70%,transparent 72%),
+      radial-gradient(105px 28px at 71% 100%,#fff 0 70%,transparent 72%),
+      radial-gradient(80px 24px at 87% 100%,#fff 0 70%,transparent 72%),
+      linear-gradient(#fff,#eef5ff);
+    box-shadow:0 -6px 22px rgba(255,255,255,.18);
+}
+.lockCountdown{
+    margin-top:17px;
+    font:700 18px "Cormorant Garamond",serif;
+    color:#f2c5df;
+    letter-spacing:1px;
+}
+@media(max-width:700px){
+    .lockBox{padding:40px 20px 28px}
+    .lockBox h1{font-size:47px}
+    .hero{min-height:92vh;padding-top:80px}
+    .hero p{max-width:340px}
+    .counters{gap:12px;margin-bottom:75px}
+    .counter{padding:20px 12px}
+    .bookTitle h2{font-size:55px}
+    .page{min-height:940px}
+    .finalPhoto{margin-bottom:80px;padding:9px 9px 45px}
+    .finalPhoto img{height:74vw;min-height:230px}
+    .finalPhotoCaption{font-size:16px}
+    .skyGift{font-size:27px}
+    .skyGift .santa{font-size:32px}
+    .skyGift .reindeer{font-size:23px}
+    .snowGround{height:24px}
+}
+@media(prefers-reduced-motion:reduce){
+    *,*:before,*:after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important}
+}
+
 </style>
 </head>
 
@@ -829,6 +1139,8 @@ body{
 
 <div class="stars" id="stars"></div>
 <div id="snow"></div>
+<div class="snowGround"></div>
+<div class="skyGift" id="skyGift" aria-hidden="true"><span class="santa">🎅</span><span class="reindeer">🦌 🦌 🦌</span></div>
 
 
 <!-- =====================================================
@@ -859,6 +1171,8 @@ body{
         <button class="enter" onclick="unlock()">
             Defteri Aç ♡
         </button>
+
+        <div class="lockCountdown" id="lockCountdown">Yeni yıla hazırlanıyor...</div>
 
         <p id="error"></p>
 
@@ -1652,6 +1966,13 @@ Meğer senmişsin.
 
 </section>
 
+
+<!-- BÜYÜK FİNAL FOTOĞRAFI -->
+<section class="finalPhoto">
+    <img src="images/final.jpg" alt="Bizim en güzel anımız" onerror="photoError(this)">
+    <div class="finalPhotoCaption">Ve hikâyemizin en güzel kısmı... hâlâ devam ediyor. ♡</div>
+</section>
+
 </div>
 
 
@@ -2182,6 +2503,88 @@ function toggleMusic(){
     }
 
 }
+
+
+/* =====================================================
+   PROFESYONEL DOKUNUŞLAR
+   - Yeni yıl geldiğinde otomatik açılır.
+   - Santa + 3 geyik iki dakikada bir geçer.
+   - Müzik koduna dokunulmadı.
+===================================================== */
+
+function showMain(){
+    const lock=document.getElementById("lock");
+    const main=document.getElementById("main");
+    if(!lock || !main) return;
+    lock.style.opacity="0";
+    setTimeout(()=>{
+        lock.style.display="none";
+        main.style.display="block";
+    },700);
+}
+
+function updateLockCountdown(){
+    const el=document.getElementById("lockCountdown");
+    if(!el) return;
+    const diff=newYear-new Date();
+    if(diff<=0){
+        el.textContent="Yeni yıl geldi. ♡";
+        showMain();
+        return;
+    }
+    const total=Math.floor(diff/1000);
+    const d=Math.floor(total/86400);
+    const h=Math.floor((total%86400)/3600);
+    const m=Math.floor((total%3600)/60);
+    const s=total%60;
+    el.textContent=`${d} gün ${String(h).padStart(2,"0")}:${String(m).padStart(2,"0")}:${String(s).padStart(2,"0")}`;
+}
+
+function flySanta(){
+    const gift=document.getElementById("skyGift");
+    if(!gift) return;
+    gift.classList.remove("go");
+    void gift.offsetWidth;
+    gift.classList.add("go");
+}
+
+setInterval(flySanta,120000);
+setTimeout(flySanta,2500);
+setInterval(updateLockCountdown,1000);
+updateLockCountdown();
+
+/* Yeni yıl geldiğinde şifre sormadan açılır. */
+setInterval(()=>{
+    if(new Date()>=newYear){
+        showMain();
+    }
+},1000);
+
+/* Müzik düğmesinin mevcut davranışını bozmadan küçük görsel durum. */
+const originalStartMusic=startMusic;
+startMusic=function(){
+    originalStartMusic();
+    musicButton.classList.add("playing");
+};
+const originalStopMusic=stopMusic;
+stopMusic=function(){
+    originalStopMusic();
+    musicButton.classList.remove("playing");
+};
+
+/* Mobilde sağa-sola kaydırarak defter sayfası değiştirme. */
+let touchStartX=0;
+document.addEventListener("touchstart",e=>{
+    if(e.touches.length===1) touchStartX=e.touches[0].clientX;
+},{passive:true});
+document.addEventListener("touchend",e=>{
+    if(!touchStartX || e.changedTouches.length!==1) return;
+    const dx=e.changedTouches[0].clientX-touchStartX;
+    touchStartX=0;
+    if(Math.abs(dx)<60) return;
+    if(dx<0) nextPage();
+    else previousPage();
+},{passive:true});
 
 </script>
 
