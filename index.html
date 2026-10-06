@@ -2,8 +2,7 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0a0611">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
 <title>Sadece İkimiz ♡</title>
 
@@ -14,49 +13,41 @@
 <style>
 
 /* =========================================================
-   VARIABLES
+   ROOT
 ========================================================= */
 
 :root{
-    --night:#08050d;
-    --night2:#110719;
-    --night3:#1a0b24;
+    --black:#07060b;
+    --night:#0c0913;
+    --night2:#171022;
+    --purple:#29182f;
 
-    --purple:#74479a;
-    --purple2:#9c69bd;
-    --lilac:#c69be3;
-    --pink:#e795ca;
-    --fuchsia:#d75aa8;
+    --wine:#3c1125;
+    --wine2:#5c1836;
+    --wine3:#741f43;
 
-    --wine:#47152f;
-    --wine2:#68234d;
-    --wine3:#8c3269;
+    --gold:#c7a258;
+    --gold2:#f1d789;
+    --gold3:#fff0af;
 
-    --gold:#d8b96e;
-    --gold2:#f0d99a;
+    --paper:#eadbb6;
+    --paper2:#d5c394;
+    --paperDark:#9e875b;
 
-    --silver:#d9d8e4;
+    --ink:#302326;
+    --inkSoft:#584448;
 
-    --paper:#f5eddd;
-    --paper2:#e8dcc6;
-    --paper3:#ded0b8;
-
-    --ink:#2d1c27;
-    --ink2:#54333f;
-
-    --muted:#a99aaa;
+    --snow:#f8fbff;
+    --snow2:#dbe5f4;
+    --ice:#aebdd7;
 
     --shadow:rgba(0,0,0,.65);
 }
 
-/* =========================================================
-   RESET
-========================================================= */
-
 *{
+    box-sizing:border-box;
     margin:0;
     padding:0;
-    box-sizing:border-box;
 }
 
 html{
@@ -69,353 +60,569 @@ body{
     color:white;
     background:
         radial-gradient(
-            circle at 50% -10%,
-            rgba(169,91,205,.22),
-            transparent 36%
-        ),
-        radial-gradient(
-            circle at 5% 45%,
-            rgba(122,35,101,.18),
-            transparent 32%
-        ),
-        radial-gradient(
-            circle at 95% 65%,
-            rgba(85,43,144,.16),
-            transparent 34%
-        ),
-        linear-gradient(
-            180deg,
-            #08050d 0%,
-            #100719 45%,
-            #07040c 100%
+            ellipse at 50% -10%,
+            #3b2850 0%,
+            #1a1228 28%,
+            #0b0811 70%
         );
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
+    font-family:"Cormorant Garamond",serif;
 }
+
+/* =========================================================
+   GLOBAL ATMOSPHERE
+========================================================= */
 
 body:before{
     content:"";
     position:fixed;
     inset:0;
-    z-index:-20;
+    z-index:900;
     pointer-events:none;
 
     background:
-        linear-gradient(
-            rgba(255,255,255,.018) 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            rgba(255,255,255,.018) 1px,
-            transparent 1px
+        radial-gradient(
+            ellipse at center,
+            transparent 35%,
+            rgba(0,0,0,.35) 100%
         );
 
-    background-size:60px 60px;
+    mix-blend-mode:multiply;
 }
 
 body:after{
     content:"";
     position:fixed;
     inset:0;
-    z-index:9998;
+    z-index:899;
     pointer-events:none;
+
+    opacity:.09;
+
+    background-image:
+        repeating-linear-gradient(
+            0deg,
+            transparent 0,
+            transparent 2px,
+            rgba(255,255,255,.08) 3px
+        );
+}
+
+/* =========================================================
+   SKY
+========================================================= */
+
+.sky{
+    position:fixed;
+    inset:0;
+    z-index:-30;
+    overflow:hidden;
 
     background:
         radial-gradient(
-            circle at center,
-            transparent 45%,
-            rgba(0,0,0,.42) 100%
+            circle at 50% 15%,
+            rgba(101,67,135,.35),
+            transparent 32%
+        ),
+        radial-gradient(
+            circle at 50% 80%,
+            rgba(47,35,71,.18),
+            transparent 40%
+        ),
+        linear-gradient(
+            180deg,
+            #080710 0%,
+            #110d1b 42%,
+            #0b0910 100%
         );
+}
+
+.sky-glow{
+    position:absolute;
+    width:700px;
+    height:700px;
+    left:50%;
+    top:-350px;
+    transform:translateX(-50%);
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(176,139,216,.18),
+            transparent 68%
+        );
+
+    filter:blur(30px);
+}
+
+/* =========================================================
+   MOON
+========================================================= */
+
+.moon{
+    position:absolute;
+    width:125px;
+    height:125px;
+
+    top:7%;
+    right:9%;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle at 32% 28%,
+            #ffffff,
+            #e9ecff 48%,
+            #b6bad5 100%
+        );
+
+    box-shadow:
+        0 0 25px rgba(240,244,255,.7),
+        0 0 80px rgba(157,169,255,.25),
+        0 0 150px rgba(120,107,188,.15);
+}
+
+.moon:before{
+    content:"";
+
+    position:absolute;
+    width:18px;
+    height:12px;
+
+    top:32px;
+    left:27px;
+
+    border-radius:50%;
+
+    background:rgba(150,153,177,.25);
+
+    box-shadow:
+        35px 15px 0 rgba(150,153,177,.16),
+        10px 45px 0 rgba(150,153,177,.15),
+        55px 55px 0 rgba(150,153,177,.14);
+}
+
+.moon:after{
+    content:"";
+
+    position:absolute;
+
+    width:112px;
+    height:112px;
+
+    top:-4px;
+    left:32px;
+
+    border-radius:50%;
+
+    background:#0b0911;
+
+    opacity:.78;
 }
 
 /* =========================================================
    STARS
 ========================================================= */
 
-#stars{
-    position:fixed;
+.stars{
+    position:absolute;
     inset:0;
-    z-index:-5;
-    pointer-events:none;
 }
 
 .star{
     position:absolute;
-    width:3px;
-    height:3px;
+
+    width:2px;
+    height:2px;
+
     border-radius:50%;
 
-    background:#fff;
+    background:white;
 
     box-shadow:
-        0 0 5px rgba(255,255,255,.95),
-        0 0 12px rgba(210,183,255,.5);
+        0 0 6px white;
 
     animation:
-        twinkle var(--duration)
+        starTwinkle
+        var(--duration)
         ease-in-out
-        infinite
-        alternate;
+        infinite;
 }
 
-@keyframes twinkle{
-    0%{
-        opacity:.12;
-        transform:scale(.65);
+.star.big{
+    width:3px;
+    height:3px;
+}
+
+@keyframes starTwinkle{
+
+    0%,100%{
+        opacity:.15;
+        transform:scale(.7);
     }
 
-    100%{
+    50%{
         opacity:1;
-        transform:scale(1.35);
+        transform:scale(1.5);
     }
 }
+
+/* =========================================================
+   DISTANT FOREST
+========================================================= */
+
+.forest{
+    position:fixed;
+    z-index:-20;
+    bottom:0;
+    left:0;
+
+    width:100%;
+    height:230px;
+
+    opacity:.85;
+}
+
+.forest-tree{
+    position:absolute;
+    bottom:0;
+
+    width:0;
+    height:0;
+
+    border-left:45px solid transparent;
+    border-right:45px solid transparent;
+    border-bottom:180px solid #0b1212;
+}
+
+.forest-tree:before{
+    content:"";
+
+    position:absolute;
+
+    left:-37px;
+    top:55px;
+
+    border-left:37px solid transparent;
+    border-right:37px solid transparent;
+    border-bottom:135px solid #0a1010;
+}
+
+.forest-tree:after{
+    content:"";
+
+    position:absolute;
+
+    left:-4px;
+    top:125px;
+
+    width:8px;
+    height:55px;
+
+    background:#080c0c;
+}
+
+.tree-a{left:4%;transform:scale(.8)}
+.tree-b{left:14%;transform:scale(.55)}
+.tree-c{left:25%;transform:scale(.7)}
+.tree-d{right:6%;transform:scale(.8)}
+.tree-e{right:17%;transform:scale(.55)}
+.tree-f{right:28%;transform:scale(.65)}
 
 /* =========================================================
    SNOW
 ========================================================= */
 
-#snow{
+.snow-layer{
     position:fixed;
-    inset:0;
-    z-index:40;
+    inset:-15%;
+
+    z-index:80;
+
     pointer-events:none;
-    overflow:hidden;
+}
+
+.snow-back{
+    opacity:.35;
+    filter:blur(1.5px);
+}
+
+.snow-mid{
+    opacity:.75;
+}
+
+.snow-front{
+    opacity:1;
 }
 
 .flake{
     position:absolute;
-    top:-35px;
 
-    color:white;
+    top:-30px;
 
-    text-shadow:
-        0 0 5px white,
-        0 0 14px rgba(191,174,255,.55);
+    border-radius:50%;
 
-    opacity:var(--opacity);
+    background:
+        radial-gradient(
+            circle at 35% 30%,
+            white,
+            #eef4ff
+        );
+
+    box-shadow:
+        0 0 8px rgba(255,255,255,.7);
 
     animation:
         snowFall
         var(--speed)
         linear
         infinite;
+
+    animation-delay:var(--delay);
 }
 
 @keyframes snowFall{
 
-    0%{
+    from{
         transform:
-            translate3d(0,-35px,0)
+            translate3d(0,-15vh,0)
             rotate(0deg);
     }
 
-    50%{
+    to{
         transform:
-            translate3d(var(--drift),55vh,0)
-            rotate(180deg);
-    }
-
-    100%{
-        transform:
-            translate3d(
-                calc(var(--drift) * -1),
-                110vh,
-                0
-            )
+            translate3d(var(--drift),120vh,0)
             rotate(360deg);
     }
 }
 
-.snow-ground{
+/* =========================================================
+   WIND
+========================================================= */
+
+.wind{
     position:fixed;
-    left:-5%;
-    right:-5%;
-    bottom:-35px;
+    inset:0;
 
-    height:100px;
+    z-index:82;
 
-    z-index:35;
     pointer-events:none;
 
-    border-radius:
-        50%
-        50%
-        0
-        0;
+    opacity:.15;
+}
+
+.wind-line{
+    position:absolute;
+
+    width:180px;
+    height:1px;
 
     background:
-        radial-gradient(
-            ellipse at 50% 0%,
-            rgba(255,255,255,.98),
-            rgba(233,229,246,.82) 42%,
-            rgba(186,173,214,.2) 78%,
-            transparent 100%
+        linear-gradient(
+            90deg,
+            transparent,
+            rgba(255,255,255,.8),
+            transparent
         );
 
-    filter:blur(1px);
+    transform:rotate(-12deg);
 
-    opacity:.78;
+    animation:
+        windMove
+        var(--wind-speed)
+        linear
+        infinite;
+
+    animation-delay:var(--wind-delay);
+}
+
+@keyframes windMove{
+
+    from{
+        left:-25%;
+        opacity:0;
+    }
+
+    15%{
+        opacity:.8;
+    }
+
+    80%{
+        opacity:.5;
+    }
+
+    to{
+        left:125%;
+        opacity:0;
+    }
+}
+
+/* =========================================================
+   PINE BRANCHES
+========================================================= */
+
+.pine-frame{
+    position:fixed;
+
+    z-index:70;
+
+    pointer-events:none;
+}
+
+.pine-frame.left{
+    left:-65px;
+    top:0;
+
+    width:440px;
+    height:280px;
+
+    transform:rotate(-10deg);
+}
+
+.pine-frame.right{
+    right:-65px;
+    top:0;
+
+    width:440px;
+    height:280px;
+
+    transform:
+        scaleX(-1)
+        rotate(-10deg);
+}
+
+.pine-branch{
+    position:absolute;
+
+    height:18px;
+    width:330px;
+
+    border-radius:100%;
+
+    background:
+        linear-gradient(
+            180deg,
+            #23412f,
+            #0c2017
+        );
+
+    box-shadow:
+        30px -16px 0 -5px #173424,
+        70px -23px 0 -6px #1a3927,
+        115px -18px 0 -6px #21442e,
+        160px -25px 0 -7px #143020;
+}
+
+.pine-branch:nth-child(1){
+    top:30px;
+    left:20px;
+    transform:rotate(-22deg);
+}
+
+.pine-branch:nth-child(2){
+    top:95px;
+    left:0;
+    transform:rotate(-10deg);
+}
+
+.pine-branch:nth-child(3){
+    top:160px;
+    left:30px;
+    transform:rotate(4deg);
+}
+
+.pine-snow{
+    position:absolute;
+
+    width:260px;
+    height:16px;
+
+    border-radius:50%;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fff,
+            #cdd7e8
+        );
+
+    filter:drop-shadow(0 4px 4px rgba(0,0,0,.3));
+}
+
+.pine-snow.s1{
+    top:22px;
+    left:65px;
+    transform:rotate(-22deg);
+}
+
+.pine-snow.s2{
+    top:89px;
+    left:45px;
+    transform:rotate(-10deg);
+}
+
+.pine-snow.s3{
+    top:154px;
+    left:70px;
+    transform:rotate(4deg);
 }
 
 /* =========================================================
    CHRISTMAS LIGHTS
 ========================================================= */
 
-.christmas-lights{
-    position:fixed;
-    top:0;
-    left:0;
-    right:0;
-
-    height:70px;
-
-    z-index:50;
-    pointer-events:none;
-}
-
-.wire{
+.light-wire{
     position:absolute;
 
-    left:-3%;
-    top:9px;
+    width:310px;
+    height:120px;
 
-    width:106%;
-    height:55px;
+    left:45px;
+    top:40px;
 
-    border-top:
-        2px solid
-        rgba(28,19,31,.95);
+    border-bottom:1px solid rgba(30,30,30,.6);
 
-    border-radius:50%;
-
-    transform:rotate(1.4deg);
+    border-radius:0 0 50% 50%;
 }
 
 .bulb{
     position:absolute;
 
-    width:13px;
-    height:18px;
+    width:9px;
+    height:9px;
 
-    top:32px;
+    border-radius:50%;
 
-    border-radius:
-        50%
-        50%
-        45%
-        45%;
+    background:#ffe08a;
 
     box-shadow:
-        0 0 8px currentColor,
-        0 0 20px currentColor,
-        0 0 35px currentColor;
+        0 0 7px #ffe08a,
+        0 0 18px rgba(255,212,105,.8);
 
     animation:
         bulbGlow
-        1.6s
+        2s
         ease-in-out
-        infinite
-        alternate;
+        infinite alternate;
 }
 
-.bulb:before{
-    content:"";
-
-    position:absolute;
-
-    width:7px;
-    height:5px;
-
-    left:3px;
-    top:-4px;
-
-    border-radius:2px;
-
-    background:#27212c;
-}
-
-.b1{
-    left:4%;
-    color:#e58acb;
-}
-
-.b2{
-    left:12%;
-    color:#d5c4ff;
-    animation-delay:.2s;
-}
-
-.b3{
-    left:20%;
-    color:#f3ce78;
-    animation-delay:.5s;
-}
-
-.b4{
-    left:28%;
-    color:#c58df3;
-    animation-delay:.7s;
-}
-
-.b5{
-    left:36%;
-    color:#ef86bd;
-    animation-delay:.1s;
-}
-
-.b6{
-    left:44%;
-    color:#f4d37d;
+.bulb:nth-child(2n){
     animation-delay:.6s;
 }
 
-.b7{
-    left:52%;
-    color:#c89af8;
-    animation-delay:.3s;
-}
-
-.b8{
-    left:60%;
-    color:#e98ccf;
-    animation-delay:.8s;
-}
-
-.b9{
-    left:68%;
-    color:#ffe18c;
-    animation-delay:.4s;
-}
-
-.b10{
-    left:76%;
-    color:#cba0fa;
-    animation-delay:.1s;
-}
-
-.b11{
-    left:84%;
-    color:#eb8ac9;
-    animation-delay:.6s;
-}
-
-.b12{
-    left:92%;
-    color:#f4d27c;
-    animation-delay:.3s;
+.bulb:nth-child(3n){
+    animation-delay:1.2s;
 }
 
 @keyframes bulbGlow{
-
     from{
-        filter:brightness(.75);
+        opacity:.55;
     }
-
     to{
-        filter:brightness(1.55);
+        opacity:1;
+        transform:scale(1.25);
     }
 }
 
@@ -423,29 +630,23 @@ body:after{
    LOCK SCREEN
 ========================================================= */
 
-#lockScreen{
+.lock{
     position:fixed;
     inset:0;
 
-    z-index:1000;
+    z-index:2000;
 
     display:flex;
     justify-content:center;
     align-items:center;
 
-    padding:25px;
+    padding:20px;
 
     background:
         radial-gradient(
             circle at center,
-            rgba(115,59,145,.22),
-            transparent 40%
-        ),
-        linear-gradient(
-            180deg,
-            #07040b,
-            #150a1d 55%,
-            #07040b
+            rgba(63,32,76,.45),
+            rgba(4,3,7,.98)
         );
 
     transition:
@@ -453,7 +654,7 @@ body:after{
         visibility 1s ease;
 }
 
-#lockScreen.hidden{
+.lock.hide{
     opacity:0;
     visibility:hidden;
     pointer-events:none;
@@ -462,196 +663,152 @@ body:after{
 .lock-card{
     position:relative;
 
-    width:min(450px,100%);
+    width:min(540px,94vw);
 
-    padding:
-        55px
-        35px
-        45px;
+    padding:50px 38px;
 
     text-align:center;
 
-    border:
-        1px solid
-        rgba(215,183,109,.45);
+    border-radius:20px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(67,28,66,.82),
-            rgba(17,8,26,.95)
+            rgba(61,22,44,.98),
+            rgba(13,8,18,.98)
         );
 
+    border:
+        1px solid rgba(220,184,104,.45);
+
     box-shadow:
-        0 35px 110px rgba(0,0,0,.72),
-        inset 0 0 60px rgba(217,137,205,.055);
-
-    backdrop-filter:blur(18px);
-}
-
-.lock-card:before,
-.lock-card:after{
-    position:absolute;
-
-    color:var(--gold);
-
-    font-size:24px;
-
-    opacity:.7;
+        0 40px 120px #000,
+        inset 0 0 60px rgba(222,181,89,.04);
 }
 
 .lock-card:before{
-    content:"✦";
+    content:"";
 
-    top:18px;
-    left:22px;
-}
+    position:absolute;
 
-.lock-card:after{
-    content:"✦";
-
-    right:22px;
-    bottom:18px;
-}
-
-.lock-icon{
-    font-size:44px;
-    margin-bottom:10px;
-
-    filter:
-        drop-shadow(
-            0 0 13px
-            rgba(235,179,245,.55)
-        );
-}
-
-.lock-card h1{
-    font-family:"Great Vibes",cursive;
-
-    font-size:60px;
-
-    font-weight:400;
-
-    color:#f5d9ef;
-
-    text-shadow:
-        0 0 25px
-        rgba(224,133,211,.4);
-}
-
-.lock-card p{
-    margin:
-        8px
-        0
-        27px;
-
-    color:#c7b6c7;
-
-    font-size:17px;
-}
-
-#passwordInput{
-    width:100%;
-    height:53px;
-
-    padding:0 18px;
+    inset:9px;
 
     border:
-        1px solid
-        rgba(216,182,110,.5);
+        1px solid rgba(255,255,255,.08);
 
-    border-radius:5px;
+    border-radius:13px;
+}
+
+.lock-snowflake{
+    font-size:42px;
+
+    color:#f0d98e;
+
+    text-shadow:
+        0 0 25px rgba(240,217,142,.4);
+
+    margin-bottom:8px;
+}
+
+.lock-title{
+    position:relative;
+
+    font-family:"Great Vibes",cursive;
+
+    font-size:65px;
+
+    color:#efd687;
+
+    text-shadow:
+        0 2px 0 #654919,
+        0 0 25px rgba(239,214,135,.15);
+}
+
+.lock-text{
+    position:relative;
+
+    margin-top:10px;
+    margin-bottom:28px;
+
+    color:#d2cbd7;
+
+    font-size:18px;
+}
+
+.lock-input{
+    position:relative;
+
+    width:100%;
+
+    padding:15px 18px;
+
+    border-radius:11px;
+
+    border:
+        1px solid rgba(216,182,101,.4);
 
     outline:none;
 
+    background:
+        rgba(3,2,6,.8);
+
     color:white;
 
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:19px;
+
     text-align:center;
-
-    letter-spacing:3px;
-
-    font-family:inherit;
-    font-size:17px;
-
-    background:
-        rgba(0,0,0,.28);
 }
 
-#passwordInput:focus{
-    border-color:var(--pink);
+.unlock{
+    position:relative;
 
-    box-shadow:
-        0 0 20px
-        rgba(229,138,201,.2);
-}
+    margin-top:15px;
 
-.unlock-btn{
-    width:100%;
+    padding:14px 36px;
 
-    height:51px;
-
-    margin-top:14px;
-
-    border:0;
-    border-radius:5px;
+    border:none;
+    border-radius:50px;
 
     cursor:pointer;
-
-    color:#261426;
-
-    font-family:
-        "Cormorant Garamond",
-        serif;
-
-    font-size:18px;
-    font-weight:700;
 
     background:
         linear-gradient(
             135deg,
-            #e8c878,
-            #f2dfa6
+            #9b7131,
+            #f0d77d
         );
 
-    box-shadow:
-        0 8px 25px rgba(0,0,0,.3);
+    color:#251a0c;
+
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:19px;
+
+    font-weight:700;
 
     transition:.3s;
 }
 
-.unlock-btn:hover{
-    transform:translateY(-2px);
+.unlock:hover{
+    transform:translateY(-3px);
 
     box-shadow:
-        0 10px 32px
-        rgba(226,182,108,.28);
+        0 10px 30px rgba(0,0,0,.5),
+        0 0 25px rgba(240,211,123,.2);
 }
 
-#errorMessage{
-    min-height:22px;
+.lock-error{
+    position:relative;
+
+    min-height:24px;
 
     margin-top:10px;
 
-    color:#f39ac7;
+    color:#ef9aae;
 
-    font-size:15px;
-}
-
-/* =========================================================
-   MAIN
-========================================================= */
-
-#mainContent{
-    opacity:0;
-    visibility:hidden;
-
-    transition:
-        opacity 1.2s ease;
-}
-
-#mainContent.show{
-    opacity:1;
-    visibility:visible;
+    font-family:"Kalam",cursive;
 }
 
 /* =========================================================
@@ -664,429 +821,460 @@ body:after{
     min-height:100vh;
 
     display:flex;
-    flex-direction:column;
-
     justify-content:center;
     align-items:center;
 
-    text-align:center;
-
     padding:
-        120px
+        110px
         20px
-        100px;
+        130px;
 
     overflow:hidden;
 }
 
-.moon{
+.hero-ground{
     position:absolute;
 
-    width:245px;
-    height:245px;
+    left:-10%;
+    bottom:-140px;
 
-    right:8%;
-    top:14%;
+    width:120%;
+    height:310px;
 
     border-radius:50%;
 
     background:
         radial-gradient(
-            circle at 35% 32%,
-            rgba(255,255,255,.96),
-            rgba(231,213,255,.85) 45%,
-            rgba(168,129,198,.35) 70%,
-            transparent 72%
+            ellipse at center,
+            #f7faff 0%,
+            #e0e8f5 42%,
+            #aab6ca 72%,
+            transparent 73%
         );
 
-    opacity:.28;
+    filter:blur(1px);
 
     box-shadow:
-        0 0 100px
-        rgba(207,174,255,.2);
+        0 -20px 70px rgba(226,236,255,.13);
 }
 
-.moon:after{
-    content:"";
-
-    position:absolute;
-
-    width:245px;
-    height:245px;
-
-    left:70px;
-    top:-15px;
-
-    border-radius:50%;
-
-    background:#0b0611;
-}
-
-/* distant Christmas tree */
-
-.distant-tree{
-    position:absolute;
-
-    left:4%;
-    bottom:-30px;
-
-    width:240px;
-    height:330px;
-
-    opacity:.35;
-
-    filter:
-        drop-shadow(
-            0 0 30px
-            rgba(155,101,191,.15)
-        );
-}
-
-.tree-layer{
-    position:absolute;
-
-    left:50%;
-
-    transform:
-        translateX(-50%);
-
-    border-left:
-        solid transparent;
-
-    border-right:
-        solid transparent;
-
-    border-bottom:
-        solid #1a1024;
-}
-
-.tree1{
-    bottom:15px;
-
-    border-left-width:120px;
-    border-right-width:120px;
-    border-bottom-width:230px;
-}
-
-.tree2{
-    bottom:75px;
-
-    border-left-width:98px;
-    border-right-width:98px;
-    border-bottom-width:185px;
-}
-
-.tree3{
-    bottom:140px;
-
-    border-left-width:73px;
-    border-right-width:73px;
-    border-bottom-width:140px;
-}
-
-.tree-light{
-    position:absolute;
-
-    width:7px;
-    height:7px;
-
-    border-radius:50%;
-
-    background:#f6d57e;
-
-    box-shadow:
-        0 0 12px #f6d57e;
-
-    animation:
-        treeBlink
-        2s
-        ease-in-out
-        infinite
-        alternate;
-}
-
-.tree-light.t1{
-    left:80px;
-    bottom:147px;
-}
-
-.tree-light.t2{
-    left:126px;
-    bottom:115px;
-    animation-delay:.4s;
-}
-
-.tree-light.t3{
-    left:62px;
-    bottom:84px;
-    animation-delay:.8s;
-}
-
-.tree-light.t4{
-    left:150px;
-    bottom:62px;
-    animation-delay:.2s;
-}
-
-.tree-light.t5{
-    left:105px;
-    bottom:39px;
-    animation-delay:.6s;
-}
-
-@keyframes treeBlink{
-
-    from{
-        opacity:.35;
-    }
-
-    to{
-        opacity:1;
-        transform:scale(1.35);
-    }
-}
-
-.hero-eyebrow{
+.hero-content{
     position:relative;
-    z-index:2;
 
-    color:#d7b8db;
+    z-index:20;
 
-    letter-spacing:5px;
+    width:min(1050px,96vw);
+
+    text-align:center;
+}
+
+.hero-kicker{
+    font-size:13px;
+
+    letter-spacing:8px;
+
+    color:#bdb3c8;
 
     text-transform:uppercase;
 
-    font-size:13px;
-
-    margin-bottom:18px;
+    margin-bottom:17px;
 }
 
-.hero h1{
-    position:relative;
-    z-index:2;
-
+.hero-title{
     font-family:"Great Vibes",cursive;
 
     font-size:
         clamp(
-            75px,
+            70px,
             11vw,
-            155px
+            135px
         );
-
-    font-weight:400;
 
     line-height:.9;
 
-    color:#f2d9ed;
+    color:#f0d583;
 
     text-shadow:
-        0 0 18px
-        rgba(232,140,211,.35),
-        0 0 55px
-        rgba(145,86,181,.3);
-}
-
-.hero h1 span{
-    color:#e3b2df;
-}
-
-.hero-divider{
-    position:relative;
-    z-index:2;
-
-    margin:
-        30px
-        0;
-
-    color:var(--gold);
-
-    letter-spacing:10px;
+        0 2px 0 #5c4118,
+        0 0 35px rgba(240,213,131,.18);
 }
 
 .hero-subtitle{
-    position:relative;
-    z-index:2;
+    margin-top:25px;
 
-    max-width:700px;
+    font-size:22px;
 
-    margin-top:2px;
+    line-height:1.4;
 
-    color:#bcaabd;
-
-    font-size:20px;
-
-    line-height:1.7;
+    color:#d9d2df;
 }
 
-.counter{
-    position:relative;
-    z-index:2;
-
+.relationship-counter{
     display:flex;
-    flex-wrap:wrap;
 
     justify-content:center;
 
-    gap:11px;
+    gap:12px;
 
-    margin-top:30px;
+    flex-wrap:wrap;
+
+    margin-top:32px;
 }
 
-.counter-box{
-    min-width:92px;
+.counter{
+    min-width:105px;
 
-    padding:
-        13px
-        17px;
+    padding:14px 17px;
 
     border:
-        1px solid
-        rgba(216,183,109,.3);
+        1px solid rgba(215,178,93,.22);
+
+    border-radius:13px;
 
     background:
-        rgba(39,16,47,.48);
+        rgba(15,10,20,.55);
 
-    backdrop-filter:blur(8px);
+    backdrop-filter:blur(10px);
 
-    border-radius:4px;
+    box-shadow:
+        inset 0 0 20px rgba(255,255,255,.02);
 }
 
-.counter-box strong{
+.counter-number{
     display:block;
 
-    font-size:28px;
+    font-size:29px;
 
-    color:#eed7ec;
+    color:#f0d687;
 
-    font-weight:600;
+    font-weight:700;
 }
 
-.counter-box span{
-    display:block;
-
-    margin-top:2px;
-
-    font-size:12px;
+.counter-label{
+    font-size:11px;
 
     letter-spacing:2px;
 
-    text-transform:uppercase;
-
-    color:#a997aa;
+    color:#aaa1b3;
 }
 
-.newyear-counter{
-    position:relative;
-    z-index:2;
+.open-diary{
+    margin-top:30px;
 
-    margin-top:20px;
+    padding:15px 38px;
 
-    color:#a99baa;
+    border:
+        1px solid rgba(241,213,132,.45);
 
-    font-size:14px;
-
-    letter-spacing:2px;
-}
-
-.newyear-counter strong{
-    color:#e3c98d;
-}
-
-.scroll-hint{
-    position:absolute;
-
-    bottom:28px;
-
-    z-index:2;
-
-    color:#9d8ca3;
-
-    font-size:13px;
-
-    letter-spacing:3px;
-
-    text-transform:uppercase;
-
-    animation:
-        bounce
-        2s
-        infinite;
-}
-
-@keyframes bounce{
-
-    0%,100%{
-        transform:translateY(0);
-    }
-
-    50%{
-        transform:translateY(8px);
-    }
-}
-
-/* =========================================================
-   SECTIONS
-========================================================= */
-
-.section{
-    position:relative;
-
-    padding:
-        110px
-        20px;
-}
-
-.section-title{
-    text-align:center;
-
-    margin-bottom:55px;
-}
-
-.section-title .small{
-    color:#a98eb0;
-
-    text-transform:uppercase;
-
-    letter-spacing:4px;
-
-    font-size:12px;
-}
-
-.section-title h2{
-    margin-top:8px;
-
-    font-family:
-        "Great Vibes",
-        cursive;
-
-    font-size:68px;
-
-    font-weight:400;
-
-    color:#eacfe7;
-
-    text-shadow:
-        0 0 25px
-        rgba(215,127,201,.2);
-}
-
-.section-title .line{
-    width:110px;
-
-    height:1px;
-
-    margin:
-        15px
-        auto
-        0;
+    border-radius:50px;
 
     background:
         linear-gradient(
-            90deg,
-            transparent,
-            var(--gold),
-            transparent
+            135deg,
+            rgba(89,20,49,.9),
+            rgba(31,11,24,.95)
+        );
+
+    color:#efd585;
+
+    font-family:"Cormorant Garamond",serif;
+
+    font-size:20px;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 15px 35px rgba(0,0,0,.45);
+
+    transition:.35s;
+}
+
+.open-diary:hover{
+    transform:translateY(-4px);
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.6),
+        0 0 25px rgba(236,207,126,.12);
+}
+
+/* =========================================================
+   DIARY AREA
+========================================================= */
+
+.diary-section{
+    position:relative;
+
+    min-height:100vh;
+
+    padding:
+        120px
+        10px
+        170px;
+
+    display:flex;
+    justify-content:center;
+
+    overflow:hidden;
+}
+
+.diary-heading{
+    position:absolute;
+
+    top:35px;
+
+    font-family:"Great Vibes",cursive;
+
+    font-size:64px;
+
+    color:#e9cd80;
+
+    text-shadow:
+        0 2px 15px rgba(0,0,0,.4);
+}
+
+.diary-stage{
+    position:relative;
+
+    width:min(1420px,98vw);
+
+    margin-top:45px;
+
+    perspective:2000px;
+}
+
+/* =========================================================
+   SNOW GROUND UNDER BOOK
+========================================================= */
+
+.snow-bed{
+    position:absolute;
+
+    z-index:0;
+
+    left:1%;
+    right:1%;
+
+    bottom:-70px;
+
+    height:170px;
+
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            ellipse,
+            #ffffff 0%,
+            #e5ebf7 47%,
+            #aab7cd 78%,
+            transparent 79%
+        );
+
+    box-shadow:
+        0 35px 50px rgba(0,0,0,.5);
+}
+
+.snow-bed:before{
+    content:"";
+
+    position:absolute;
+
+    width:55%;
+    height:50px;
+
+    left:22%;
+    top:5px;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    filter:blur(3px);
+}
+
+/* =========================================================
+   DECORATIVE GIFTS
+========================================================= */
+
+.gift{
+    position:absolute;
+
+    z-index:8;
+
+    width:95px;
+    height:80px;
+
+    bottom:-12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #681d3c,
+            #2b0b1a
+        );
+
+    border:
+        2px solid #b78d43;
+
+    box-shadow:
+        0 17px 25px rgba(0,0,0,.5);
+}
+
+.gift:before{
+    content:"";
+
+    position:absolute;
+
+    left:39px;
+    top:0;
+
+    width:15px;
+    height:100%;
+
+    background:#d4ae59;
+}
+
+.gift:after{
+    content:"";
+
+    position:absolute;
+
+    left:0;
+    top:29px;
+
+    width:100%;
+    height:13px;
+
+    background:#d4ae59;
+}
+
+.gift-ribbon{
+    position:absolute;
+
+    left:35px;
+    top:-22px;
+
+    width:25px;
+    height:25px;
+
+    border:
+        5px solid #d4ae59;
+
+    border-radius:
+        50% 50% 0 50%;
+
+    transform:rotate(-30deg);
+}
+
+.gift-left{
+    left:3%;
+    transform:rotate(-8deg);
+}
+
+.gift-right{
+    right:3%;
+    transform:
+        rotate(7deg)
+        scale(.82);
+}
+
+/* =========================================================
+   BOOK SHELL
+========================================================= */
+
+.book-shell{
+    position:relative;
+
+    z-index:10;
+
+    width:min(1210px,96vw);
+
+    margin:auto;
+
+    transform:
+        rotateX(2deg)
+        rotateZ(-.15deg);
+
+    filter:
+        drop-shadow(
+            0 45px 38px rgba(0,0,0,.7)
+        );
+}
+
+/* =========================================================
+   BOOK SNOW
+========================================================= */
+
+.book-snow-cap{
+    position:absolute;
+
+    z-index:100;
+
+    left:28px;
+    right:28px;
+
+    top:-25px;
+
+    height:65px;
+
+    pointer-events:none;
+
+    background:
+        radial-gradient(
+            ellipse at 7% 62%,
+            #ffffff 0 14%,
+            transparent 15%
+        ),
+        radial-gradient(
+            ellipse at 21% 42%,
+            #f8fbff 0 14%,
+            transparent 15%
+        ),
+        radial-gradient(
+            ellipse at 38% 67%,
+            #ffffff 0 17%,
+            transparent 18%
+        ),
+        radial-gradient(
+            ellipse at 57% 40%,
+            #f8fbff 0 15%,
+            transparent 16%
+        ),
+        radial-gradient(
+            ellipse at 76% 61%,
+            #ffffff 0 16%,
+            transparent 17%
+        ),
+        radial-gradient(
+            ellipse at 94% 45%,
+            #f8fbff 0 13%,
+            transparent 14%
+        );
+
+    filter:
+        drop-shadow(
+            0 5px 4px rgba(0,0,0,.32)
+        );
+}
+
+.book-snow-cap:after{
+    content:"";
+
+    position:absolute;
+
+    left:2%;
+    right:2%;
+
+    bottom:1px;
+
+    height:17px;
+
+    border-radius:50%;
+
+    background:
+        linear-gradient(
+            180deg,
+            #ffffff,
+            #d1dbea
         );
 }
 
@@ -1094,182 +1282,234 @@ body:after{
    BOOK
 ========================================================= */
 
-.book-wrap{
-    width:min(1550px,100%);
-
-    margin:auto;
-
-    perspective:2200px;
-}
-
 .book{
     position:relative;
 
-    width:100%;
+    min-height:785px;
 
-    min-height:850px;
+    padding:36px;
 
-    padding:
-        28px;
+    border-radius:
+        18px
+        30px
+        30px
+        18px;
 
     border:
-        8px solid
-        #2b1025;
-
-    border-radius:14px;
+        8px solid #200c15;
 
     background:
         linear-gradient(
-            135deg,
-            #311127,
-            #5d1943 38%,
-            #722250 55%,
-            #321029
+            90deg,
+            #17070e 0%,
+            #421225 3%,
+            #661d39 9%,
+            #52152f 48%,
+            #681d3b 90%,
+            #2a0b18 97%,
+            #13050b 100%
         );
 
     box-shadow:
-        0 50px 100px rgba(0,0,0,.7),
-        0 0 0 2px rgba(215,183,109,.3),
-        inset 0 0 65px rgba(0,0,0,.5);
+        inset 0 0 0 3px #8e6634,
+        inset 0 0 35px rgba(0,0,0,.7),
+        0 25px 60px rgba(0,0,0,.8);
 }
 
-/* leather texture */
+/* leather grain */
 
 .book:before{
     content:"";
 
     position:absolute;
-    inset:10px;
 
-    border:
-        1px solid
-        rgba(226,191,111,.5);
+    inset:11px;
 
-    border-radius:8px;
-
-    pointer-events:none;
+    border-radius:13px;
 
     background:
         repeating-linear-gradient(
-            115deg,
-            transparent 0,
-            transparent 6px,
-            rgba(255,255,255,.012) 7px,
-            transparent 9px
+            33deg,
+            rgba(255,255,255,.025) 0,
+            rgba(255,255,255,.025) 1px,
+            transparent 1px,
+            transparent 5px
+        ),
+        repeating-linear-gradient(
+            -37deg,
+            rgba(0,0,0,.1) 0,
+            rgba(0,0,0,.1) 1px,
+            transparent 1px,
+            transparent 7px
         );
+
+    pointer-events:none;
 }
 
-.book:after{
-    content:"";
+/* =========================================================
+   PAGE BLOCK
+========================================================= */
 
+.page-stack{
     position:absolute;
 
-    top:0;
-    bottom:0;
-    left:57px;
+    z-index:2;
 
-    width:2px;
+    left:24px;
+    right:24px;
+
+    top:29px;
+    bottom:29px;
+
+    border-radius:11px;
 
     background:
-        linear-gradient(
-            180deg,
-            transparent,
-            #c8a767,
-            transparent
+        repeating-linear-gradient(
+            0deg,
+            #b9a476 0,
+            #b9a476 2px,
+            #e7d9b5 2px,
+            #e7d9b5 5px
         );
 
-    opacity:.45;
+    box-shadow:
+        8px 0 0 #8f7950,
+        13px 0 0 #c6b383,
+        17px 0 0 #806b48;
 }
 
-/* gold spine ornament */
+/* =========================================================
+   GOLD SPINE
+========================================================= */
 
 .book-spine{
     position:absolute;
 
-    left:22px;
-    top:50%;
+    z-index:40;
 
-    width:25px;
-    height:260px;
+    left:8px;
 
-    transform:
-        translateY(-50%);
+    top:25px;
+    bottom:25px;
 
-    border:
-        1px solid
-        rgba(220,185,103,.35);
+    width:36px;
 
-    border-radius:15px;
-
-    pointer-events:none;
-}
-
-.book-spine:before,
-.book-spine:after{
-    content:"✦";
-
-    position:absolute;
-
-    left:50%;
-
-    transform:
-        translateX(-50%);
-
-    color:#d8b96e;
-
-    font-size:13px;
-}
-
-.book-spine:before{
-    top:12px;
-}
-
-.book-spine:after{
-    bottom:12px;
-}
-
-/* rings */
-
-.book-rings{
-    position:absolute;
-
-    top:30px;
-    bottom:30px;
-    left:16px;
-
-    width:40px;
-
-    z-index:30;
-
-    display:flex;
-    flex-direction:column;
-
-    justify-content:space-around;
-
-    pointer-events:none;
-}
-
-.ring{
-    width:30px;
-    height:13px;
-
-    border:
-        3px solid
-        #cbcbd4;
-
-    border-radius:50%;
+    border-radius:10px;
 
     background:
         linear-gradient(
-            180deg,
-            #f4f3f5,
-            #77757f,
-            #e6e4e8
+            90deg,
+            #6d421e,
+            #d9b461,
+            #8d5f2c
         );
 
     box-shadow:
-        0 3px 5px rgba(0,0,0,.65),
-        inset 0 1px 2px white;
+        inset 0 0 9px #2d1207;
+}
+
+.spine-decoration{
+    position:absolute;
+
+    left:7px;
+
+    color:#fff0a5;
+
+    font-size:17px;
+}
+
+.spine-top{
+    top:30px;
+}
+
+.spine-middle{
+    top:50%;
+
+    transform:translateY(-50%);
+}
+
+.spine-bottom{
+    bottom:30px;
+}
+
+/* =========================================================
+   BOOK CORNERS
+========================================================= */
+
+.corner{
+    position:absolute;
+
+    z-index:50;
+
+    width:58px;
+    height:58px;
+
+    border:
+        5px solid #c59b4d;
+
+    filter:
+        drop-shadow(
+            0 1px 1px rgba(0,0,0,.5)
+        );
+}
+
+.corner-tl{
+    left:19px;
+    top:19px;
+
+    border-right:0;
+    border-bottom:0;
+}
+
+.corner-tr{
+    right:19px;
+    top:19px;
+
+    border-left:0;
+    border-bottom:0;
+}
+
+.corner-bl{
+    left:19px;
+    bottom:19px;
+
+    border-right:0;
+    border-top:0;
+}
+
+.corner-br{
+    right:19px;
+    bottom:19px;
+
+    border-left:0;
+    border-top:0;
+}
+
+/* =========================================================
+   BOOK EMBOSSED TITLE
+========================================================= */
+
+.book-cover-title{
+    position:absolute;
+
+    z-index:45;
+
+    left:50%;
+    top:69px;
+
+    transform:translateX(-50%);
+
+    white-space:nowrap;
+
+    font-family:"Great Vibes",cursive;
+
+    font-size:58px;
+
+    color:#e8cb7e;
+
+    text-shadow:
+        1px 1px 0 #674719,
+        0 0 12px rgba(240,211,130,.12);
 }
 
 /* =========================================================
@@ -1279,65 +1519,74 @@ body:after{
 .page{
     position:relative;
 
+    z-index:10;
+
     display:none;
 
-    min-height:785px;
+    min-height:715px;
+
+    padding:
+        112px
+        75px
+        65px;
 
     overflow:hidden;
 
-    border-radius:6px;
+    border-radius:10px;
 
-    padding:50px;
+    color:var(--ink);
 
     background:
         radial-gradient(
-            circle at 20% 15%,
-            rgba(124,77,55,.09),
-            transparent 20%
+            circle at 17% 13%,
+            rgba(255,255,255,.5),
+            transparent 22%
         ),
         radial-gradient(
-            circle at 85% 75%,
-            rgba(104,63,49,.07),
-            transparent 25%
+            circle at 84% 82%,
+            rgba(111,76,34,.12),
+            transparent 30%
         ),
         repeating-linear-gradient(
             0deg,
-            rgba(80,50,35,.025) 0,
-            rgba(80,50,35,.025) 1px,
+            rgba(75,48,23,.025) 0,
+            rgba(75,48,23,.025) 1px,
             transparent 1px,
-            transparent 4px
+            transparent 5px
         ),
         linear-gradient(
-            145deg,
-            #f7efdf,
-            #eadfc9
+            90deg,
+            #e0cea2,
+            #f0e2be 50%,
+            #ddc99b
         );
 
     box-shadow:
-        inset 0 0 55px
-        rgba(74,46,31,.13),
-
-        0 15px 30px
-        rgba(0,0,0,.3);
+        inset 0 0 35px rgba(74,43,17,.23),
+        0 0 0 2px #c2a977;
 }
 
 .page.active{
     display:block;
 
     animation:
-        pageIn
-        .72s
-        cubic-bezier(.18,.85,.2,1);
+        pageTurn
+        .75s
+        cubic-bezier(.2,.75,.2,1);
 }
 
-@keyframes pageIn{
+@keyframes pageTurn{
 
     0%{
         opacity:0;
         transform:
-            rotateY(-8deg)
-            translateX(35px)
-            scale(.985);
+            rotateY(-22deg)
+            translateX(40px)
+            scale(.98);
+    }
+
+    60%{
+        opacity:1;
     }
 
     100%{
@@ -1354,11 +1603,10 @@ body:after{
 
     position:absolute;
 
-    inset:15px;
+    inset:16px;
 
     border:
-        1px solid
-        rgba(90,54,38,.18);
+        1px solid rgba(82,51,25,.25);
 
     pointer-events:none;
 }
@@ -1368,293 +1616,20 @@ body:after{
 
     position:absolute;
 
-    right:0;
-    top:0;
-    bottom:0;
+    left:35px;
+    right:35px;
 
-    width:45px;
+    bottom:24px;
+
+    height:1px;
 
     background:
         linear-gradient(
             90deg,
             transparent,
-            rgba(64,42,32,.06)
+            rgba(90,57,28,.25),
+            transparent
         );
-
-    pointer-events:none;
-}
-
-/* corners */
-
-.corner{
-    position:absolute;
-
-    width:27px;
-    height:27px;
-
-    border-color:#b58b45;
-
-    opacity:.65;
-}
-
-.corner.tl{
-    top:25px;
-    left:25px;
-
-    border-top:1px solid;
-    border-left:1px solid;
-}
-
-.corner.tr{
-    top:25px;
-    right:25px;
-
-    border-top:1px solid;
-    border-right:1px solid;
-}
-
-.corner.bl{
-    bottom:25px;
-    left:25px;
-
-    border-bottom:1px solid;
-    border-left:1px solid;
-}
-
-.corner.br{
-    bottom:25px;
-    right:25px;
-
-    border-bottom:1px solid;
-    border-right:1px solid;
-}
-
-/* =========================================================
-   PHOTO SYSTEM
-========================================================= */
-
-.photo{
-    position:absolute;
-
-    z-index:6;
-
-    width:176px;
-
-    padding:
-        9px
-        9px
-        28px;
-
-    background:
-        linear-gradient(
-            145deg,
-            #fffaf0,
-            #eee5d5
-        );
-
-    border:
-        1px solid
-        rgba(70,48,39,.17);
-
-    box-shadow:
-        0 11px 25px
-        rgba(39,23,20,.24),
-
-        0 2px 5px
-        rgba(0,0,0,.12);
-
-    cursor:pointer;
-
-    transition:
-        transform .38s ease,
-        box-shadow .38s ease;
-}
-
-.photo img{
-    display:block;
-
-    width:100%;
-    height:170px;
-
-    object-fit:cover;
-
-    background:#ddd;
-
-    filter:
-        saturate(.94)
-        contrast(.99);
-}
-
-.photo:after{
-    content:"";
-
-    position:absolute;
-
-    bottom:8px;
-    left:50%;
-
-    width:68px;
-    height:1px;
-
-    transform:
-        translateX(-50%);
-
-    background:
-        rgba(80,50,40,.22);
-}
-
-.photo:hover{
-    z-index:20;
-
-    box-shadow:
-        0 20px 38px
-        rgba(40,20,30,.4);
-
-    transform:
-        translateY(-8px)
-        rotate(0deg)
-        scale(1.045);
-}
-
-/* positions */
-
-.photo.p1{
-    left:4%;
-    top:8%;
-
-    transform:rotate(-7deg);
-}
-
-.photo.p2{
-    left:4%;
-    top:40%;
-
-    transform:rotate(5deg);
-}
-
-.photo.p3{
-    left:4%;
-    bottom:8%;
-
-    transform:rotate(-4deg);
-}
-
-.photo.p4{
-    right:4%;
-    top:8%;
-
-    transform:rotate(6deg);
-}
-
-.photo.p5{
-    right:4%;
-    top:40%;
-
-    transform:rotate(-5deg);
-}
-
-.photo.p6{
-    right:4%;
-    bottom:8%;
-
-    transform:rotate(4deg);
-}
-
-/* tape */
-
-.photo .tape{
-    position:absolute;
-
-    width:64px;
-    height:19px;
-
-    top:-9px;
-    left:50%;
-
-    transform:
-        translateX(-50%)
-        rotate(-2deg);
-
-    background:
-        rgba(229,210,163,.64);
-
-    opacity:.85;
-}
-
-.photo.p2 .tape,
-.photo.p5 .tape{
-    transform:
-        translateX(-50%)
-        rotate(3deg);
-}
-
-/* focus */
-
-.photo-backdrop{
-    position:fixed;
-
-    inset:0;
-
-    z-index:190;
-
-    background:
-        rgba(7,3,12,.82);
-
-    backdrop-filter:
-        blur(6px);
-
-    opacity:0;
-
-    pointer-events:none;
-
-    transition:.3s;
-}
-
-.photo-backdrop.show{
-    opacity:1;
-
-    pointer-events:auto;
-}
-
-.photo.focused{
-    position:fixed;
-
-    z-index:200;
-
-    top:50%;
-    left:50%;
-
-    right:auto;
-    bottom:auto;
-
-    width:min(500px,80vw);
-
-    padding:
-        14px
-        14px
-        40px;
-
-    transform:
-        translate(-50%,-50%)
-        rotate(0deg)
-        scale(1);
-
-    box-shadow:
-        0 45px 100px
-        rgba(0,0,0,.78),
-
-        0 0 0 1px
-        rgba(236,215,165,.75);
-
-    cursor:zoom-out;
-}
-
-.photo.focused img{
-    height:auto;
-
-    max-height:72vh;
-
-    object-fit:contain;
 }
 
 /* =========================================================
@@ -1664,121 +1639,241 @@ body:after{
 .note{
     position:relative;
 
-    z-index:12;
+    z-index:15;
 
-    width:56%;
+    width:65%;
 
-    min-height:615px;
+    margin:auto;
 
-    margin:
-        28px
-        auto;
-
-    padding:
-        52px
-        58px
-        45px;
-
-    color:var(--ink);
-
-    border:
-        1px solid
-        rgba(87,54,39,.18);
-
-    background:
-        radial-gradient(
-            circle at 80% 20%,
-            rgba(164,112,77,.08),
-            transparent 25%
-        ),
-        linear-gradient(
-            145deg,
-            #faf1df,
-            #eee2cc
-        );
-
-    box-shadow:
-        0 18px 38px
-        rgba(54,31,25,.22),
-
-        inset 0 0 38px
-        rgba(102,64,44,.07);
+    text-align:left;
 }
 
-.note:before{
-    content:"";
+.note-number{
+    color:#78552c;
 
-    position:absolute;
-
-    inset:12px;
-
-    border:
-        1px solid
-        rgba(111,73,50,.15);
-
-    pointer-events:none;
-}
-
-.note-title{
-    text-align:center;
-
-    margin-bottom:28px;
-}
-
-.note-title .chapter{
-    color:#95744d;
-
-    font-size:12px;
+    font-size:13px;
 
     letter-spacing:4px;
 
     text-transform:uppercase;
+
+    margin-bottom:5px;
 }
 
-.note-title h3{
-    margin-top:6px;
+.note-title{
+    font-family:"Great Vibes",cursive;
 
-    font-size:39px;
+    font-weight:400;
 
-    font-weight:600;
+    font-size:52px;
 
-    color:#4a2736;
-}
+    line-height:1;
 
-.note-title .ornament{
-    color:#a57a42;
+    color:#5b2035;
 
-    margin-top:7px;
-
-    letter-spacing:8px;
+    margin-bottom:21px;
 }
 
 .note-text{
-    font-family:
-        "Kalam",
-        cursive;
+    font-family:"Kalam",cursive;
 
-    font-size:18px;
+    font-size:17px;
 
-    line-height:1.72;
+    line-height:1.67;
+
+    color:#362629;
 
     white-space:pre-line;
-
-    color:#3b2730;
 }
 
-.note-sign{
-    margin-top:25px;
+/* =========================================================
+   PHOTOS
+========================================================= */
 
-    text-align:right;
+.photo{
+    position:absolute;
 
-    font-family:
-        "Great Vibes",
-        cursive;
+    z-index:6;
 
-    font-size:32px;
+    width:148px;
 
-    color:#7c3b63;
+    padding:
+        7px
+        7px
+        27px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff9ea,
+            #e8dbc1
+        );
+
+    box-shadow:
+        0 10px 20px rgba(45,26,12,.35);
+
+    cursor:pointer;
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease;
+}
+
+.photo:before{
+    content:"";
+
+    position:absolute;
+
+    width:35px;
+    height:10px;
+
+    top:-5px;
+    left:50%;
+
+    transform:translateX(-50%) rotate(-2deg);
+
+    background:
+        rgba(218,202,163,.72);
+
+    box-shadow:
+        0 1px 2px rgba(0,0,0,.15);
+}
+
+.photo img{
+    display:block;
+
+    width:100%;
+    height:120px;
+
+    object-fit:cover;
+
+    filter:
+        saturate(.9)
+        contrast(.96);
+}
+
+.photo-caption{
+    position:absolute;
+
+    left:0;
+    right:0;
+
+    bottom:4px;
+
+    text-align:center;
+
+    font-family:"Kalam",cursive;
+
+    color:#55443c;
+
+    font-size:11px;
+}
+
+.photo:hover{
+    z-index:30;
+
+    transform:
+        scale(1.13)
+        rotate(0deg) !important;
+
+    box-shadow:
+        0 20px 40px rgba(0,0,0,.55);
+}
+
+/* positions */
+
+.photo-1{
+    left:31px;
+    top:142px;
+    transform:rotate(-8deg);
+}
+
+.photo-2{
+    right:31px;
+    top:155px;
+    transform:rotate(7deg);
+}
+
+.photo-3{
+    left:14px;
+    bottom:83px;
+    transform:rotate(6deg);
+}
+
+.photo-4{
+    right:17px;
+    bottom:92px;
+    transform:rotate(-6deg);
+}
+
+.photo-5{
+    left:91px;
+    top:305px;
+    transform:rotate(8deg);
+}
+
+.photo-6{
+    right:90px;
+    top:345px;
+    transform:rotate(-8deg);
+}
+
+/* =========================================================
+   PHOTO LIGHTBOX
+========================================================= */
+
+.photo-backdrop{
+    position:fixed;
+
+    inset:0;
+
+    z-index:500;
+
+    display:none;
+
+    background:
+        rgba(0,0,0,.82);
+
+    backdrop-filter:
+        blur(10px);
+}
+
+.photo-backdrop.show{
+    display:block;
+}
+
+.photo.focused{
+    position:fixed;
+
+    z-index:600;
+
+    left:50% !important;
+    top:50% !important;
+
+    right:auto !important;
+    bottom:auto !important;
+
+    width:min(650px,84vw);
+
+    padding:
+        15px
+        15px
+        50px;
+
+    transform:
+        translate(-50%,-50%)
+        rotate(0deg) !important;
+
+    box-shadow:
+        0 35px 110px #000;
+}
+
+.photo.focused img{
+    width:100%;
+    height:auto;
+    max-height:76vh;
+
+    object-fit:contain;
 }
 
 /* =========================================================
@@ -1786,444 +1881,486 @@ body:after{
 ========================================================= */
 
 .book-controls{
+    position:relative;
+
+    z-index:90;
+
     display:flex;
 
-    align-items:center;
     justify-content:center;
+    align-items:center;
 
-    gap:25px;
+    gap:18px;
 
-    margin-top:28px;
+    margin-top:25px;
 }
 
-.book-btn{
-    min-width:130px;
+.book-button{
+    width:53px;
+    height:53px;
 
-    padding:
-        13px
-        20px;
+    border-radius:50%;
 
     border:
-        1px solid
-        rgba(215,183,109,.42);
-
-    border-radius:3px;
-
-    color:#eadce9;
+        1px solid #c6a45b;
 
     background:
         linear-gradient(
-            135deg,
-            #42183d,
-            #211026
+            145deg,
+            #351322,
+            #170912
         );
 
-    font-family:
-        "Cormorant Garamond",
-        serif;
+    color:#e7cb7e;
 
-    font-size:17px;
+    font-size:27px;
 
     cursor:pointer;
 
-    transition:.3s;
+    transition:.25s;
 }
 
-.book-btn:hover:not(:disabled){
+.book-button:hover{
     transform:translateY(-2px);
 
-    border-color:#e3bd75;
-
     box-shadow:
-        0 8px 20px
-        rgba(0,0,0,.25);
+        0 8px 20px rgba(0,0,0,.4);
 }
 
-.book-btn:disabled{
-    opacity:.32;
-
-    cursor:not-allowed;
-}
-
-.page-counter{
-    min-width:95px;
+.book-page-count{
+    min-width:155px;
 
     text-align:center;
 
-    color:#b9a7b9;
+    color:#d8c99e;
 
-    font-size:15px;
-
-    letter-spacing:2px;
+    font-size:17px;
 }
 
 /* =========================================================
-   TIME SECTION
+   HOURGLASS
 ========================================================= */
 
-.time-section{
-    width:min(900px,100%);
+.hourglass-section{
+    min-height:75vh;
 
-    margin:auto;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:110px 20px;
+}
+
+.hourglass-card{
+    width:min(650px,94vw);
+
+    padding:48px 30px;
 
     text-align:center;
+
+    border:
+        1px solid rgba(220,182,96,.27);
+
+    border-radius:22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(44,21,43,.78),
+            rgba(12,8,15,.78)
+        );
+
+    backdrop-filter:blur(13px);
+
+    box-shadow:
+        0 30px 90px rgba(0,0,0,.5);
+}
+
+.script-title{
+    font-family:"Great Vibes",cursive;
+
+    font-size:67px;
+
+    color:#ebce80;
+}
+
+.hourglass-sub{
+    margin-top:5px;
+
+    color:#c3bac8;
+
+    font-size:19px;
 }
 
 .hourglass{
     position:relative;
 
-    width:165px;
-    height:255px;
+    width:140px;
+    height:195px;
 
-    margin:
-        35px
-        auto;
+    margin:28px auto;
 }
 
-.glass{
+.hourglass-frame-top,
+.hourglass-frame-bottom{
     position:absolute;
 
-    left:22px;
-    right:22px;
+    left:12px;
 
-    top:25px;
-    bottom:25px;
+    width:116px;
+    height:22px;
 
-    overflow:hidden;
+    border:
+        5px solid #cfae60;
+
+    background:#241222;
+
+    box-shadow:
+        0 0 10px rgba(207,174,96,.15);
 }
 
-.glass:before,
-.glass:after{
-    content:"";
-
-    position:absolute;
-
-    left:50%;
-
-    transform:
-        translateX(-50%);
-
-    border-left:
-        56px solid transparent;
-
-    border-right:
-        56px solid transparent;
-}
-
-.glass:before{
+.hourglass-frame-top{
     top:0;
 
-    border-top:
-        91px solid
-        rgba(224,205,235,.12);
+    border-radius:10px 10px 4px 4px;
 }
 
-.glass:after{
+.hourglass-frame-bottom{
     bottom:0;
 
-    border-bottom:
-        91px solid
-        rgba(224,205,235,.12);
+    border-radius:4px 4px 10px 10px;
+}
+
+.hourglass-glass{
+    position:absolute;
+
+    left:31px;
+    top:20px;
+
+    width:78px;
+    height:155px;
+
+    border-left:
+        4px solid #cfae60;
+
+    border-right:
+        4px solid #cfae60;
+
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            65% 48%,
+            100% 100%,
+            0 100%,
+            35% 48%
+        );
+
+    background:
+        rgba(226,204,150,.06);
 }
 
 .sand-top{
     position:absolute;
 
-    left:34px;
-    top:20px;
+    left:43px;
+    top:28px;
 
-    width:72px;
-    height:65px;
-
-    border-radius:
-        0
-        0
-        50%
-        50%;
+    width:54px;
+    height:58px;
 
     background:
         linear-gradient(
             180deg,
-            #d7b76d,
-            #9f7540
+            #e0c170,
+            #ad833b
         );
 
-    animation:
-        sandTop
-        5s
-        linear
-        infinite;
+    clip-path:
+        polygon(
+            0 0,
+            100% 0,
+            68% 100%,
+            32% 100%
+        );
 }
 
 .sand-stream{
     position:absolute;
 
-    left:79px;
-    top:70px;
+    left:68px;
+    top:76px;
 
-    width:3px;
-    height:110px;
+    width:4px;
+    height:63px;
 
-    background:#c49d55;
+    background:#d4af59;
 
-    box-shadow:
-        0 0 8px
-        rgba(215,183,109,.6);
+    animation:
+        sandFall
+        1.8s
+        linear
+        infinite;
 }
 
 .sand-bottom{
     position:absolute;
 
-    left:28px;
-    bottom:20px;
+    left:45px;
+    bottom:23px;
 
-    width:82px;
-    height:50px;
-
-    border-radius:
-        50%
-        50%
-        10px
-        10px;
+    width:50px;
+    height:45px;
 
     background:
         linear-gradient(
             180deg,
-            #a87940,
-            #d4b26b
+            #dcb967,
+            #ae843b
+        );
+
+    clip-path:
+        polygon(
+            30% 0,
+            70% 0,
+            100% 100%,
+            0 100%
         );
 }
 
-@keyframes sandTop{
-
-    from{
-        height:65px;
-    }
-
-    to{
-        height:8px;
-    }
+@keyframes sandFall{
+    from{height:0}
+    to{height:63px}
 }
 
-.hourglass-frame{
-    position:absolute;
+/* =========================================================
+   NEW YEAR
+========================================================= */
 
-    inset:0;
+.new-year{
+    position:relative;
 
-    border-top:
-        8px solid
-        #bda675;
+    min-height:70vh;
 
-    border-bottom:
-        8px solid
-        #bda675;
+    padding:130px 20px;
 
-    box-shadow:
-        inset 0 0 15px
-        rgba(0,0,0,.4),
-
-        0 10px 30px
-        rgba(0,0,0,.3);
+    text-align:center;
 }
 
-.hourglass-text{
-    max-width:650px;
+.new-year-sub{
+    margin-top:7px;
 
-    margin:auto;
+    color:#c6bdcb;
 
-    color:#b8a8ba;
+    font-size:20px;
+}
 
-    font-size:19px;
+.countdown{
+    display:flex;
 
-    line-height:1.7;
+    justify-content:center;
+
+    gap:13px;
+
+    flex-wrap:wrap;
+
+    margin-top:30px;
+}
+
+.countdown-box{
+    min-width:110px;
+
+    padding:19px;
+
+    border:
+        1px solid rgba(216,179,94,.25);
+
+    border-radius:13px;
+
+    background:
+        rgba(34,17,39,.6);
+
+    backdrop-filter:blur(10px);
+}
+
+.countdown-box strong{
+    display:block;
+
+    color:#efd37d;
+
+    font-size:37px;
+}
+
+.countdown-box span{
+    color:#a9a1b0;
+
+    font-size:13px;
 }
 
 /* =========================================================
    FINAL
 ========================================================= */
 
-.final-section{
+.final{
+    position:relative;
+
     min-height:100vh;
 
-    padding:
-        120px
-        20px
-        160px;
+    padding:130px 20px;
 
     display:flex;
-
     justify-content:center;
     align-items:center;
+
+    text-align:center;
 }
 
 .final-card{
-    position:relative;
-
-    width:min(1000px,100%);
+    width:min(900px,95vw);
 
     padding:
-        75px
-        70px
-        80px;
+        65px
+        50px;
 
-    text-align:center;
+    border-radius:24px;
 
     border:
-        1px solid
-        rgba(216,183,109,.34);
+        1px solid rgba(224,186,97,.34);
 
     background:
-        radial-gradient(
-            circle at 50% 0%,
-            rgba(142,81,160,.18),
-            transparent 40%
-        ),
         linear-gradient(
             145deg,
-            rgba(43,17,46,.94),
-            rgba(15,8,23,.97)
+            rgba(57,19,43,.9),
+            rgba(10,7,13,.92)
         );
 
     box-shadow:
-        0 45px 110px
-        rgba(0,0,0,.62),
-
-        inset 0 0 70px
-        rgba(190,105,174,.04);
+        0 35px 120px #000;
 }
 
-.final-card:before{
-    content:"✦";
+.final-title{
+    font-family:"Great Vibes",cursive;
 
-    position:absolute;
-
-    top:25px;
-    left:30px;
-
-    color:var(--gold);
-
-    font-size:30px;
-
-    opacity:.7;
-}
-
-.final-card:after{
-    content:"✦";
-
-    position:absolute;
-
-    right:30px;
-    bottom:25px;
-
-    color:var(--gold);
-
-    font-size:30px;
-
-    opacity:.7;
-}
-
-.final-label{
-    color:#ae93b1;
-
-    letter-spacing:5px;
-
-    font-size:12px;
-
-    text-transform:uppercase;
-}
-
-.final-card h2{
-    margin:
-        12px
-        0
-        30px;
-
-    font-family:
-        "Great Vibes",
-        cursive;
-
-    font-size:80px;
+    font-size:88px;
 
     font-weight:400;
 
-    color:#eed5e9;
+    color:#efd27f;
 }
 
 .final-text{
-    max-width:730px;
+    margin-top:28px;
 
-    margin:auto;
-
-    white-space:pre-line;
-
-    color:#d0c0d0;
-
-    font-family:
-        "Kalam",
-        cursive;
+    font-family:"Kalam",cursive;
 
     font-size:20px;
 
-    line-height:1.9;
-}
+    line-height:1.85;
 
-.final-photo{
-    width:min(500px,90%);
+    color:#ded5dc;
 
-    margin:
-        45px
-        auto
-        0;
-
-    padding:
-        10px
-        10px
-        30px;
-
-    background:#f6efe3;
-
-    box-shadow:
-        0 20px 45px
-        rgba(0,0,0,.4);
-
-    transform:rotate(-1.5deg);
-}
-
-.final-photo img{
-    display:block;
-
-    width:100%;
-
-    max-height:500px;
-
-    object-fit:cover;
+    white-space:pre-line;
 }
 
 .final-heart{
-    margin-top:35px;
+    margin-top:27px;
 
-    font-size:50px;
+    font-size:47px;
 
-    color:#e88bcf;
+    color:#dfa7bd;
 
     text-shadow:
-        0 0 25px
-        rgba(232,139,207,.45);
-
-    animation:
-        heartPulse
-        2s
-        infinite;
+        0 0 20px rgba(223,167,189,.2);
 }
 
-@keyframes heartPulse{
+/* =========================================================
+   SANTA
+========================================================= */
 
-    0%,100%{
-        transform:scale(1);
+.santa-flight{
+    position:fixed;
+
+    z-index:150;
+
+    left:-500px;
+
+    top:10%;
+
+    display:flex;
+    align-items:center;
+
+    gap:5px;
+
+    opacity:0;
+
+    pointer-events:none;
+}
+
+.santa-flight.fly{
+    animation:
+        santaFlight
+        16s
+        linear
+        forwards;
+}
+
+.santa{
+    font-size:74px;
+
+    filter:
+        drop-shadow(
+            0 7px 7px rgba(0,0,0,.6)
+        );
+}
+
+.reindeer{
+    font-size:44px;
+
+    filter:
+        drop-shadow(
+            0 5px 5px rgba(0,0,0,.6)
+        );
+}
+
+@keyframes santaFlight{
+
+    0%{
+        left:-500px;
+
+        transform:
+            translateY(25px)
+            rotate(-2deg);
+
+        opacity:0;
     }
 
-    50%{
-        transform:scale(1.12);
+    8%{
+        opacity:1;
+    }
+
+    35%{
+        transform:
+            translateY(-30px)
+            rotate(1deg);
+    }
+
+    65%{
+        transform:
+            translateY(25px)
+            rotate(-1deg);
+    }
+
+    92%{
+        opacity:1;
+    }
+
+    100%{
+        left:115%;
+
+        transform:
+            translateY(-10px);
+
+        opacity:0;
     }
 }
 
@@ -2234,480 +2371,340 @@ body:after{
 .music-button{
     position:fixed;
 
-    right:24px;
-    bottom:24px;
+    z-index:300;
 
-    z-index:120;
+    right:20px;
+    bottom:20px;
 
-    width:57px;
-    height:57px;
+    width:52px;
+    height:52px;
 
     border-radius:50%;
 
     border:
-        1px solid
-        rgba(216,183,109,.45);
-
-    color:#ead5e8;
+        1px solid rgba(233,201,122,.5);
 
     background:
-        rgba(40,15,43,.84);
+        rgba(34,15,29,.9);
 
-    backdrop-filter:blur(10px);
-
-    box-shadow:
-        0 8px 25px
-        rgba(0,0,0,.35);
-
-    cursor:pointer;
+    color:#efd480;
 
     font-size:20px;
 
-    transition:.3s;
-}
+    cursor:pointer;
 
-.music-button:hover{
-    transform:scale(1.08);
+    backdrop-filter:blur(8px);
 
-    border-color:#e7bf76;
-}
-
-.music-button.playing{
     box-shadow:
-        0 0 0 5px
-        rgba(214,147,210,.06),
-
-        0 0 30px
-        rgba(215,130,202,.35);
+        0 10px 30px rgba(0,0,0,.4);
 }
 
 /* =========================================================
-   SANTA
+   MAGICAL SPARKLES
 ========================================================= */
 
-.santa-flight{
+.sparkle{
     position:fixed;
 
-    z-index:90;
+    z-index:85;
 
-    top:13%;
-    left:-520px;
+    width:3px;
+    height:3px;
 
-    display:flex;
+    border-radius:50%;
 
-    align-items:center;
+    background:white;
 
-    gap:5px;
+    box-shadow:
+        0 0 12px white;
 
     pointer-events:none;
-
-    opacity:0;
-
-    filter:
-        drop-shadow(
-            0 8px 18px
-            rgba(0,0,0,.45)
-        );
-}
-
-.santa-flight.fly{
-    animation:
-        santaFly
-        15s
-        linear
-        forwards;
-}
-
-.santa{
-    font-size:78px;
-}
-
-.reindeer{
-    font-size:58px;
-}
-
-.reindeer.r1{
-    transform:translateY(18px);
-}
-
-.reindeer.r2{
-    transform:translateY(-5px);
-}
-
-.reindeer.r3{
-    transform:translateY(12px);
-}
-
-@keyframes santaFly{
-
-    0%{
-        left:-520px;
-        top:15%;
-        opacity:0;
-    }
-
-    7%{
-        opacity:1;
-    }
-
-    45%{
-        top:10%;
-    }
-
-    72%{
-        top:18%;
-    }
-
-    93%{
-        opacity:1;
-    }
-
-    100%{
-        left:calc(100% + 520px);
-        top:11%;
-        opacity:0;
-    }
-}
-
-/* =========================================================
-   FOOTER
-========================================================= */
-
-footer{
-    padding:
-        35px
-        20px
-        80px;
-
-    text-align:center;
-
-    color:#817182;
-
-    font-size:14px;
-
-    letter-spacing:1px;
-}
-
-footer span{
-    color:#c78dbb;
 }
 
 /* =========================================================
    RESPONSIVE
 ========================================================= */
 
-@media(max-width:1200px){
+@media(max-width:950px){
 
-    .note{
-        width:60%;
-
-        padding:
-            45px;
+    .pine-frame{
+        opacity:.5;
+        transform:scale(.75);
+        transform-origin:top left;
     }
 
-    .photo{
-        width:145px;
-    }
-
-    .photo img{
-        height:145px;
-    }
-
-    .photo.p1,
-    .photo.p2,
-    .photo.p3{
-        left:1.5%;
-    }
-
-    .photo.p4,
-    .photo.p5,
-    .photo.p6{
-        right:1.5%;
-    }
-}
-
-@media(max-width:900px){
-
-    .book{
-        padding:17px;
-        min-height:auto;
-    }
-
-    .page{
-        min-height:930px;
-        padding:25px;
-    }
-
-    .note{
-        width:77%;
-
-        min-height:740px;
-
-        margin:
-            45px
-            auto;
-
-        padding:
-            40px
-            32px;
-    }
-
-    .photo{
-        width:125px;
-    }
-
-    .photo img{
-        height:120px;
-    }
-
-    .photo.p1{
-        left:1%;
-        top:4%;
-    }
-
-    .photo.p2{
-        left:1%;
-        top:43%;
-    }
-
-    .photo.p3{
-        left:1%;
-        bottom:4%;
-    }
-
-    .photo.p4{
-        right:1%;
-        top:4%;
-    }
-
-    .photo.p5{
-        right:1%;
-        top:43%;
-    }
-
-    .photo.p6{
-        right:1%;
-        bottom:4%;
-    }
-
-    .note-text{
-        font-size:16px;
-        line-height:1.65;
-    }
-
-    .note-title h3{
-        font-size:32px;
-    }
-
-    .final-card{
-        padding:
-            55px
-            30px
-            60px;
-    }
-
-    .final-card h2{
-        font-size:64px;
-    }
-}
-
-@media(max-width:600px){
-
-    .christmas-lights{
-        height:55px;
-    }
-
-    .bulb{
-        width:9px;
-        height:13px;
-        top:27px;
-    }
-
-    .hero{
-        padding-top:105px;
-    }
-
-    .hero h1{
-        font-size:72px;
-    }
-
-    .hero-subtitle{
-        font-size:17px;
-    }
-
-    .hero-eyebrow{
-        font-size:10px;
-        letter-spacing:3px;
+    .pine-frame.right{
+        transform:
+            scaleX(-1)
+            scale(.75)
+            rotate(-10deg);
+        transform-origin:top right;
     }
 
     .moon{
-        width:140px;
-        height:140px;
-        right:-20px;
+        width:85px;
+        height:85px;
     }
 
     .moon:after{
-        width:140px;
-        height:140px;
-        left:35px;
-    }
-
-    .counter{
-        gap:7px;
-    }
-
-    .counter-box{
-        min-width:70px;
-
-        padding:
-            10px
-            7px;
-    }
-
-    .counter-box strong{
-        font-size:22px;
-    }
-
-    .counter-box span{
-        font-size:8px;
-        letter-spacing:1px;
-    }
-
-    .section{
-        padding:
-            75px
-            10px;
-    }
-
-    .section-title h2{
-        font-size:54px;
+        width:77px;
+        height:77px;
+        left:23px;
     }
 
     .book{
-        border-width:4px;
-        padding:10px;
-    }
-
-    .book:after{
-        display:none;
-    }
-
-    .book-spine{
-        display:none;
+        min-height:900px;
+        padding:25px;
     }
 
     .page{
-        min-height:1000px;
-
-        padding:12px;
+        min-height:820px;
+        padding:
+            105px
+            30px
+            50px;
     }
 
     .note{
-        width:81%;
-
-        min-height:820px;
-
-        margin:
-            50px
-            auto;
-
-        padding:
-            35px
-            23px;
+        width:88%;
     }
 
-    .note-title h3{
-        font-size:29px;
+    .note-title{
+        font-size:44px;
     }
 
     .note-text{
         font-size:15px;
-        line-height:1.62;
+        line-height:1.58;
     }
 
     .photo{
-        width:91px;
-
-        padding:
-            5px
-            5px
-            17px;
+        width:112px;
     }
 
     .photo img{
         height:90px;
     }
 
-    .photo .tape{
-        width:38px;
-        height:12px;
-        top:-6px;
+    .photo-5,
+    .photo-6{
+        display:none;
     }
 
-    .photo.p1{
-        left:0;
-        top:3%;
+    .photo-1{
+        left:12px;
     }
 
-    .photo.p2{
-        left:0;
-        top:45%;
+    .photo-2{
+        right:12px;
     }
 
-    .photo.p3{
-        left:0;
-        bottom:3%;
+    .photo-3{
+        left:8px;
     }
 
-    .photo.p4{
-        right:0;
-        top:3%;
+    .photo-4{
+        right:8px;
     }
 
-    .photo.p5{
-        right:0;
-        top:45%;
+    .book-cover-title{
+        font-size:46px;
+    }
+}
+
+@media(max-width:600px){
+
+    .hero{
+        padding:
+            80px
+            15px
+            100px;
     }
 
-    .photo.p6{
-        right:0;
-        bottom:3%;
+    .hero-kicker{
+        letter-spacing:3px;
+        font-size:9px;
     }
 
-    .book-controls{
-        gap:8px;
+    .hero-title{
+        font-size:70px;
     }
 
-    .book-btn{
-        min-width:100px;
+    .hero-subtitle{
+        font-size:17px;
+    }
+
+    .counter{
+        min-width:82px;
+    }
+
+    .counter-number{
+        font-size:23px;
+    }
+
+    .diary-section{
+        padding-top:105px;
+    }
+
+    .diary-heading{
+        font-size:48px;
+    }
+
+    .diary-stage{
+        margin-top:40px;
+    }
+
+    .book-shell{
+        width:97vw;
+    }
+
+    .book{
+        min-height:930px;
+
+        padding:18px;
+
+        border-width:5px;
+    }
+
+    .page-stack{
+        left:18px;
+        right:18px;
+    }
+
+    .book-spine{
+        width:28px;
+        left:5px;
+    }
+
+    .corner{
+        width:42px;
+        height:42px;
+        border-width:4px;
+    }
+
+    .corner-tl,
+    .corner-tr{
+        top:15px;
+    }
+
+    .corner-bl,
+    .corner-br{
+        bottom:15px;
+    }
+
+    .corner-tl,
+    .corner-bl{
+        left:15px;
+    }
+
+    .corner-tr,
+    .corner-br{
+        right:15px;
+    }
+
+    .book-cover-title{
+        top:57px;
+        font-size:38px;
+    }
+
+    .page{
+        min-height:850px;
 
         padding:
-            11px
-            10px;
-
-        font-size:15px;
+            103px
+            17px
+            30px;
     }
 
-    .page-counter{
-        min-width:60px;
+    .note{
+        width:94%;
+    }
 
-        font-size:12px;
+    .note-number{
+        text-align:center;
+        font-size:10px;
+        letter-spacing:2px;
+    }
+
+    .note-title{
+        text-align:center;
+        font-size:37px;
+    }
+
+    .note-text{
+        font-size:13.5px;
+        line-height:1.54;
+    }
+
+    .photo{
+        width:80px;
+        padding:
+            4px
+            4px
+            19px;
+    }
+
+    .photo img{
+        height:64px;
+    }
+
+    .photo-caption{
+        font-size:8px;
+    }
+
+    .photo-1{
+        top:130px;
+        left:8px;
+    }
+
+    .photo-2{
+        top:135px;
+        right:8px;
+    }
+
+    .photo-3{
+        bottom:50px;
+        left:7px;
+    }
+
+    .photo-4{
+        bottom:55px;
+        right:7px;
+    }
+
+    .snow-bed{
+        bottom:-45px;
+    }
+
+    .gift{
+        transform:scale(.6);
+    }
+
+    .gift-left{
+        left:-5px;
+    }
+
+    .gift-right{
+        right:-5px;
+    }
+
+    .script-title{
+        font-size:51px;
     }
 
     .final-card{
         padding:
-            50px
-            20px
-            55px;
+            45px
+            22px;
     }
 
-    .final-card h2{
-        font-size:53px;
+    .final-title{
+        font-size:61px;
     }
 
     .final-text{
-        font-size:17px;
-        line-height:1.75;
+        font-size:16px;
+        line-height:1.72;
     }
 
     .santa{
@@ -2715,12 +2712,7 @@ footer span{
     }
 
     .reindeer{
-        font-size:40px;
-    }
-
-    .music-button{
-        right:15px;
-        bottom:15px;
+        font-size:31px;
     }
 }
 
@@ -2729,300 +2721,356 @@ footer span{
 
 <body>
 
-<!-- =========================================================
-     STARS
-========================================================= -->
+<!-- =======================================================
+     SKY
+======================================================= -->
 
-<div id="stars"></div>
+<div class="sky">
 
-<!-- =========================================================
-     SNOW
-========================================================= -->
-
-<div id="snow"></div>
-<div class="snow-ground"></div>
-
-<!-- =========================================================
-     CHRISTMAS LIGHTS
-========================================================= -->
-
-<div class="christmas-lights">
-
-    <div class="wire"></div>
-
-    <div class="bulb b1"></div>
-    <div class="bulb b2"></div>
-    <div class="bulb b3"></div>
-    <div class="bulb b4"></div>
-    <div class="bulb b5"></div>
-    <div class="bulb b6"></div>
-    <div class="bulb b7"></div>
-    <div class="bulb b8"></div>
-    <div class="bulb b9"></div>
-    <div class="bulb b10"></div>
-    <div class="bulb b11"></div>
-    <div class="bulb b12"></div>
-
-</div>
-
-
-<!-- =========================================================
-     LOCK SCREEN
-========================================================= -->
-
-<div id="lockScreen">
-
-    <div class="lock-card">
-
-        <div class="lock-icon">
-            ✦
-        </div>
-
-        <h1>
-            Sadece İkimiz
-        </h1>
-
-        <p>
-            Bu sayfa sadece ikimizin hikâyesi için.
-        </p>
-
-        <input
-            id="passwordInput"
-            type="password"
-            placeholder="Şifremiz..."
-            autocomplete="off"
-        >
-
-        <button
-            class="unlock-btn"
-            onclick="unlock()"
-        >
-            Hikâyemizi Aç ♡
-        </button>
-
-        <div id="errorMessage"></div>
-
-    </div>
-
-</div>
-
-
-<!-- =========================================================
-     MAIN
-========================================================= -->
-
-<div id="mainContent">
-
-
-<!-- =========================================================
-     HERO
-========================================================= -->
-
-<section class="hero">
+    <div class="sky-glow"></div>
 
     <div class="moon"></div>
 
+    <div class="stars" id="stars"></div>
 
-    <div class="distant-tree">
+    <div class="forest">
+        <div class="forest-tree tree-a"></div>
+        <div class="forest-tree tree-b"></div>
+        <div class="forest-tree tree-c"></div>
+        <div class="forest-tree tree-d"></div>
+        <div class="forest-tree tree-e"></div>
+        <div class="forest-tree tree-f"></div>
+    </div>
 
-        <div class="tree-layer tree1"></div>
-        <div class="tree-layer tree2"></div>
-        <div class="tree-layer tree3"></div>
+</div>
 
-        <div class="tree-light t1"></div>
-        <div class="tree-light t2"></div>
-        <div class="tree-light t3"></div>
-        <div class="tree-light t4"></div>
-        <div class="tree-light t5"></div>
+<!-- =======================================================
+     SNOW
+======================================================= -->
+
+<div class="snow-layer snow-back" id="snowBack"></div>
+<div class="snow-layer snow-mid" id="snowMid"></div>
+<div class="snow-layer snow-front" id="snowFront"></div>
+
+<div class="wind">
+    <span class="wind-line"
+          style="top:18%;--wind-speed:9s;--wind-delay:0s"></span>
+
+    <span class="wind-line"
+          style="top:33%;--wind-speed:12s;--wind-delay:2s"></span>
+
+    <span class="wind-line"
+          style="top:54%;--wind-speed:10s;--wind-delay:4s"></span>
+
+    <span class="wind-line"
+          style="top:72%;--wind-speed:13s;--wind-delay:1s"></span>
+
+    <span class="wind-line"
+          style="top:87%;--wind-speed:11s;--wind-delay:5s"></span>
+</div>
+
+<!-- =======================================================
+     PINE FRAME LEFT
+======================================================= -->
+
+<div class="pine-frame left">
+
+    <div class="pine-branch"></div>
+    <div class="pine-branch"></div>
+    <div class="pine-branch"></div>
+
+    <div class="pine-snow s1"></div>
+    <div class="pine-snow s2"></div>
+    <div class="pine-snow s3"></div>
+
+    <div class="light-wire">
+        <i class="bulb" style="left:28px;top:42px"></i>
+        <i class="bulb" style="left:78px;top:67px"></i>
+        <i class="bulb" style="left:130px;top:80px"></i>
+        <i class="bulb" style="left:185px;top:74px"></i>
+        <i class="bulb" style="left:238px;top:55px"></i>
+        <i class="bulb" style="left:282px;top:32px"></i>
+    </div>
+
+</div>
+
+<!-- =======================================================
+     PINE FRAME RIGHT
+======================================================= -->
+
+<div class="pine-frame right">
+
+    <div class="pine-branch"></div>
+    <div class="pine-branch"></div>
+    <div class="pine-branch"></div>
+
+    <div class="pine-snow s1"></div>
+    <div class="pine-snow s2"></div>
+    <div class="pine-snow s3"></div>
+
+    <div class="light-wire">
+        <i class="bulb" style="left:28px;top:42px"></i>
+        <i class="bulb" style="left:78px;top:67px"></i>
+        <i class="bulb" style="left:130px;top:80px"></i>
+        <i class="bulb" style="left:185px;top:74px"></i>
+        <i class="bulb" style="left:238px;top:55px"></i>
+        <i class="bulb" style="left:282px;top:32px"></i>
+    </div>
+
+</div>
+
+<!-- =======================================================
+     LOCK
+======================================================= -->
+
+<div class="lock" id="lockScreen">
+
+    <div class="lock-card">
+
+        <div class="lock-snowflake">❄</div>
+
+        <div class="lock-title">
+            Sadece İkimiz
+        </div>
+
+        <div class="lock-text">
+            Bu defterde sadece bizim hikâyemiz var.
+        </div>
+
+        <input
+            id="passwordInput"
+            class="lock-input"
+            type="password"
+            autocomplete="off"
+            placeholder="Defterin şifresi"
+        >
+
+        <button
+            class="unlock"
+            onclick="unlockDiary()">
+            Defteri Aç
+        </button>
+
+        <div
+            class="lock-error"
+            id="lockError">
+        </div>
 
     </div>
 
+</div>
 
-    <div class="hero-eyebrow">
-        Noel gecesi · bizim hikâyemiz
-    </div>
+<!-- =======================================================
+     SANTA
+======================================================= -->
 
+<div class="santa-flight" id="santaFlight">
 
-    <h1>
-        Sadece İkimiz <span>♡</span>
-    </h1>
+    <div class="santa">🎅</div>
 
+    <div class="reindeer">🦌</div>
+    <div class="reindeer">🦌</div>
+    <div class="reindeer">🦌</div>
 
-    <div class="hero-divider">
-        ✦ · ✧ · ✦
-    </div>
+</div>
 
+<!-- =======================================================
+     HERO
+======================================================= -->
 
-    <p class="hero-subtitle">
-        Bazı hikâyeler anlatılmaz.<br>
-        Yaşanır, hatırlanır ve yıllar geçse bile kalbin bir köşesinde yaşamaya devam eder.
-    </p>
+<section class="hero" id="home">
 
+    <div class="hero-ground"></div>
 
-    <div class="counter">
+    <div class="hero-content">
 
-        <div class="counter-box">
-            <strong id="years">0</strong>
-            <span>Yıl</span>
+        <div class="hero-kicker">
+            Bir kış gecesinde başlayan hikâyemiz
         </div>
 
-        <div class="counter-box">
-            <strong id="months">0</strong>
-            <span>Ay</span>
+        <h1 class="hero-title">
+            Sadece İkimiz ♡
+        </h1>
+
+        <div class="hero-subtitle">
+            Bazı hikâyeler yazılmaz.<br>
+            Yaşanır.
         </div>
 
-        <div class="counter-box">
-            <strong id="days">0</strong>
-            <span>Gün</span>
+        <div class="relationship-counter">
+
+            <div class="counter">
+                <span
+                    class="counter-number"
+                    id="days">
+                    0
+                </span>
+
+                <span class="counter-label">
+                    GÜN
+                </span>
+            </div>
+
+            <div class="counter">
+                <span
+                    class="counter-number"
+                    id="hours">
+                    00
+                </span>
+
+                <span class="counter-label">
+                    SAAT
+                </span>
+            </div>
+
+            <div class="counter">
+                <span
+                    class="counter-number"
+                    id="minutes">
+                    00
+                </span>
+
+                <span class="counter-label">
+                    DAKİKA
+                </span>
+            </div>
+
+            <div class="counter">
+                <span
+                    class="counter-number"
+                    id="seconds">
+                    00
+                </span>
+
+                <span class="counter-label">
+                    SANİYE
+                </span>
+            </div>
+
         </div>
 
-        <div class="counter-box">
-            <strong id="hours">0</strong>
-            <span>Saat</span>
-        </div>
+        <button
+            class="open-diary"
+            onclick="scrollToDiary()">
 
-        <div class="counter-box">
-            <strong id="minutes">0</strong>
-            <span>Dakika</span>
-        </div>
+            ❄&nbsp; Defteri Aç
 
-        <div class="counter-box">
-            <strong id="seconds">0</strong>
-            <span>Saniye</span>
-        </div>
+        </button>
 
-    </div>
-
-
-    <div class="newyear-counter">
-        Yeni yıla kalan:
-        <strong id="newYearCountdown">
-            hesaplanıyor...
-        </strong>
-    </div>
-
-
-    <div class="scroll-hint">
-        Hikâyemize doğru ↓
     </div>
 
 </section>
 
+<!-- =======================================================
+     DIARY
+======================================================= -->
 
-<!-- =========================================================
-     STORY BOOK
-========================================================= -->
+<section
+    class="diary-section"
+    id="diary">
 
-<section class="section">
+    <div class="diary-heading">
+        Bizim Hikâyemiz
+    </div>
 
-    <div class="section-title">
+    <div class="diary-stage">
 
-        <div class="small">
-            Bir hikâyenin sayfaları
+        <div class="snow-bed"></div>
+
+        <!-- GIFTS -->
+
+        <div class="gift gift-left">
+            <div class="gift-ribbon"></div>
         </div>
 
-        <h2>
-            Bizim Hikâyemiz
-        </h2>
-
-        <div class="line"></div>
-
-    </div>
-
-
-    <div class="book-wrap">
-
-        <div class="book">
-
-            <div class="book-spine"></div>
-
-
-            <div class="book-rings">
-
-                <div class="ring"></div>
-                <div class="ring"></div>
-                <div class="ring"></div>
-                <div class="ring"></div>
-                <div class="ring"></div>
-                <div class="ring"></div>
-                <div class="ring"></div>
-                <div class="ring"></div>
-                <div class="ring"></div>
-                <div class="ring"></div>
-
-            </div>
-
-
-            <div
-                class="photo-backdrop"
-                id="photoBackdrop"
-                onclick="closePhoto()"
-            ></div>
-
-
-<!-- =========================================================
-     PAGE 1
-========================================================= -->
-
-<div class="page active">
-
-    <div class="corner tl"></div>
-    <div class="corner tr"></div>
-    <div class="corner bl"></div>
-    <div class="corner br"></div>
-
-
-    <div class="photo p1" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto1.jpg" alt="">
-    </div>
-
-    <div class="photo p2" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto2.jpg" alt="">
-    </div>
-
-    <div class="photo p3" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto3.jpg" alt="">
-    </div>
-
-    <div class="photo p4" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto4.jpg" alt="">
-    </div>
-
-    <div class="photo p5" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto5.jpg" alt="">
-    </div>
-
-    <div class="photo p6" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto6.jpg" alt="">
-    </div>
-
-
-    <div class="note">
-
-        <div class="note-title">
-
-            <div class="chapter">
-                Sayfa I
-            </div>
-
-            <h3>
-                Her Şeyden Önce
-            </h3>
-
-            <div class="ornament">
-                ✦ · ✦
-            </div>
-
+        <div class="gift gift-right">
+            <div class="gift-ribbon"></div>
         </div>
 
+        <!-- BOOK -->
 
-        <div class="note-text">Seninle tanışmadan önce benim de bir hayatım vardı.
+        <div class="book-shell">
+
+            <div class="book-snow-cap"></div>
+
+            <div class="book">
+
+                <div class="book-spine">
+                    <span class="spine-decoration spine-top">✦</span>
+                    <span class="spine-decoration spine-middle">♡</span>
+                    <span class="spine-decoration spine-bottom">✦</span>
+                </div>
+
+                <div class="corner corner-tl"></div>
+                <div class="corner corner-tr"></div>
+                <div class="corner corner-bl"></div>
+                <div class="corner corner-br"></div>
+
+                <div class="book-cover-title">
+                    Sadece İkimiz ♡
+                </div>
+
+                <div class="page-stack"></div>
+
+                <!-- =================================================
+                     PAGE 1
+                ================================================== -->
+
+                <article class="page active">
+
+                    <div class="photo photo-1">
+                        <img src="images/foto1.jpg">
+                        <div class="photo-caption">
+                            bir başlangıç
+                        </div>
+                    </div>
+
+                    <div class="photo photo-2">
+                        <img src="images/foto2.jpg">
+                        <div class="photo-caption">
+                            o günler
+                        </div>
+                    </div>
+
+                    <div class="photo photo-3">
+                        <img src="images/foto3.jpg">
+                        <div class="photo-caption">
+                            ben
+                        </div>
+                    </div>
+
+                    <div class="photo photo-4">
+                        <img src="images/foto4.jpg">
+                        <div class="photo-caption">
+                            hayat
+                        </div>
+                    </div>
+
+                    <div class="photo photo-5">
+                        <img src="images/foto5.jpg">
+                        <div class="photo-caption">
+                            bir soru
+                        </div>
+                    </div>
+
+                    <div class="photo photo-6">
+                        <img src="images/foto6.jpg">
+                        <div class="photo-caption">
+                            başlangıç
+                        </div>
+                    </div>
+
+                    <div class="note">
+
+                        <div class="note-number">
+                            01 · Her Şeyden Önce
+                        </div>
+
+                        <div class="note-title">
+                            Her Şeyden Önce
+                        </div>
+
+                        <div class="note-text">Seninle tanışmadan önce benim de bir hayatım vardı.
 
 Çalışıyor, çabalıyor ve bir şeyleri düzeltmeye uğraşıyordum.
 
@@ -3038,79 +3086,57 @@ Ama bir gün durup kendime baktım ve kendime tek bir soru sordum:
 
 “Ben kimim?”</div>
 
+                    </div>
 
-        <div class="note-sign">
-            ♡
-        </div>
+                </article>
 
-    </div>
+                <!-- =================================================
+                     PAGE 2
+                ================================================== -->
 
-</div>
+                <article class="page">
 
+                    <div class="photo photo-1">
+                        <img src="images/foto7.jpg">
+                        <div class="photo-caption">gitar</div>
+                    </div>
 
-<!-- =========================================================
-     PAGE 2
-========================================================= -->
+                    <div class="photo photo-2">
+                        <img src="images/foto8.jpg">
+                        <div class="photo-caption">öğrenmek</div>
+                    </div>
 
-<div class="page">
+                    <div class="photo photo-3">
+                        <img src="images/foto9.jpg">
+                        <div class="photo-caption">kendim</div>
+                    </div>
 
-    <div class="corner tl"></div>
-    <div class="corner tr"></div>
-    <div class="corner bl"></div>
-    <div class="corner br"></div>
+                    <div class="photo photo-4">
+                        <img src="images/foto10.jpg">
+                        <div class="photo-caption">mutluluk</div>
+                    </div>
 
+                    <div class="photo photo-5">
+                        <img src="images/foto11.jpg">
+                        <div class="photo-caption">ilk kez</div>
+                    </div>
 
-    <div class="photo p1" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto7.jpg" alt="">
-    </div>
+                    <div class="photo photo-6">
+                        <img src="images/foto12.jpg">
+                        <div class="photo-caption">benim</div>
+                    </div>
 
-    <div class="photo p2" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto8.jpg" alt="">
-    </div>
+                    <div class="note">
 
-    <div class="photo p3" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto9.jpg" alt="">
-    </div>
+                        <div class="note-number">
+                            02 · Kendimi Ararken
+                        </div>
 
-    <div class="photo p4" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto10.jpg" alt="">
-    </div>
+                        <div class="note-title">
+                            Kendimi Ararken
+                        </div>
 
-    <div class="photo p5" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto11.jpg" alt="">
-    </div>
-
-    <div class="photo p6" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto12.jpg" alt="">
-    </div>
-
-
-    <div class="note">
-
-        <div class="note-title">
-
-            <div class="chapter">
-                Sayfa II
-            </div>
-
-            <h3>
-                Kendimi Ararken
-            </h3>
-
-            <div class="ornament">
-                ✦ · ✦
-            </div>
-
-        </div>
-
-
-        <div class="note-text">Ne sevdiğimi, ne istediğimi bile tam olarak bilmiyordum.
+                        <div class="note-text">Ne sevdiğimi, ne istediğimi bile tam olarak bilmiyordum.
 
 Bu yüzden kendimi yeniden tanımaya çalıştım.
 
@@ -3126,79 +3152,57 @@ Belki dışarıdan bakınca küçük bir şey gibi görünebilirdi ama benim iç
 
 Çünkü uzun zaman sonra ilk defa gerçekten bana ait bir şey bulmuştum.</div>
 
+                    </div>
 
-        <div class="note-sign">
-            ♡
-        </div>
+                </article>
 
-    </div>
+                <!-- =================================================
+                     PAGE 3
+                ================================================== -->
 
-</div>
+                <article class="page">
 
+                    <div class="photo photo-1">
+                        <img src="images/foto13.jpg">
+                        <div class="photo-caption">sonra</div>
+                    </div>
 
-<!-- =========================================================
-     PAGE 3
-========================================================= -->
+                    <div class="photo photo-2">
+                        <img src="images/foto14.jpg">
+                        <div class="photo-caption">hayat</div>
+                    </div>
 
-<div class="page">
+                    <div class="photo photo-3">
+                        <img src="images/foto15.jpg">
+                        <div class="photo-caption">yeniden</div>
+                    </div>
 
-    <div class="corner tl"></div>
-    <div class="corner tr"></div>
-    <div class="corner bl"></div>
-    <div class="corner br"></div>
+                    <div class="photo photo-4">
+                        <img src="images/foto16.jpg">
+                        <div class="photo-caption">devam</div>
+                    </div>
 
+                    <div class="photo photo-5">
+                        <img src="images/foto17.jpg">
+                        <div class="photo-caption">sayfalar</div>
+                    </div>
 
-    <div class="photo p1" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto13.jpg" alt="">
-    </div>
+                    <div class="photo photo-6">
+                        <img src="images/foto18.jpg">
+                        <div class="photo-caption">silindi</div>
+                    </div>
 
-    <div class="photo p2" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto14.jpg" alt="">
-    </div>
+                    <div class="note">
 
-    <div class="photo p3" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto15.jpg" alt="">
-    </div>
+                        <div class="note-number">
+                            03 · Bir Kaza
+                        </div>
 
-    <div class="photo p4" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto16.jpg" alt="">
-    </div>
+                        <div class="note-title">
+                            Bir Kaza
+                        </div>
 
-    <div class="photo p5" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto17.jpg" alt="">
-    </div>
-
-    <div class="photo p6" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto18.jpg" alt="">
-    </div>
-
-
-    <div class="note">
-
-        <div class="note-title">
-
-            <div class="chapter">
-                Sayfa III
-            </div>
-
-            <h3>
-                Bir Kaza
-            </h3>
-
-            <div class="ornament">
-                ✦ · ✦
-            </div>
-
-        </div>
-
-
-        <div class="note-text">Sonra hayatımı değiştiren bir şey oldu.
+                        <div class="note-text">Sonra hayatımı değiştiren bir şey oldu.
 
 Bir kaza geçirdim.
 
@@ -3216,79 +3220,57 @@ Ama hayat durmadı.
 
 Ben de durmadım.</div>
 
+                    </div>
 
-        <div class="note-sign">
-            ♡
-        </div>
+                </article>
 
-    </div>
+                <!-- =================================================
+                     PAGE 4
+                ================================================== -->
 
-</div>
+                <article class="page">
 
+                    <div class="photo photo-1">
+                        <img src="images/foto19.jpg">
+                        <div class="photo-caption">babam</div>
+                    </div>
 
-<!-- =========================================================
-     PAGE 4
-========================================================= -->
+                    <div class="photo photo-2">
+                        <img src="images/foto20.jpg">
+                        <div class="photo-caption">dükkan</div>
+                    </div>
 
-<div class="page">
+                    <div class="photo photo-3">
+                        <img src="images/foto21.jpg">
+                        <div class="photo-caption">çalışmak</div>
+                    </div>
 
-    <div class="corner tl"></div>
-    <div class="corner tr"></div>
-    <div class="corner bl"></div>
-    <div class="corner br"></div>
+                    <div class="photo photo-4">
+                        <img src="images/foto22.jpg">
+                        <div class="photo-caption">yeniden</div>
+                    </div>
 
+                    <div class="photo photo-5">
+                        <img src="images/foto23.jpg">
+                        <div class="photo-caption">emek</div>
+                    </div>
 
-    <div class="photo p1" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto19.jpg" alt="">
-    </div>
+                    <div class="photo photo-6">
+                        <img src="images/foto24.jpg">
+                        <div class="photo-caption">hayaller</div>
+                    </div>
 
-    <div class="photo p2" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto20.jpg" alt="">
-    </div>
+                    <div class="note">
 
-    <div class="photo p3" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto21.jpg" alt="">
-    </div>
+                        <div class="note-number">
+                            04 · Babamın Hayali
+                        </div>
 
-    <div class="photo p4" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto22.jpg" alt="">
-    </div>
+                        <div class="note-title">
+                            Babamın Hayali
+                        </div>
 
-    <div class="photo p5" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto23.jpg" alt="">
-    </div>
-
-    <div class="photo p6" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto24.jpg" alt="">
-    </div>
-
-
-    <div class="note">
-
-        <div class="note-title">
-
-            <div class="chapter">
-                Sayfa IV
-            </div>
-
-            <h3>
-                Babamın Hayali
-            </h3>
-
-            <div class="ornament">
-                ✦ · ✦
-            </div>
-
-        </div>
-
-
-        <div class="note-text">Sonra babamla birlikte ilk işime başladım.
+                        <div class="note-text">Sonra babamla birlikte ilk işime başladım.
 
 Bu kez sadece kendim için değil, onun hayallerini gerçekleştirmek için de uğraşıyordum.
 
@@ -3308,79 +3290,57 @@ Bazıları hayatımızda kalmak için değil, bize bir şey öğretmek için var
 
 Ben de bazı şeyleri geride bırakıp yeniden başladım.</div>
 
+                    </div>
 
-        <div class="note-sign">
-            ♡
-        </div>
+                </article>
 
-    </div>
+                <!-- =================================================
+                     PAGE 5
+                ================================================== -->
 
-</div>
+                <article class="page">
 
+                    <div class="photo photo-1">
+                        <img src="images/foto25.jpg">
+                        <div class="photo-caption">Ömerler</div>
+                    </div>
 
-<!-- =========================================================
-     PAGE 5
-========================================================= -->
+                    <div class="photo photo-2">
+                        <img src="images/foto26.jpg">
+                        <div class="photo-caption">arkadaşlık</div>
+                    </div>
 
-<div class="page">
+                    <div class="photo photo-3">
+                        <img src="images/foto27.jpg">
+                        <div class="photo-caption">çevrem</div>
+                    </div>
 
-    <div class="corner tl"></div>
-    <div class="corner tr"></div>
-    <div class="corner bl"></div>
-    <div class="corner br"></div>
+                    <div class="photo photo-4">
+                        <img src="images/foto28.jpg">
+                        <div class="photo-caption">gülmek</div>
+                    </div>
 
+                    <div class="photo photo-5">
+                        <img src="images/foto29.jpg">
+                        <div class="photo-caption">insanlar</div>
+                    </div>
 
-    <div class="photo p1" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto25.jpg" alt="">
-    </div>
+                    <div class="photo photo-6">
+                        <img src="images/foto30.jpg">
+                        <div class="photo-caption">ait olmak</div>
+                    </div>
 
-    <div class="photo p2" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto26.jpg" alt="">
-    </div>
+                    <div class="note">
 
-    <div class="photo p3" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto27.jpg" alt="">
-    </div>
+                        <div class="note-number">
+                            05 · Yeniden İnsanlar
+                        </div>
 
-    <div class="photo p4" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto28.jpg" alt="">
-    </div>
+                        <div class="note-title">
+                            Yeniden İnsanlar
+                        </div>
 
-    <div class="photo p5" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto29.jpg" alt="">
-    </div>
-
-    <div class="photo p6" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto30.jpg" alt="">
-    </div>
-
-
-    <div class="note">
-
-        <div class="note-title">
-
-            <div class="chapter">
-                Sayfa V
-            </div>
-
-            <h3>
-                Yeniden İnsanlar
-            </h3>
-
-            <div class="ornament">
-                ✦ · ✦
-            </div>
-
-        </div>
-
-
-        <div class="note-text">Sonra Ömerlerle tanıştım.
+                        <div class="note-text">Sonra Ömerlerle tanıştım.
 
 Beni olduğum gibi kabul ettiler.
 
@@ -3392,79 +3352,57 @@ Hayat yavaş yavaş yeniden düzene giriyordu.
 
 Ama yine de içimde ne olduğunu anlayamadığım bir eksiklik vardı.</div>
 
+                    </div>
 
-        <div class="note-sign">
-            ♡
-        </div>
+                </article>
 
-    </div>
+                <!-- =================================================
+                     PAGE 6
+                ================================================== -->
 
-</div>
+                <article class="page">
 
+                    <div class="photo photo-1">
+                        <img src="images/foto31.jpg">
+                        <div class="photo-caption">dükkan</div>
+                    </div>
 
-<!-- =========================================================
-     PAGE 6
-========================================================= -->
+                    <div class="photo photo-2">
+                        <img src="images/foto32.jpg">
+                        <div class="photo-caption">emek</div>
+                    </div>
 
-<div class="page">
+                    <div class="photo photo-3">
+                        <img src="images/foto33.jpg">
+                        <div class="photo-caption">çalışmak</div>
+                    </div>
 
-    <div class="corner tl"></div>
-    <div class="corner tr"></div>
-    <div class="corner bl"></div>
-    <div class="corner br"></div>
+                    <div class="photo photo-4">
+                        <img src="images/foto34.jpg">
+                        <div class="photo-caption">hayat</div>
+                    </div>
 
+                    <div class="photo photo-5">
+                        <img src="images/foto35.jpg">
+                        <div class="photo-caption">boşluk</div>
+                    </div>
 
-    <div class="photo p1" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto31.jpg" alt="">
-    </div>
+                    <div class="photo photo-6">
+                        <img src="images/foto36.jpg">
+                        <div class="photo-caption">sen</div>
+                    </div>
 
-    <div class="photo p2" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto32.jpg" alt="">
-    </div>
+                    <div class="note">
 
-    <div class="photo p3" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto33.jpg" alt="">
-    </div>
+                        <div class="note-number">
+                            06 · Dükkân
+                        </div>
 
-    <div class="photo p4" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto34.jpg" alt="">
-    </div>
+                        <div class="note-title">
+                            Dükkân
+                        </div>
 
-    <div class="photo p5" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto35.jpg" alt="">
-    </div>
-
-    <div class="photo p6" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto36.jpg" alt="">
-    </div>
-
-
-    <div class="note">
-
-        <div class="note-title">
-
-            <div class="chapter">
-                Sayfa VI
-            </div>
-
-            <h3>
-                Dükkân
-            </h3>
-
-            <div class="ornament">
-                ✦ · ✦
-            </div>
-
-        </div>
-
-
-        <div class="note-text">Sonunda dükkânı açtım.
+                        <div class="note-text">Sonunda dükkânı açtım.
 
 Bir işim vardı.
 
@@ -3488,79 +3426,57 @@ Ama ne yaparsam yapayım o eksiklik gitmedi.
 
 Ta ki sen gelene kadar...</div>
 
+                    </div>
 
-        <div class="note-sign">
-            ♡
-        </div>
+                </article>
 
-    </div>
+                <!-- =================================================
+                     PAGE 7
+                ================================================== -->
 
-</div>
+                <article class="page">
 
+                    <div class="photo photo-1">
+                        <img src="images/foto37.jpg">
+                        <div class="photo-caption">sen</div>
+                    </div>
 
-<!-- =========================================================
-     PAGE 7
-========================================================= -->
+                    <div class="photo photo-2">
+                        <img src="images/foto38.jpg">
+                        <div class="photo-caption">biz</div>
+                    </div>
 
-<div class="page">
+                    <div class="photo photo-3">
+                        <img src="images/foto39.jpg">
+                        <div class="photo-caption">tanışmak</div>
+                    </div>
 
-    <div class="corner tl"></div>
-    <div class="corner tr"></div>
-    <div class="corner bl"></div>
-    <div class="corner br"></div>
+                    <div class="photo photo-4">
+                        <img src="images/foto40.jpg">
+                        <div class="photo-caption">iki yıl</div>
+                    </div>
 
+                    <div class="photo photo-5">
+                        <img src="images/foto41.jpg">
+                        <div class="photo-caption">farklı</div>
+                    </div>
 
-    <div class="photo p1" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto37.jpg" alt="">
-    </div>
+                    <div class="photo photo-6">
+                        <img src="images/foto42.jpg">
+                        <div class="photo-caption">eksiklik</div>
+                    </div>
 
-    <div class="photo p2" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto38.jpg" alt="">
-    </div>
+                    <div class="note">
 
-    <div class="photo p3" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto39.jpg" alt="">
-    </div>
+                        <div class="note-number">
+                            07 · Sonra Sen Geldin
+                        </div>
 
-    <div class="photo p4" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto40.jpg" alt="">
-    </div>
+                        <div class="note-title">
+                            Sonra Sen Geldin
+                        </div>
 
-    <div class="photo p5" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto41.jpg" alt="">
-    </div>
-
-    <div class="photo p6" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto42.jpg" alt="">
-    </div>
-
-
-    <div class="note">
-
-        <div class="note-title">
-
-            <div class="chapter">
-                Sayfa VII
-            </div>
-
-            <h3>
-                Sonra Sen Geldin
-            </h3>
-
-            <div class="ornament">
-                ✦ · ✦
-            </div>
-
-        </div>
-
-
-        <div class="note-text">Sonra seni tanıdım.
+                        <div class="note-text">Sonra seni tanıdım.
 
 Ve zaman geçtikçe bir şeyi fark etmeye başladım.
 
@@ -3580,79 +3496,57 @@ Seni tanıdığım iki yıl boyunca bunu daha da iyi anladım.
 
 Yaşadığım onca şeyin arasında seni neden bu kadar farklı hissettiğimi artık biliyorum.</div>
 
+                    </div>
 
-        <div class="note-sign">
-            ♡
-        </div>
+                </article>
 
-    </div>
+                <!-- =================================================
+                     PAGE 8
+                ================================================== -->
 
-</div>
+                <article class="page">
 
+                    <div class="photo photo-1">
+                        <img src="images/foto43.jpg">
+                        <div class="photo-caption">gelmek</div>
+                    </div>
 
-<!-- =========================================================
-     PAGE 8
-========================================================= -->
+                    <div class="photo photo-2">
+                        <img src="images/foto44.jpg">
+                        <div class="photo-caption">yanına</div>
+                    </div>
 
-<div class="page">
+                    <div class="photo photo-3">
+                        <img src="images/foto45.jpg">
+                        <div class="photo-caption">yol</div>
+                    </div>
 
-    <div class="corner tl"></div>
-    <div class="corner tr"></div>
-    <div class="corner bl"></div>
-    <div class="corner br"></div>
+                    <div class="photo photo-4">
+                        <img src="images/foto46.jpg">
+                        <div class="photo-caption">aşk</div>
+                    </div>
 
+                    <div class="photo photo-5">
+                        <img src="images/foto47.jpg">
+                        <div class="photo-caption">ilk kez</div>
+                    </div>
 
-    <div class="photo p1" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto43.jpg" alt="">
-    </div>
+                    <div class="photo photo-6">
+                        <img src="images/foto48.jpg">
+                        <div class="photo-caption">geldim</div>
+                    </div>
 
-    <div class="photo p2" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto44.jpg" alt="">
-    </div>
+                    <div class="note">
 
-    <div class="photo p3" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto45.jpg" alt="">
-    </div>
+                        <div class="note-number">
+                            08 · Apar Topar Sana
+                        </div>
 
-    <div class="photo p4" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto46.jpg" alt="">
-    </div>
+                        <div class="note-title">
+                            Apar Topar Sana
+                        </div>
 
-    <div class="photo p5" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto47.jpg" alt="">
-    </div>
-
-    <div class="photo p6" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto48.jpg" alt="">
-    </div>
-
-
-    <div class="note">
-
-        <div class="note-title">
-
-            <div class="chapter">
-                Sayfa VIII
-            </div>
-
-            <h3>
-                Apar Topar Sana
-            </h3>
-
-            <div class="ornament">
-                ✦ · ✦
-            </div>
-
-        </div>
-
-
-        <div class="note-text">Sonra sana gelebilmek için bahaneler bulup apar topar yanına geldim.
+                        <div class="note-text">Sonra sana gelebilmek için bahaneler bulup apar topar yanına geldim.
 
 Ve hayatımda daha önce hissetmediğim duyguları hissettim.
 
@@ -3668,79 +3562,57 @@ Ve geldim.
 
 Çünkü ilk defa bir yere değil, bir insana gitmek için bu kadar çok istemiştim.</div>
 
+                    </div>
 
-        <div class="note-sign">
-            ♡
-        </div>
+                </article>
 
-    </div>
+                <!-- =================================================
+                     PAGE 9
+                ================================================== -->
 
-</div>
+                <article class="page">
 
+                    <div class="photo photo-1">
+                        <img src="images/foto49.jpg">
+                        <div class="photo-caption">ailen</div>
+                    </div>
 
-<!-- =========================================================
-     PAGE 9
-========================================================= -->
+                    <div class="photo photo-2">
+                        <img src="images/foto50.jpg">
+                        <div class="photo-caption">20 gün</div>
+                    </div>
 
-<div class="page">
+                    <div class="photo photo-3">
+                        <img src="images/foto51.jpg">
+                        <div class="photo-caption">alışkanlıklar</div>
+                    </div>
 
-    <div class="corner tl"></div>
-    <div class="corner tr"></div>
-    <div class="corner bl"></div>
-    <div class="corner br"></div>
+                    <div class="photo photo-4">
+                        <img src="images/foto52.jpg">
+                        <div class="photo-caption">küçük şeyler</div>
+                    </div>
 
+                    <div class="photo photo-5">
+                        <img src="images/foto53.jpg">
+                        <div class="photo-caption">tanımak</div>
+                    </div>
 
-    <div class="photo p1" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto49.jpg" alt="">
-    </div>
+                    <div class="photo photo-6">
+                        <img src="images/foto54.jpg">
+                        <div class="photo-caption">ait olmak</div>
+                    </div>
 
-    <div class="photo p2" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto50.jpg" alt="">
-    </div>
+                    <div class="note">
 
-    <div class="photo p3" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto51.jpg" alt="">
-    </div>
+                        <div class="note-number">
+                            09 · Seni Tanımak
+                        </div>
 
-    <div class="photo p4" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto52.jpg" alt="">
-    </div>
+                        <div class="note-title">
+                            Seni Tanımak
+                        </div>
 
-    <div class="photo p5" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto53.jpg" alt="">
-    </div>
-
-    <div class="photo p6" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto54.jpg" alt="">
-    </div>
-
-
-    <div class="note">
-
-        <div class="note-title">
-
-            <div class="chapter">
-                Sayfa IX
-            </div>
-
-            <h3>
-                Seni Tanımak
-            </h3>
-
-            <div class="ornament">
-                ✦ · ✦
-            </div>
-
-        </div>
-
-
-        <div class="note-text">Yaklaşık 20 gün senin yanında kaldım.
+                        <div class="note-text">Yaklaşık 20 gün senin yanında kaldım.
 
 Ailenle tanıştım.
 
@@ -3756,79 +3628,57 @@ Seni tanıdıkça, yıllardır hissettiğim o eksikliğin nedenini daha iyi anla
 
 Çünkü artık nereye ait olduğumu biliyorum.</div>
 
+                    </div>
 
-        <div class="note-sign">
-            ♡
-        </div>
+                </article>
 
-    </div>
+                <!-- =================================================
+                     PAGE 10
+                ================================================== -->
 
-</div>
+                <article class="page">
 
+                    <div class="photo photo-1">
+                        <img src="images/foto55.jpg">
+                        <div class="photo-caption">üç yıl</div>
+                    </div>
 
-<!-- =========================================================
-     PAGE 10
-========================================================= -->
+                    <div class="photo photo-2">
+                        <img src="images/foto56.jpg">
+                        <div class="photo-caption">biz</div>
+                    </div>
 
-<div class="page">
+                    <div class="photo photo-3">
+                        <img src="images/foto57.jpg">
+                        <div class="photo-caption">gülüşün</div>
+                    </div>
 
-    <div class="corner tl"></div>
-    <div class="corner tr"></div>
-    <div class="corner bl"></div>
-    <div class="corner br"></div>
+                    <div class="photo photo-4">
+                        <img src="images/foto58.jpg">
+                        <div class="photo-caption">güzelsin</div>
+                    </div>
 
+                    <div class="photo photo-5">
+                        <img src="images/foto59.jpg">
+                        <div class="photo-caption">♡</div>
+                    </div>
 
-    <div class="photo p1" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto55.jpg" alt="">
-    </div>
+                    <div class="photo photo-6">
+                        <img src="images/foto60.jpg">
+                        <div class="photo-caption">sonsuza</div>
+                    </div>
 
-    <div class="photo p2" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto56.jpg" alt="">
-    </div>
+                    <div class="note">
 
-    <div class="photo p3" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto57.jpg" alt="">
-    </div>
+                        <div class="note-number">
+                            10 · Üç Yıl
+                        </div>
 
-    <div class="photo p4" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto58.jpg" alt="">
-    </div>
+                        <div class="note-title">
+                            Üç Yıl
+                        </div>
 
-    <div class="photo p5" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto59.jpg" alt="">
-    </div>
-
-    <div class="photo p6" onclick="focusPhoto(this)">
-        <div class="tape"></div>
-        <img src="images/foto60.jpg" alt="">
-    </div>
-
-
-    <div class="note">
-
-        <div class="note-title">
-
-            <div class="chapter">
-                Sayfa X
-            </div>
-
-            <h3>
-                Üç Yıl
-            </h3>
-
-            <div class="ornament">
-                ✦ · ✦
-            </div>
-
-        </div>
-
-
-        <div class="note-text">Sen beni iki yıl bekledin.
+                        <div class="note-text">Sen beni iki yıl bekledin.
 
 Artık üç yıl oldu.
 
@@ -3842,53 +3692,41 @@ Ve hâlâ çok güzelsinnnn.
 
 Aaaaa... neyse. ♡</div>
 
+                    </div>
 
-        <div class="note-sign">
-            Sadece ikimiz ♡
-        </div>
-
-    </div>
-
-</div>
-
-
-        </div>
-
-
-        <div class="book-controls">
-
-            <button
-                class="book-btn"
-                id="prevBtn"
-                onclick="changePage(-1)"
-                disabled
-            >
-                ← Önceki
-            </button>
-
-
-            <div class="page-counter">
-
-                <span id="currentPage">
-                    1
-                </span>
-
-                /
-
-                <span id="totalPages">
-                    10
-                </span>
+                </article>
 
             </div>
 
+            <!-- BOOK CONTROLS -->
 
-            <button
-                class="book-btn"
-                id="nextBtn"
-                onclick="changePage(1)"
-            >
-                Sonraki →
-            </button>
+            <div class="book-controls">
+
+                <button
+                    class="book-button"
+                    onclick="previousPage()">
+                    ‹
+                </button>
+
+                <div
+                    class="book-page-count">
+
+                    Sayfa
+                    <span id="pageNumber">
+                        1
+                    </span>
+                    /
+                    10
+
+                </div>
+
+                <button
+                    class="book-button"
+                    onclick="nextPage()">
+                    ›
+                </button>
+
+            </div>
 
         </div>
 
@@ -3896,76 +3734,103 @@ Aaaaa... neyse. ♡</div>
 
 </section>
 
-
-<!-- =========================================================
+<!-- =======================================================
      HOURGLASS
-========================================================= -->
+======================================================= -->
 
-<section class="section">
+<section class="hourglass-section">
 
-    <div class="section-title">
+    <div class="hourglass-card">
 
-        <div class="small">
-            Zamanın içinden
+        <div class="script-title">
+            Zaman Geçiyor...
         </div>
 
-        <h2>
-            Birlikte Geçen Zaman
-        </h2>
-
-        <div class="line"></div>
-
-    </div>
-
-
-    <div class="time-section">
+        <div class="hourglass-sub">
+            Ama bazı şeyler zaman geçtikçe eksilmez.
+        </div>
 
         <div class="hourglass">
 
-            <div class="glass">
+            <div class="hourglass-frame-top"></div>
+            <div class="hourglass-frame-bottom"></div>
 
-                <div class="sand-top"></div>
+            <div class="hourglass-glass"></div>
 
-                <div class="sand-stream"></div>
-
-                <div class="sand-bottom"></div>
-
-            </div>
-
-            <div class="hourglass-frame"></div>
+            <div class="sand-top"></div>
+            <div class="sand-stream"></div>
+            <div class="sand-bottom"></div>
 
         </div>
 
+        <div
+            style="
+                font-family:Kalam;
+                font-size:19px;
+                color:#ddd;
+            ">
 
-        <p class="hourglass-text">
-            Zaman bazen çok hızlı geçti.
-            Bazen de geçmek bilmedi.
-            Ama geriye dönüp baktığımda,
-            geçen her saniyenin bizi biraz daha birbirimize getirdiğini görüyorum.
-        </p>
+            Bizim hikâyemizin sayfaları
+            da böyle birikiyor.
+
+        </div>
 
     </div>
 
 </section>
 
+<!-- =======================================================
+     NEW YEAR
+======================================================= -->
 
-<!-- =========================================================
+<section class="new-year">
+
+    <div class="script-title">
+        Yeni Bir Yıl
+    </div>
+
+    <div class="new-year-sub">
+        Ve belki de birlikte yazacağımız
+        daha çok sayfa vardır.
+    </div>
+
+    <div class="countdown">
+
+        <div class="countdown-box">
+            <strong id="nyDays">0</strong>
+            <span>Gün</span>
+        </div>
+
+        <div class="countdown-box">
+            <strong id="nyHours">00</strong>
+            <span>Saat</span>
+        </div>
+
+        <div class="countdown-box">
+            <strong id="nyMinutes">00</strong>
+            <span>Dakika</span>
+        </div>
+
+        <div class="countdown-box">
+            <strong id="nySeconds">00</strong>
+            <span>Saniye</span>
+        </div>
+
+    </div>
+
+</section>
+
+<!-- =======================================================
      FINAL
-========================================================= -->
+======================================================= -->
 
-<section class="final-section">
+<section class="final">
 
     <div class="final-card">
 
-        <div class="final-label">
-            Son sayfa değil
-        </div>
-
-
-        <h2>
+        <div class="final-title">
             Kader
-        </h2>
-
+        </div>
 
         <div class="final-text">Hayatımıza binlerce insan girdi, binlercesi çıktı.
 
@@ -3987,17 +3852,6 @@ Meğer senmişsin.
 
 İyi ki seni bulmuşum. ♡</div>
 
-
-        <div class="final-photo">
-
-            <img
-                src="images/final.jpg"
-                alt="Sadece İkimiz"
-            >
-
-        </div>
-
-
         <div class="final-heart">
             ♡
         </div>
@@ -4006,63 +3860,25 @@ Meğer senmişsin.
 
 </section>
 
-
-<footer>
-
-    Bu hikâyenin en güzel kısmı daha yazılmadı.
-    <span>
-        Çünkü daha bitmedi.
-    </span>
-
-    ♡
-
-</footer>
-
-
-</div>
-
-
-<!-- =========================================================
-     SANTA
-========================================================= -->
-
-<div
-    class="santa-flight"
-    id="santaFlight"
->
-
-    <div class="santa">
-        🎅
-    </div>
-
-    <div class="reindeer r1">
-        🦌
-    </div>
-
-    <div class="reindeer r2">
-        🦌
-    </div>
-
-    <div class="reindeer r3">
-        🦌
-    </div>
-
-</div>
-
-
-<!-- =========================================================
+<!-- =======================================================
      MUSIC
-========================================================= -->
+======================================================= -->
 
 <button
     class="music-button"
     id="musicButton"
-    onclick="toggleMusic()"
-    title="Müziği aç/kapat"
->
+    onclick="toggleMusic()">
     ♫
 </button>
 
+<!-- =======================================================
+     PHOTO BACKDROP
+======================================================= -->
+
+<div
+    class="photo-backdrop"
+    id="photoBackdrop">
+</div>
 
 <script>
 
@@ -4072,74 +3888,50 @@ Meğer senmişsin.
 
 const PASSWORD = "sadeceikimiz";
 
-
-function unlock(){
+function unlockDiary(){
 
     const input =
-        document.getElementById(
-            "passwordInput"
-        );
+        document.getElementById("passwordInput");
 
     const error =
-        document.getElementById(
-            "errorMessage"
-        );
-
+        document.getElementById("lockError");
 
     if(
-        input.value
-            .toLowerCase()
-            .trim()
-        === PASSWORD
+        input.value.trim().toLowerCase()
+        ===
+        PASSWORD
     ){
 
         document
             .getElementById("lockScreen")
-            .classList.add("hidden");
+            .classList.add("hide");
 
+        setTimeout(()=>{
+            startMusic();
+            flySanta();
+        },800);
 
-        document
-            .getElementById("mainContent")
-            .classList.add("show");
-
-
-        startMusic();
-
-    }
-
-    else{
+    }else{
 
         error.textContent =
-            "Bu hikâyenin şifresini sadece ikimiz biliyoruz. ♡";
-
-
-        input.value = "";
-
+            "Şifre yanlış... ama hikâyenin kapısı hâlâ burada. ♡";
 
         input.animate(
             [
-                {
-                    transform:"translateX(0)"
-                },
-                {
-                    transform:"translateX(-8px)"
-                },
-                {
-                    transform:"translateX(8px)"
-                },
-                {
-                    transform:"translateX(0)"
-                }
+                {transform:"translateX(0)"},
+                {transform:"translateX(-9px)"},
+                {transform:"translateX(9px)"},
+                {transform:"translateX(-5px)"},
+                {transform:"translateX(0)"}
             ],
             {
-                duration:300
+                duration:420
             }
         );
 
     }
 
 }
-
 
 document
     .getElementById("passwordInput")
@@ -4147,147 +3939,139 @@ document
         "keydown",
         function(e){
 
-            if(e.key === "Enter"){
-                unlock();
+            if(e.key==="Enter"){
+                unlockDiary();
             }
 
         }
     );
-
 
 /* =========================================================
    STARS
 ========================================================= */
 
 const stars =
-    document.getElementById(
-        "stars"
-    );
+    document.getElementById("stars");
 
-
-for(let i=0;i<120;i++){
+for(let i=0;i<170;i++){
 
     const star =
-        document.createElement(
-            "div"
-        );
-
+        document.createElement("span");
 
     star.className =
         "star";
 
-
-    const size =
-        Math.random()*3+1;
-
-
-    star.style.width =
-        size+"px";
-
-    star.style.height =
-        size+"px";
-
+    if(Math.random()>.88){
+        star.classList.add("big");
+    }
 
     star.style.left =
         Math.random()*100+"%";
 
     star.style.top =
-        Math.random()*100+"%";
-
+        Math.random()*78+"%";
 
     star.style.setProperty(
         "--duration",
-        (1.5+Math.random()*4)+"s"
+        (2+Math.random()*5)+"s"
     );
 
-
     star.style.animationDelay =
-        Math.random()*4+"s";
-
+        (-Math.random()*5)+"s";
 
     stars.appendChild(star);
 
 }
 
-
 /* =========================================================
-   SNOW
+   SNOW GENERATOR
 ========================================================= */
 
-const snow =
-    document.getElementById(
-        "snow"
-    );
+function createSnow(
+    container,
+    amount,
+    minSize,
+    maxSize,
+    minSpeed,
+    maxSpeed
+){
 
+    for(let i=0;i<amount;i++){
 
-const snowCharacters =
-    [
-        "❄",
-        "❅",
-        "❆",
-        "•"
-    ];
+        const flake =
+            document.createElement("span");
 
+        flake.className =
+            "flake";
 
-for(let i=0;i<160;i++){
+        const size =
+            minSize+
+            Math.random()*
+            (maxSize-minSize);
 
-    const flake =
-        document.createElement(
-            "div"
+        flake.style.width =
+            size+"px";
+
+        flake.style.height =
+            size+"px";
+
+        flake.style.left =
+            Math.random()*100+"%";
+
+        flake.style.setProperty(
+            "--speed",
+            (
+                minSpeed+
+                Math.random()*
+                (maxSpeed-minSpeed)
+            )+"s"
         );
 
+        flake.style.setProperty(
+            "--delay",
+            (-Math.random()*25)+"s"
+        );
 
-    flake.className =
-        "flake";
+        flake.style.setProperty(
+            "--drift",
+            (-180+Math.random()*360)+"px"
+        );
 
+        container.appendChild(flake);
 
-    flake.textContent =
-        snowCharacters[
-            Math.floor(
-                Math.random()
-                *
-                snowCharacters.length
-            )
-        ];
-
-
-    flake.style.left =
-        Math.random()*100+"%";
-
-
-    flake.style.fontSize =
-        (Math.random()*13+5)+"px";
-
-
-    flake.style.setProperty(
-        "--speed",
-        (Math.random()*13+8)+"s"
-    );
-
-
-    flake.style.setProperty(
-        "--drift",
-        (Math.random()*180-90)+"px"
-    );
-
-
-    flake.style.setProperty(
-        "--opacity",
-        (.18+Math.random()*.78)
-    );
-
-
-    flake.style.animationDelay =
-        (-Math.random()*20)+"s";
-
-
-    snow.appendChild(flake);
+    }
 
 }
 
+createSnow(
+    document.getElementById("snowBack"),
+    100,
+    1,
+    3,
+    18,
+    30
+);
+
+createSnow(
+    document.getElementById("snowMid"),
+    90,
+    3,
+    7,
+    10,
+    20
+);
+
+createSnow(
+    document.getElementById("snowFront"),
+    48,
+    6,
+    13,
+    7,
+    15
+);
 
 /* =========================================================
-   RELATIONSHIP TIMER
+   RELATIONSHIP COUNTER
 ========================================================= */
 
 const relationshipStart =
@@ -4295,258 +4079,66 @@ const relationshipStart =
         "2026-06-05T14:53:00+03:00"
     );
 
-
-function updateCounter(){
+function updateRelationship(){
 
     const now =
         new Date();
 
-
-    let diff =
+    let difference =
         now.getTime()
         -
         relationshipStart.getTime();
 
-
-    if(diff<0){
-        diff=0;
+    if(difference<0){
+        difference=0;
     }
 
-
-    const seconds =
+    const totalSeconds =
         Math.floor(
-            diff/1000
+            difference/1000
         );
-
-
-    const minutes =
-        Math.floor(
-            seconds/60
-        );
-
-
-    const hours =
-        Math.floor(
-            minutes/60
-        );
-
 
     const days =
         Math.floor(
-            hours/24
+            totalSeconds/86400
         );
 
-
-    const years =
+    const hours =
         Math.floor(
-            days/365.2425
+            (totalSeconds%86400)/3600
         );
 
-
-    let tempDate =
-        new Date(
-            relationshipStart
-        );
-
-
-    tempDate.setFullYear(
-        tempDate.getFullYear()
-        +
-        years
-    );
-
-
-    let remaining =
-        now.getTime()
-        -
-        tempDate.getTime();
-
-
-    const months =
+    const minutes =
         Math.floor(
-            remaining
-            /
-            (
-                1000*
-                60*
-                60*
-                24*
-                30.4375
-            )
+            (totalSeconds%3600)/60
         );
 
+    const seconds =
+        totalSeconds%60;
 
-    const remainingDays =
-        Math.floor(
-            (
-                remaining
-                -
-                months*
-                (
-                    1000*
-                    60*
-                    60*
-                    24*
-                    30.4375
-                )
-            )
-            /
-            (
-                1000*
-                60*
-                60*
-                24
-            )
-        );
+    document.getElementById("days")
+        .textContent=days;
 
+    document.getElementById("hours")
+        .textContent=
+            String(hours).padStart(2,"0");
 
-    const h =
-        Math.floor(
-            (
-                remaining
-                -
-                months*
-                (
-                    1000*
-                    60*
-                    60*
-                    24*
-                    30.4375
-                )
-                -
-                remainingDays*
-                (
-                    1000*
-                    60*
-                    60*
-                    24
-                )
-            )
-            /
-            (
-                1000*
-                60*
-                60
-            )
-        );
+    document.getElementById("minutes")
+        .textContent=
+            String(minutes).padStart(2,"0");
 
-
-    const m =
-        Math.floor(
-            (
-                remaining
-                -
-                months*
-                (
-                    1000*
-                    60*
-                    60*
-                    24*
-                    30.4375
-                )
-                -
-                remainingDays*
-                (
-                    1000*
-                    60*
-                    60*
-                    24
-                )
-                -
-                h*
-                (
-                    1000*
-                    60*
-                    60
-                )
-            )
-            /
-            (
-                1000*
-                60
-            )
-        );
-
-
-    const s =
-        Math.floor(
-            (
-                remaining
-                -
-                months*
-                (
-                    1000*
-                    60*
-                    60*
-                    24*
-                    30.4375
-                )
-                -
-                remainingDays*
-                (
-                    1000*
-                    60*
-                    60*
-                    24
-                )
-                -
-                h*
-                (
-                    1000*
-                    60*
-                    60
-                )
-                -
-                m*
-                (
-                    1000*
-                    60
-                )
-            )
-            /
-            1000
-        );
-
-
-    document.getElementById(
-        "years"
-    ).textContent=years;
-
-
-    document.getElementById(
-        "months"
-    ).textContent=months;
-
-
-    document.getElementById(
-        "days"
-    ).textContent=remainingDays;
-
-
-    document.getElementById(
-        "hours"
-    ).textContent=h;
-
-
-    document.getElementById(
-        "minutes"
-    ).textContent=m;
-
-
-    document.getElementById(
-        "seconds"
-    ).textContent=s;
+    document.getElementById("seconds")
+        .textContent=
+            String(seconds).padStart(2,"0");
 
 }
 
+updateRelationship();
 
 setInterval(
-    updateCounter,
+    updateRelationship,
     1000
 );
-
-updateCounter();
-
 
 /* =========================================================
    NEW YEAR COUNTDOWN
@@ -4557,283 +4149,155 @@ function updateNewYear(){
     const now =
         new Date();
 
-
-    const year =
-        now.getFullYear();
-
-
-    let target =
+    const target =
         new Date(
-            `January 1, ${year+1} 00:00:00`
+            now.getFullYear()+1,
+            0,
+            1,
+            0,
+            0,
+            0
         );
 
-
-    let diff =
+    let difference =
         target.getTime()
         -
         now.getTime();
 
-
-    if(diff<0){
-
-        target =
-            new Date(
-                `January 1, ${year+2} 00:00:00`
-            );
-
-        diff =
-            target.getTime()
-            -
-            now.getTime();
-
+    if(difference<0){
+        difference=0;
     }
 
+    const total =
+        Math.floor(
+            difference/1000
+        );
 
     const days =
         Math.floor(
-            diff/
-            (
-                1000*
-                60*
-                60*
-                24
-            )
+            total/86400
         );
-
 
     const hours =
         Math.floor(
-            (
-                diff/
-                (
-                    1000*
-                    60*
-                    60
-                )
-            )
-            %
-            24
+            (total%86400)/3600
         );
-
 
     const minutes =
         Math.floor(
-            (
-                diff/
-                (
-                    1000*
-                    60
-                )
-            )
-            %
-            60
+            (total%3600)/60
         );
-
 
     const seconds =
-        Math.floor(
-            (
-                diff/1000
-            )
-            %
-            60
-        );
+        total%60;
 
+    document.getElementById("nyDays")
+        .textContent=days;
 
-    document.getElementById(
-        "newYearCountdown"
-    ).textContent =
-        `${days} gün · ${hours} saat · ${minutes} dk · ${seconds} sn`;
+    document.getElementById("nyHours")
+        .textContent=
+            String(hours).padStart(2,"0");
+
+    document.getElementById("nyMinutes")
+        .textContent=
+            String(minutes).padStart(2,"0");
+
+    document.getElementById("nySeconds")
+        .textContent=
+            String(seconds).padStart(2,"0");
 
 }
 
+updateNewYear();
 
 setInterval(
     updateNewYear,
     1000
 );
 
-updateNewYear();
+/* =========================================================
+   SCROLL TO DIARY
+========================================================= */
 
+function scrollToDiary(){
+
+    document
+        .getElementById("diary")
+        .scrollIntoView({
+            behavior:"smooth"
+        });
+
+}
 
 /* =========================================================
    BOOK
 ========================================================= */
 
 const pages =
-    document.querySelectorAll(
-        ".page"
+    Array.from(
+        document.querySelectorAll(".page")
     );
-
 
 let currentPage=0;
 
-
-document.getElementById(
-    "totalPages"
-).textContent =
-    pages.length;
-
-
-function renderPage(){
-
-    pages.forEach(
-        (page,index)=>{
-
-            page.classList.toggle(
-                "active",
-                index===currentPage
-            );
-
-        }
-    );
-
-
-    document.getElementById(
-        "currentPage"
-    ).textContent =
-        currentPage+1;
-
-
-    document.getElementById(
-        "prevBtn"
-    ).disabled =
-        currentPage===0;
-
-
-    document.getElementById(
-        "nextBtn"
-    ).disabled =
-        currentPage===
-        pages.length-1;
-
-
-    closePhoto();
-
-
-    const book =
-        document.querySelector(
-            ".book-wrap"
-        );
-
-
-    if(book){
-
-        const top =
-            book.getBoundingClientRect().top
-            +
-            window.scrollY
-            -
-            100;
-
-
-        window.scrollTo({
-            top,
-            behavior:"smooth"
-        });
-
-    }
-
-}
-
-
-function changePage(direction){
-
-    const next =
-        currentPage
-        +
-        direction;
-
+function showPage(index){
 
     if(
-        next<0
-        ||
-        next>=pages.length
+        index<0 ||
+        index>=pages.length
     ){
         return;
     }
 
+    pages[currentPage]
+        .classList
+        .remove("active");
 
-    currentPage =
-        next;
+    currentPage=index;
 
+    pages[currentPage]
+        .classList
+        .add("active");
 
-    renderPage();
+    document.getElementById("pageNumber")
+        .textContent=
+            currentPage+1;
 
 }
 
+function nextPage(){
 
-/* =========================================================
-   PHOTO FOCUS
-========================================================= */
-
-function focusPhoto(photo){
-
-    if(
-        photo.classList.contains(
-            "focused"
-        )
+    if(currentPage<
+        pages.length-1
     ){
 
-        closePhoto();
+        showPage(
+            currentPage+1
+        );
 
-        return;
+    }else{
+
+        document
+            .querySelector(".hourglass-section")
+            .scrollIntoView({
+                behavior:"smooth"
+            });
 
     }
 
-
-    document
-        .querySelectorAll(
-            ".photo.focused"
-        )
-        .forEach(
-            p =>
-                p.classList.remove(
-                    "focused"
-                )
-        );
-
-
-    photo.classList.add(
-        "focused"
-    );
-
-
-    document
-        .getElementById(
-            "photoBackdrop"
-        )
-        .classList.add(
-            "show"
-        );
-
 }
 
+function previousPage(){
 
-function closePhoto(){
+    if(currentPage>0){
 
-    document
-        .querySelectorAll(
-            ".photo.focused"
-        )
-        .forEach(
-            p =>
-                p.classList.remove(
-                    "focused"
-                )
+        showPage(
+            currentPage-1
         );
 
-
-    document
-        .getElementById(
-            "photoBackdrop"
-        )
-        .classList.remove(
-            "show"
-        );
+    }
 
 }
-
 
 /* =========================================================
    KEYBOARD
@@ -4843,448 +4307,182 @@ document.addEventListener(
     "keydown",
     function(e){
 
+        if(e.key==="ArrowRight"){
+            nextPage();
+        }
+
+        if(e.key==="ArrowLeft"){
+            previousPage();
+        }
+
         if(e.key==="Escape"){
             closePhoto();
         }
 
-
-        if(
-            document
-                .getElementById(
-                    "mainContent"
-                )
-                .classList.contains(
-                    "show"
-                )
-        ){
-
-            if(e.key==="ArrowRight"){
-                changePage(1);
-            }
-
-            if(e.key==="ArrowLeft"){
-                changePage(-1);
-            }
-
-        }
-
     }
 );
 
-
 /* =========================================================
-   MOBILE SWIPE
+   SWIPE
 ========================================================= */
 
 let touchStartX=0;
+let touchStartY=0;
 
+document.addEventListener(
+    "touchstart",
+    function(e){
 
-document
-    .querySelector(".book")
-    .addEventListener(
-        "touchstart",
-        function(e){
+        touchStartX =
+            e.changedTouches[0].screenX;
 
-            touchStartX =
-                e.changedTouches[0]
-                    .screenX;
+        touchStartY =
+            e.changedTouches[0].screenY;
 
-        },
-        {
-            passive:true
-        }
-    );
+    },
+    {
+        passive:true
+    }
+);
 
+document.addEventListener(
+    "touchend",
+    function(e){
 
-document
-    .querySelector(".book")
-    .addEventListener(
-        "touchend",
-        function(e){
+        const endX =
+            e.changedTouches[0].screenX;
 
-            const touchEndX =
-                e.changedTouches[0]
-                    .screenX;
+        const endY =
+            e.changedTouches[0].screenY;
 
+        const diffX =
+            endX-touchStartX;
 
-            const diff =
-                touchStartX
-                -
-                touchEndX;
+        const diffY =
+            endY-touchStartY;
 
+        if(
+            Math.abs(diffX)>65 &&
+            Math.abs(diffX)>Math.abs(diffY)
+        ){
 
-            if(
-                Math.abs(diff)<50
-            ){
-                return;
-            }
-
-
-            if(diff>0){
-
-                changePage(1);
-
+            if(diffX<0){
+                nextPage();
             }else{
-
-                changePage(-1);
-
+                previousPage();
             }
 
-        },
-        {
-            passive:true
         }
-    );
 
+    },
+    {
+        passive:true
+    }
+);
 
 /* =========================================================
-   SANTA + 3 REINDEER
+   PHOTO LIGHTBOX
 ========================================================= */
 
-const santa =
+const photoBackdrop =
     document.getElementById(
-        "santaFlight"
+        "photoBackdrop"
     );
 
+document
+    .querySelectorAll(".photo")
+    .forEach(photo=>{
 
-function santaRide(){
+        photo.addEventListener(
+            "click",
+            function(e){
 
-    santa.classList.remove(
-        "fly"
-    );
+                e.stopPropagation();
 
+                if(
+                    photo.classList
+                    .contains("focused")
+                ){
+
+                    closePhoto();
+
+                }else{
+
+                    photo.classList
+                        .add("focused");
+
+                    photoBackdrop
+                        .classList
+                        .add("show");
+
+                }
+
+            }
+        );
+
+    });
+
+function closePhoto(){
+
+    document
+        .querySelectorAll(
+            ".photo.focused"
+        )
+        .forEach(photo=>{
+
+            photo.classList
+                .remove("focused");
+
+        });
+
+    photoBackdrop
+        .classList
+        .remove("show");
+
+}
+
+photoBackdrop.addEventListener(
+    "click",
+    closePhoto
+);
+
+/* =========================================================
+   SANTA
+========================================================= */
+
+function flySanta(){
+
+    const santa =
+        document.getElementById(
+            "santaFlight"
+        );
+
+    santa.classList.remove("fly");
 
     void santa.offsetWidth;
 
-
-    santa.classList.add(
-        "fly"
-    );
+    santa.classList.add("fly");
 
 }
 
-
-/* first appearance */
-
 setTimeout(
-    santaRide,
-    2500
+    flySanta,
+    3500
 );
 
-
-/* every 60 seconds */
-
 setInterval(
-    santaRide,
+    flySanta,
     60000
 );
 
-
 /* =========================================================
-   ORIGINAL CINEMATIC MUSIC
+   MUSIC ENGINE
 ========================================================= */
 
 let audioContext=null;
-
 let masterGain=null;
-
-let musicTimer=null;
-
 let musicStarted=false;
-
-let musicMuted=false;
-
-
-/* create */
-
-function createAudio(){
-
-    if(audioContext){
-        return;
-    }
-
-
-    audioContext =
-        new (
-            window.AudioContext
-            ||
-            window.webkitAudioContext
-        )();
-
-
-    masterGain =
-        audioContext.createGain();
-
-
-    masterGain.gain.value=.045;
-
-
-    masterGain.connect(
-        audioContext.destination
-    );
-
-}
-
-
-/* soft tone */
-
-function playTone(
-    frequency,
-    start,
-    duration,
-    volume,
-    type="sine"
-){
-
-    if(!audioContext){
-        return;
-    }
-
-
-    const osc =
-        audioContext.createOscillator();
-
-
-    const gain =
-        audioContext.createGain();
-
-
-    osc.type =
-        type;
-
-
-    osc.frequency.setValueAtTime(
-        frequency,
-        start
-    );
-
-
-    gain.gain.setValueAtTime(
-        0,
-        start
-    );
-
-
-    gain.gain.linearRampToValueAtTime(
-        volume,
-        start+.18
-    );
-
-
-    gain.gain.exponentialRampToValueAtTime(
-        .0001,
-        start+duration
-    );
-
-
-    osc.connect(gain);
-
-    gain.connect(
-        masterGain
-    );
-
-
-    osc.start(start);
-
-    osc.stop(
-        start+
-        duration+
-        .1
-    );
-
-}
-
-
-/* chord */
-
-function playChord(
-    frequencies,
-    start,
-    duration
-){
-
-    frequencies.forEach(
-        (frequency,index)=>{
-
-            playTone(
-                frequency,
-                start+
-                index*.025,
-                duration,
-                .009,
-                "sine"
-            );
-
-        }
-    );
-
-}
-
-
-/* music loop */
-
-function musicLoop(){
-
-    if(
-        !audioContext
-        ||
-        musicMuted
-    ){
-        return;
-    }
-
-
-    const now =
-        audioContext.currentTime;
-
-
-    const beat=1.15;
-
-
-    /*
-        Original progression:
-        Dm → Bb → F → C
-    */
-
-    const chords=[
-
-        [
-            146.83,
-            174.61,
-            220.00,
-            261.63
-        ],
-
-        [
-            116.54,
-            146.83,
-            174.61,
-            233.08
-        ],
-
-        [
-            174.61,
-            220.00,
-            261.63,
-            329.63
-        ],
-
-        [
-            130.81,
-            164.81,
-            196.00,
-            246.94
-        ]
-
-    ];
-
-
-    chords.forEach(
-        (chord,index)=>{
-
-            const start =
-                now+
-                index*
-                beat*
-                4;
-
-
-            playChord(
-                chord,
-                start,
-                beat*3.8
-            );
-
-        }
-    );
-
-
-    /* melody */
-
-    const melody=[
-
-        293.66,
-        349.23,
-        440.00,
-        392.00,
-
-        349.23,
-        293.66,
-        261.63,
-        293.66,
-
-        349.23,
-        392.00,
-        523.25,
-        440.00,
-
-        392.00,
-        349.23,
-        293.66,
-        261.63
-
-    ];
-
-
-    melody.forEach(
-        (note,index)=>{
-
-            playTone(
-                note,
-                now+
-                index*.55,
-                .95,
-                .025,
-                "triangle"
-            );
-
-        }
-    );
-
-
-    /* high sparkle */
-
-    const sparkle=[
-
-        880,
-        1046.5,
-        1318.5,
-        1174.66
-
-    ];
-
-
-    sparkle.forEach(
-        (note,index)=>{
-
-            playTone(
-                note,
-                now+
-                index*2.8+
-                1.4,
-                2,
-                .008,
-                "sine"
-            );
-
-        }
-    );
-
-
-    musicTimer =
-        setTimeout(
-            musicLoop,
-            beat*
-            4*
-            1000
-            -
-            150
-        );
-
-}
-
-
-/* start */
+let musicTimer=null;
 
 function startMusic(){
 
@@ -5292,38 +4490,169 @@ function startMusic(){
         return;
     }
 
-
-    createAudio();
-
-
-    if(
-        audioContext.state===
-        "suspended"
-    ){
-
-        audioContext.resume();
-
-    }
-
-
     musicStarted=true;
 
+    audioContext =
+        new (
+            window.AudioContext ||
+            window.webkitAudioContext
+        )();
 
-    musicLoop();
+    masterGain =
+        audioContext.createGain();
 
+    masterGain.gain.value=.065;
 
-    document
-        .getElementById(
-            "musicButton"
-        )
-        .classList.add(
-            "playing"
-        );
+    masterGain.connect(
+        audioContext.destination
+    );
+
+    playWinterMusic();
 
 }
 
+function playNote(
+    frequency,
+    start,
+    duration,
+    type,
+    volume
+){
 
-/* toggle */
+    if(!audioContext){
+        return;
+    }
+
+    const oscillator =
+        audioContext
+        .createOscillator();
+
+    const gain =
+        audioContext
+        .createGain();
+
+    oscillator.type=type;
+
+    oscillator.frequency.value=
+        frequency;
+
+    const now =
+        audioContext.currentTime;
+
+    gain.gain.setValueAtTime(
+        .0001,
+        now+start
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        volume,
+        now+start+.06
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        .0001,
+        now+start+duration
+    );
+
+    oscillator.connect(gain);
+
+    gain.connect(masterGain);
+
+    oscillator.start(
+        now+start
+    );
+
+    oscillator.stop(
+        now+start+duration+.05
+    );
+
+}
+
+function playWinterMusic(){
+
+    if(!audioContext){
+        return;
+    }
+
+    /*
+       Tamamen özgün basit kış atmosferi.
+       Mevcut bir şarkının melodisi kullanılmıyor.
+    */
+
+    const melody=[
+        261.63,
+        329.63,
+        392.00,
+        329.63,
+        293.66,
+        349.23,
+        440.00,
+        349.23
+    ];
+
+    melody.forEach(
+        (frequency,index)=>{
+
+            playNote(
+                frequency,
+                index*.62,
+                2.1,
+                "sine",
+                .15
+            );
+
+        }
+    );
+
+    const bells=[
+        523.25,
+        659.25,
+        783.99,
+        659.25
+    ];
+
+    bells.forEach(
+        (frequency,index)=>{
+
+            playNote(
+                frequency,
+                1.2+index*.85,
+                1.25,
+                "triangle",
+                .045
+            );
+
+        }
+    );
+
+    const bass=[
+        130.81,
+        146.83,
+        164.81,
+        146.83
+    ];
+
+    bass.forEach(
+        (frequency,index)=>{
+
+            playNote(
+                frequency,
+                index*1.25,
+                1.7,
+                "sine",
+                .045
+            );
+
+        }
+    );
+
+    musicTimer =
+        setTimeout(
+            playWinterMusic,
+            5000
+        );
+
+}
 
 function toggleMusic(){
 
@@ -5335,81 +4664,139 @@ function toggleMusic(){
 
     }
 
+    if(
+        audioContext.state
+        ===
+        "running"
+    ){
 
-    musicMuted =
-        !musicMuted;
+        audioContext.suspend();
 
-
-    const button =
         document.getElementById(
             "musicButton"
-        );
+        ).textContent="🔇";
 
+    }else{
 
-    if(musicMuted){
+        audioContext.resume();
 
-        masterGain.gain.setTargetAtTime(
-            0,
-            audioContext.currentTime,
-            .25
-        );
-
-
-        button.classList.remove(
-            "playing"
-        );
-
-    }
-
-    else{
-
-        masterGain.gain.setTargetAtTime(
-            .045,
-            audioContext.currentTime,
-            .25
-        );
-
-
-        button.classList.add(
-            "playing"
-        );
-
-
-        musicLoop();
+        document.getElementById(
+            "musicButton"
+        ).textContent="♫";
 
     }
 
 }
 
-
 /* =========================================================
-   IMAGE FALLBACK
+   START MUSIC AFTER FIRST USER ACTION
 ========================================================= */
 
-document
-    .querySelectorAll("img")
-    .forEach(
-        img=>{
+document.addEventListener(
+    "click",
+    function(){
 
-            img.addEventListener(
-                "error",
-                function(){
+        if(!musicStarted){
+            startMusic();
+        }
 
-                    this.style.background =
-                        "linear-gradient(135deg,#43233e,#1c1021)";
+    },
+    {
+        once:true
+    }
+);
+
+/* =========================================================
+   SPARKLES
+========================================================= */
+
+setInterval(
+    function(){
+
+        const sparkle =
+            document.createElement("div");
+
+        sparkle.className="sparkle";
+
+        sparkle.style.left =
+            Math.random()*100+"%";
+
+        sparkle.style.top =
+            (5+Math.random()*90)+"%";
+
+        document.body.appendChild(
+            sparkle
+        );
+
+        const animation =
+            sparkle.animate(
+                [
+                    {
+                        opacity:0,
+                        transform:"scale(.2)"
+                    },
+                    {
+                        opacity:1,
+                        transform:"scale(1.7)"
+                    },
+                    {
+                        opacity:0,
+                        transform:"scale(.2)"
+                    }
+                ],
+                {
+                    duration:
+                        1000+
+                        Math.random()*800,
+
+                    easing:
+                        "ease-in-out"
+                }
+            );
+
+        animation.onfinish=
+            function(){
+                sparkle.remove();
+            };
+
+    },
+    750
+);
+
+/* =========================================================
+   RANDOM CHRISTMAS LIGHT FLICKER
+========================================================= */
+
+setInterval(
+    function(){
+
+        document
+            .querySelectorAll(".bulb")
+            .forEach(
+                bulb=>{
+
+                    if(Math.random()>.7){
+
+                        bulb.style.opacity=
+                            ".35";
+
+                        setTimeout(
+                            ()=>{
+                                bulb.style.opacity=
+                                    "";
+                            },
+                            150+
+                            Math.random()*300
+                        );
+
+                    }
 
                 }
             );
 
-        }
-    );
-
-
-/* =========================================================
-   INITIAL
-========================================================= */
-
-renderPage();
+    },
+    1500
+);
 
 </script>
 
