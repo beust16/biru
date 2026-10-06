@@ -533,35 +533,102 @@ body{
 }
 
 /* =========================
-   ÇAPRAZ DÜZENLER
+   DEFTER FOTOĞRAF DÜZENİ
+   Fotoğraflar yazının SAĞINDA,
+   sayfadan sayfaya farklı yüksekliklerde.
+   Metin alanına hiçbir dekor taşmaz.
 ========================= */
 
-.page:nth-child(even) .photo{
-    margin-left:8%;
-    margin-right:auto;
+.page{
+    padding:56px 50px 64px;
 }
 
-.page:nth-child(3n) .photo{
-    margin-left:auto;
-    margin-right:4%;
+.page .photo{
+    position:absolute;
+    top:72px;
+    right:36px;
+    width:265px;
+    margin:0 !important;
+    padding:10px 10px 34px;
+    z-index:2;
+}
+
+.page .photo img{
+    height:205px;
+}
+
+.page .note{
+    position:relative;
+    z-index:4;
+    width:62% !important;
+    margin:0 !important;
+    padding:28px 24px 34px 16px;
+    background:rgba(255,248,233,.94);
+    border-radius:10px;
+    box-shadow:0 8px 22px rgba(74,43,43,.055);
+}
+
+/* Her birkaç sayfada fotoğraf biraz daha aşağıya kayar.
+   Ama hiçbir zaman sayfanın dibine yapışmaz. */
+.page:nth-child(2) .photo{
+    top:238px;
+    transform:rotate(3.5deg);
+}
+.page:nth-child(3) .photo{
+    top:118px;
+    transform:rotate(-4deg);
+}
+.page:nth-child(4) .photo{
+    top:318px;
     transform:rotate(4deg);
 }
-
-.page:nth-child(3n) .note{
-    width:78%;
-    margin-left:8%;
+.page:nth-child(5) .photo{
+    top:182px;
+    transform:rotate(-2.5deg);
+}
+.page:nth-child(6) .photo{
+    top:355px;
+    transform:rotate(3deg);
+}
+.page:nth-child(7) .photo{
+    top:92px;
+    transform:rotate(-3.5deg);
+}
+.page:nth-child(8) .photo{
+    top:278px;
+    transform:rotate(4deg);
+}
+.page:nth-child(9) .photo{
+    top:145px;
+    transform:rotate(-3deg);
+}
+.page:nth-child(10) .photo{
+    top:330px;
+    transform:rotate(3.5deg);
 }
 
-.page:nth-child(4n) .photo{
-    width:56%;
-    margin-left:0;
-    margin-right:auto;
+/* Dekoratif notlar sadece boş kenar alanlarında dursun. */
+.sticker{
+    z-index:1;
+    pointer-events:none;
+}
+.sticker.one{
+    top:22px;
+    left:28px;
+}
+.sticker.two{
+    right:320px;
+    bottom:24px;
 }
 
-.page:nth-child(4n) .note{
-    width:65%;
-    margin-left:auto;
-    margin-right:3%;
+.heart.one{
+    top:25px;
+    left:28px;
+}
+.heart.two{
+    right:28px;
+    bottom:26px;
+    z-index:1;
 }
 
 /* =========================
@@ -738,6 +805,14 @@ body{
    MOBİL
 ========================= */
 
+/* Masaüstünde yazı ve fotoğrafı tamamen ayrı alanlarda tut. */
+@media(min-width:701px){
+    .page .note p{
+        position:relative;
+        z-index:5;
+    }
+}
+
 @media(max-width:700px){
 
     .hero h1{
@@ -765,9 +840,21 @@ body{
     .photo.right,
     .page:nth-child(even) .photo,
     .page:nth-child(3n) .photo,
-    .page:nth-child(4n) .photo{
+    .page:nth-child(4n) .photo,
+    .page:nth-child(2) .photo,
+    .page:nth-child(3) .photo,
+    .page:nth-child(4) .photo,
+    .page:nth-child(5) .photo,
+    .page:nth-child(6) .photo,
+    .page:nth-child(7) .photo,
+    .page:nth-child(8) .photo,
+    .page:nth-child(9) .photo,
+    .page:nth-child(10) .photo{
+        position:relative;
+        top:auto;
+        right:auto;
         width:92%;
-        margin:0 auto 35px;
+        margin:0 auto 35px !important;
         transform:rotate(-2deg);
     }
 
@@ -778,10 +865,12 @@ body{
     .note,
     .page:nth-child(3n) .note,
     .page:nth-child(4n) .note{
-        width:94%;
-        margin:auto;
+        width:94% !important;
+        margin:auto !important;
+        padding:18px 14px 28px;
         font-size:18px;
         line-height:1.9;
+        background:rgba(255,248,233,.96);
     }
 
     .noteTitle{
@@ -838,6 +927,15 @@ body:before{
 }
 #lock{
     overflow:hidden;
+}
+#snow{
+    position:fixed;
+    inset:0;
+    z-index:1000;
+    pointer-events:none;
+}
+.lockBox{
+    z-index:1002;
 }
 #lock:before,#lock:after{
     content:"";
@@ -1053,7 +1151,7 @@ body:before{
     position:fixed;
     top:-80px;
     left:-180px;
-    z-index:30;
+    z-index:1001;
     pointer-events:none;
     display:flex;
     align-items:center;
@@ -1066,11 +1164,11 @@ body:before{
     animation:skyRide 13s linear forwards;
 }
 @keyframes skyRide{
-    0%{left:-220px;top:5%;opacity:0;transform:scale(.72)}
-    8%{opacity:1}
-    46%{transform:translateY(28px) scale(1)}
+    0%{left:-220px;top:4%;opacity:0;transform:scale(.72)}
+    7%{opacity:1}
+    45%{transform:translateY(34px) scale(1.04)}
     92%{opacity:1}
-    100%{left:110vw;top:13%;opacity:0;transform:translateY(-12px) scale(.86)}
+    100%{left:110vw;top:11%;opacity:0;transform:translateY(-14px) scale(.9)}
 }
 .skyGift .santa{font-size:42px}
 .skyGift .reindeer{font-size:30px}
@@ -2086,7 +2184,7 @@ for(let i=0;i<75;i++){
 const snow=
     document.getElementById("snow");
 
-for(let i=0;i<85;i++){
+for(let i=0;i<150;i++){
 
     const flake=
         document.createElement("div");
@@ -2094,19 +2192,19 @@ for(let i=0;i<85;i++){
     flake.className="snow";
 
     flake.textContent=
-        Math.random()>.55 ? "❄":"•";
+        Math.random()>.35 ? "❄":"✦";
 
     flake.style.left=
         Math.random()*100+"%";
 
     flake.style.fontSize=
-        (Math.random()*9+5)+"px";
+        (Math.random()*11+6)+"px";
 
     flake.style.animationDuration=
-        (Math.random()*8+8)+"s";
+        (Math.random()*7+7)+"s";
 
     flake.style.animationDelay=
-        Math.random()*8+"s";
+        -(Math.random()*10)+"s";
 
     snow.appendChild(flake);
 
@@ -2369,90 +2467,51 @@ function playMelody(){
     if(!musicPlaying)
         return;
 
-
-    const now=
-        audioContext.currentTime;
-
+    const now=audioContext.currentTime;
 
     /*
-       Ana melodi
+       Daha hareketli, tamamen özgün bir tema:
+       sihirli/karanlık masal hissi + sıcak Noel çanları.
+       Belirli bir film/oyun melodisi kullanılmaz.
     */
-
+    const step=.36;
     const melody=[
-
-        [261.63,0.0],
-        [329.63,0.7],
-        [392.00,1.4],
-        [329.63,2.2],
-
-        [293.66,3.1],
-        [349.23,3.8],
-        [440.00,4.6],
-        [349.23,5.4],
-
-        [261.63,6.4],
-        [329.63,7.1],
-        [392.00,7.8],
-        [523.25,8.6],
-
-        [440.00,9.6],
-        [392.00,10.4],
-        [329.63,11.2],
-        [293.66,12.0],
-
-        [261.63,13.0],
-        [293.66,13.7],
-        [329.63,14.5]
-
+        [261.63,0],[329.63,1],[392.00,2],[523.25,3],[392.00,4],[329.63,5],
+        [233.08,7],[293.66,8],[349.23,9],[466.16,10],[349.23,11],[293.66,12],
+        [261.63,14],[329.63,15],[392.00,16],[587.33,17],[523.25,18],[392.00,19],
+        [220.00,21],[277.18,22],[349.23,23],[440.00,24],[349.23,25],[277.18,26],
+        [246.94,28],[311.13,29],[369.99,30],[493.88,31],[369.99,32],[311.13,33]
     ];
 
-
-    melody.forEach(n=>{
-
-        note(
-            n[0],
-            now+n[1],
-            1.4,
-            .035,
-            "sine"
-        );
-
+    melody.forEach(([f,i])=>{
+        note(f,now+i*step,0.48,.028,'triangle');
     });
 
+    /* Zıplayan alt bas / akorlar */
+    const bass=[
+        [130.81,0],[130.81,4],[155.56,7],[155.56,12],
+        [130.81,14],[130.81,18],[110.00,21],[110.00,26],
+        [123.47,28],[123.47,33]
+    ];
+    bass.forEach(([f,i])=>note(f,now+i*step,1.35,.018,'sine'));
 
-    /*
-       Hafif karanlık alt notalar
-    */
+    /* Küçük Noel çanı parıltıları */
+    const bells=[
+        [783.99,1],[987.77,3.5],[1046.50,6.5],
+        [880.00,9.5],[1318.51,12.5],[1174.66,17.5],
+        [1567.98,20.5],[1318.51,24.5],[1760.00,27.5],
+        [1174.66,31.5],[1567.98,34.2]
+    ];
+    bells.forEach(([f,i])=>note(f,now+i*step,0.65,.012,'sine'));
 
-    note(130.81,0,4,.014,"triangle");
-    note(164.81,0,4,.012,"triangle");
+    /* Hafif gizemli cevap notaları */
+    const shadows=[
+        [196,2.5],[233.08,5.4],[174.61,10.8],[207.65,13.1],
+        [196,18.6],[164.81,22.2],[220,29.1],[196,33.8]
+    ];
+    shadows.forEach(([f,i])=>note(f,now+i*step,0.9,.011,'sawtooth'));
 
-    note(146.83,4,4,.014,"triangle");
-    note(174.61,4,4,.012,"triangle");
-
-    note(130.81,8,4,.014,"triangle");
-    note(164.81,8,4,.012,"triangle");
-
-    note(146.83,12,4,.014,"triangle");
-    note(174.61,12,4,.012,"triangle");
-
-
-    /*
-       Küçük yıldız gibi yüksek sesler
-    */
-
-    note(783.99,2.6,.8,.008,"sine");
-    note(659.25,6.0,.8,.007,"sine");
-    note(880.00,10.0,.8,.007,"sine");
-    note(783.99,14.9,.8,.007,"sine");
-
-
-    musicTimer=
-        setTimeout(
-            playMelody,
-            16500
-        );
-
+    musicTimer=setTimeout(playMelody,step*35*1000+120);
 }
 
 
@@ -2509,7 +2568,7 @@ function toggleMusic(){
    PROFESYONEL DOKUNUŞLAR
    - Yeni yıl geldiğinde otomatik açılır.
    - Santa + 3 geyik iki dakikada bir geçer.
-   - Müzik koduna dokunulmadı.
+   - Özgün müzik daha hareketli ve Noel/sihir atmosferine çekildi.
 ===================================================== */
 
 function showMain(){
