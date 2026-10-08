@@ -2,159 +2,266 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Sadece İkimiz ♡</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Kalam:wght@300;400;700&display=swap');
 
 *{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    -webkit-tap-highlight-color: transparent;
 }
 
 html{
-    scroll-behavior:smooth;
+    scroll-behavior: smooth;
 }
 
 body{
-    min-height:100vh;
-    overflow-x:hidden;
+    min-height: 100vh;
+    overflow-x: hidden;
     background:
-        radial-gradient(circle at 15% 20%,rgba(125,55,160,.35),transparent 30%),
-        radial-gradient(circle at 85% 75%,rgba(180,20,65,.28),transparent 32%),
-        linear-gradient(135deg,#09030e,#21091e,#100410);
-    color:#3c2030;
+        radial-gradient(circle at 15% 20%, rgba(125,55,160,.35), transparent 30%),
+        radial-gradient(circle at 85% 75%, rgba(180,20,65,.28), transparent 32%),
+        linear-gradient(135deg, #09030e, #21091e, #100410);
+    color: #3c2030;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+/* =========================
+   SALLANAN MOR KALP EFEKTİ
+========================= */
+.swaying-heart {
+    display: inline-block;
+    color: #a855f7;
+    text-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
+    animation: swayHeart 2.5s ease-in-out infinite alternate;
+    transform-origin: center bottom;
+}
+
+@keyframes swayHeart {
+    0% { transform: rotate(-15deg) scale(1); }
+    100% { transform: rotate(15deg) scale(1.15); }
+}
+
+.page-sway-heart {
+    position: absolute;
+    font-size: 22px;
+    z-index: 5;
+    pointer-events: none;
+}
+
+.page-sway-heart.top-left {
+    top: 15px;
+    left: 15px;
+}
+
+.page-sway-heart.bottom-right {
+    bottom: 15px;
+    right: 15px;
+    animation-delay: -1.2s;
+}
+
+/* =========================
+   SARKAN NOEL IŞIKLARI
+========================= */
+.hanging-lights {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 100;
+    pointer-events: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.15);
+}
+
+.light-wire {
+    position: relative;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.light-bulb {
+    position: absolute;
+    width: 10px;
+    height: 15px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    top: 0;
+    animation: lightBlink 1.5s infinite alternate;
+}
+
+.light-wire::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 1px;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.light-wire:nth-child(5n+1) { height: 25px; }
+.light-wire:nth-child(5n+1) .light-bulb { top: 25px; background: #ff3562; box-shadow: 0 0 10px #ff3562; animation-delay: 0.1s; }
+
+.light-wire:nth-child(5n+2) { height: 40px; }
+.light-wire:nth-child(5n+2) .light-bulb { top: 40px; background: #ffb703; box-shadow: 0 0 10px #ffb703; animation-delay: 0.4s; }
+
+.light-wire:nth-child(5n+3) { height: 20px; }
+.light-wire:nth-child(5n+3) .light-bulb { top: 20px; background: #a855f7; box-shadow: 0 0 10px #a855f7; animation-delay: 0.7s; }
+
+.light-wire:nth-child(5n+4) { height: 35px; }
+.light-wire:nth-child(5n+4) .light-bulb { top: 35px; background: #00f5d4; box-shadow: 0 0 10px #00f5d4; animation-delay: 0.2s; }
+
+.light-wire:nth-child(5n+5) { height: 45px; }
+.light-wire:nth-child(5n+5) .light-bulb { top: 45px; background: #ff007f; box-shadow: 0 0 10px #ff007f; animation-delay: 0.9s; }
+
+@keyframes lightBlink {
+    0% { opacity: 0.3; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1.1); }
+}
+
+/* =========================
+   FOTOĞRAF ÇERÇEVESİ
+========================= */
+.photo-upload-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.polaroid-frame {
+    position: relative;
+    width: 100%;
+    max-width: 200px;
+    height: 230px;
+    background: #fff;
+    padding: 10px 10px 35px 10px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+    transform: rotate(-1.5deg);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.polaroid-frame:hover, .polaroid-frame:active {
+    transform: rotate(0deg) scale(1.02);
+}
+
+.polaroid-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 2px;
+    display: none;
+}
+
+.photo-placeholder {
+    width: 100%;
+    height: 100%;
+    border: 2px dashed #b89db0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #835272;
+    font-family: 'Kalam', cursive;
+    font-size: 13px;
+    text-align: center;
+    padding: 8px;
+    background: #faf4f8;
+}
+
+.photo-placeholder span {
+    font-size: 24px;
+    margin-bottom: 4px;
 }
 
 /* =========================
    ARKA PLAN & YILDIZLAR
 ========================= */
-
 .bg{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:-10;
-    background:
-        radial-gradient(circle at 50% 35%,rgba(190,80,180,.08),transparent 35%);
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -10;
+    background: radial-gradient(circle at 50% 35%, rgba(190,80,180,.08), transparent 35%);
 }
 
 .stars{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:-5;
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: -5;
 }
 
 .star{
-    position:absolute;
-    color:white;
-    animation:twinkle 2s infinite alternate;
+    position: absolute;
+    color: white;
+    animation: twinkle 2s infinite alternate;
 }
 
 @keyframes twinkle{
-    from{opacity:.15;transform:scale(.7)}
-    to{opacity:.9;transform:scale(1.15)}
+    from{ opacity: .15; transform: scale(.7); }
+    to{ opacity: .9; transform: scale(1.15); }
 }
 
 /* =========================
    KAR EFEKTİ
 ========================= */
-
 #snow-container{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:20;
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 20;
 }
 
 .snow{
-    position:fixed;
-    top:-20px;
-    color:#fff;
-    pointer-events:none;
-    animation:fall linear infinite;
+    position: fixed;
+    top: -20px;
+    color: #fff;
+    pointer-events: none;
+    animation: fall linear infinite;
 }
 
 @keyframes fall{
-    to{
-        transform:translateY(110vh) rotate(360deg);
-    }
-}
-
-/* =========================
-   IŞIKLAR
-========================= */
-
-.lights{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:30px;
-    display:flex;
-    justify-content:space-around;
-    z-index:50;
-    pointer-events:none;
-}
-
-.light{
-    width:8px;
-    height:8px;
-    margin-top:8px;
-    border-radius:50%;
-    animation:blink 1.8s infinite alternate;
-}
-
-.light:nth-child(odd){
-    background:#ff315e;
-    box-shadow:0 0 15px #ff315e;
-}
-
-.light:nth-child(even){
-    background:#bf65ff;
-    box-shadow:0 0 15px #bf65ff;
-}
-
-@keyframes blink{
-    from{opacity:.3}
-    to{opacity:1}
+    to{ transform: translateY(110vh) rotate(360deg); }
 }
 
 /* =========================
    SAĞ ÜST KONTROL PANELİ
 ========================= */
-
 .top-right-controls {
     position: fixed;
-    top: 20px;
-    right: 20px;
+    top: 55px;
+    right: 15px;
     z-index: 1000;
     display: flex;
-    gap: 12px;
+    gap: 8px;
 }
 
 .top-btn {
-    width: 50px;
-    height: 50px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
     border: 1px solid rgba(255,255,255,.25);
-    background: linear-gradient(135deg,#8e275d,#7130a5);
+    background: linear-gradient(135deg, #8e275d, #7130a5);
     color: white;
-    font-size: 20px;
+    font-size: 16px;
     cursor: pointer;
-    box-shadow: 0 8px 25px rgba(0,0,0,.4);
+    box-shadow: 0 4px 15px rgba(0,0,0,.4);
     transition: transform .25s, box-shadow .25s;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
-.top-btn:hover {
-    transform: translateY(-3px) scale(1.05);
-    box-shadow: 0 12px 30px rgba(0,0,0,.5), 0 0 20px rgba(210,83,170,.3);
+.top-btn:active {
+    transform: scale(0.95);
 }
 
 .top-btn.playing {
@@ -162,215 +269,217 @@ body{
 }
 
 @keyframes musicPulse{
-    50%{box-shadow:0 0 0 10px rgba(255,100,160,.2),0 14px 38px rgba(0,0,0,.46)}
+    50%{ box-shadow: 0 0 0 8px rgba(255,100,160,.2), 0 8px 20px rgba(0,0,0,.46); }
 }
 
 /* =========================
    ŞİFRE EKRANI
 ========================= */
-
 #lock{
-    position:fixed;
-    inset:0;
-    z-index:999;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-    text-align:center;
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    text-align: center;
     background:
-        radial-gradient(circle at center,rgba(130,45,150,.25),transparent 40%),
-        linear-gradient(135deg,#08030d,#22091d,#08030d);
-    transition:opacity .9s;
+        radial-gradient(circle at center, rgba(130,45,150,.25), transparent 40%),
+        linear-gradient(135deg, #08030d, #22091d, #08030d);
+    transition: opacity .8s;
 }
 
 .lockBox{
-    width:min(470px,100%);
-    padding:45px 30px;
-    border-radius:30px;
-    background:rgba(255,255,255,.055);
-    border:1px solid rgba(255,255,255,.12);
-    backdrop-filter:blur(18px);
-    box-shadow:0 30px 100px rgba(0,0,0,.55);
+    width: min(420px, 100%);
+    padding: 35px 20px;
+    border-radius: 24px;
+    background: rgba(255,255,255,.055);
+    border: 1px solid rgba(255,255,255,.12);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 20px 60px rgba(0,0,0,.55);
 }
 
 .lockHeart{
-    font-size:65px;
-    color:#ff6389;
-    animation:heartbeat 2s infinite;
+    font-size: 50px;
+    color: #ff6389;
+    animation: heartbeat 2s infinite;
 }
 
 @keyframes heartbeat{
-    50%{transform:scale(1.1)}
+    50%{ transform: scale(1.1); }
 }
 
 .lockBox h1{
-    font-family:"Great Vibes",cursive;
-    font-size:56px;
-    font-weight:400;
-    color:#f19bce;
+    font-family: "Great Vibes", cursive;
+    font-size: clamp(38px, 8vw, 52px);
+    font-weight: 400;
+    color: #f19bce;
 }
 
 .lockBox p{
-    margin-top:10px;
-    color:#ddd;
-    font-family:"Cormorant Garamond",serif;
-    font-size:19px;
+    margin-top: 8px;
+    color: #ddd;
+    font-size: 16px;
 }
 
 .password{
-    width:100%;
-    margin-top:25px;
-    padding:15px;
-    border-radius:15px;
-    border:1px solid rgba(255,255,255,.12);
-    outline:none;
-    background:rgba(255,255,255,.07);
-    color:white;
-    text-align:center;
-    font-size:16px;
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,.15);
+    outline: none;
+    background: rgba(255,255,255,.08);
+    color: white;
+    text-align: center;
+    font-size: 16px;
 }
 
 .enter{
-    width:100%;
-    margin-top:12px;
-    padding:15px;
-    border:0;
-    border-radius:15px;
-    color:white;
-    background:linear-gradient(90deg,#982351,#7130a3);
-    font-family:"Cormorant Garamond",serif;
-    font-size:18px;
-    cursor:pointer;
-    transition:.3s;
+    width: 100%;
+    margin-top: 12px;
+    padding: 14px;
+    border: 0;
+    border-radius: 12px;
+    color: white;
+    background: linear-gradient(90deg, #982351, #7130a3);
+    font-size: 17px;
+    cursor: pointer;
+    transition: .3s;
 }
 
-.enter:hover{
-    transform:translateY(-2px);
-    box-shadow:0 12px 30px rgba(160,40,180,.3);
+.enter:active{
+    transform: scale(0.98);
 }
 
 #error{
-    min-height:25px;
+    min-height: 22px;
     margin-top: 10px;
-    color:#ff6b8b!important;
+    color: #ff6b8b !important;
+    font-size: 14px;
 }
 
 /* =========================
    ANA İÇERİK
 ========================= */
-
 #main{
-    display:none;
+    display: none;
 }
 
 .hero{
-    min-height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:90px 20px 50px;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 75px 15px 40px;
 }
 
 .tree{
-    font-size:58px;
-    animation:float 3s ease-in-out infinite;
+    font-size: 48px;
+    animation: float 3s ease-in-out infinite;
 }
 
 @keyframes float{
-    50%{transform:translateY(-8px)}
+    50%{ transform: translateY(-8px); }
 }
 
 .hero h1{
-    margin-top:15px;
-    font-family:"Great Vibes",cursive;
-    font-weight:400;
-    font-size:clamp(65px,12vw,130px);
-    background:linear-gradient(90deg,#ff5079,#d494ff,#ff5079);
-    background-size:200%;
-    -webkit-background-clip:text;
-    color:transparent;
-    animation:gradient 5s linear infinite;
+    margin-top: 10px;
+    font-family: "Great Vibes", cursive;
+    font-weight: 400;
+    font-size: clamp(48px, 11vw, 100px);
+    background: linear-gradient(90deg, #ff5079, #d494ff, #ff5079);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    color: transparent;
+    animation: gradient 5s linear infinite;
+    line-height: 1.2;
 }
 
 @keyframes gradient{
-    to{background-position:200%}
+    to{ background-position: 200%; }
 }
 
 .hero p{
-    color:#eee;
-    font-size:clamp(20px,3vw,29px);
-    margin-top:12px;
+    color: #eee;
+    font-size: clamp(16px, 4vw, 24px);
+    margin-top: 10px;
+    padding: 0 10px;
 }
 
 .symbols{
-    margin-top:25px;
-    font-size:30px;
-    letter-spacing:12px;
+    margin-top: 20px;
+    font-size: 24px;
+    letter-spacing: 8px;
 }
 
 /* =========================
    SAYAÇLAR
 ========================= */
-
 .counters{
-    width:min(1050px,92%);
-    margin:0 auto 110px;
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:18px;
+    width: min(1000px, 92%);
+    margin: 0 auto 60px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
 }
 
 .counter{
-    padding:25px 15px;
-    text-align:center;
-    border-radius:24px;
-    background:rgba(255,255,255,.045);
-    border:1px solid rgba(255,255,255,.1);
-    backdrop-filter:blur(12px);
+    padding: 20px 12px;
+    text-align: center;
+    border-radius: 18px;
+    background: rgba(255,255,255,.045);
+    border: 1px solid rgba(255,255,255,.1);
+    backdrop-filter: blur(12px);
 }
 
 .counterNumber{
-    margin-top:8px;
-    color:#ed8dca;
-    font-size:31px;
-    font-weight:600;
+    margin-top: 6px;
+    color: #ed8dca;
+    font-size: clamp(22px, 5vw, 28px);
+    font-weight: 600;
 }
 
 .counterText{
-    margin-top:5px;
-    color:#aaa;
+    margin-top: 4px;
+    color: #aaa;
+    font-size: 14px;
 }
 
 /* =========================
    DEFTER
 ========================= */
-
 .bookSection{
-    width:min(1080px,94%);
-    margin:0 auto 130px;
+    width: min(950px, 94%);
+    margin: 0 auto 80px;
 }
 
 .bookTitle{
-    text-align:center;
-    color:white;
-    margin-bottom:30px;
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
 }
 
 .bookTitle h2{
-    font-family:"Great Vibes",cursive;
-    font-size:67px;
-    font-weight:400;
-    color:#f0a1cf;
+    font-family: "Great Vibes", cursive;
+    font-size: clamp(45px, 9vw, 65px);
+    font-weight: 400;
+    color: #f0a1cf;
+}
+
+.bookTitle p{
+    font-size: 15px;
+    opacity: 0.8;
 }
 
 .book{
-    position:relative;
-    padding:32px 20px 20px;
-    border:8px solid #39172e;
-    border-radius:20px;
+    position: relative;
+    padding: 15px 10px 15px;
+    border: 6px solid #39172e;
+    border-radius: 16px;
     background:
         linear-gradient(
             90deg,
@@ -380,20 +489,20 @@ body{
             rgba(65,20,40,.4)
         ),
         #e8d0a9;
-    box-shadow:0 40px 90px rgba(0,0,0,.6);
+    box-shadow: 0 25px 60px rgba(0,0,0,.6);
 }
 
 .page{
-    display:none;
-    position:relative;
-    min-height:750px;
-    padding:50px 45px;
+    display: none;
+    position: relative;
+    min-height: 520px;
+    padding: 25px 18px;
     background:
         repeating-linear-gradient(
             0deg,
             transparent,
-            transparent 31px,
-            rgba(80,70,50,.065) 32px
+            transparent 29px,
+            rgba(80,70,50,.065) 30px
         ),
         linear-gradient(
             90deg,
@@ -404,47 +513,60 @@ body{
 }
 
 .page.active{
-    display:block;
+    display: block;
 }
 
 .noteTitle{
-    font-family:"Great Vibes",cursive;
-    font-size:51px;
-    color:#9b315d;
-    margin-bottom:18px;
+    font-family: "Great Vibes", cursive;
+    font-size: clamp(30px, 6vw, 42px);
+    color: #9b315d;
+    margin-bottom: 12px;
+    text-align: center;
+    line-height: 1.2;
+    word-break: break-word;
 }
 
 .note p{
-    font-family:"Kalam",cursive;
-    font-size:20px;
-    line-height:2;
-    color:#513343;
-    white-space:pre-line;
+    font-family: "Kalam", cursive;
+    font-size: clamp(15px, 3.8vw, 18px);
+    line-height: 1.8;
+    color: #513343;
+    white-space: pre-line;
+    word-wrap: break-word;
 }
 
 .controls{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:22px;
-    padding:20px 10px 5px;
-    background:#e8d0a9;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 15px 5px 5px;
+    background: #e8d0a9;
 }
 
 .btn{
-    padding:12px 23px;
-    border:1px solid #895269;
-    border-radius:12px;
-    background:#71324f;
-    color:white;
-    font-family:"Kalam",cursive;
-    font-size:16px;
-    cursor:pointer;
+    flex: 1;
+    max-width: 130px;
+    padding: 10px 12px;
+    border: 1px solid #895269;
+    border-radius: 10px;
+    background: #71324f;
+    color: white;
+    font-family: "Kalam", cursive;
+    font-size: 15px;
+    cursor: pointer;
+    text-align: center;
+    transition: background 0.2s;
 }
 
-@media(max-width:700px){
-    .counters{grid-template-columns:1fr;}
-    .hero h1{font-size:72px;}
+.btn:active{
+    background: #54223a;
+}
+
+@media(max-width: 600px){
+    .book{ padding: 8px 4px 8px; border-width: 4px; }
+    .page{ padding: 20px 12px; min-height: 480px; }
+    .hanging-lights{ height: 35px; }
 }
 </style>
 </head>
@@ -453,16 +575,24 @@ body{
 
 <div class="bg"></div>
 
+<!-- YUKARIDAN SARKAN NOEL IŞIKLARI -->
+<div class="hanging-lights">
+    <div class="light-wire"><div class="light-bulb"></div></div>
+    <div class="light-wire"><div class="light-bulb"></div></div>
+    <div class="light-wire"><div class="light-bulb"></div></div>
+    <div class="light-wire"><div class="light-bulb"></div></div>
+    <div class="light-wire"><div class="light-bulb"></div></div>
+    <div class="light-wire"><div class="light-bulb"></div></div>
+    <div class="light-wire"><div class="light-bulb"></div></div>
+    <div class="light-wire"><div class="light-bulb"></div></div>
+    <div class="light-wire"><div class="light-bulb"></div></div>
+    <div class="light-wire"><div class="light-bulb"></div></div>
+</div>
+
 <!-- SAĞ ÜST KONTROL PANELİ -->
 <div class="top-right-controls">
     <button class="top-btn" id="snowButton" onclick="toggleSnow()" title="Kar Efekti">❄</button>
-    <button class="top-btn" id="musicButton" onclick="toggleMusic()" title="Sally Face x Harry Potter x Yılbaşı Müziği">♫</button>
-</div>
-
-<!-- IŞIKLAR VE EFEKTLER -->
-<div class="lights">
-    <i class="light"></i><i class="light"></i><i class="light"></i><i class="light"></i>
-    <i class="light"></i><i class="light"></i><i class="light"></i><i class="light"></i>
+    <button class="top-btn" id="musicButton" onclick="toggleMusic()" title="Müzik">♫</button>
 </div>
 
 <div class="stars" id="stars"></div>
@@ -471,7 +601,7 @@ body{
 <!-- ŞİFRE EKRANI -->
 <div id="lock">
     <div class="lockBox">
-        <div class="lockHeart">♡</div>
+        <div class="lockHeart"><span class="swaying-heart">💜</span></div>
         <h1>Sadece İkimiz</h1>
         <p>Gizemli & Büyülü Yılbaşı Defteri</p>
         <input id="password" class="password" type="password" placeholder="Şifrenizi girin...">
@@ -485,24 +615,24 @@ body{
 
 <section class="hero">
     <div class="tree">🎄⚡</div>
-    <h1>Sadece İkimiz ♡</h1>
+    <h1>Sadece İkimiz <span class="swaying-heart">💜</span></h1>
     <p>Büyülü, gizemli ve unutulmaz bir yılbaşı... ✨</p>
     <div class="symbols">🧹 🎸 ❄️ 🔮</div>
 </section>
 
 <section class="counters">
     <div class="counter">
-        <div style="font-size:30px;">❤️</div>
+        <div style="font-size:24px;"><span class="swaying-heart">💜</span></div>
         <div class="counterNumber" id="days">0</div>
         <div class="counterText">Birlikte Geçen Gün</div>
     </div>
     <div class="counter">
-        <div style="font-size:30px;">⌛</div>
+        <div style="font-size:24px;">⌛</div>
         <div class="counterNumber" id="time">00:00:00</div>
         <div class="counterText">Birlikte Geçen Süre</div>
     </div>
     <div class="counter">
-        <div style="font-size:30px;">🎄</div>
+        <div style="font-size:24px;">🎄</div>
         <div class="counterNumber" id="newYear">00:00:00</div>
         <div class="counterText">Yeni Yıla Kalan</div>
     </div>
@@ -510,39 +640,381 @@ body{
 
 <section class="bookSection">
     <div class="bookTitle">
-        <h2>Bizim Defterimiz</h2>
+        <h2>Bizim Defterimiz <span class="swaying-heart">💜</span></h2>
         <p>Büyülü ve gizemli hikayemiz... ♡</p>
     </div>
 
     <div class="book">
+
+        <!-- SAYFA 1 -->
         <div class="page active">
-            <div class="noteTitle">Büyülü Bir Başlangıç</div>
+            <span class="page-sway-heart top-left swaying-heart">💜</span>
+            <span class="page-sway-heart bottom-right swaying-heart">💜</span>
+            <div class="photo-upload-container">
+                <div class="polaroid-frame" onclick="triggerFileInput(1)">
+                    <div class="photo-placeholder" id="placeholder-1"><span>📷</span>Fotoğraf Yükle</div>
+                    <img id="img-preview-1" alt="Fotoğraf 1">
+                    <input type="file" id="file-input-1" accept="image/*" style="display:none" onchange="previewImage(event, 1)">
+                </div>
+            </div>
+            <div class="noteTitle">Sayfa 1 — Her Şeyden Önce</div>
             <div class="note">
                 <p>
-Her şey tıpkı Harry Potter'ın gizemli koridorları gibi beklenmedik...
-Ve Sally Face'in derin, anlamlı melodi tınıları gibi özgün başladı.
+Seninle tanışmadan önce benim de bir hayatım vardı.
 
-Seninle olan hikayemiz, sıradan bir dünyayı büyülü bir yere dönüştürdü.
-Bu yılbaşı, en güzel anılarımızın ilk günü olsun. ♡
+Çalışıyor, çabalıyor ve bir şeyleri düzeltmeye uğraşıyordum. Zor zamanlardan geçtiğim, hatta bazen kendi babamın bile beni unuttuğunu hissettiğim dönemler oldu.
+
+Hayatımın beni nereye götürdüğünü pek düşünmeden devam ediyordum.
+
+Çalıştım.
+Çabaladım.
+Sadece devam ettim.
+
+Ama bir gün durup kendime baktım ve kendime tek bir soru sordum:
+
+“Ben kimim?”
                 </p>
             </div>
         </div>
 
+        <!-- SAYFA 2 -->
         <div class="page">
-            <div class="noteTitle">Karanlıktan Aydınlığa</div>
+            <span class="page-sway-heart top-left swaying-heart">💜</span>
+            <span class="page-sway-heart bottom-right swaying-heart">💜</span>
+            <div class="photo-upload-container">
+                <div class="polaroid-frame" onclick="triggerFileInput(2)">
+                    <div class="photo-placeholder" id="placeholder-2"><span>📷</span>Fotoğraf Yükle</div>
+                    <img id="img-preview-2" alt="Fotoğraf 2">
+                    <input type="file" id="file-input-2" accept="image/*" style="display:none" onchange="previewImage(event, 2)">
+                </div>
+            </div>
+            <div class="noteTitle">Sayfa 2 — Kendimi Ararken</div>
             <div class="note">
                 <p>
-Hayat bazen zor ve karmaşık olabilir.
-Ama senin varlığın, en karanlık odalarda bile yakılan bir "Lumos" büyüsü gibi etrafı aydınlatıyor.
+Ne sevdiğimi, ne istediğimi bile tam olarak bilmiyordum.
 
-İyi ki varsın, iyi ki benimlesin...
+Bu yüzden kendimi yeniden tanımaya çalıştım.
+
+Gitar kursuna başladım. Bir şeyi gerçekten öğrenmek, başarmak ve kendime ait bir şey bulmak istedim.
+
+Öğrendim.
+Gitar çaldım.
+Ve mutlu oldum.
+
+Belki dışarıdan bakınca küçük bir şey gibi görünebilirdi ama benim için değildi.
+
+Çünkü uzun zaman sonra ilk defa gerçekten bana ait bir şey bulmuştum.
+                </p>
+            </div>
+        </div>
+
+        <!-- SAYFA 3 -->
+        <div class="page">
+            <span class="page-sway-heart top-left swaying-heart">💜</span>
+            <span class="page-sway-heart bottom-right swaying-heart">💜</span>
+            <div class="photo-upload-container">
+                <div class="polaroid-frame" onclick="triggerFileInput(3)">
+                    <div class="photo-placeholder" id="placeholder-3"><span>📷</span>Fotoğraf Yükle</div>
+                    <img id="img-preview-3" alt="Fotoğraf 3">
+                    <input type="file" id="file-input-3" accept="image/*" style="display:none" onchange="previewImage(event, 3)">
+                </div>
+            </div>
+            <div class="noteTitle">Sayfa 3 — Bir Kaza</div>
+            <div class="note">
+                <p>
+Sonra hayatımı değiştiren bir şey oldu.
+
+Bir kaza geçirdim.
+
+Ve hafızamı kaybettim.
+
+Geçmişimin bazı parçaları artık benim için yoktu.
+
+Sanki hayatımın bazı sayfaları bir anda silinmişti.
+
+Ben de elimde kalanlarla yeniden devam etmek zorunda kaldım.
+
+Yine bir şeyleri kaybettim.
+
+Ama hayat durmadı.
+
+Ben de durmadım.
+                </p>
+            </div>
+        </div>
+
+        <!-- SAYFA 4 -->
+        <div class="page">
+            <span class="page-sway-heart top-left swaying-heart">💜</span>
+            <span class="page-sway-heart bottom-right swaying-heart">💜</span>
+            <div class="photo-upload-container">
+                <div class="polaroid-frame" onclick="triggerFileInput(4)">
+                    <div class="photo-placeholder" id="placeholder-4"><span>📷</span>Fotoğraf Yükle</div>
+                    <img id="img-preview-4" alt="Fotoğraf 4">
+                    <input type="file" id="file-input-4" accept="image/*" style="display:none" onchange="previewImage(event, 4)">
+                </div>
+            </div>
+            <div class="noteTitle">Sayfa 4 — Babamın Hayali ve Yeniden Başlamak</div>
+            <div class="note">
+                <p>
+Sonra babamla birlikte ilk işime başladım.
+Bu kez sadece kendim için değil, onun hayallerini gerçekleştirmek için de uğraşıyordum.
+
+Yeni bir yer bulduk. Lotus'la anlaştık. Fakat işler yine istediğimiz gibi gitmedi.
+Başka bir yer bulduk. Sonra dükkân basıldı. Biz anlaşmayı bozmadığımız hâlde para talep edildi.
+
+Zor zamanlardı. Ama destek olan insanlar sayesinde devam ettik.
+Ben de yine çalıştım, yine uğraştım ve sonunda babamın istediği dükkânı açtım.
+
+Bu süreçte Nurettin abiyle tanıştım. Aramız iyiydi ve ne zaman ihtiyaçları olsa elimden geldiğince yanlarında oldu.
+Kamil'in annesi öldüğünde de yanında olmaya çalıştım.
+
+Hayatım boyunca yaptığım gibi yine elimden geleni yaptım.
+Ama zamanla bazı insanların hayatımızda kalmak için değil, bize bir şey öğretmek için olduğunu anladım.
+
+Ben de bazı şeyleri geride bırakıp yeniden başladım.
+                </p>
+            </div>
+        </div>
+
+        <!-- SAYFA 5 -->
+        <div class="page">
+            <span class="page-sway-heart top-left swaying-heart">💜</span>
+            <span class="page-sway-heart bottom-right swaying-heart">💜</span>
+            <div class="photo-upload-container">
+                <div class="polaroid-frame" onclick="triggerFileInput(5)">
+                    <div class="photo-placeholder" id="placeholder-5"><span>📷</span>Fotoğraf Yükle</div>
+                    <img id="img-preview-5" alt="Fotoğraf 5">
+                    <input type="file" id="file-input-5" accept="image/*" style="display:none" onchange="previewImage(event, 5)">
+                </div>
+            </div>
+            <div class="noteTitle">Sayfa 5 — Yeniden İnsanlar</div>
+            <div class="note">
+                <p>
+Sonra Ömerlerle tanıştım.
+
+Beni olduğum gibi kabul ettiler.
+
+Ben de onlara karşı olduğum gibi davrandım.
+
+Uzun zaman sonra kendimi ait hissettiğim düzgün bir çevrem olmuştu.
+
+Hayat yavaş yavaş yeniden düzene giriyordu.
+
+Ama yine de içimde ne olduğunu anlayamadığım bir eksiklik vardı.
+                </p>
+            </div>
+        </div>
+
+        <!-- SAYFA 6 -->
+        <div class="page">
+            <span class="page-sway-heart top-left swaying-heart">💜</span>
+            <span class="page-sway-heart bottom-right swaying-heart">💜</span>
+            <div class="photo-upload-container">
+                <div class="polaroid-frame" onclick="triggerFileInput(6)">
+                    <div class="photo-placeholder" id="placeholder-6"><span>📷</span>Fotoğraf Yükle</div>
+                    <img id="img-preview-6" alt="Fotoğraf 6">
+                    <input type="file" id="file-input-6" accept="image/*" style="display:none" onchange="previewImage(event, 6)">
+                </div>
+            </div>
+            <div class="noteTitle">Sayfa 6 — Dükkân</div>
+            <div class="note">
+                <p>
+Sonunda dükkânı açtım.
+
+Bir işim vardı. Çalışıyordum. Kendi hayatımı yeniden kuruyordum.
+
+Dışarıdan bakıldığında her şey yoluna girmiş gibiydi.
+
+Ama içimde hâlâ bir boşluk vardı.
+
+Ne olduğunu bilmiyordum.
+
+Çalışarak doldurmaya çalıştım.
+Uğraşarak doldurmaya çalıştım.
+Yeni başlangıçlarla doldurmaya çalıştım.
+
+Ama ne yaparsam yapayım o eksiklik gitmedi.
+
+Ta ki sen gelene kadar...
+                </p>
+            </div>
+        </div>
+
+        <!-- SAYFA 7 -->
+        <div class="page">
+            <span class="page-sway-heart top-left swaying-heart">💜</span>
+            <span class="page-sway-heart bottom-right swaying-heart">💜</span>
+            <div class="photo-upload-container">
+                <div class="polaroid-frame" onclick="triggerFileInput(7)">
+                    <div class="photo-placeholder" id="placeholder-7"><span>📷</span>Fotoğraf Yükle</div>
+                    <img id="img-preview-7" alt="Fotoğraf 7">
+                    <input type="file" id="file-input-7" accept="image/*" style="display:none" onchange="previewImage(event, 7)">
+                </div>
+            </div>
+            <div class="noteTitle">Sayfa 7 — Sonra Sen Geldin</div>
+            <div class="note">
+                <p>
+Sonra seni tanıdım.
+
+Ve zaman geçtikçe bir şeyi fark etmeye başladım.
+
+Ben hayatım boyunca bir şey arıyormuşum.
+
+Ama ne aradığımı bilmiyormuşum.
+
+Sonra anladım.
+
+Hayatımdaki o eksiklik aslında senmişsin.
+
+Sen yoktun ve ben neyi aradığımı bilmeden o boşluğu başka şeylerle doldurmaya çalışıyordum.
+
+Meğer yıllardır aradığım şey senmişsin.
+
+Seni tanıdığım iki yıl boyunca bunu daha da iyi anladım.
+
+Yaşadığım onca şeyin arasında seni neden bu kadar farklı hissettiğimi artık biliyorum.
+                </p>
+            </div>
+        </div>
+
+        <!-- SAYFA 8 -->
+        <div class="page">
+            <span class="page-sway-heart top-left swaying-heart">💜</span>
+            <span class="page-sway-heart bottom-right swaying-heart">💜</span>
+            <div class="photo-upload-container">
+                <div class="polaroid-frame" onclick="triggerFileInput(8)">
+                    <div class="photo-placeholder" id="placeholder-8"><span>📷</span>Fotoğraf Yükle</div>
+                    <img id="img-preview-8" alt="Fotoğraf 8">
+                    <input type="file" id="file-input-8" accept="image/*" style="display:none" onchange="previewImage(event, 8)">
+                </div>
+            </div>
+            <div class="noteTitle">Sayfa 8 — Apar Topar Sana</div>
+            <div class="note">
+                <p>
+Sonra sana gelebilmek için bahaneler bulup apar topar yanına geldim.
+
+Ve hayatımda daha önce hissetmediğim duyguları hissettim.
+
+Başta ne olduğunu bile anlayamadım.
+
+Sonra bunun aşk olduğunu öğrendim.
+
+Bunu anladıktan sonra yine sana gelebilmek için çalışmaya başladım.
+
+Çalıştım.
+
+Ve geldim.
+
+Çünkü ilk defa bir yere değil, bir insana gitmek için bu kadar çok istemiştim.
+                </p>
+            </div>
+        </div>
+
+        <!-- SAYFA 9 -->
+        <div class="page">
+            <span class="page-sway-heart top-left swaying-heart">💜</span>
+            <span class="page-sway-heart bottom-right swaying-heart">💜</span>
+            <div class="photo-upload-container">
+                <div class="polaroid-frame" onclick="triggerFileInput(9)">
+                    <div class="photo-placeholder" id="placeholder-9"><span>📷</span>Fotoğraf Yükle</div>
+                    <img id="img-preview-9" alt="Fotoğraf 9">
+                    <input type="file" id="file-input-9" accept="image/*" style="display:none" onchange="previewImage(event, 9)">
+                </div>
+            </div>
+            <div class="noteTitle">Sayfa 9 — Seni Tanımak</div>
+            <div class="note">
+                <p>
+Yaklaşık 20 gün senin yanında kaldım.
+
+Ailenle tanıştım.
+
+Seni daha yakından tanıdım.
+
+Küçük şeylerini, alışkanlıklarını, sevdiğin şeyleri ve seni sen yapan her parçayı öğrendim.
+
+Ve hepsini çok sevdim.
+
+Seni tanıdıkça, yıllardır hissettiğim o eksikliğin nedenini daha iyi anladım.
+
+Şimdi de çalışıp tekrar yanına gelebilmek için can atıyorum.
+
+Çünkü artık nereye ait olduğumu biliyorum.
+                </p>
+            </div>
+        </div>
+
+        <!-- SAYFA 10 -->
+        <div class="page">
+            <span class="page-sway-heart top-left swaying-heart">💜</span>
+            <span class="page-sway-heart bottom-right swaying-heart">💜</span>
+            <div class="photo-upload-container">
+                <div class="polaroid-frame" onclick="triggerFileInput(10)">
+                    <div class="photo-placeholder" id="placeholder-10"><span>📷</span>Fotoğraf Yükle</div>
+                    <img id="img-preview-10" alt="Fotoğraf 10">
+                    <input type="file" id="file-input-10" accept="image/*" style="display:none" onchange="previewImage(event, 10)">
+                </div>
+            </div>
+            <div class="noteTitle">Sayfa 10 — Üç Yıl</div>
+            <div class="note">
+                <p>
+Sen beni iki yıl bekledin.
+
+Artık üç yıl oldu.
+
+Ve bu üç yılda değişmeyen bir şey var:
+
+Seni hâlâ çok beğeniyorum.
+
+Hâlâ seni seviyorum.
+
+Ve hâlâ çok güzelsinnnn.
+
+Aaaaa... neyse. ♡
+                </p>
+            </div>
+        </div>
+
+        <!-- SON SAYFA -->
+        <div class="page">
+            <span class="page-sway-heart top-left swaying-heart">💜</span>
+            <span class="page-sway-heart bottom-right swaying-heart">💜</span>
+            <div class="photo-upload-container">
+                <div class="polaroid-frame" onclick="triggerFileInput(11)">
+                    <div class="photo-placeholder" id="placeholder-11"><span>📷</span>Fotoğraf Yükle</div>
+                    <img id="img-preview-11" alt="Fotoğraf 11">
+                    <input type="file" id="file-input-11" accept="image/*" style="display:none" onchange="previewImage(event, 11)">
+                </div>
+            </div>
+            <div class="noteTitle">Son Sayfa — Kader</div>
+            <div class="note">
+                <p>
+Hayatımıza binlerce insan girdi, binlercesi çıktı.
+
+Ama ne olursa olsun, en sonunda yine birbirimize döndük.
+
+Onca insanın arasında, onca şeyin ardından yine birbirimizi bulduk.
+
+Bence bunun sıradan bir açıklaması yok.
+
+Bence bu, kutsal bir şey.
+
+Belki de gerçekten kaderimize böyle yazılmış.
+
+Çünkü hayat bizi ne kadar farklı yerlere götürürse götürsün, sonunda yine birbirimize geldik.
+
+Benim yıllardır ne olduğunu bilmediğim o eksiklik...
+
+Meğer senmişsin.
+
+İyi ki seni bulmuşum. ♡
                 </p>
             </div>
         </div>
 
         <div class="controls">
             <button class="btn" onclick="previousPage()">← Önceki</button>
-            <span id="pageCounter" style="font-family:'Kalam',cursive; color:#74465b;">1 / 2</span>
+            <span id="pageCounter" style="font-family:'Kalam',cursive; color:#74465b; font-size: 15px;">1 / 11</span>
             <button class="btn" onclick="nextPage()">Sonraki →</button>
         </div>
     </div>
@@ -577,18 +1049,39 @@ document.getElementById("password").addEventListener("keydown", e => {
     if(e.key === "Enter") unlock();
 });
 
+/* FOTOĞRAF YÜKLEME */
+function triggerFileInput(id) {
+    document.getElementById(`file-input-${id}`).click();
+}
+
+function previewImage(event, id) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = document.getElementById(`img-preview-${id}`);
+            const placeholder = document.getElementById(`placeholder-${id}`);
+            img.src = e.target.result;
+            img.style.display = "block";
+            placeholder.style.display = "none";
+        }
+        reader.readAsDataURL(file);
+    }
+}
+
 /* KAR EFEKTİ */
 const snowContainer = document.getElementById("snow-container");
 let snowActive = true;
 
 function createSnow() {
     snowContainer.innerHTML = "";
-    for(let i=0; i<70; i++){
+    const count = window.innerWidth < 600 ? 35 : 60;
+    for(let i=0; i<count; i++){
         const flake = document.createElement("div");
         flake.className = "snow";
         flake.textContent = Math.random() > 0.5 ? "❄" : "•";
         flake.style.left = Math.random()*100 + "%";
-        flake.style.fontSize = (Math.random()*10+6) + "px";
+        flake.style.fontSize = (Math.random()*8+6) + "px";
         flake.style.animationDuration = (Math.random()*8+7) + "s";
         flake.style.animationDelay = Math.random()*5 + "s";
         snowContainer.appendChild(flake);
@@ -634,16 +1127,22 @@ function showPage(){
     document.getElementById("pageCounter").textContent = `${currentPage + 1} / ${pages.length}`;
 }
 
-function nextPage(){ if(currentPage < pages.length - 1){ currentPage++; showPage(); } }
-function previousPage(){ if(currentPage > 0){ currentPage--; showPage(); } }
+function nextPage(){ 
+    if(currentPage < pages.length - 1){ 
+        currentPage++; 
+        showPage(); 
+        window.scrollTo({ top: document.querySelector('.bookSection').offsetTop - 20, behavior: 'smooth' });
+    } 
+}
+function previousPage(){ 
+    if(currentPage > 0){ 
+        currentPage--; 
+        showPage(); 
+        window.scrollTo({ top: document.querySelector('.bookSection').offsetTop - 20, behavior: 'smooth' });
+    } 
+}
 
-/* =====================================================
-   ÖZEL MÜZİK MOTORU
-   Harry Potter (Büyülü Hedwig gizemi) +
-   Sally Face (Karanlık/Nostaljik akustik gitarlar) +
-   Yılbaşı Çanları tınısı karışımı.
-===================================================== */
-
+/* MÜZİK MOTORU */
 let audioCtx = null;
 let musicPlaying = false;
 let musicLoopTimeout = null;
@@ -676,41 +1175,35 @@ function playSpookyChristmasMelody() {
     if(!musicPlaying) return;
     const now = audioCtx.currentTime;
 
-    // Harry Potter Hedwig + Sally Face Melodi Karışımı Notaları (Frekanslar)
     const melody = [
-        // Büyülü Giriş (Harry Potter Esintisi)
-        { f: 493.88, t: 0.0, d: 0.8 }, // B4
-        { f: 659.25, t: 0.6, d: 1.0 }, // E5
-        { f: 783.99, t: 1.2, d: 0.5 }, // G5
-        { f: 739.99, t: 1.6, d: 0.8 }, // F#5
-        { f: 659.25, t: 2.2, d: 1.2 }, // E5
-        { f: 987.77, t: 3.0, d: 0.8 }, // B5
-        { f: 880.00, t: 3.6, d: 1.4 }, // A5
-        { f: 739.99, t: 4.8, d: 1.2 }, // F#5
+        { f: 493.88, t: 0.0, d: 0.8 },
+        { f: 659.25, t: 0.6, d: 1.0 },
+        { f: 783.99, t: 1.2, d: 0.5 },
+        { f: 739.99, t: 1.6, d: 0.8 },
+        { f: 659.25, t: 2.2, d: 1.2 },
+        { f: 987.77, t: 3.0, d: 0.8 },
+        { f: 880.00, t: 3.6, d: 1.4 },
+        { f: 739.99, t: 4.8, d: 1.2 },
 
-        // Sally Face Havası (Melankolik Akustik Notalar)
-        { f: 329.63, t: 6.0, d: 1.0 }, // E4
-        { f: 392.00, t: 6.6, d: 0.8 }, // G4
-        { f: 440.00, t: 7.2, d: 1.0 }, // A4
-        { f: 493.88, t: 7.8, d: 1.2 }, // B4
-        { f: 440.00, t: 8.8, d: 0.8 }, // A4
-        { f: 392.00, t: 9.4, d: 1.0 }, // G4
-        { f: 329.63, t: 10.2, d: 1.5 }  // E4
+        { f: 329.63, t: 6.0, d: 1.0 },
+        { f: 392.00, t: 6.6, d: 0.8 },
+        { f: 440.00, t: 7.2, d: 1.0 },
+        { f: 493.88, t: 7.8, d: 1.2 },
+        { f: 440.00, t: 8.8, d: 0.8 },
+        { f: 392.00, t: 9.4, d: 1.0 },
+        { f: 329.63, t: 10.2, d: 1.5 }
     ];
 
     melody.forEach(note => {
-        // Ana Tını (Harry Potter Sentezi)
         playCustomNote(note.f, now + note.t, note.d, 0.04, "sine");
-        // Yılbaşı Çanı Efekti (Yüksek Tiz Katman)
         playCustomNote(note.f * 2, now + note.t, note.d * 0.5, 0.01, "triangle");
     });
 
-    // Sally Face Arka Plan Bas / Gitar Akor Tınısı
     const bassNotes = [
-        { f: 164.81, t: 0.0, d: 3.0 }, // E3
-        { f: 130.81, t: 3.0, d: 3.0 }, // C3
-        { f: 146.83, t: 6.0, d: 3.0 }, // D3
-        { f: 164.81, t: 9.0, d: 3.0 }  // E3
+        { f: 164.81, t: 0.0, d: 3.0 },
+        { f: 130.81, t: 3.0, d: 3.0 },
+        { f: 146.83, t: 6.0, d: 3.0 },
+        { f: 164.81, t: 9.0, d: 3.0 }
     ];
 
     bassNotes.forEach(b => {
@@ -743,13 +1236,13 @@ function toggleMusic(){
 
 /* YILDIZLARIN OLUŞTURULMASI */
 const stars = document.getElementById("stars");
-for(let i=0; i<60; i++){
+for(let i=0; i<45; i++){
     const s = document.createElement("span");
     s.className = "star";
     s.textContent = Math.random() > 0.5 ? "✦" : "·";
     s.style.left = Math.random()*100 + "%";
     s.style.top = Math.random()*100 + "%";
-    s.style.fontSize = (Math.random()*8+4) + "px";
+    s.style.fontSize = (Math.random()*6+4) + "px";
     s.style.animationDelay = Math.random()*3 + "s";
     stars.appendChild(s);
 }
