@@ -1,698 +1,927 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sadece İkimiz - Birlikte Geçen Anılar</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Great+Vibes&family=Quicksand:wght@300;400;600&display=swap" rel="stylesheet">
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        :root {
-            --primary-color: #ff6b81;
-            --secondary-color: #ff4757;
-            --bg-gradient: linear-gradient(135deg, #0f0c1b 0%, #2d132c 50%, #1a0826 100%);
-            --card-bg: rgba(255, 255, 255, 0.08);
-            --text-color: #ffffff;
-            --font-serif: 'Dancing Script', cursive;
-            --font-title: 'Great Vibes', cursive;
-            --font-sans: 'Quicksand', sans-serif;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Sadece İkimiz ♡</title>
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            user-select: none;
-        }
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Kalam:wght@300;400;700&display=swap');
 
-        body {
-            font-family: var(--font-sans);
-            background: var(--bg-gradient);
-            color: var(--text-color);
-            min-height: 100vh;
-            overflow-x: hidden;
-            position: relative;
-        }
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
 
-        /* Kar Yağışı Canvas */
-        #snow-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 2;
-        }
+html{
+    scroll-behavior:smooth;
+}
 
-        /* Ana Konteyner */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 40px 20px 120px;
-            position: relative;
-            z-index: 5;
-        }
+body{
+    min-height:100vh;
+    overflow-x:hidden;
+    background:
+        radial-gradient(circle at 15% 20%,rgba(125,55,160,.35),transparent 30%),
+        radial-gradient(circle at 85% 75%,rgba(180,20,65,.28),transparent 32%),
+        linear-gradient(135deg,#09030e,#21091e,#100410);
+    color:#3c2030;
+}
 
-        /* Başlık Alanı */
-        header {
-            text-align: center;
-            margin-bottom: 40px;
-            animation: fadeInDown 1.2s ease-out;
-        }
+/* =========================
+   SALLANAN MOR KALP EFEKTİ
+========================= */
+.swaying-heart {
+    display: inline-block;
+    color: #a855f7;
+    text-shadow: 0 0 12px rgba(168, 85, 247, 0.6);
+    animation: swayHeart 2.5s ease-in-out infinite alternate;
+    transform-origin: center bottom;
+}
 
-        header h1 {
-            font-family: var(--font-title);
-            font-size: 4rem;
-            color: #ff758c;
-            text-shadow: 0 0 15px rgba(255, 117, 140, 0.6);
-            margin-bottom: 10px;
-        }
+@keyframes swayHeart {
+    0% {
+        transform: rotate(-15deg) scale(1);
+    }
+    100% {
+        transform: rotate(15deg) scale(1.15);
+    }
+}
 
-        header p {
-            font-size: 1.2rem;
-            opacity: 0.85;
-            letter-spacing: 1px;
-        }
+.page-sway-heart {
+    position: absolute;
+    font-size: 28px;
+    z-index: 5;
+    pointer-events: none;
+}
 
-        /* Zaman Sayacı */
-        .counter-box {
-            background: var(--card-bg);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
-            padding: 25px;
-            margin: 20px auto 40px;
-            max-width: 700px;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            text-align: center;
-        }
+.page-sway-heart.top-left {
+    top: 25px;
+    left: 25px;
+}
 
-        .counter-title {
-            font-family: var(--font-serif);
-            font-size: 1.8rem;
-            color: #ff8fa3;
-            margin-bottom: 15px;
-        }
+.page-sway-heart.bottom-right {
+    bottom: 25px;
+    right: 25px;
+    animation-delay: -1.2s;
+}
 
-        .timer-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-        }
+/* =========================
+   SARKAN NOEL IŞIKLARI
+========================= */
+.hanging-lights {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    z-index: 100;
+    pointer-events: none;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+}
 
-        .timer-unit {
-            background: rgba(0, 0, 0, 0.25);
-            padding: 15px 5px;
-            border-radius: 12px;
-            border: 1px solid rgba(255, 117, 140, 0.2);
-        }
+.light-wire {
+    position: relative;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
 
-        .timer-number {
-            font-size: 2.2rem;
-            font-weight: 600;
-            color: #ffffff;
-            display: block;
-        }
+.light-bulb {
+    position: absolute;
+    width: 12px;
+    height: 18px;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    top: 0;
+    animation: lightBlink 1.5s infinite alternate;
+}
 
-        .timer-label {
-            font-size: 0.85rem;
-            opacity: 0.7;
-            text-transform: uppercase;
-        }
+.light-wire::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 2px;
+    background: rgba(255, 255, 255, 0.2);
+}
 
-        /* İnteraktif Defter Seviyesi (Tabs) */
-        .notebook-section {
-            margin-top: 50px;
-        }
+/* Farklı uzunlukta sarkan kablolar ve renkler */
+.light-wire:nth-child(5n+1) { height: 35px; }
+.light-wire:nth-child(5n+1) .light-bulb { top: 35px; background: #ff3562; box-shadow: 0 0 15px #ff3562, 0 0 25px #ff3562; animation-delay: 0.1s; }
 
-        .tab-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
+.light-wire:nth-child(5n+2) { height: 55px; }
+.light-wire:nth-child(5n+2) .light-bulb { top: 55px; background: #ffb703; box-shadow: 0 0 15px #ffb703, 0 0 25px #ffb703; animation-delay: 0.4s; }
 
-        .tab-btn {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 12px 28px;
-            border-radius: 30px;
-            font-size: 1.05rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: var(--font-sans);
-        }
+.light-wire:nth-child(5n+3) { height: 25px; }
+.light-wire:nth-child(5n+3) .light-bulb { top: 25px; background: #a855f7; box-shadow: 0 0 15px #a855f7, 0 0 25px #a855f7; animation-delay: 0.7s; }
 
-        .tab-btn.active, .tab-btn:hover {
-            background: var(--primary-color);
-            border-color: var(--primary-color);
-            box-shadow: 0 0 15px rgba(255, 107, 129, 0.5);
-            transform: translateY(-2px);
-        }
+.light-wire:nth-child(5n+4) { height: 45px; }
+.light-wire:nth-child(5n+4) .light-bulb { top: 45px; background: #00f5d4; box-shadow: 0 0 15px #00f5d4, 0 0 25px #00f5d4; animation-delay: 0.2s; }
 
-        /* Defter Görünümü */
-        .book-wrapper {
-            perspective: 1000px;
-            display: flex;
-            justify-content: center;
-        }
+.light-wire:nth-child(5n+5) { height: 60px; }
+.light-wire:nth-child(5n+5) .light-bulb { top: 60px; background: #ff007f; box-shadow: 0 0 15px #ff007f, 0 0 25px #ff007f; animation-delay: 0.9s; }
 
-        .notebook {
-            width: 100%;
-            max-width: 800px;
-            min-height: 450px;
-            background: #fdfbf7;
-            color: #2b2b2b;
-            border-radius: 15px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            position: relative;
-            overflow: hidden;
-            border: 8px solid #3a2218;
-        }
+.light-wire::before {
+    height: 100%;
+}
 
-        .book-page {
-            padding: 30px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            position: relative;
-        }
+@keyframes lightBlink {
+    0% { opacity: 0.3; transform: scale(0.9); }
+    100% { opacity: 1; transform: scale(1.1); }
+}
 
-        .book-page.left {
-            border-right: 2px dashed #d1c7bd;
-            background: linear-gradient(90deg, #f3ece1 0%, #fdfbf7 100%);
-        }
+/* =========================
+   FOTOĞRAF ÇERÇEVESİ
+========================= */
+.photo-upload-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+}
 
-        .book-page.right {
-            background: linear-gradient(-90deg, #f3ece1 0%, #fdfbf7 100%);
-        }
+.polaroid-frame {
+    position: relative;
+    width: 220px;
+    height: 260px;
+    background: #fff;
+    padding: 12px 12px 45px 12px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    transform: rotate(-2deg);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+    border-radius: 4px;
+}
 
-        .page-content h3 {
-            font-family: var(--font-serif);
-            font-size: 2.2rem;
-            color: #8b0000;
-            margin-bottom: 15px;
-        }
+.polaroid-frame:hover {
+    transform: rotate(0deg) scale(1.03);
+}
 
-        .page-content p {
-            font-family: var(--font-serif);
-            font-size: 1.4rem;
-            line-height: 1.6;
-            color: #333;
-        }
+.polaroid-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 2px;
+    display: none;
+}
 
-        .photo-frame {
-            width: 100%;
-            height: 220px;
-            border-radius: 10px;
-            overflow: hidden;
-            border: 5px solid white;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
-            margin-bottom: 15px;
-            background-size: cover;
-            background-position: center;
-        }
+.photo-placeholder {
+    width: 100%;
+    height: 100%;
+    border: 2px dashed #b89db0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #835272;
+    font-family: 'Kalam', cursive;
+    font-size: 15px;
+    text-align: center;
+    padding: 10px;
+    background: #faf4f8;
+}
 
-        .page-controls {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
+.photo-placeholder span {
+    font-size: 32px;
+    margin-bottom: 5px;
+}
 
-        .page-btn {
-            background: #8b0000;
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: 0.3s;
-            font-size: 0.9rem;
-        }
+/* =========================
+   ARKA PLAN & YILDIZLAR
+========================= */
 
-        .page-btn:hover {
-            background: #b22222;
-        }
+.bg{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-10;
+    background:
+        radial-gradient(circle at 50% 35%,rgba(190,80,180,.08),transparent 35%);
+}
 
-        /* Notlar Kutuları Grid */
-        .notes-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            width: 100%;
-            max-width: 800px;
-        }
+.stars{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:-5;
+}
 
-        .note-card {
-            background: #fff8c5;
-            color: #333;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-            transform: rotate(-1deg);
-            transition: transform 0.3s ease;
-            position: relative;
-        }
+.star{
+    position:absolute;
+    color:white;
+    animation:twinkle 2s infinite alternate;
+}
 
-        .note-card:nth-child(even) {
-            transform: rotate(2deg);
-            background: #ffe3e8;
-        }
+@keyframes twinkle{
+    from{opacity:.15;transform:scale(.7)}
+    to{opacity:.9;transform:scale(1.15)}
+}
 
-        .note-card:hover {
-            transform: scale(1.05) rotate(0deg);
-            z-index: 10;
-        }
+/* =========================
+   KAR EFEKTİ
+========================= */
 
-        .note-card h4 {
-            font-family: var(--font-serif);
-            font-size: 1.6rem;
-            margin-bottom: 10px;
-            color: #c0392b;
-        }
+#snow-container{
+    position:fixed;
+    inset:0;
+    pointer-events:none;
+    z-index:20;
+}
 
-        .note-card p {
-            font-family: var(--font-serif);
-            font-size: 1.2rem;
-        }
+.snow{
+    position:fixed;
+    top:-20px;
+    color:#fff;
+    pointer-events:none;
+    animation:fall linear infinite;
+}
 
-        /* Yüzen Kontrol Paneli (Şarkı & Kar Ayarları - "biru" stili) */
-        .control-panel {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: rgba(15, 12, 27, 0.85);
-            backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 40px;
-            padding: 12px 30px;
-            display: flex;
-            align-items: center;
-            gap: 25px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            z-index: 100;
-        }
+@keyframes fall{
+    to{
+        transform:translateY(110vh) rotate(360deg);
+    }
+}
 
-        .control-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+/* =========================
+   SAĞ ÜST KONTROL PANELİ
+========================= */
 
-        .control-btn {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.3rem;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
+.top-right-controls {
+    position: fixed;
+    top: 75px;
+    right: 20px;
+    z-index: 1000;
+    display: flex;
+    gap: 12px;
+}
 
-        .control-btn:hover {
-            color: var(--primary-color);
-        }
+.top-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid rgba(255,255,255,.25);
+    background: linear-gradient(135deg,#8e275d,#7130a5);
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(0,0,0,.4);
+    transition: transform .25s, box-shadow .25s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-        .control-select, .control-slider {
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 12px;
-            outline: none;
-            font-size: 0.85rem;
-        }
+.top-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(0,0,0,.5), 0 0 20px rgba(210,83,170,.3);
+}
 
-        .control-select option {
-            background: #2d132c;
-            color: white;
-        }
+.top-btn.playing {
+    animation: musicPulse 1.5s ease-in-out infinite;
+}
 
-        /* Dokunma Kalp Efekti */
-        .floating-heart {
-            position: fixed;
-            color: var(--primary-color);
-            font-size: 20px;
-            pointer-events: none;
-            animation: floatUp 1.5s forwards ease-out;
-            z-index: 1000;
-        }
+@keyframes musicPulse{
+    50%{box-shadow:0 0 0 10px rgba(255,100,160,.2),0 14px 38px rgba(0,0,0,.46)}
+}
 
-        @keyframes floatUp {
-            0% {
-                opacity: 1;
-                transform: translate(-50%, -50%) scale(0.8);
-            }
-            100% {
-                opacity: 0;
-                transform: translate(-50%, -150px) scale(1.5);
-            }
-        }
+/* =========================
+   ŞİFRE EKRANI
+========================= */
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+#lock{
+    position:fixed;
+    inset:0;
+    z-index:999;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    text-align:center;
+    background:
+        radial-gradient(circle at center,rgba(130,45,150,.25),transparent 40%),
+        linear-gradient(135deg,#08030d,#22091d,#08030d);
+    transition:opacity .9s;
+}
 
-        /* Mobil Uyum */
-        @media (max-width: 768px) {
-            header h1 { font-size: 2.8rem; }
-            .notebook { grid-template-columns: 1fr; border: 4px solid #3a2218; }
-            .book-page.left { border-right: none; border-bottom: 2px dashed #d1c7bd; }
-            .timer-grid { grid-template-columns: repeat(2, 1fr); }
-            .control-panel {
-                flex-wrap: wrap;
-                justify-content: center;
-                width: 90%;
-                border-radius: 20px;
-                padding: 15px;
-            }
-        }
-    </style>
+.lockBox{
+    width:min(470px,100%);
+    padding:45px 30px;
+    border-radius:30px;
+    background:rgba(255,255,255,.055);
+    border:1px solid rgba(255,255,255,.12);
+    backdrop-filter:blur(18px);
+    box-shadow:0 30px 100px rgba(0,0,0,.55);
+}
+
+.lockHeart{
+    font-size:65px;
+    color:#ff6389;
+    animation:heartbeat 2s infinite;
+}
+
+@keyframes heartbeat{
+    50%{transform:scale(1.1)}
+}
+
+.lockBox h1{
+    font-family:"Great Vibes",cursive;
+    font-size:56px;
+    font-weight:400;
+    color:#f19bce;
+}
+
+.lockBox p{
+    margin-top:10px;
+    color:#ddd;
+    font-family:"Cormorant Garamond",serif;
+    font-size:19px;
+}
+
+.password{
+    width:100%;
+    margin-top:25px;
+    padding:15px;
+    border-radius:15px;
+    border:1px solid rgba(255,255,255,.12);
+    outline:none;
+    background:rgba(255,255,255,.07);
+    color:white;
+    text-align:center;
+    font-size:16px;
+}
+
+.enter{
+    width:100%;
+    margin-top:12px;
+    padding:15px;
+    border:0;
+    border-radius:15px;
+    color:white;
+    background:linear-gradient(90deg,#982351,#7130a3);
+    font-family:"Cormorant Garamond",serif;
+    font-size:18px;
+    cursor:pointer;
+    transition:.3s;
+}
+
+.enter:hover{
+    transform:translateY(-2px);
+    box-shadow:0 12px 30px rgba(160,40,180,.3);
+}
+
+#error{
+    min-height:25px;
+    margin-top: 10px;
+    color:#ff6b8b!important;
+}
+
+/* =========================
+   ANA İÇERİK
+========================= */
+
+#main{
+    display:none;
+}
+
+.hero{
+    min-height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:90px 20px 50px;
+}
+
+.tree{
+    font-size:58px;
+    animation:float 3s ease-in-out infinite;
+}
+
+@keyframes float{
+    50%{transform:translateY(-8px)}
+}
+
+.hero h1{
+    margin-top:15px;
+    font-family:"Great Vibes",cursive;
+    font-weight:400;
+    font-size:clamp(65px,12vw,130px);
+    background:linear-gradient(90deg,#ff5079,#d494ff,#ff5079);
+    background-size:200%;
+    -webkit-background-clip:text;
+    color:transparent;
+    animation:gradient 5s linear infinite;
+}
+
+@keyframes gradient{
+    to{background-position:200%}
+}
+
+.hero p{
+    color:#eee;
+    font-size:clamp(20px,3vw,29px);
+    margin-top:12px;
+}
+
+.symbols{
+    margin-top:25px;
+    font-size:30px;
+    letter-spacing:12px;
+}
+
+/* =========================
+   SAYAÇLAR
+========================= */
+
+.counters{
+    width:min(1050px,92%);
+    margin:0 auto 110px;
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:18px;
+}
+
+.counter{
+    padding:25px 15px;
+    text-align:center;
+    border-radius:24px;
+    background:rgba(255,255,255,.045);
+    border:1px solid rgba(255,255,255,.1);
+    backdrop-filter:blur(12px);
+}
+
+.counterNumber{
+    margin-top:8px;
+    color:#ed8dca;
+    font-size:31px;
+    font-weight:600;
+}
+
+.counterText{
+    margin-top:5px;
+    color:#aaa;
+}
+
+/* =========================
+   DEFTER
+========================= */
+
+.bookSection{
+    width:min(1080px,94%);
+    margin:0 auto 130px;
+}
+
+.bookTitle{
+    text-align:center;
+    color:white;
+    margin-bottom:30px;
+}
+
+.bookTitle h2{
+    font-family:"Great Vibes",cursive;
+    font-size:67px;
+    font-weight:400;
+    color:#f0a1cf;
+}
+
+.book{
+    position:relative;
+    padding:32px 20px 20px;
+    border:8px solid #39172e;
+    border-radius:20px;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(65,20,40,.4),
+            transparent 5%,
+            transparent 95%,
+            rgba(65,20,40,.4)
+        ),
+        #e8d0a9;
+    box-shadow:0 40px 90px rgba(0,0,0,.6);
+}
+
+.page{
+    display:none;
+    position:relative;
+    min-height:750px;
+    padding:50px 45px;
+    background:
+        repeating-linear-gradient(
+            0deg,
+            transparent,
+            transparent 31px,
+            rgba(80,70,50,.065) 32px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.25),
+            rgba(255,246,224,.72) 50%,
+            rgba(255,255,255,.25)
+        );
+}
+
+.page.active{
+    display:block;
+}
+
+.noteTitle{
+    font-family:"Great Vibes",cursive;
+    font-size:51px;
+    color:#9b315d;
+    margin-bottom:18px;
+    text-align:center;
+}
+
+.note p{
+    font-family:"Kalam",cursive;
+    font-size:20px;
+    line-height:2;
+    color:#513343;
+    white-space:pre-line;
+}
+
+.controls{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:22px;
+    padding:20px 10px 5px;
+    background:#e8d0a9;
+}
+
+.btn{
+    padding:12px 23px;
+    border:1px solid #895269;
+    border-radius:12px;
+    background:#71324f;
+    color:white;
+    font-family:"Kalam",cursive;
+    font-size:16px;
+    cursor:pointer;
+}
+
+@media(max-width:700px){
+    .counters{grid-template-columns:1fr;}
+    .hero h1{font-size:72px;}
+}
+</style>
 </head>
+
 <body>
 
-    <!-- Kar Efekti Canvas -->
-    <canvas id="snow-canvas"></canvas>
+<div class="bg"></div>
 
-    <div class="container">
-        <!-- Başlık -->
-        <header>
-            <h1>Sadece İkimiz</h1>
-            <p>Sonsuza dek sürecek bir aşk hikayesi...</p>
-        </header>
+<!-- YUKARIDAN SARKAN NOEL IŞIKLARI -->
+<div class="hanging-lights">
+    <div class="light-wire"><div class="light-bulb"></div></div>
+    <div class="light-wire"><div class="light-bulb"></div></div>
+    <div class="light-wire"><div class="light-bulb"></div></div>
+    <div class="light-wire"><div class="light-bulb"></div></div>
+    <div class="light-wire"><div class="light-bulb"></div></div>
+    <div class="light-wire"><div class="light-bulb"></div></div>
+    <div class="light-wire"><div class="light-bulb"></div></div>
+    <div class="light-wire"><div class="light-bulb"></div></div>
+    <div class="light-wire"><div class="light-bulb"></div></div>
+    <div class="light-wire"><div class="light-bulb"></div></div>
+    <div class="light-wire"><div class="light-bulb"></div></div>
+    <div class="light-wire"><div class="light-bulb"></div></div>
+    <div class="light-wire"><div class="light-bulb"></div></div>
+    <div class="light-wire"><div class="light-bulb"></div></div>
+    <div class="light-wire"><div class="light-bulb"></div></div>
+</div>
 
-        <!-- Aşk Sayacı -->
-        <div class="counter-box">
-            <div class="counter-title">Birlikte Geçen Her Anımız</div>
-            <div class="timer-grid">
-                <div class="timer-unit">
-                    <span class="timer-number" id="days">00</span>
-                    <span class="timer-label">Gün</span>
-                </div>
-                <div class="timer-unit">
-                    <span class="timer-number" id="hours">00</span>
-                    <span class="timer-label">Saat</span>
-                </div>
-                <div class="timer-unit">
-                    <span class="timer-number" id="minutes">00</span>
-                    <span class="timer-label">Dakika</span>
-                </div>
-                <div class="timer-unit">
-                    <span class="timer-number" id="seconds">00</span>
-                    <span class="timer-label">Saniye</span>
-                </div>
-            </div>
-        </div>
+<!-- SAĞ ÜST KONTROL PANELİ -->
+<div class="top-right-controls">
+    <button class="top-btn" id="snowButton" onclick="toggleSnow()" title="Kar Efekti">❄</button>
+    <button class="top-btn" id="musicButton" onclick="toggleMusic()" title="Sally Face x Harry Potter x Yılbaşı Müziği">♫</button>
+</div>
 
-        <!-- Defterler & Notlar Sekmesi -->
-        <div class="notebook-section">
-            <div class="tab-buttons">
-                <button class="tab-btn active" onclick="switchTab('album')"><i class="fa-solid fa-book-bookmark"></i> Anı Defteri</button>
-                <button class="tab-btn" onclick="switchTab('notes')"><i class="fa-solid fa-heart"></i> Aşk Notları</button>
-            </div>
+<div class="stars" id="stars"></div>
+<div id="snow-container"></div>
 
-            <!-- Sayfa Görünümü: Anı Defteri -->
-            <div id="album-view" class="book-wrapper">
-                <div class="notebook">
-                    <div class="book-page left">
-                        <div class="photo-frame" id="page-photo" style="background-image: url('https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=600&q=80');"></div>
-                        <p id="page-date" style="text-align: right; font-style: italic; opacity: 0.7;">14 Şubat 2023</p>
-                    </div>
-                    <div class="book-page right">
-                        <div class="page-content">
-                            <h3 id="page-title">İlk Karşılaşmamız</h3>
-                            <p id="page-text">Gözlerinin gözlerime değdiği o ilk an, zamanın durduğunu hissettim. Bütün dünyam seninle anlam kazandı...</p>
-                        </div>
-                        <div class="page-controls">
-                            <button class="page-btn" onclick="prevPage()"><i class="fa-solid fa-chevron-left"></i> Önceki</button>
-                            <span id="page-num" style="align-self: center; font-weight: bold;">1 / 3</span>
-                            <button class="page-btn" onclick="nextPage()">Sonraki <i class="fa-solid fa-chevron-right"></i></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!-- ŞİFRE EKRANI -->
+<div id="lock">
+    <div class="lockBox">
+        <div class="lockHeart"><span class="swaying-heart">💜</span></div>
+        <h1>Sadece İkimiz</h1>
+        <p>Gizemli & Büyülü Yılbaşı Defteri</p>
+        <input id="password" class="password" type="password" placeholder="Şifrenizi girin...">
+        <button class="enter" onclick="unlock()">Defteri Aç ♡</button>
+        <p id="error"></p>
+    </div>
+</div>
 
-            <!-- Sayfa Görünümü: Notlar (Varsayılan Gizli) -->
-            <div id="notes-view" class="book-wrapper" style="display: none;">
-                <div class="notes-grid">
-                    <div class="note-card">
-                        <h4>Gülüşün...</h4>
-                        <p>Dünyadaki en güzel manzara senin gülerken kısılan gözlerin.</p>
-                    </div>
-                    <div class="note-card">
-                        <h4>İyi Ki Sen</h4>
-                        <p>Hayatıma kattığın her güzel renk ve huzur için teşekkür ederim.</p>
-                    </div>
-                    <div class="note-card">
-                        <h4>Sonsuzluk</h4>
-                        <p>Gelecekteki tüm günleri seninle paylaşmak tek dileğim.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
+<!-- ANA İÇERİK -->
+<div id="main">
+
+<section class="hero">
+    <div class="tree">🎄⚡</div>
+    <h1>Sadece İkimiz <span class="swaying-heart">💜</span></h1>
+    <p>Büyülü, gizemli ve unutulmaz bir yılbaşı... ✨</p>
+    <div class="symbols">🧹 🎸 ❄️ 🔮</div>
+</section>
+
+<section class="counters">
+    <div class="counter">
+        <div style="font-size:30px;"><span class="swaying-heart">💜</span></div>
+        <div class="counterNumber" id="days">0</div>
+        <div class="counterText">Birlikte Geçen Gün</div>
+    </div>
+    <div class="counter">
+        <div style="font-size:30px;">⌛</div>
+        <div class="counterNumber" id="time">00:00:00</div>
+        <div class="counterText">Birlikte Geçen Süre</div>
+    </div>
+    <div class="counter">
+        <div style="font-size:30px;">🎄</div>
+        <div class="counterNumber" id="newYear">00:00:00</div>
+        <div class="counterText">Yeni Yıla Kalan</div>
+    </div>
+</section>
+
+<section class="bookSection">
+    <div class="bookTitle">
+        <h2>Bizim Defterimiz <span class="swaying-heart">💜</span></h2>
+        <p>Büyülü ve gizemli hikayemiz... ♡</p>
     </div>
 
-    <!-- Alt Kontrol Paneli (Şarkı & Kar Ayarları) -->
-    <div class="control-panel">
-        <!-- Müzik Kontrolü -->
-        <div class="control-item">
-            <button class="control-btn" id="play-btn" onclick="togglePlay()"><i class="fa-solid fa-play"></i></button>
-            <i class="fa-solid fa-music" style="color: #ff758c;"></i>
-            <select class="control-select" id="song-select" onchange="changeSong()">
-                <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3">Romantik Melodi 1</option>
-                <option value="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3">Huzurlu Piyano 2</option>
-            </select>
-        </div>
-
-        <!-- Kar Yağışı Ayarı (Biru Özelliği) -->
-        <div class="control-item">
-            <i class="fa-regular fa-snowflake" style="color: #89cff0;"></i>
-            <label style="font-size: 0.85rem;">Kar:</label>
-            <select class="control-select" id="snow-density" onchange="updateSnowSettings()">
-                <option value="50">Hafif</option>
-                <option value="120" selected>Orta</option>
-                <option value="250">Fırtına</option>
-            </select>
-        </div>
-    </div>
-
-    <!-- Gizli Audio Etiketi -->
-    <audio id="bg-music" loop>
-        <source id="audio-source" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    </audio>
-
-    <script>
-        /* === 1. Zaman Sayacı Mantığı === */
-        const startDate = new Date("2023-01-01T00:00:00").getTime(); // İlişki başlangıç tarihinize göre güncelleyebilirsiniz
-
-        function updateTimer() {
-            const now = new Date().getTime();
-            const diff = now - startDate;
-
-            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
-
-            document.getElementById("days").innerText = days < 10 ? "0" + days : days;
-            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
-            document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
-            document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
-        }
-        setInterval(updateTimer, 1000);
-        updateTimer();
-
-        /* === 2. Anı Defteri Mantığı === */
-        const pages = [
-            {
-                title: "İlk Karşılaşmamız",
-                date: "14 Şubat 2023",
-                text: "Gözlerinin gözlerime değdiği o ilk an, zamanın durduğunu hissettim. Bütün dünyam seninle anlam kazandı...",
-                photo: "https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                title: "Unutulmaz Tatil",
-                date: "20 Temmuz 2023",
-                text: "Deniz kenarında gün batımını izlerken elini tutmak, hayatımın en huzurlu anlarından biriydi.",
-                photo: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80"
-            },
-            {
-                title: "Birlikte Yeni Bir Yıl",
-                date: "31 Aralık 2023",
-                text: "Yeni yıla senin gülüşünle girmek, önümdeki tüm yılların güzel geçeceğinin en büyük kanıtıydı.",
-                photo: "https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=600&q=80"
-            }
-        ];
-
-        let currentPage = 0;
-
-        function updatePage() {
-            const data = pages[currentPage];
-            document.getElementById("page-title").innerText = data.title;
-            document.getElementById("page-date").innerText = data.date;
-            document.getElementById("page-text").innerText = data.text;
-            document.getElementById("page-photo").style.backgroundImage = `url('${data.photo}')`;
-            document.getElementById("page-num").innerText = `${currentPage + 1} / ${pages.length}`;
-        }
-
-        function nextPage() {
-            if (currentPage < pages.length - 1) {
-                currentPage++;
-                updatePage();
-            }
-        }
-
-        function prevPage() {
-            if (currentPage > 0) {
-                currentPage--;
-                updatePage();
-            }
-        }
-
-        function switchTab(tab) {
-            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-            if (tab === 'album') {
-                document.getElementById('album-view').style.display = 'flex';
-                document.getElementById('notes-view').style.display = 'none';
-                event.target.classList.add('active');
-            } else {
-                document.getElementById('album-view').style.display = 'none';
-                document.getElementById('notes-view').style.display = 'flex';
-                event.target.classList.add('active');
-            }
-        }
-
-        /* === 3. Müzik Çalar Mantığı === */
-        const audio = document.getElementById("bg-music");
-        const playBtn = document.getElementById("play-btn");
-
-        function togglePlay() {
-            if (audio.paused) {
-                audio.play();
-                playBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-            } else {
-                audio.pause();
-                playBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
-            }
-        }
-
-        function changeSong() {
-            const select = document.getElementById("song-select");
-            const source = document.getElementById("audio-source");
-            const isPlaying = !audio.paused;
-
-            source.src = select.value;
-            audio.load();
-            if (isPlaying) {
-                audio.play();
-            }
-        }
-
-        /* === 4. Kar Yağışı Efekti (Canvas & "biru" Özelliği) === */
-        const canvas = document.getElementById("snow-canvas");
-        const ctx = canvas.getContext("2d");
-
-        let width = canvas.width = window.innerWidth;
-        let height = canvas.height = window.innerHeight;
-
-        window.addEventListener("resize", () => {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        });
-
-        let particles = [];
-        let maxParticles = 120;
-
-        class Particle {
-            constructor() {
-                this.reset();
-            }
-
-            reset() {
-                this.x = Math.random() * width;
-                this.y = Math.random() * -height;
-                this.size = Math.random() * 3 + 1;
-                this.speed = Math.random() * 1 + 0.5;
-                this.velX = Math.random() * 0.5 - 0.25;
-                this.opacity = Math.random() * 0.7 + 0.3;
-            }
-
-            update() {
-                this.y += this.speed;
-                this.x += this.velX;
-
-                if (this.y > height) {
-                    this.reset();
-                }
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
-                ctx.fill();
-            }
-        }
-
-        function initSnow() {
-            particles = [];
-            for (let i = 0; i < maxParticles; i++) {
-                particles.push(new Particle());
-            }
-        }
-
-        function animateSnow() {
-            ctx.clearRect(0, 0, width, height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            requestAnimationFrame(animateSnow);
-        }
-
-        function updateSnowSettings() {
-            const select = document.getElementById("snow-density");
-            maxParticles = parseInt(select.value);
-            initSnow();
-        }
-
-        initSnow();
-        animateSnow();
-
-        /* === 5. Ekran Dokunma / Tıklama Kalp Efekti === */
-        document.addEventListener('click', function(e) {
-            // Panel butonlarına tıklanınca kalp fırlatma
-            if(e.target.closest('.control-panel') || e.target.closest('.page-btn') || e.target.closest('.tab-btn')) return;
-
-            const heart = document.createElement('i');
-            heart.classList.add('fa-solid', 'fa-heart', 'floating-heart');
-            heart.style.left = e.clientX + 'px';
-            heart.style.top = e.clientY + 'px';
+    <div class="book">
+        <div class="page active">
+            <span class="page-sway-heart top-left swaying-heart">💜</span>
+            <span class="page-sway-heart bottom-right swaying-heart">💜</span>
             
-            // Rastgele boyut ve renk nüansı
-            const size = Math.random() * 15 + 15;
-            heart.style.fontSize = size + 'px';
+            <div class="photo-upload-container">
+                <div class="polaroid-frame" onclick="triggerFileInput(1)">
+                    <div class="photo-placeholder" id="placeholder-1">
+                        <span>📷</span>
+                        Fotoğraf Yüklemek İçin Tıkla
+                    </div>
+                    <img id="img-preview-1" alt="Fotoğraf 1">
+                    <input type="file" id="file-input-1" accept="image/*" style="display:none" onchange="previewImage(event, 1)">
+                </div>
+            </div>
 
-            document.body.appendChild(heart);
+            <div class="noteTitle">Büyülü Bir Başlangıç</div>
+            <div class="note">
+                <p>
+Her şey tıpkı Harry Potter'ın gizemli koridorları gibi beklenmedik...
+Ve Sally Face'in derin, anlamlı melodi tınıları gibi özgün başladı.
 
-            setTimeout(() => {
-                heart.remove();
-            }, 1500);
-        });
-    </script>
+Seninle olan hikayemiz, sıradan bir dünyayı büyülü bir yere dönüştürdü.
+Bu yılbaşı, en güzel anılarımızın ilk günü olsun. ♡
+                </p>
+            </div>
+        </div>
+
+        <div class="page">
+            <span class="page-sway-heart top-left swaying-heart">💜</span>
+            <span class="page-sway-heart bottom-right swaying-heart">💜</span>
+            
+            <div class="photo-upload-container">
+                <div class="polaroid-frame" onclick="triggerFileInput(2)">
+                    <div class="photo-placeholder" id="placeholder-2">
+                        <span>📷</span>
+                        Fotoğraf Yüklemek İçin Tıkla
+                    </div>
+                    <img id="img-preview-2" alt="Fotoğraf 2">
+                    <input type="file" id="file-input-2" accept="image/*" style="display:none" onchange="previewImage(event, 2)">
+                </div>
+            </div>
+
+            <div class="noteTitle">Karanlıktan Aydınlığa</div>
+            <div class="note">
+                <p>
+Hayat bazen zor ve karmaşık olabilir.
+Ama senin varlığın, en karanlık odalarda bile yakılan bir "Lumos" büyüsü gibi etrafı aydınlatıyor.
+
+İyi ki varsın, iyi ki benimlesin...
+                </p>
+            </div>
+        </div>
+
+        <div class="controls">
+            <button class="btn" onclick="previousPage()">← Önceki</button>
+            <span id="pageCounter" style="font-family:'Kalam',cursive; color:#74465b;">1 / 2</span>
+            <button class="btn" onclick="nextPage()">Sonraki →</button>
+        </div>
+    </div>
+</section>
+
+</div>
+
+<script>
+const PASSWORD = "sadeceikimiz";
+const relationshipStart = new Date("2026-06-05T14:53:00+03:00");
+const newYearTarget = new Date("2027-01-01T00:00:00+03:00");
+
+/* ŞİFRE KONTROLÜ */
+function unlock(){
+    const input = document.getElementById("password");
+    const error = document.getElementById("error");
+    if(input.value === PASSWORD){
+        const lock = document.getElementById("lock");
+        lock.style.opacity = "0";
+        setTimeout(()=>{
+            lock.style.display = "none";
+            document.getElementById("main").style.display = "block";
+            startMusic();
+        }, 800);
+    } else {
+        error.textContent = "Şifre yanlış... ♡";
+        input.value = "";
+    }
+}
+
+document.getElementById("password").addEventListener("keydown", e => {
+    if(e.key === "Enter") unlock();
+});
+
+/* FOTOĞRAF YÜKLEME */
+function triggerFileInput(id) {
+    document.getElementById(`file-input-${id}`).click();
+}
+
+function previewImage(event, id) {
+    const file = event.target.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            const img = document.getElementById(`img-preview-${id}`);
+            const placeholder = document.getElementById(`placeholder-${id}`);
+            img.src = e.target.result;
+            img.style.display = "block";
+            placeholder.style.display = "none";
+        }
+        reader.readAsDataURL(file);
+    }
+}
+
+/* KAR EFEKTİ */
+const snowContainer = document.getElementById("snow-container");
+let snowActive = true;
+
+function createSnow() {
+    snowContainer.innerHTML = "";
+    for(let i=0; i<70; i++){
+        const flake = document.createElement("div");
+        flake.className = "snow";
+        flake.textContent = Math.random() > 0.5 ? "❄" : "•";
+        flake.style.left = Math.random()*100 + "%";
+        flake.style.fontSize = (Math.random()*10+6) + "px";
+        flake.style.animationDuration = (Math.random()*8+7) + "s";
+        flake.style.animationDelay = Math.random()*5 + "s";
+        snowContainer.appendChild(flake);
+    }
+}
+createSnow();
+
+function toggleSnow(){
+    snowActive = !snowActive;
+    snowContainer.style.display = snowActive ? "block" : "none";
+    document.getElementById("snowButton").style.opacity = snowActive ? "1" : "0.5";
+}
+
+/* SAYAÇLAR */
+function updateCounters(){
+    const now = new Date();
+    let diff = Math.max(0, now - relationshipStart);
+    
+    document.getElementById("days").textContent = Math.floor(diff / (1000*60*60*24));
+    
+    const totalSec = Math.floor(diff / 1000);
+    const h = String(Math.floor(totalSec / 3600)).padStart(2,"0");
+    const m = String(Math.floor((totalSec % 3600) / 60)).padStart(2,"0");
+    const s = String(totalSec % 60).padStart(2,"0");
+    document.getElementById("time").textContent = `${h}:${m}:${s}`;
+
+    let nyDiff = Math.max(0, newYearTarget - now);
+    const nd = Math.floor(nyDiff / (1000*60*60*24));
+    const nh = String(Math.floor((nyDiff / (1000*60*60)) % 24)).padStart(2,"0");
+    const nm = String(Math.floor((nyDiff / (1000*60)) % 60)).padStart(2,"0");
+    const ns = String(Math.floor((nyDiff / 1000) % 60)).padStart(2,"0");
+    document.getElementById("newYear").textContent = `${nd}g ${nh}:${nm}:${ns}`;
+}
+setInterval(updateCounters, 1000);
+updateCounters();
+
+/* DEFTER SAYFALARI */
+const pages = document.querySelectorAll(".page");
+let currentPage = 0;
+
+function showPage(){
+    pages.forEach((p, idx) => p.classList.toggle("active", idx === currentPage));
+    document.getElementById("pageCounter").textContent = `${currentPage + 1} / ${pages.length}`;
+}
+
+function nextPage(){ if(currentPage < pages.length - 1){ currentPage++; showPage(); } }
+function previousPage(){ if(currentPage > 0){ currentPage--; showPage(); } }
+
+/* MÜZİK MOTORU */
+let audioCtx = null;
+let musicPlaying = false;
+let musicLoopTimeout = null;
+
+function initAudio(){
+    if(!audioCtx){
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    }
+}
+
+function playCustomNote(freq, startTime, duration, vol, type="sine") {
+    const osc = audioCtx.createOscillator();
+    const gain = audioCtx.createGain();
+
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, startTime);
+
+    gain.gain.setValueAtTime(0, startTime);
+    gain.gain.linearRampToValueAtTime(vol, startTime + 0.08);
+    gain.gain.exponentialRampToValueAtTime(0.0001, startTime + duration);
+
+    osc.connect(gain);
+    gain.connect(audioCtx.destination);
+
+    osc.start(startTime);
+    osc.stop(startTime + duration + 0.1);
+}
+
+function playSpookyChristmasMelody() {
+    if(!musicPlaying) return;
+    const now = audioCtx.currentTime;
+
+    const melody = [
+        { f: 493.88, t: 0.0, d: 0.8 },
+        { f: 659.25, t: 0.6, d: 1.0 },
+        { f: 783.99, t: 1.2, d: 0.5 },
+        { f: 739.99, t: 1.6, d: 0.8 },
+        { f: 659.25, t: 2.2, d: 1.2 },
+        { f: 987.77, t: 3.0, d: 0.8 },
+        { f: 880.00, t: 3.6, d: 1.4 },
+        { f: 739.99, t: 4.8, d: 1.2 },
+
+        { f: 329.63, t: 6.0, d: 1.0 },
+        { f: 392.00, t: 6.6, d: 0.8 },
+        { f: 440.00, t: 7.2, d: 1.0 },
+        { f: 493.88, t: 7.8, d: 1.2 },
+        { f: 440.00, t: 8.8, d: 0.8 },
+        { f: 392.00, t: 9.4, d: 1.0 },
+        { f: 329.63, t: 10.2, d: 1.5 }
+    ];
+
+    melody.forEach(note => {
+        playCustomNote(note.f, now + note.t, note.d, 0.04, "sine");
+        playCustomNote(note.f * 2, now + note.t, note.d * 0.5, 0.01, "triangle");
+    });
+
+    const bassNotes = [
+        { f: 164.81, t: 0.0, d: 3.0 },
+        { f: 130.81, t: 3.0, d: 3.0 },
+        { f: 146.83, t: 6.0, d: 3.0 },
+        { f: 164.81, t: 9.0, d: 3.0 }
+    ];
+
+    bassNotes.forEach(b => {
+        playCustomNote(b.f, now + b.t, b.d, 0.025, "sawtooth");
+    });
+
+    musicLoopTimeout = setTimeout(playSpookyChristmasMelody, 12000);
+}
+
+function startMusic(){
+    initAudio();
+    audioCtx.resume();
+    musicPlaying = true;
+    document.getElementById("musicButton").classList.add("playing");
+    document.getElementById("musicButton").textContent = "❚❚";
+    playSpookyChristmasMelody();
+}
+
+function stopMusic(){
+    musicPlaying = false;
+    clearTimeout(musicLoopTimeout);
+    document.getElementById("musicButton").classList.remove("playing");
+    document.getElementById("musicButton").textContent = "♫";
+}
+
+function toggleMusic(){
+    if(musicPlaying) stopMusic();
+    else startMusic();
+}
+
+/* YILDIZLARIN OLUŞTURULMASI */
+const stars = document.getElementById("stars");
+for(let i=0; i<60; i++){
+    const s = document.createElement("span");
+    s.className = "star";
+    s.textContent = Math.random() > 0.5 ? "✦" : "·";
+    s.style.left = Math.random()*100 + "%";
+    s.style.top = Math.random()*100 + "%";
+    s.style.fontSize = (Math.random()*8+4) + "px";
+    s.style.animationDelay = Math.random()*3 + "s";
+    stars.appendChild(s);
+}
+</script>
 </body>
 </html>
